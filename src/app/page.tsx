@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import CinematicModelSlider from '@/components/CinematicModelSlider';
-import CinematicVideoSection from '@/components/CinematicVideoSection';
 import UnveilingSliderSection from '@/components/UnveilingSliderSection';
 import KineticShowcaseSection from '@/components/KineticShowcaseSection';
 import VehicleSelector from '@/components/VehicleSelector';
@@ -20,25 +19,25 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   const [selectedVehicle, setSelectedVehicle] = useState({
-    brand: 'Aston Martin',
-    model: 'Vanquish',
-    year: '2025 - 2026',
-    variant: 'Coupe',
+    brand: 'Mahindra',
+    model: 'Thar Roxx (5-Door)',
+    year: '2024 - 2026',
+    variant: 'AX7L Luxury 4x4 (With Spare Wheel)',
   });
 
   const [cartItems, setCartItems] = useState<any[]>([
     {
-      vehicle: 'Aston Martin Vanquish (Coupe)',
-      tier: 'Prestige Tailored Indoor',
-      fabricColor: 'Silverstone Liquid Silver',
-      fabricHex: '#8a939e',
-      pipingColor: 'Emerald British Green',
-      pipingHex: '#00624a',
-      monogram: 'VANQUISH',
-      monogramColor: 'silver',
-      addons: { mirrorPockets: true, heavyDutyHoldall: true, lockingUnderbodyStraps: false, batteryChargerFlap: true },
-      price: 434,
-      currency: '£',
+      vehicle: 'Mahindra Thar Roxx 4x4',
+      tier: 'AquaShield+ Extreme Monsoon Outdoor',
+      fabricColor: 'Obsidian Midnight Black',
+      fabricHex: '#0a0d10',
+      pipingColor: 'Neon Acid Lime (High-Vis)',
+      pipingHex: '#c5e838',
+      monogram: 'THAR-4X4',
+      monogramColor: 'gold',
+      addons: { mirrorPockets: true, heavyDutyHoldall: true, lockingUnderbodyStraps: true, batteryChargerFlap: false },
+      price: 4999,
+      currency: '₹',
     }
   ]);
 
@@ -83,12 +82,20 @@ export default function Home() {
 
   return (
     <main style={{ minHeight: '100vh', backgroundColor: '#ffffff', color: '#111615' }}>
-      {/* Aston Martin Global Light Header */}
+      {/* TheSignaturecovers Global Light Header */}
       <Header
         onOpenConfigurator={handleOpenConfigurator}
         onOpenEnquiry={handleOpenEnquiry}
         onOpenCart={() => setIsCartOpen(true)}
         cartCount={cartItems.length}
+        onSelectVehicle={(brand, model, year, variant) => {
+          setSelectedVehicle({ brand, model, year, variant });
+          const el = document.getElementById('configurator');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }}
+        onSelectCategory={(categoryId) => {
+          handleSelectTierFromCollection(categoryId);
+        }}
       />
 
       {/* Cinematic 100vh Hero Banner */}
@@ -104,12 +111,6 @@ export default function Home() {
         onOpenEnquiry={handleOpenEnquiry}
       />
 
-      {/* 🎬 DEDICATED CINEMATIC FILM SECTION: The Art of Motion & Preservation (Pure Standalone Automotive Video Theater) */}
-      <CinematicVideoSection
-        onOpenConfigurator={handleOpenConfigurator}
-        onOpenEnquiry={handleOpenEnquiry}
-      />
-
       {/* 🌟 SECTION VARIATION 2: Interactive Before/After Reveal Curtain Slider */}
       <UnveilingSliderSection
         onOpenConfigurator={handleOpenConfigurator}
@@ -121,27 +122,27 @@ export default function Home() {
         onOpenEnquiry={handleOpenEnquiry}
       />
 
-      {/* Specialised Covers CAD Vehicle Finder */}
+      {/* TheSignaturecovers CAD Vehicle Finder */}
       <VehicleSelector
         onSelectVehicle={handleSelectVehicleFromFinder}
         onOpenConfigurator={handleOpenConfigurator}
       />
 
-      {/* Aston Martin Online Configurator Studio */}
+      {/* TheSignaturecovers Online Configurator Studio */}
       <BespokeConfigurator
         selectedVehicle={selectedVehicle}
         onAddToCommission={handleAddToCommission}
-        currencySymbol="£"
+        currencySymbol="₹"
         currencyRate={1}
       />
 
-      {/* Q by Specialised Covers (Bespoke Atelier) */}
+      {/* Atelier by TheSignaturecovers (Bespoke Atelier) */}
       <QAtelier onOpenEnquiry={handleOpenEnquiry} />
 
       {/* 4 Performance Collections */}
       <ProductCollection
         onSelectTier={handleSelectTierFromCollection}
-        currencySymbol="£"
+        currencySymbol="₹"
         currencyRate={1}
       />
 
@@ -168,7 +169,7 @@ export default function Home() {
         onClose={() => setIsCartOpen(false)}
         items={cartItems}
         onRemoveItem={handleRemoveCartItem}
-        currencySymbol="£"
+        currencySymbol="₹"
       />
     </main>
   );

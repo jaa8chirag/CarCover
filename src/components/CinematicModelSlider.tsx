@@ -19,55 +19,72 @@ interface ModelSlide {
 
 const MODEL_SLIDES: ModelSlide[] = [
   {
-    id: 'dbx707',
-    name: 'DBX707',
-    tagline: 'POWER. DRIVEN.',
-    subtitle: 'The World’s Most Powerful Ultra-Luxury SUV',
-    description: 'A 707PS titan demanding the ultimate in weather resistance. Tailored with our heavy-duty Stormshield+ 4-layer breathable nano-membrane with fluorescent lime aerodynamic piping.',
+    id: 'aquashield-monsoon',
+    name: 'AQUASHIELD+ MONSOON',
+    tagline: 'UNSTOPPABLE MONSOON DEFENSE',
+    subtitle: 'Heavy-Duty 100% Waterproof SUV & Thar Edition',
+    description: 'Engineered specifically for extreme Indian downpours and open street parking. 100% waterproof nano-membrane with heat-welded seams, mirror pockets, wind-lock buckles, and night-reflective neon piping.',
     specs: [
-      { label: 'POWER', value: '707 PS' },
-      { label: 'TORQUE', value: '900 NM' },
-      { label: '0-62 MPH', value: '3.3 SEC' },
-      { label: 'MAX SPEED', value: '193 MPH' },
+      { label: 'WATERPROOF', value: '10,000 MM+' },
+      { label: 'WIND RESIST', value: '65 KM/H BUCKLES' },
+      { label: 'FABRIC', value: '5-PLY NANO-SHIELD' },
+      { label: 'WARRANTY', value: '3-YR REPLACEMENT' },
     ],
-    image: '/images/slider_dbx707.jpg',
+    image: '/images/cover_monsoon.jpg',
+    accentColor: '#c5e838',
+    recommendedCover: 'AquaShield+ Extreme Outdoor Monsoon Suit',
+    coverPrice: 4999,
+  },
+  {
+    id: 'prestige-indoor',
+    name: 'PRESTIGE ATELIER',
+    tagline: 'SCULPTED ELEGANCE. ZERO FRICTION.',
+    subtitle: 'Form-Fitting Cashmere Soft Indoor Fleece',
+    description: 'Form-hugging deep emerald stretch fleece that clings sensually to every contour. Cashmere-soft underside certified 100% scratch-proof for fresh ceramic coatings and delicate clear coats in basement parking.',
+    specs: [
+      { label: 'PAINT SAFETY', value: '100% ZERO-SCRATCH' },
+      { label: 'DENSITY', value: '280 GSM FLEECE' },
+      { label: 'DUST REPELLENT', value: 'ANTI-STATIC YARN' },
+      { label: 'EMBROIDERY', value: 'CUSTOM MONOGRAM' },
+    ],
+    image: '/images/cover_hero.jpg',
     accentColor: '#00665e',
-    recommendedCover: 'Stormshield+ 4-Layer All-Weather',
-    coverPrice: 479,
+    recommendedCover: 'Prestige Velvet Indoor Cashmere Suit',
+    coverPrice: 5499,
   },
   {
-    id: 'vanquish',
-    name: 'VANQUISH',
-    tagline: 'ALL OUT. ALL ROADS.',
-    subtitle: 'V12 Flagship Grand Tourer Reborn',
-    description: 'Exquisite carbon-fiber sculpted bodywork pampered by our ultra-dense liquid-soft fleece interior lining with diamond-quilted twin-needle hand-stitched seams.',
+    id: 'heatshield-48c',
+    name: 'TITANIUM 48°C SHIELD',
+    tagline: 'DEFEAT 48°C INDIAN SUMMERS',
+    subtitle: 'Aerospace UV-Reflective Thermal Sun Barrier',
+    description: 'Multi-layer aerodynamic silver-titanium composite reflecting 99.8% of harsh solar UV rays. Drops cabin heat by up to 20°C, shielding touchscreen electronics and leather seats from thermal cracking.',
     specs: [
-      { label: 'POWER', value: '835 PS' },
-      { label: 'TORQUE', value: '1,000 NM' },
-      { label: 'TOP SPEED', value: '214 MPH' },
-      { label: 'ENGINE', value: '5.2L TWIN-TURBO V12' },
+      { label: 'UV DEFENSE', value: '99.8% SOLAR REFLECTION' },
+      { label: 'CABIN TEMP', value: 'UP TO 20°C COOLER' },
+      { label: 'SUN BLISTERING', value: 'ZERO COLOR FADE' },
+      { label: 'FASTENING', value: 'DUAL TIE-DOWNS' },
     ],
-    image: '/images/slider_vanquish.jpg',
-    accentColor: '#8b1e2d',
-    recommendedCover: 'Bespoke Atelier Indoor Monogram',
-    coverPrice: 535,
+    image: '/images/cover_heatshield.jpg',
+    accentColor: '#38bdf8',
+    recommendedCover: 'Titanium Heat-Shield UV Pro Suit',
+    coverPrice: 4499,
   },
   {
-    id: 'vantage',
-    name: 'VANTAGE',
-    tagline: 'THRILL. DRIVEN.',
-    subtitle: 'Engineered for Real Drivers',
-    description: 'Aggressive wide-stance sports proportions protected by form-hugging precision elastic memory weave that accentuates the iconic muscle curves even under cover.',
+    id: 'obsidian-vip',
+    name: 'OBSIDIAN VIP DRAPE',
+    tagline: 'BESPOKE CONCOURS LUXURY',
+    subtitle: 'Midnight Black Satin Showroom & Garage Shield',
+    description: 'Ultra-dense midnight velvet finish with bespoke contrast ice-silver piping and custom embroidered family crest or car registration number. The ultimate statement of luxury garage preservation.',
     specs: [
-      { label: 'POWER', value: '665 PS' },
-      { label: 'TORQUE', value: '800 NM' },
-      { label: '0-62 MPH', value: '3.4 SEC' },
-      { label: 'DISTRIBUTION', value: '50:50 RATIO' },
+      { label: 'FINISH', value: 'MIDNIGHT SATIN VELVET' },
+      { label: 'TRIM', value: 'ICE-SILVER PIPING' },
+      { label: 'EMBROIDERY', value: 'FRENCH LOOM CREST' },
+      { label: 'ARCHIVE CAD', value: 'MILLIMETER FIT' },
     ],
-    image: '/images/slider_vantage.jpg',
-    accentColor: '#95b836',
-    recommendedCover: 'Prestige Form-Fitting Indoor Weave',
-    coverPrice: 415,
+    image: '/images/cover_velvet.jpg',
+    accentColor: '#cbd5e1',
+    recommendedCover: 'Obsidian Velvet Concours Edition',
+    coverPrice: 6999,
   },
 ];
 
@@ -255,7 +272,7 @@ export default function CinematicModelSlider({
               fontWeight: 500,
             }}
           >
-            HANDCRAFTED CAR COVER ARCHIVE
+            BESPOKE TAILORED CAR COVER ATELIER • INDIA
           </span>
         </div>
 
@@ -571,7 +588,7 @@ export default function CinematicModelSlider({
                 textTransform: 'uppercase',
               }}
             >
-              VELUM ATELIER ARCHIVE • {currentModel.tagline}
+              THE SIGNATURE COVERS ARCHIVE • {currentModel.tagline}
             </span>
 
             <h2
@@ -658,7 +675,7 @@ export default function CinematicModelSlider({
               <div style={{ textAlign: 'right' }}>
                 <div style={{ fontSize: '12px', color: '#8b9696' }}>Atelier Commission</div>
                 <div style={{ fontSize: '24px', fontWeight: 700, color: '#ffffff' }}>
-                  £{currentModel.coverPrice}
+                  ₹{currentModel.coverPrice.toLocaleString('en-IN')}
                 </div>
               </div>
             </div>

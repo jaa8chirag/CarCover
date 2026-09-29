@@ -25,67 +25,67 @@ interface MagazineIssue {
 const MAGAZINE_ISSUES: MagazineIssue[] = [
   {
     id: 'v44',
-    issueCode: 'ISSUE V44',
-    kicker: 'ASTON MARTIN MAGAZINE • ISSUE V44',
-    title: 'The Essence of Speed & Protection',
-    subtitle: 'London nocturnal preservation, ceramic coat shield, and bespoke 3D CAD coordinate scans safeguarding DBS Superleggera aluminum bodywork.',
-    coverImage: '/images/magazine.jpg',
+    issueCode: 'EDITION 03',
+    kicker: 'THE SIGNATURE JOURNAL • EDITION 03',
+    title: 'The Essence of Craft & Protection',
+    subtitle: 'Indian monsoon deluge preservation, ceramic coat shield, and bespoke 3D CAD coordinate scans safeguarding luxury SUV bodywork.',
+    coverImage: '/images/cover_monsoon.jpg',
     bgGradient: 'radial-gradient(ellipse at 80% 30%, #00564d 0%, #003630 60%, #00231f 100%)',
     accentColor: '#00a896',
-    leadArticle: 'Night Moves: Preserving the DBS Superleggera under London Skies',
+    leadArticle: 'Monsoon Mastery: Preserving Luxury Automobiles Across Mumbai & Coastal India',
     features: [
       {
         tag: 'FEATURE 01',
         title: 'Nanofiber Vapor Barrier',
-        desc: 'Micro-porous physics preventing heat-soak condensation in subterranean collector garages.',
+        desc: 'Micro-porous physics preventing heat-soak condensation in humid coastal climates.',
       },
       {
         tag: 'FEATURE 02',
         title: 'Zero-Scratch Guarantee',
-        desc: 'Certified laboratory testing on multi-stage paint-corrected supercars.',
+        desc: 'Certified laboratory testing on multi-stage paint-corrected lacquer and PPF.',
       },
     ],
-    configureModel: 'DBS Superleggera',
+    configureModel: 'Mahindra Thar Roxx',
   },
   {
     id: 'v43',
-    issueCode: 'ISSUE V43',
-    kicker: 'ASTON MARTIN MAGAZINE • ISSUE V43',
-    title: 'Valkyrie: Extreme Downforce',
-    subtitle: 'Mastery of wet weather, ground effects aerodynamics, and ultra-lightweight bespoke carbon-safe fleece engineered for track weapons.',
-    coverImage: '/images/magazine_v43.jpg',
+    issueCode: 'EDITION 02',
+    kicker: 'THE SIGNATURE JOURNAL • EDITION 02',
+    title: 'Fortuner: Extreme All-Weather',
+    subtitle: 'Stormproof waterhead defense, high-altitude dust storms, and ultra-durable tailored stormguard fleece engineered for full-size SUVs.',
+    coverImage: '/images/cover_monsoon.jpg',
     bgGradient: 'radial-gradient(ellipse at 80% 30%, #0a463c 0%, #062b25 60%, #031b17 100%)',
     accentColor: '#30c79e',
-    leadArticle: 'The Science of Downforce: Handcrafted Protection for Carbon Aerodynamics',
+    leadArticle: 'The Science of Stormguard: Handcrafted Protection for Indian Road Conditions',
     features: [
       {
         tag: 'FEATURE 01',
-        title: 'Aero Wing Contour Cutouts',
-        desc: 'Dual venturi channel tailoring preventing lift and wind flutter under 80mph gusts.',
+        title: 'Wind-Lock Buckle Straps',
+        desc: 'Dual underbody high-tension straps preventing wind lift in 90km/h squalls.',
       },
       {
         tag: 'FEATURE 02',
-        title: 'Formula 1 Heritage Tech',
-        desc: 'Antistatic woven filaments that discharge static charge from dry track tires.',
+        title: 'Heavy Hydrophobic Repellency',
+        desc: '10,000mm hydrostatic head causing water to bead and sheet off instantly.',
       },
     ],
-    configureModel: 'Valkyrie AMR Pro',
+    configureModel: 'Toyota Fortuner Legender',
   },
   {
     id: 'v42',
-    issueCode: 'ISSUE V42',
-    kicker: 'ASTON MARTIN MAGAZINE • ISSUE V42',
-    title: 'DB12: The First Super Tourer',
-    subtitle: 'Alpine Grand Touring, Swiss mountain pass storage, and all-weather Stormshield+ multi-layer protection in sub-zero climates.',
-    coverImage: '/images/magazine_v42.jpg',
+    issueCode: 'EDITION 01',
+    kicker: 'THE SIGNATURE JOURNAL • EDITION 01',
+    title: 'Titanium Shield: 48°C Heat Defense',
+    subtitle: 'Rajasthan and Delhi summer heat mitigation, UV barrier technology, and interior cabin temperature drop in blazing direct sunlight.',
+    coverImage: '/images/cover_heatshield.jpg',
     bgGradient: 'radial-gradient(ellipse at 80% 30%, #173847 0%, #0d232e 60%, #07151c 100%)',
     accentColor: '#00b4d8',
-    leadArticle: 'Alpine Expedition: Weatherproof Tailoring in the High Passes',
+    leadArticle: 'Sun Barrier Expedition: Defeating Scorching 48°C Summer Radiation',
     features: [
       {
         tag: 'FEATURE 01',
-        title: 'Cryo-Thermal Insulation',
-        desc: 'Multi-layer thermal barrier maintaining battery conditioning in alpine frost.',
+        title: 'Titanium UV Barrier',
+        desc: 'Reflective silver outer layer deflecting 99.8% of harsh solar rays.',
       },
       {
         tag: 'FEATURE 02',
@@ -234,7 +234,7 @@ export default function EditorialSplitSection({
                 textShadow: '0 2px 10px rgba(0,0,0,0.8)',
               }}
             >
-              SPECIALISED TIMELESS ARCHIVE
+              THESIGNATURECOVERS TIMELESS ARCHIVE
             </span>
           </div>
 

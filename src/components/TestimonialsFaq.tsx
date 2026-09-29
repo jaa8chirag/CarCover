@@ -147,6 +147,7 @@ export default function TestimonialsFaq() {
                   }}
                 >
                   <button
+                    suppressHydrationWarning
                     onClick={() => toggleFaq(idx)}
                     style={{
                       width: '100%',

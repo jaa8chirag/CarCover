@@ -42,7 +42,7 @@ export default function Footer() {
             }}
           >
             <Globe size={16} color="#00665e" />
-            <span>International (English)</span>
+            <span>India (English) • ₹ INR</span>
           </div>
         </div>
 
@@ -67,10 +67,10 @@ export default function Footer() {
                 fontWeight: 600,
               }}
             >
-              Models
+              Popular Indian Models
             </div>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {['Vanquish', 'Vantage', 'DB12', 'DBX707', 'Valhalla', 'Valkyrie', 'Heritage DB5'].map((item) => (
+              {['Mahindra Thar Roxx & 4x4', 'Toyota Fortuner Legender', 'Mahindra Scorpio-N', 'Tata Safari & Curvv', 'Hyundai Creta N-Line', 'Land Rover Defender', 'BMW M4 & 3 Series', 'Aston Martin DB12'].map((item) => (
                 <li key={item}>
                   <a href="#models" className="footer-link-light">
                     {item}
@@ -95,7 +95,7 @@ export default function Footer() {
               Tailored Covers
             </div>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {['Prestige Indoor Fleece', 'Stormshield+ Outdoor', 'Atelier Silk Reveal', 'Heritage & Track', 'CAD Pattern Finder'].map((item) => (
+              {['AquaShield Monsoon Outdoor', 'Prestige Indoor Velvet Fleece', 'Titanium 48°C Heat Shield', 'Atelier Liquid Silk Reveal', 'CAD 3D Pattern Matcher'].map((item) => (
                 <li key={item}>
                   <a href="#collections" className="footer-link-light">
                     {item}
@@ -117,12 +117,12 @@ export default function Footer() {
                 fontWeight: 600,
               }}
             >
-              Bespoke Services
+              Indian Climate Defense
             </div>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {['Q by Specialised Covers', 'Paint Code Dye-Match', 'Crest Embroidery', 'Fabric Swatches', 'Dealership Commissions'].map((item) => (
+              {['10,000mm Monsoon Waterproof', '48°C UV Solar Heat Barrier', 'Delhi Dust & Smog Shield', 'Stray Animal Scratch Matrix', 'Wind-Lock Buckle Systems'].map((item) => (
                 <li key={item}>
-                  <a href="#q-atelier" className="footer-link-light">
+                  <a href="#material-science" className="footer-link-light">
                     {item}
                   </a>
                 </li>
@@ -142,14 +142,14 @@ export default function Footer() {
                 fontWeight: 600,
               }}
             >
-              Atelier & Contact
+              Atelier India
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '13px', color: '#5c6462', lineHeight: 1.6 }}>
-              <div>Specialised Covers Atelier</div>
-              <div>Mill House, Innovation Way, Yorkshire, UK</div>
-              <div>Tel: +44 (0) 1943 864 646</div>
-              <div>Email: bespoke@specialisedcovers.com</div>
-              <div style={{ color: '#00665e', marginTop: '4px', fontWeight: 600 }}>5-Year Craftsmanship Guarantee</div>
+              <div>TheSignaturecovers India Pvt. Ltd.</div>
+              <div>Studios: BKC, Mumbai • DLF Horizon, Gurugram</div>
+              <div>Helpline: +91 1800 889 2683</div>
+              <div>Email: contact@thesignaturecovers.com</div>
+              <div style={{ color: '#00665e', marginTop: '4px', fontWeight: 600 }}>Free Pan-India Delivery + COD</div>
             </div>
           </div>
         </div>
@@ -169,7 +169,7 @@ export default function Footer() {
           }}
         >
           <div>
-            © 2026 Aston Martin Lagonda / Specialised Covers Ltd. Handcrafted in Yorkshire, England.
+            © 2026 TheSignaturecovers India. Handcrafted Bespoke Tailored Car Covers. All Rights Reserved.
           </div>
 
           <div style={{ display: 'flex', gap: '24px' }}>

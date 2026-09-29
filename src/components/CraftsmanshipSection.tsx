@@ -75,7 +75,7 @@ export default function CraftsmanshipSection() {
                     fontWeight: 600,
                   }}
                 >
-                  Yorkshire Heritage
+                  Pan-India Master Atelier
                 </div>
                 <div
                   style={{
@@ -85,7 +85,7 @@ export default function CraftsmanshipSection() {
                     fontFamily: 'var(--font-main)',
                   }}
                 >
-                  Handmade In England
+                  Handcrafted For Indian Roads
                 </div>
               </div>
             </div>
@@ -93,7 +93,7 @@ export default function CraftsmanshipSection() {
 
           {/* Right: Atelier Narrative & Process */}
           <div>
-            <span className="am-kicker">YORKSHIRE MANUFACTURING ATELIER</span>
+            <span className="am-kicker">BESPOKE CAR COVER MANUFACTURING ATELIER</span>
             <h2
               className="am-title-section"
               style={{
@@ -102,7 +102,7 @@ export default function CraftsmanshipSection() {
                 color: '#111615',
               }}
             >
-              Where Digital Precision Meets British Savoir-Faire
+              Where Digital 3D CAD Meets Master Craftsmanship
             </h2>
 
             <p
@@ -112,9 +112,9 @@ export default function CraftsmanshipSection() {
                 color: '#5c6462',
               }}
             >
-              Every Velum commission starts with digital CAD surface models of the vehicle’s exact sheet metal. 
-              Our master patternmakers cut each textile panel individually before our Yorkshire seamstresses 
-              hand-stitch with twin-needle French felled seams—delivering an unmistakable bespoke fit.
+              Every TheSignaturecovers commission starts with digital 3D coordinate scans of the vehicle's exact bodywork. 
+              Our master patternmakers cut each textile panel individually with laser precision before stitching with 
+              twin-needle waterproof seams—delivering an unmistakable tailored suit that survives Indian monsoons and summer heat.
             </p>
 
             {/* 4 Atelier Milestones */}
@@ -264,7 +264,7 @@ export default function CraftsmanshipSection() {
                   marginTop: '6px',
                 }}
               >
-                Master Patternmaker • Velum Atelier Yorkshire
+                Master Patternmaker • TheSignaturecovers Atelier
               </div>
             </div>
 

@@ -64,7 +64,8 @@ export default function MaterialScience() {
           </h2>
           <p className="am-lead" style={{ marginTop: '12px', color: '#5c6462' }}>
             Beneath the tailored elegance lies advanced automotive engineering. Explore our proprietary 
-            4-layer textile composite developed to shield million-pound hypercars in the harshest climates.
+            4-layer textile composite developed to shield luxury vehicles in the harshest Indian climates—from 
+            48°C scorching solar heat and torrential monsoon deluges to Delhi dust storms and stray animal scratches.
           </p>
         </div>
 
@@ -258,7 +259,7 @@ export default function MaterialScience() {
                 color: '#111615',
               }}
             >
-              Velum Atelier vs Generic Universal Covers
+              TheSignaturecovers vs Generic Universal Covers
             </h3>
           </div>
 
@@ -288,7 +289,7 @@ export default function MaterialScience() {
                   }}
                 >
                   <th style={{ padding: '16px 20px', color: '#5c6462', fontFamily: 'var(--font-main)', letterSpacing: '0.5px' }}>Protection Criterion</th>
-                  <th style={{ padding: '16px 20px', color: '#00665e', fontFamily: 'var(--font-main)', letterSpacing: '0.5px', fontWeight: 600 }}>VELUM ATELIER BESPOKE</th>
+                  <th style={{ padding: '16px 20px', color: '#00665e', fontFamily: 'var(--font-main)', letterSpacing: '0.5px', fontWeight: 600 }}>THESIGNATURECOVERS BESPOKE</th>
                   <th style={{ padding: '16px 20px', color: '#828c8a', fontFamily: 'var(--font-main)', letterSpacing: '0.5px' }}>Off-The-Shelf Universal</th>
                 </tr>
               </thead>
@@ -326,15 +327,37 @@ export default function MaterialScience() {
                     Traps moisture, causing paint blisters
                   </td>
                 </tr>
-                <tr>
-                  <td style={{ padding: '14px 20px', color: '#111615', fontWeight: 500 }}>Guarantee & Provenance</td>
+                <tr style={{ borderBottom: '1px solid #eef2f2' }}>
+                  <td style={{ padding: '14px 20px', color: '#111615', fontWeight: 500 }}>Indian Monsoon & Storm Defense</td>
                   <td style={{ padding: '14px 20px', color: '#00665e', fontWeight: 500 }}>
                     <Check size={16} style={{ display: 'inline', marginRight: '6px' }} />
-                    5-Year Master Craftsmanship Warranty
+                    10,000mm+ Waterproof + Dual Wind Buckles
                   </td>
                   <td style={{ padding: '14px 20px', color: '#dc2626' }}>
                     <X size={16} style={{ display: 'inline', marginRight: '6px' }} />
-                    30-Day limited or zero support
+                    Seeps at stitches, blows away in storms
+                  </td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #eef2f2' }}>
+                  <td style={{ padding: '14px 20px', color: '#111615', fontWeight: 500 }}>48°C Summer Heat & UV Block</td>
+                  <td style={{ padding: '14px 20px', color: '#00665e', fontWeight: 500 }}>
+                    <Check size={16} style={{ display: 'inline', marginRight: '6px' }} />
+                    99.8% UV Deflection (Cabin 20°C Cooler)
+                  </td>
+                  <td style={{ padding: '14px 20px', color: '#dc2626' }}>
+                    <X size={16} style={{ display: 'inline', marginRight: '6px' }} />
+                    Cracks leather & damages dashboard LCDs
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '14px 20px', color: '#111615', fontWeight: 500 }}>Guarantee & Free Delivery</td>
+                  <td style={{ padding: '14px 20px', color: '#00665e', fontWeight: 500 }}>
+                    <Check size={16} style={{ display: 'inline', marginRight: '6px' }} />
+                    3 to 5 Year Warranty + Free Pan-India Shipping
+                  </td>
+                  <td style={{ padding: '14px 20px', color: '#dc2626' }}>
+                    <X size={16} style={{ display: 'inline', marginRight: '6px' }} />
+                    No warranty, cheap plastic fabric
                   </td>
                 </tr>
               </tbody>

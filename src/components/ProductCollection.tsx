@@ -55,16 +55,17 @@ export default function ProductCollection({
           }}
         >
           {[
-            { id: 'all', label: 'Complete Collection' },
-            { id: 'indoor', label: 'Indoor Prestige' },
-            { id: 'outdoor', label: 'Stormshield+ Outdoor' },
+            { id: 'all', label: 'All Covers' },
+            { id: 'outdoor', label: 'AquaShield Monsoon' },
+            { id: 'indoor', label: 'Prestige Velvet Indoor' },
+            { id: 'heatshield', label: '48°C Heat-Shield' },
             { id: 'reveal', label: 'Silk Reveal Drapes' },
-            { id: 'all-weather', label: 'Track & Heritage' },
           ].map((tab) => {
             const isActive = activeTab === tab.id;
             return (
               <button
                 key={tab.id}
+                suppressHydrationWarning
                 onClick={() => setActiveTab(tab.id)}
                 style={{
                   background: isActive ? '#00665e' : '#ffffff',
@@ -290,11 +291,12 @@ export default function ProductCollection({
                         color: '#111615',
                       }}
                     >
-                      {currencySymbol}{Math.round(tier.price * currencyRate)}
+                      {currencySymbol}{Math.round(tier.price * currencyRate).toLocaleString('en-IN')}
                     </span>
                   </div>
 
                   <button
+                    suppressHydrationWarning
                     onClick={() => {
                       onSelectTier(tier.id);
                       const el = document.getElementById('configurator');

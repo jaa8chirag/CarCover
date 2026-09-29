@@ -21,7 +21,7 @@ export default function SwatchRequestModal({ isOpen, onClose }: SwatchModalProps
     address: '',
     city: '',
     postcode: '',
-    country: 'United Kingdom',
+    country: 'India',
     vehicleModel: '',
   });
 
@@ -139,10 +139,10 @@ export default function SwatchRequestModal({ isOpen, onClose }: SwatchModalProps
                 </label>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
                   {[
-                    'Prestige Indoor Fleece',
-                    'Stormshield+ Outdoor',
+                    'AquaShield Monsoon Outdoor',
+                    'Prestige Indoor Velvet Fleece',
+                    'Titanium 48°C Heat Shield',
                     'Atelier Silk Reveal Drape',
-                    'Diamond Weave Heritage',
                   ].map((fabric) => {
                     const isChecked = selectedFabrics.includes(fabric);
                     return (

@@ -90,7 +90,7 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
             style={{
               position: 'absolute',
               inset: 0,
-              backgroundImage: 'url(/images/hero.jpg)',
+              backgroundImage: 'url(/images/cover_hero.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center 45%',
             }}
@@ -114,18 +114,18 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
               }}
               className="unveil-badge unveil-badge-right"
             >
-              TAILORED PRESTIGE FLEECE
+              TAILORED SIGNATURE SUIT
             </div>
           </div>
 
-          {/* TOP LAYER (CLIPPED): The Bare Supercar Grille / Machine (timeless.jpg) */}
+          {/* TOP LAYER (CLIPPED): The Bare Machine (thar_unveiled.jpg) */}
           <div
             style={{
               position: 'absolute',
               inset: 0,
-              backgroundImage: 'url(/images/timeless.jpg)',
+              backgroundImage: 'url(/images/thar_unveiled.jpg)',
               backgroundSize: 'cover',
-              backgroundPosition: 'center 40%',
+              backgroundPosition: 'center 45%',
               clipPath: `polygon(0 0, ${sliderPos}% 0, ${sliderPos}% 100%, 0 100%)`,
             }}
           >
@@ -149,7 +149,7 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
               }}
               className="unveil-badge unveil-badge-left"
             >
-              FACTORY CHASSIS
+              UNVEILED SHOWROOM FINISH
             </div>
           </div>
 
@@ -261,7 +261,7 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
               Cashmere Underside Fleece
             </div>
             <div style={{ fontSize: '13px', color: '#5c6462', marginTop: '4px' }}>
-              Tested zero paint swirls on multi-layer corrected Aston Martin lacquer.
+              Tested zero paint swirls on ceramic-coated paint, PPF, and showroom gloss lacquer.
             </div>
           </div>
 

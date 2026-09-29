@@ -26,15 +26,15 @@ export default function BespokeConfigurator({
   const [selectedTierId, setSelectedTierId] = useState<string>('prestige-indoor');
   const [selectedColor, setSelectedColor] = useState(FABRIC_COLORS[0]);
   const [selectedPiping, setSelectedPiping] = useState(PIPING_COLORS[0]);
-  const [monogramText, setMonogramText] = useState<string>('AM-007');
+  const [monogramText, setMonogramText] = useState<string>('THAR-4X4');
   const [hasMonogram, setHasMonogram] = useState<boolean>(true);
   const [monogramColor, setMonogramColor] = useState<'gold' | 'silver'>('gold');
 
   const [addons, setAddons] = useState({
     mirrorPockets: true,
     heavyDutyHoldall: true,
-    lockingUnderbodyStraps: false,
-    batteryChargerFlap: true,
+    lockingUnderbodyStraps: true,
+    batteryChargerFlap: false,
   });
 
   const [viewEnvironment, setViewEnvironment] = useState<'studio' | 'night'>('studio');
@@ -42,9 +42,9 @@ export default function BespokeConfigurator({
   const currentTier = COVER_TIERS.find((t) => t.id === selectedTierId) || COVER_TIERS[0];
 
   const basePrice = currentTier.price;
-  const monogramPrice = hasMonogram ? 45 : 0;
-  const strapsPrice = addons.lockingUnderbodyStraps ? 35 : 0;
-  const flapPrice = addons.batteryChargerFlap ? 40 : 0;
+  const monogramPrice = hasMonogram ? 499 : 0;
+  const strapsPrice = addons.lockingUnderbodyStraps ? 399 : 0;
+  const flapPrice = addons.batteryChargerFlap ? 299 : 0;
   const totalPrice = Math.round((basePrice + monogramPrice + strapsPrice + flapPrice) * currencyRate);
 
   const handleCommissionClick = () => {
@@ -515,7 +515,7 @@ export default function BespokeConfigurator({
                 <div>
                   <span className="am-kicker" style={{ margin: 0 }}>4. Personal Monogram</span>
                   <div style={{ fontSize: '12px', color: '#5c6462', marginTop: '2px' }}>
-                    Embroidered thread on bonnet (+{currencySymbol}{Math.round(45 * currencyRate)})
+                    Embroidered thread on bonnet (+{currencySymbol}499)
                   </div>
                 </div>
                 <input
@@ -530,10 +530,10 @@ export default function BespokeConfigurator({
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '8px' }}>
                   <input
                     type="text"
-                    maxLength={8}
+                    maxLength={10}
                     value={monogramText}
                     onChange={(e) => setMonogramText(e.target.value.toUpperCase())}
-                    placeholder="E.G. DB12, 007"
+                    placeholder="E.G. THAR-4X4, MH-02"
                     style={{
                       background: '#ffffff',
                       border: '1px solid #d4dedd',
@@ -595,7 +595,7 @@ export default function BespokeConfigurator({
                 </div>
 
                 <div style={{ fontSize: '32px', fontWeight: 600, color: '#111615' }}>
-                  {currencySymbol}{totalPrice}
+                  {currencySymbol}{totalPrice.toLocaleString('en-IN')}
                 </div>
               </div>
 

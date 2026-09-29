@@ -13,7 +13,7 @@ export default function KineticShowcaseSection({
   onOpenEnquiry,
 }: KineticShowcaseProps) {
   // Card 1 Live Stitcher State
-  const [initials, setInitials] = useState('AM-007');
+  const [initials, setInitials] = useState('THAR-4X4');
   const [threadColor, setThreadColor] = useState<'gold' | 'lime' | 'silver'>('gold');
 
   // Card 2 Layer expansion state
@@ -34,11 +34,11 @@ export default function KineticShowcaseSection({
       <div className="container-am">
         {/* Section Header */}
         <div style={{ marginBottom: '60px' }}>
-          <span className="am-kicker">ATELIER KINETIC STORIES</span>
-          <h2 className="am-title-section">The Art of Commissioning</h2>
+          <span className="am-kicker">CAR COVER ATELIER KINETIC STORIES</span>
+          <h2 className="am-title-section">The Art of Custom Cover Craft</h2>
           <p className="am-lead" style={{ marginTop: '8px' }}>
-            Three interactive explorations into the artisanal techniques, nanofiber textile science, 
-            and theatrical unveilings that define Specialised Covers.
+            Three interactive explorations into personalized Indian registration embroidery, 
+            5-layer nanofiber weather science, and fluid satin unveilings that define TheSignaturecovers.
           </p>
         </div>
 

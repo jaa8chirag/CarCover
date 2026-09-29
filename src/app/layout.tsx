@@ -1,15 +1,21 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
-  title: 'VELUM ATELIER | Bespoke Tailored Car Covers | Handcrafted in England',
-  description: 'Precision 3D-laser tailored bespoke automotive covers engineered for Aston Martin, Porsche, Ferrari, McLaren, and high-performance marques. Handcrafted in Yorkshire, England.',
-  keywords: 'bespoke car covers, luxury car covers, tailored indoor car cover, Aston Martin car cover, stormproof outdoor car cover, specialised covers',
+  title: 'THESIGNATURECOVERS | Bespoke Tailored Car Covers | India',
+  description: 'Precision 3D-laser CAD tailored luxury automotive covers engineered for Indian weather by TheSignaturecovers. 100% Waterproof monsoon shield, 48°C UV heat deflection & zero-scratch cashmere fleece. Free delivery across India.',
+  keywords: 'TheSignaturecovers, bespoke car covers India, luxury car covers, tailored car cover, Mahindra Thar car cover, Fortuner car cover, Creta car cover, waterproof car cover India, specialized covers',
   openGraph: {
-    title: 'VELUM ATELIER | Bespoke Tailored Car Covers',
-    description: 'Precision 3D-laser tailored bespoke automotive covers engineered for luxury and high-performance marques.',
+    title: 'THESIGNATURECOVERS | India\'s #1 Bespoke Tailored Car Covers',
+    description: 'Precision 3D-laser CAD tailored luxury automotive covers engineered for Indian weather by TheSignaturecovers. 100% Waterproof & zero-scratch fleece.',
     type: 'website',
-    locale: 'en_GB',
+    locale: 'en_IN',
   },
 };
 
@@ -19,12 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {children}
       </body>
     </html>

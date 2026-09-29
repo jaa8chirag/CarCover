@@ -23,41 +23,41 @@ const CHAPTERS: Chapter[] = [
   {
     id: 'ch-1',
     number: '01',
-    title: 'Aerodynamic Drape Dynamics',
-    tagline: 'HIGH-VELOCITY BOUNDARY LAYER PRESERVATION',
-    description: 'Filmed on the Silverstone National Circuit. Observing how our bespoke tailored contouring eliminates wind flutter, surface abrasion, and draft cavitation at wind speeds exceeding 80 mph.',
+    title: 'Monsoon Deluge Laboratory',
+    tagline: '10,000MM HYDROSTATIC MONSOON REPELLENT TESTING',
+    description: 'Subjecting our multi-layer AquaShield+ nano-membrane to relentless high-pressure water cannons. Simulating severe coastal and Mumbai downpours with zero moisture penetration and active vapor release.',
     telemetry: [
-      { label: 'WIND TUNNEL DRAG', value: '0.29 Cd' },
-      { label: 'FABRIC TENSION', value: '42 N/cm²' },
-      { label: 'SURFACE FRICTION', value: '0.02 μ' },
+      { label: 'HYDROSTATIC HEAD', value: '10,000+ mm' },
+      { label: 'SEAM INTEGRITY', value: 'Ultrasonic Welded' },
+      { label: 'WIND FLUTTER', value: '0.00 %' },
     ],
-    accentColor: '#00665e',
+    accentColor: '#c5e838',
   },
   {
     id: 'ch-2',
     number: '02',
-    title: 'Atmospheric Cryo-Barrier',
-    tagline: 'SUB-ZERO ALPINE WEATHERPROOF TESTING',
-    description: 'Documenting the dual-flow nanoporous membrane under severe freezing rain and alpine frost in the Swiss Engadin valley. Trapped engine heat escapes freely while exterior moisture is locked out.',
+    title: '48°C Rajasthan Thermal Shield',
+    tagline: 'EXTREME SOLAR UV RADIATION DEFLECTION',
+    description: 'Testing the Titanium Heat-Shield under scorching 48°C desert summer sun. The aerospace multi-foil composite deflects 99.8% of ultraviolet rays, keeping the interior cabin 20°C cooler.',
     telemetry: [
-      { label: 'WATER RESISTANCE', value: '10,000 mm' },
-      { label: 'VAPOR PERMEABILITY', value: '98.4 %' },
-      { label: 'UV DEGRADATION', value: '0.00 %' },
+      { label: 'UV-A & UV-B BLOCK', value: '99.8 %' },
+      { label: 'CABIN TEMP REDUCTION', value: '-20.4 °C' },
+      { label: 'DASHBOARD FADE', value: '0.00 %' },
     ],
-    accentColor: '#00a896',
+    accentColor: '#38bdf8',
   },
   {
     id: 'ch-3',
     number: '03',
-    title: 'The VIP Unveiling Handover',
-    tagline: 'SENSORY FLUID SATIN THEATRE',
-    description: 'The ceremonial unveiling of a bespoke commission. Weighted golden fringes glide effortlessly off paint-corrected bodywork, creating an unforgettable motor show experience.',
+    title: 'Zero-Scratch Cashmere Micro-Fleece',
+    tagline: 'CONCOURS PAINTWORK & CERAMIC COAT PRESERVATION',
+    description: 'Electron-microscope surface friction analysis on fresh multi-stage paint correction and delicate ceramic coatings. Ultra-dense brushed microfiber guarantees zero swirl marks.',
     telemetry: [
-      { label: 'SATIN WEAVE DENSITY', value: '280 GSM' },
-      { label: 'COEFFICIENT OF SLIP', value: 'Ultra-Low' },
-      { label: 'HEM WEIGHT', value: '1.2 kg' },
+      { label: 'FLEECE DENSITY', value: '280 GSM' },
+      { label: 'SURFACE FRICTION', value: '0.01 μ' },
+      { label: 'PAINT SWIRL RISK', value: '0.00 %' },
     ],
-    accentColor: '#dfc287',
+    accentColor: '#00a896',
   },
 ];
 
@@ -154,7 +154,7 @@ export default function CinematicVideoSection({
               marginBottom: '10px',
             }}
           >
-            CINEMATIC EXPERIENCE • SPECIALISED COVERS ATELIER
+            CINEMATIC LAB • EXTREME CLIMATE & PRESSURE TESTING
           </span>
           <h2
             className="am-title-section"
@@ -164,7 +164,7 @@ export default function CinematicVideoSection({
               lineHeight: 1.15,
             }}
           >
-            The Art of Motion & Preservation
+            The Science of Automotive Armor
           </h2>
           <p
             className="am-lead"
@@ -174,8 +174,9 @@ export default function CinematicVideoSection({
               fontSize: 'clamp(14px, 3vw, 17px)',
             }}
           >
-            Experience the motion and aerodynamic engineering behind our bespoke tailored suits. 
-            Crafted for speed, tested against the elements, and finished to museum standard.
+            Witness our bespoke tailored covers undergoing 10,000mm monsoon pressure cannons, 
+            48°C desert thermal radiation, and electron-microscope scratch testing to guarantee 
+            zero swirl marks and total weather defense across Indian driving conditions.
           </p>
         </div>
 

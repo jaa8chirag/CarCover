@@ -10,10 +10,10 @@ interface VehicleSelectorProps {
 }
 
 export default function VehicleSelector({ onSelectVehicle, onOpenConfigurator }: VehicleSelectorProps) {
-  const [selectedBrandId, setSelectedBrandId] = useState<string>('aston-martin');
-  const [selectedModelId, setSelectedModelId] = useState<string>('db12');
+  const [selectedBrandId, setSelectedBrandId] = useState<string>('mahindra');
+  const [selectedModelId, setSelectedModelId] = useState<string>('thar-roxx');
   const [selectedYear, setSelectedYear] = useState<string>('2024 - 2026');
-  const [selectedVariant, setSelectedVariant] = useState<string>('Coupe');
+  const [selectedVariant, setSelectedVariant] = useState<string>('AX7L Luxury 4x4');
 
   const currentBrand = CAR_BRANDS.find((b) => b.id === selectedBrandId) || CAR_BRANDS[0];
   const currentModel = currentBrand.models.find((m) => m.id === selectedModelId) || currentBrand.models[0];
@@ -55,12 +55,13 @@ export default function VehicleSelector({ onSelectVehicle, onOpenConfigurator }:
     >
       <div className="container-am">
         {/* Section Header */}
-        <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 48px' }}>
-          <span className="am-kicker">PRECISION DIGITAL PATTERNS</span>
-          <h2 className="am-title-section">3D Laser CAD Vehicle Match</h2>
+        <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 48px' }}>
+          <span className="am-kicker">50,000+ PRECISION 3D CAD PATTERNS</span>
+          <h2 className="am-title-section">Custom Tailored Vehicle Match</h2>
           <p className="am-lead" style={{ marginTop: '12px' }}>
-            Select your exact marque, generation, and aerodynamic body package. Our British atelier holds 
-            over 50,000 certified 3D coordinate scans to ensure an impeccable zero-tolerance tailored fit.
+            Select your car brand, generation, and exact body styling. From Mahindra Thar, Fortuner, Creta, 
+            and Safari to Mercedes, BMW, Porsche, and Aston Martin—our atelier cuts every cover with exact 
+            mirror pockets and aerodynamic clearances.
           </p>
         </div>
 
@@ -253,11 +254,11 @@ export default function VehicleSelector({ onSelectVehicle, onOpenConfigurator }:
               gap: '20px',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: '1 1 240px', minWidth: 0 }}>
               <div
                 style={{
-                  width: '48px',
-                  height: '48px',
+                  width: '44px',
+                  height: '44px',
                   borderRadius: '2px',
                   background: 'var(--color-brand-green-subtle)',
                   border: '1px solid #00665e',
@@ -267,21 +268,21 @@ export default function VehicleSelector({ onSelectVehicle, onOpenConfigurator }:
                   flexShrink: 0,
                 }}
               >
-                <Cpu size={24} color="#00665e" />
+                <Cpu size={22} color="#00665e" />
               </div>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                  <span style={{ fontSize: '11px', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#00665e', fontWeight: 600 }}>
+              <div style={{ minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '6px', marginBottom: '4px' }}>
+                  <span style={{ fontSize: '11px', letterSpacing: '1.2px', textTransform: 'uppercase', color: '#00665e', fontWeight: 600 }}>
                     CAD Scan Status: 100% Certified
                   </span>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: '#00665e', fontWeight: 500 }}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#00665e', fontWeight: 500 }}>
                     <CheckCircle2 size={13} /> Active In Archive
                   </span>
                 </div>
-                <div style={{ fontSize: '18px', fontWeight: 600, color: '#111615' }}>
+                <div style={{ fontSize: 'clamp(15px, 3.5vw, 18px)', fontWeight: 600, color: '#111615', wordBreak: 'break-word', lineHeight: 1.3 }}>
                   {currentBrand.name} {currentModel.name} • {selectedVariant} ({selectedYear})
                 </div>
-                <div style={{ fontSize: '13px', color: '#5c6462', marginTop: '2px' }}>
+                <div style={{ fontSize: '12px', color: '#5c6462', marginTop: '2px', lineHeight: 1.4 }}>
                   Includes precision mirror pockets, contoured roofline & sculpted splitter tolerances.
                 </div>
               </div>

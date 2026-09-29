@@ -353,7 +353,7 @@ export default function CheckoutDrawer({
                         Total Atelier Investment
                       </div>
                       <div style={{ fontSize: '12px', color: '#00665e', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px', fontWeight: 600 }}>
-                        <Lock size={12} /> Priority Insured Dispatch Included
+                        <Lock size={12} /> Free Pan-India Insured Express + COD/UPI
                       </div>
                     </div>
 
@@ -365,7 +365,7 @@ export default function CheckoutDrawer({
                         color: '#111615',
                       }}
                     >
-                      {currencySymbol}{total}
+                      {currencySymbol}{total.toLocaleString('en-IN')}
                     </div>
                   </div>
 

@@ -23,33 +23,56 @@ export default function Hero({ onOpenConfigurator, onOpenEnquiry }: HeroProps) {
       }}
       className="hero-section-am"
     >
-      {/* Background Image with Aston Martin cinematic grading */}
+      {/* Background Bespoke Car Cover Fitting Video - Native, Ultra-Smooth & High Clarity */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: 'url(/images/hero.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 45%',
+          overflow: 'hidden',
           zIndex: 0,
+          backgroundColor: '#0a0d10',
         }}
-      />
+      >
+        <video
+          src="/videos/hero_cover_install.mp4"
+          poster="/images/cover_install_1.jpg"
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            width: '100vw',
+            height: '56.25vw',
+            minHeight: '100vh',
+            minWidth: '177.77vh',
+            transform: 'translate(-50%, -50%)',
+            objectFit: 'cover',
+            border: 'none',
+            opacity: 0.95,
+          }}
+        />
+      </div>
 
-      {/* Aston Martin Vignette & Gradient Overlays */}
+      {/* Subtle Luxury Gradient Overlays */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.15) 35%, rgba(0, 0, 0, 0.88) 100%)',
+          background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.08) 45%, rgba(0, 0, 0, 0.85) 100%)',
           zIndex: 1,
+          pointerEvents: 'none',
         }}
       />
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.35) 60%, rgba(0, 0, 0, 0.65) 100%)',
+          background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.4) 45%, rgba(0, 0, 0, 0.05) 85%)',
           zIndex: 1,
+          pointerEvents: 'none',
         }}
       />
 
@@ -62,7 +85,7 @@ export default function Hero({ onOpenConfigurator, onOpenEnquiry }: HeroProps) {
           width: '100%',
         }}
       >
-        <div style={{ maxWidth: '820px' }}>
+        <div style={{ maxWidth: '840px' }}>
           {/* Kicker tag */}
           <span
             className="am-kicker"
@@ -72,7 +95,7 @@ export default function Hero({ onOpenConfigurator, onOpenEnquiry }: HeroProps) {
               marginBottom: '10px',
             }}
           >
-            SPECIALISED COVERS • BESPOKE AUTOMOTIVE ATELIER
+            THESIGNATURECOVERS • BESPOKE TAILORED CAR COVERS FOR INDIA
           </span>
 
           {/* Hero Main Headline */}
@@ -84,7 +107,7 @@ export default function Hero({ onOpenConfigurator, onOpenEnquiry }: HeroProps) {
               lineHeight: 1.05,
             }}
           >
-            Vanquish The Elements.
+            Sculpted Protection. Engineered To Endure.
           </h1>
 
           {/* Subtitle */}
@@ -93,13 +116,14 @@ export default function Hero({ onOpenConfigurator, onOpenEnquiry }: HeroProps) {
             style={{
               fontSize: 'clamp(14px, 3.2vw, 18px)',
               color: '#c5c9c9',
-              maxWidth: '620px',
+              maxWidth: '660px',
               marginBottom: 'clamp(24px, 4vw, 36px)',
               lineHeight: 1.55,
             }}
           >
-            Precision 3D-laser tailored bespoke car covers. Sculpted to mirror every muscular contour 
-            and aerodynamic profile down to the millimeter. Handcrafted in Yorkshire, England.
+            Precision 3D-laser CAD tailored automotive covers engineered for extreme Indian weather. 
+            Defeating 48°C scorching solar heat, torrential monsoon deluges, stray animal scratches, 
+            and Delhi dust storms with zero-scratch cashmere fleece.
           </p>
 
           {/* CTA Buttons in exact Aston Martin styling */}
@@ -115,17 +139,15 @@ export default function Hero({ onOpenConfigurator, onOpenEnquiry }: HeroProps) {
             <button
               onClick={onOpenConfigurator}
               className="cta_button cta_button--primary-light hero-btn"
-              style={{ minWidth: '150px' }}
             >
-              Configure
+              Customise Your Cover
             </button>
 
             <a
               href="#models"
               className="cta_button cta_button--secondary-dark hero-btn"
-              style={{ minWidth: '150px' }}
             >
-              Explore Range
+              Explore Cover Editions
             </a>
           </div>
         </div>
@@ -150,21 +172,21 @@ export default function Hero({ onOpenConfigurator, onOpenEnquiry }: HeroProps) {
               gridTemplateColumns: 'repeat(3, 1fr)',
               gap: '16px',
               width: '100%',
-              maxWidth: '560px',
+              maxWidth: '600px',
             }}
             className="hero-stats-grid"
           >
             <div>
-              <div style={{ fontSize: '10px', color: '#959696', letterSpacing: '1px', textTransform: 'uppercase' }}>CAD Patterns</div>
-              <div style={{ fontSize: 'clamp(14px, 3vw, 18px)', color: '#ffffff', fontWeight: 600, marginTop: '2px' }}>50,000+</div>
+              <div style={{ fontSize: '10px', color: '#959696', letterSpacing: '1px', textTransform: 'uppercase' }}>Indian & Global CAD</div>
+              <div style={{ fontSize: 'clamp(14px, 3vw, 18px)', color: '#ffffff', fontWeight: 600, marginTop: '2px' }}>50,000+ Patterns</div>
             </div>
             <div>
-              <div style={{ fontSize: '10px', color: '#959696', letterSpacing: '1px', textTransform: 'uppercase' }}>Paint Safety</div>
-              <div style={{ fontSize: 'clamp(14px, 3vw, 18px)', color: '#ffffff', fontWeight: 600, marginTop: '2px' }}>100% Zero-Scratch</div>
+              <div style={{ fontSize: '10px', color: '#959696', letterSpacing: '1px', textTransform: 'uppercase' }}>Monsoon Defense</div>
+              <div style={{ fontSize: 'clamp(14px, 3vw, 18px)', color: '#ffffff', fontWeight: 600, marginTop: '2px' }}>100% Waterproof</div>
             </div>
             <div>
-              <div style={{ fontSize: '10px', color: '#959696', letterSpacing: '1px', textTransform: 'uppercase' }}>Craftsmanship</div>
-              <div style={{ fontSize: 'clamp(14px, 3vw, 18px)', color: '#ffffff', fontWeight: 600, marginTop: '2px' }}>5-Yr Guarantee</div>
+              <div style={{ fontSize: '10px', color: '#959696', letterSpacing: '1px', textTransform: 'uppercase' }}>Pan-India Delivery</div>
+              <div style={{ fontSize: 'clamp(14px, 3vw, 18px)', color: '#ffffff', fontWeight: 600, marginTop: '2px' }}>Free Express + COD</div>
             </div>
           </div>
 

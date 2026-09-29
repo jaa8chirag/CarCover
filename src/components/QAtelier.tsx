@@ -31,42 +31,42 @@ export default function QAtelier({ onOpenEnquiry }: QAtelierProps) {
         >
           {/* Left: Atelier Story */}
           <div>
-            <span className="am-kicker">BESPOKE COMMISSIONS</span>
+            <span className="am-kicker">PRIVATE COMMISSIONS • INDIA</span>
             <h2 className="am-title-section" style={{ marginBottom: '24px', color: '#111615' }}>
-              Q by Specialised Covers
+              The Signature Private Atelier
             </h2>
 
             <p className="am-lead" style={{ marginBottom: '24px', color: '#5c6462' }}>
-              For collectors who demand absolute individuality. Q by Specialised Covers is our pinnacle 
-              bespoke service, offering tailored fabric dye-matching to your vehicle’s exact factory paint code, 
-              custom embroidered family crests, and rare material commissions.
+              For enthusiasts and collectors who demand absolute individuality. TheSignaturecovers Private Atelier is our pinnacle 
+              custom commission service—offering fabric dye-matching to your vehicle's factory paint code, 
+              hand-embroidered personalized license plates, club insignia, and rare velvet materials.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '36px' }}>
               <div style={{ borderLeft: '2px solid #00665e', paddingLeft: '16px' }}>
                 <div style={{ fontSize: '15px', color: '#111615', fontWeight: 600 }}>
-                  OEM Factory Paint Code Matching
+                  Factory Paint Code Fabric Matching
                 </div>
                 <div style={{ fontSize: '13px', color: '#5c6462', marginTop: '4px' }}>
-                  Aston Martin Racing Green, Xenon Grey, Satin Titanium, and bespoke Concours palettes.
+                  Naples Black, British Racing Green, Desert Gold, Tango Red, and bespoke Concours shades.
                 </div>
               </div>
 
               <div style={{ borderLeft: '2px solid #00665e', paddingLeft: '16px' }}>
                 <div style={{ fontSize: '15px', color: '#111615', fontWeight: 600 }}>
-                  Metallic Silk-Thread Monograms
+                  Metallic Silk-Thread Monograms & Number Plates
                 </div>
                 <div style={{ fontSize: '13px', color: '#5c6462', marginTop: '4px' }}>
-                  Hand-embroidered vehicle registration, chassis numbers, or custom heraldic insignias.
+                  Hand-embroidered Indian registration plate number, chassis VIN, family initials, or club crests.
                 </div>
               </div>
 
               <div style={{ borderLeft: '2px solid #00665e', paddingLeft: '16px' }}>
                 <div style={{ fontSize: '15px', color: '#111615', fontWeight: 600 }}>
-                  Dealership & Museum Reveal Drapes
+                  Showroom VIP Delivery Drapes
                 </div>
                 <div style={{ fontSize: '13px', color: '#5c6462', marginTop: '4px' }}>
-                  Fluid liquid-satin unveilings commissioned by factory dealers and VIP collectors worldwide.
+                  Fluid liquid-satin unveilings commissioned by luxury dealership handovers and private supercar collections.
                 </div>
               </div>
             </div>
@@ -75,7 +75,7 @@ export default function QAtelier({ onOpenEnquiry }: QAtelierProps) {
               onClick={onOpenEnquiry}
               className="cta_button cta_button--primary-light"
             >
-              <span>Enquire With Q Atelier</span>
+              <span>Enquire With Signature Atelier India</span>
               <ChevronRight size={16} />
             </button>
           </div>
@@ -92,8 +92,8 @@ export default function QAtelier({ onOpenEnquiry }: QAtelierProps) {
               }}
             >
               <img
-                src="/images/craftsmanship.jpg"
-                alt="Q by Specialised Covers Atelier"
+                src="/images/cover_velvet.jpg"
+                alt="TheSignaturecovers Private Atelier Commission"
                 style={{
                   width: '100%',
                   height: 'auto',
