@@ -87,10 +87,12 @@
   }
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 html {
@@ -146,6 +148,7 @@ img, svg, video, canvas {
   background: #94a3b8;
 }
 
+@layer components {
 /* Container */
 .container-am {
   width: 100%;
@@ -170,6 +173,7 @@ img, svg, video, canvas {
   .container-am {
     padding: 0 16px;
   }
+}
 }
 
 /* Mobile-friendly section padding utility */

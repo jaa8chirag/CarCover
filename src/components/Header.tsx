@@ -117,11 +117,15 @@ export default function Header({
       <header
         className="fixed top-0 left-0 w-full z-50 transition-all duration-300 pointer-events-auto"
         style={{
-          background: !isHomePage || scrolled ? 'rgba(255, 255, 255, 0.94)' : 'rgba(255, 255, 255, 0.22)',
-          backdropFilter: 'blur(30px) saturate(190%)',
-          WebkitBackdropFilter: 'blur(30px) saturate(190%)',
-          borderBottom: !isHomePage || scrolled ? '1px solid rgba(226, 232, 240, 0.85)' : '1px solid rgba(255, 255, 255, 0.35)',
-          boxShadow: !isHomePage || scrolled ? '0 10px 30px -10px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9)' : '0 8px 32px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.75)',
+          background: scrolled
+            ? 'linear-gradient(180deg, rgba(255,255,255,0.68) 0%, rgba(255,255,255,0.52) 100%)'
+            : 'linear-gradient(180deg, rgba(255,255,255,0.46) 0%, rgba(255,255,255,0.28) 100%)',
+          backdropFilter: 'blur(26px) saturate(220%) brightness(1.06)',
+          WebkitBackdropFilter: 'blur(26px) saturate(220%) brightness(1.06)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.55)',
+          boxShadow: scrolled
+            ? '0 12px 40px -12px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.85), inset 0 -1px 0 rgba(255, 255, 255, 0.25)'
+            : '0 8px 32px rgba(0, 0, 0, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -1px 0 rgba(255, 255, 255, 0.2)',
         }}
       >
         {/* Subtle Specular Top Luxury Hairline */}

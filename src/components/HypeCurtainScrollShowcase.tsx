@@ -107,7 +107,7 @@ function HypeSection({
       id={`slide-${index}`}
       data-index={index}
       className="relative h-screen w-full overflow-hidden flex items-center justify-center cursor-default"
-      style={{ minHeight: '680px' }}
+      style={{ minHeight: '680px', paddingTop: 'calc(var(--header-height) + 24px)', paddingBottom: '48px' }}
     >
       {/* 1. Fixed Parallax Background Image (Crystal-clear visibility) */}
       <div

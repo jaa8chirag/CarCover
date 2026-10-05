@@ -1,235 +1,160 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import CheckoutDrawer from '@/components/CheckoutDrawer';
-import SwatchRequestModal from '@/components/SwatchRequestModal';
-import { Mail, Phone, MapPin, MessageSquare, Clock, Send, CheckCircle2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import PageShell from '@/components/PageShell';
+import PageHero from '@/components/PageHero';
+
+const INFO = [
+  { icon: Phone, label: 'Concierge Direct', value: '+91 (0) 98765 43210', href: 'tel:+919876543210', note: 'Mon – Sat, 9:00 AM – 8:00 PM IST' },
+  { icon: Mail, label: 'Bespoke Inquiries', value: 'concierge@thesignaturecovers.com', href: 'mailto:concierge@thesignaturecovers.com' },
+  { icon: MapPin, label: 'Atelier & Studio', value: 'Industrial Area Phase 2, New Delhi, India 110020' },
+];
+
+const FIELD =
+  'w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/60 text-sm text-slate-900 placeholder:text-slate-400 transition focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#00665e]/10 focus:border-[#00665e]';
 
 export default function ContactPage() {
-  const [cartItems, setCartItems] = useState<any[]>([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isSwatchOpen, setIsSwatchOpen] = useState(false);
-
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    vehicle: '',
-    message: '',
-  });
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', vehicle: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
+  const set = (k: keyof typeof formData) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setFormData({ ...formData, [k]: e.target.value });
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-slate-900">
-      <Header
-        onOpenCart={() => setIsCartOpen(true)}
-        cartCount={cartItems.length}
-        onOpenEnquiry={() => setIsSwatchOpen(true)}
-      />
+    <PageShell>
+      {() => (
+        <>
+          <PageHero
+            kicker="CLIENT CONCIERGE & ATELIER ADVISORY"
+            title="Contact"
+            accent="Our Atelier"
+            lead="Questions about a custom pattern, modified vehicle clearances, fabric suitability or fleet commissions? Our specialists are at your disposal."
+            image="/images/cover_install_2.jpg"
+          />
 
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      >
-      {/* Main Page Container with generous top clearance */}
-      <main className="pt-36 sm:pt-44 pb-24">
-        {/* Page Hero */}
-        <section className="px-6 sm:px-12 mb-16">
-          <div className="container-am max-w-4xl mx-auto text-center">
-            <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-widest text-[#00665e] bg-emerald-500/10 border border-emerald-500/20 mb-4">
-              <MessageSquare size={14} /> CLIENT CONCIERGE & ATELIER ADVISORY
-            </span>
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-950 tracking-tight mb-4 leading-tight">
-              Contact Our Atelier
-            </h1>
-            <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto mb-4 font-medium leading-relaxed">
-              Have questions regarding a custom pattern, modified vehicle clearances, fabric suitability, or fleet commissions? Our specialists are at your disposal.
-            </p>
-          </div>
-        </section>
-
-        {/* Contact Form & Information Split */}
-        <section className="py-20 px-6 sm:px-12">
-          <div className="container-am max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
-              {/* Left Column: Contact Cards */}
-              <div className="md:col-span-5 space-y-6">
-                <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm">
-                  <h2 className="text-lg font-bold text-slate-950 mb-6">Concierge Contacts</h2>
-
-                  <div className="space-y-6 text-xs sm:text-sm text-slate-700">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-[#00665e] flex items-center justify-center flex-shrink-0">
-                        <Phone size={18} />
-                      </div>
-                      <div>
-                        <span className="text-[10px] font-mono uppercase text-slate-400 block mb-0.5">Concierge Direct</span>
-                        <a href="tel:+919876543210" className="font-bold text-slate-900 hover:text-[#00665e] transition-colors no-underline">
-                          +91 (0) 98765 43210
-                        </a>
-                        <span className="text-[11px] text-slate-500 block mt-0.5">Mon – Sat, 9:00 AM – 8:00 PM IST</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-[#00665e] flex items-center justify-center flex-shrink-0">
-                        <Mail size={18} />
-                      </div>
-                      <div>
-                        <span className="text-[10px] font-mono uppercase text-slate-400 block mb-0.5">Bespoke Inquiries</span>
-                        <a href="mailto:concierge@thesignaturecovers.com" className="font-bold text-slate-900 hover:text-[#00665e] transition-colors no-underline">
-                          concierge@thesignaturecovers.com
-                        </a>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-[#00665e] flex items-center justify-center flex-shrink-0">
-                        <MapPin size={18} />
-                      </div>
-                      <div>
-                        <span className="text-[10px] font-mono uppercase text-slate-400 block mb-0.5">Atelier & Studio</span>
-                        <p className="font-medium text-slate-800 leading-relaxed">
-                          TheSignaturecovers Atelier<br />
-                          Industrial Area Phase 2, New Delhi, India 110020
-                        </p>
-                      </div>
+          <section className="relative bg-[#f8fafc] pb-24 sm:pb-32">
+            <div className="container-am max-w-6xl -mt-10 sm:-mt-14 relative z-10">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+                <motion.aside
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="lg:col-span-5 space-y-6"
+                >
+                  <div className="rounded-3xl p-8 sm:p-9 text-white bg-gradient-to-br from-[#0b1514] via-[#0a2b28] to-[#00665e] shadow-2xl shadow-[#00665e]/20">
+                    <span className="am-kicker">CONCIERGE CONTACTS</span>
+                    <div className="space-y-7 mt-6">
+                      {INFO.map(({ icon: Icon, label, value, href, note }) => (
+                        <div key={label} className="flex items-start gap-4">
+                          <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/15 text-[#cca462] flex items-center justify-center flex-shrink-0">
+                            <Icon size={19} />
+                          </div>
+                          <div className="min-w-0">
+                            <span className="text-[10px] tracking-[2px] uppercase text-white/50 block mb-1">{label}</span>
+                            {href ? (
+                              <a href={href} className="font-semibold text-white hover:text-[#cca462] transition-colors no-underline break-words">
+                                {value}
+                              </a>
+                            ) : (
+                              <p className="font-medium text-white/90 leading-relaxed">{value}</p>
+                            )}
+                            {note && <span className="text-xs text-white/55 block mt-1">{note}</span>}
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                </div>
 
-                <div className="bg-slate-50 rounded-3xl p-6 border border-slate-200/80">
-                  <div className="flex items-center gap-2 mb-2 text-[#00665e]">
-                    <Clock size={16} />
-                    <span className="text-xs font-bold uppercase tracking-wider">Fast Turnaround</span>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                    All digital inquiries receive a personal response from a bespoke tailor within 4 business hours.
-                  </p>
-                </div>
-              </div>
-
-              {/* Right Column: Inquiry Form */}
-              <div className="md:col-span-7 bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-sm">
-                <h2 className="text-xl font-bold text-slate-950 mb-2">Send an Advisory Request</h2>
-                <p className="text-xs text-slate-500 mb-6">
-                  Fill in your vehicle details below and we will prepare tailored recommendations.
-                </p>
-
-                {submitted ? (
-                  <div className="py-12 text-center space-y-4">
-                    <div className="w-16 h-16 rounded-full bg-emerald-100 text-[#00665e] flex items-center justify-center mx-auto">
-                      <CheckCircle2 size={32} />
+                  <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex items-start gap-4">
+                    <div className="w-11 h-11 rounded-xl bg-[#00665e]/10 text-[#00665e] flex items-center justify-center flex-shrink-0">
+                      <Clock size={19} />
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900">Inquiry Received</h3>
-                    <p className="text-xs text-slate-600 max-w-md mx-auto">
-                      Thank you for contacting TheSignaturecovers. A senior bespoke advisor will reach out to you shortly via WhatsApp and email.
-                    </p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-xs font-semibold text-slate-700 block mb-1">Your Full Name *</label>
-                        <input
-                          type="text"
-                          required
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          placeholder="e.g. Vikram Singhania"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#00665e]/30 focus:border-[#00665e]"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-xs font-semibold text-slate-700 block mb-1">Phone Number (WhatsApp) *</label>
-                        <input
-                          type="tel"
-                          required
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          placeholder="+91 98765 43210"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#00665e]/30 focus:border-[#00665e]"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-xs font-semibold text-slate-700 block mb-1">Email Address *</label>
-                        <input
-                          type="email"
-                          required
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          placeholder="vikram@example.com"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#00665e]/30 focus:border-[#00665e]"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-xs font-semibold text-slate-700 block mb-1">Vehicle Make & Model</label>
-                        <input
-                          type="text"
-                          value={formData.vehicle}
-                          onChange={(e) => setFormData({ ...formData, vehicle: e.target.value })}
-                          placeholder="e.g. Thar Roxx, Porsche 911, Fortuner"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#00665e]/30 focus:border-[#00665e]"
-                        />
-                      </div>
-                    </div>
-
                     <div>
-                      <label className="text-xs font-semibold text-slate-700 block mb-1">Message or Custom Requirements</label>
-                      <textarea
-                        rows={4}
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        placeholder="Specify any custom modifications, roof rack, spare wheel, or specific parking environment..."
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#00665e]/30 focus:border-[#00665e] resize-none"
-                      />
+                      <span className="text-sm font-bold text-slate-900 block">4-hour response</span>
+                      <p className="text-sm text-slate-600 leading-relaxed mt-1">
+                        Every digital inquiry gets a personal reply from a bespoke tailor within 4 business hours.
+                      </p>
                     </div>
+                  </div>
+                </motion.aside>
 
-                    <button
-                      type="submit"
-                      className="w-full py-3.5 rounded-full bg-[#00665e] hover:bg-[#004e48] text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer"
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  className="lg:col-span-7 bg-white rounded-3xl p-8 sm:p-11 border border-slate-200/80 shadow-xl"
+                >
+                  <h2 className="text-slate-950 uppercase" style={{ fontFamily: 'var(--font-hype)', fontWeight: 500, fontSize: 'clamp(20px, 2.4vw, 28px)' }}>
+                    Send an Advisory Request
+                  </h2>
+                  <p className="text-sm text-slate-500 mt-2 mb-8">
+                    Share your vehicle details and we will prepare tailored recommendations.
+                  </p>
+
+                  {submitted ? (
+                    <div className="py-14 text-center">
+                      <div className="w-20 h-20 rounded-full bg-[#00665e]/10 text-[#00665e] flex items-center justify-center mx-auto mb-5">
+                        <CheckCircle2 size={38} />
+                      </div>
+                      <h3 className="text-2xl font-bold text-slate-900">Inquiry Received</h3>
+                      <p className="text-sm text-slate-600 max-w-md mx-auto mt-3 leading-relaxed">
+                        Thank you for contacting TheSignaturecovers. A senior bespoke advisor will reach out shortly via WhatsApp and email.
+                      </p>
+                    </div>
+                  ) : (
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        setSubmitted(true);
+                      }}
+                      className="space-y-5"
                     >
-                      <Send size={14} /> Send Advisory Request
-                    </button>
-                  </form>
-                )}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <label className="block">
+                          <span className="text-xs font-semibold text-slate-700 block mb-1.5">Full Name *</span>
+                          <input type="text" required value={formData.name} onChange={set('name')} placeholder="e.g. Vikram Singhania" className={FIELD} />
+                        </label>
+                        <label className="block">
+                          <span className="text-xs font-semibold text-slate-700 block mb-1.5">Phone (WhatsApp) *</span>
+                          <input type="tel" required value={formData.phone} onChange={set('phone')} placeholder="+91 98765 43210" className={FIELD} />
+                        </label>
+                        <label className="block">
+                          <span className="text-xs font-semibold text-slate-700 block mb-1.5">Email *</span>
+                          <input type="email" required value={formData.email} onChange={set('email')} placeholder="vikram@example.com" className={FIELD} />
+                        </label>
+                        <label className="block">
+                          <span className="text-xs font-semibold text-slate-700 block mb-1.5">Vehicle Make &amp; Model</span>
+                          <input type="text" value={formData.vehicle} onChange={set('vehicle')} placeholder="e.g. Thar Roxx, Porsche 911" className={FIELD} />
+                        </label>
+                      </div>
+                      <label className="block">
+                        <span className="text-xs font-semibold text-slate-700 block mb-1.5">Message or Custom Requirements</span>
+                        <textarea
+                          rows={5}
+                          value={formData.message}
+                          onChange={set('message')}
+                          placeholder="Roof rack, spare wheel, parking environment, or any custom modifications..."
+                          className={FIELD + ' resize-none'}
+                        />
+                      </label>
+                      <button
+                        type="submit"
+                        className="w-full py-4 rounded-full bg-[#00665e] hover:bg-[#00796b] text-white text-xs font-bold uppercase tracking-[1.5px] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#00665e]/25 hover:-translate-y-0.5 cursor-pointer"
+                      >
+                        <Send size={14} /> Send Advisory Request
+                      </button>
+                    </form>
+                  )}
+                </motion.div>
               </div>
             </div>
-          </div>
-        </section>
-        </main>
-      </motion.div>
-
-      <Footer />
-
-      <CheckoutDrawer
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        items={cartItems}
-        onRemoveItem={(idx) => setCartItems(cartItems.filter((_, i) => i !== idx))}
-        currencySymbol="₹"
-      />
-
-      <SwatchRequestModal
-        isOpen={isSwatchOpen}
-        onClose={() => setIsSwatchOpen(false)}
-      />
-    </div>
+          </section>
+        </>
+      )}
+    </PageShell>
   );
 }

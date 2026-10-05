@@ -1,12 +1,11 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import CheckoutDrawer from '@/components/CheckoutDrawer';
-import SwatchRequestModal from '@/components/SwatchRequestModal';
-import { Award, Compass, Shield, Users, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import React from 'react';
+import Link from 'next/link';
+import { Compass, Shield, Sparkles, CheckCircle2, Quote } from 'lucide-react';
 import { motion } from 'framer-motion';
+import PageShell from '@/components/PageShell';
+import PageHero, { btnGlass, btnPrimary } from '@/components/PageHero';
 
 const PILLARS = [
   {
@@ -51,147 +50,93 @@ const PILLARS = [
 ];
 
 export default function AboutPage() {
-  const [cartItems, setCartItems] = useState<any[]>([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isSwatchOpen, setIsSwatchOpen] = useState(false);
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-  }, []);
-
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-slate-900">
-      <Header
-        onOpenCart={() => setIsCartOpen(true)}
-        cartCount={cartItems.length}
-        onOpenEnquiry={() => setIsSwatchOpen(true)}
-      />
+    <PageShell>
+      {({ openEnquiry }) => (
+        <>
+          <PageHero
+            kicker="CRAFTSMANSHIP & BESPOKE HERITAGE"
+            title="Preserving"
+            accent="Automotive Artistry"
+            lead="TheSignaturecovers was founded on a singular conviction: extraordinary motor cars deserve protection engineered with the same obsessive precision as the cars themselves."
+            image="/images/craftsmanship.jpg"
+            stats={[
+              { value: '800+', label: 'CAD Blueprints' },
+              { value: '100%', label: 'Hand Finished' },
+              { value: '48°C', label: 'Heat Tested' },
+              { value: 'Pan-India', label: 'Free Delivery' },
+            ]}
+          >
+            <button onClick={openEnquiry} className={btnPrimary}>Request Consultation</button>
+            <Link href="/collections" className={btnGlass + ' no-underline'}>View Collections</Link>
+          </PageHero>
 
-      {/* Main Page Container with generous top clearance */}
-      <main className="pt-36 sm:pt-44 pb-24">
-        {/* Page Hero Section */}
-        <section className="px-6 sm:px-12 mb-16">
-          <div className="container-am max-w-4xl mx-auto text-center">
-            <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-widest text-[#00665e] bg-emerald-500/10 border border-emerald-500/20 mb-4">
-              <Award size={14} /> CRAFTSMANSHIP & BESPOKE HERITAGE
-            </span>
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-950 tracking-tight mb-4 leading-tight">
-              Preserving Automotive Artistry
-            </h1>
-            <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto mb-8 font-medium leading-relaxed">
-              TheSignaturecovers was founded on a singular conviction: extraordinary motor cars deserve protection engineered with the same level of obsessive precision as the vehicles themselves.
-            </p>
-          </div>
-        </section>
-
-        {/* 3 Rich Visual Pillar Cards */}
-        <section className="px-6 sm:px-12">
-          <div className="container-am max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-              {PILLARS.map((pillar, idx) => {
-                const IconComp = pillar.icon;
+          <section className="py-20 sm:py-28 bg-[#f8fafc]">
+            <div className="container-am max-w-6xl space-y-16 sm:space-y-28">
+              {PILLARS.map((p, i) => {
+                const Icon = p.icon;
+                const flip = i % 2 === 1;
                 return (
-                  <motion.div
-                    key={idx}
-                    whileHover={{ y: -6 }}
-                    transition={{ duration: 0.3 }}
-                    className="group bg-white rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-2xl transition-all overflow-hidden flex flex-col justify-between"
+                  <motion.article
+                    key={p.title}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-80px' }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center"
                   >
+                    <div className={`relative group ${flip ? 'lg:order-2' : ''}`}>
+                      <div className="absolute -inset-3 rounded-[2rem] bg-[#00665e] opacity-15 blur-2xl group-hover:opacity-30 transition-opacity" />
+                      <div className="relative aspect-[4/3] rounded-[1.75rem] overflow-hidden shadow-2xl">
+                        <img src={p.image} alt={p.title} className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                        <span className="absolute top-5 left-5 text-[10px] font-bold tracking-[2px] px-3.5 py-1.5 rounded-full bg-black/55 backdrop-blur-md text-white border border-white/20">
+                          {p.badge}
+                        </span>
+                      </div>
+                    </div>
                     <div>
-                      {/* Visual Header Image */}
-                      <div className="relative h-52 w-full overflow-hidden bg-slate-100">
-                        <img
-                          src={pillar.image}
-                          alt={pillar.title}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-                        <div className="absolute top-4 left-4">
-                          <span className="text-[10px] font-mono font-bold px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-white border border-white/20 tracking-wider">
-                            {pillar.badge}
-                          </span>
-                        </div>
-
-                        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
-                          <h3 className="text-lg font-bold">
-                            {pillar.title}
-                          </h3>
-                          <div className="w-8 h-8 rounded-full bg-white/90 text-[#00665e] flex items-center justify-center shadow-md">
-                            <IconComp size={16} />
-                          </div>
-                        </div>
+                      <div className="w-12 h-12 rounded-2xl bg-[#00665e]/10 text-[#00665e] flex items-center justify-center mb-5">
+                        <Icon size={24} />
                       </div>
-
-                      {/* Card Content */}
-                      <div className="p-6">
-                        <p className="text-xs font-semibold text-[#00665e] mb-3">
-                          {pillar.subtitle}
-                        </p>
-                        <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed mb-6 font-normal">
-                          {pillar.description}
-                        </p>
-
-                        <div className="space-y-2.5">
-                          {pillar.points.map((pt, i) => (
-                            <div key={i} className="flex items-start gap-2 text-xs text-slate-700 font-medium">
-                              <CheckCircle2 size={15} className="text-[#00665e] mt-0.5 flex-shrink-0" />
-                              <span>{pt}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+                      <span className="text-[11px] font-bold tracking-[3px] uppercase text-[#b38848]">
+                        {String(i + 1).padStart(2, '0')} — {p.subtitle}
+                      </span>
+                      <h2 className="mt-3 text-slate-950 uppercase" style={{ fontFamily: 'var(--font-hype)', fontWeight: 500, fontSize: 'clamp(24px, 3vw, 38px)', lineHeight: 1.15 }}>
+                        {p.title}
+                      </h2>
+                      <p className="mt-5 text-slate-600 leading-relaxed">{p.description}</p>
+                      <ul className="mt-6 space-y-3">
+                        {p.points.map((pt) => (
+                          <li key={pt} className="flex items-start gap-3 text-sm text-slate-700">
+                            <CheckCircle2 size={18} className="mt-0.5 flex-shrink-0 text-[#00665e]" />
+                            {pt}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-
-                    <div className="p-6 pt-0">
-                      <div className="pt-4 border-t border-slate-100 text-[11px] font-mono text-[#00665e] font-bold tracking-wider uppercase">
-                        &bull; Certified Bespoke Standard
-                      </div>
-                    </div>
-                  </motion.div>
+                  </motion.article>
                 );
               })}
             </div>
+          </section>
 
-            {/* Atelier Commitment Card (Spacious, Beautiful & Fixed Alignment) */}
-            <div className="bg-gradient-to-r from-[#00665e] to-[#04433e] rounded-3xl p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
-              <div className="max-w-2xl">
-                <span className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-200 block mb-2">
-                  THE ATELIER PROMISE
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold mb-3 tracking-tight">
-                  100% Fit & Preservation Guarantee
-                </h3>
-                <p className="text-xs sm:text-sm text-emerald-100 leading-relaxed font-normal">
-                  If your bespoke commission does not seat perfectly over your vehicle’s mirrors, antenna, and bumpers, our master tailors will alter or remanufacture it at no charge. Guaranteed.
-                </p>
-              </div>
-
-              <button
-                onClick={() => setIsSwatchOpen(true)}
-                className="px-8 py-3.5 rounded-full bg-white text-[#00665e] hover:bg-emerald-50 text-xs font-bold uppercase tracking-wider transition-all flex-shrink-0 cursor-pointer shadow-md"
-              >
-                Request Consultation
-              </button>
+          <section className="relative bg-[#050808] text-white py-20 sm:py-28 overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(204,164,98,0.2),transparent_60%)]" />
+            <div className="container-am max-w-3xl relative text-center">
+              <Quote size={34} className="mx-auto text-[#cca462] mb-5" />
+              <span className="am-kicker">THE ATELIER PROMISE</span>
+              <h2 className="uppercase" style={{ fontFamily: 'var(--font-hype)', fontWeight: 500, fontSize: 'clamp(24px, 3.6vw, 44px)' }}>
+                100% Fit &amp; Preservation Guarantee
+              </h2>
+              <p className="mt-5 text-white/70 font-light leading-relaxed">
+                If your commission does not seat perfectly over your vehicle&apos;s mirrors, antenna and bumpers, our master tailors will alter or remanufacture it at no charge. Guaranteed.
+              </p>
+              <button onClick={openEnquiry} className={btnPrimary + ' mt-8'}>Request Consultation</button>
             </div>
-          </div>
-        </section>
-      </main>
-
-      <Footer />
-
-      <CheckoutDrawer
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        items={cartItems}
-        onRemoveItem={(idx) => setCartItems(cartItems.filter((_, i) => i !== idx))}
-        currencySymbol="₹"
-      />
-
-      <SwatchRequestModal
-        isOpen={isSwatchOpen}
-        onClose={() => setIsSwatchOpen(false)}
-      />
-    </div>
+          </section>
+        </>
+      )}
+    </PageShell>
   );
 }
