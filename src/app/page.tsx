@@ -2,19 +2,11 @@
 
 import React, { useState } from 'react';
 import Header from '@/components/Header';
-import Hero from '@/components/Hero';
-import CinematicModelSlider from '@/components/CinematicModelSlider';
+import HypeCurtainScrollShowcase from '@/components/HypeCurtainScrollShowcase';
 import UnveilingSliderSection from '@/components/UnveilingSliderSection';
-import KineticShowcaseSection from '@/components/KineticShowcaseSection';
-import VehicleSelector from '@/components/VehicleSelector';
-import BespokeConfigurator from '@/components/BespokeConfigurator';
-import QAtelier from '@/components/QAtelier';
 import ProductCollection from '@/components/ProductCollection';
-import MaterialScience from '@/components/MaterialScience';
-import CraftsmanshipSection from '@/components/CraftsmanshipSection';
 import SwatchRequestModal from '@/components/SwatchRequestModal';
 import CheckoutDrawer from '@/components/CheckoutDrawer';
-import TestimonialsFaq from '@/components/TestimonialsFaq';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -81,7 +73,7 @@ export default function Home() {
   };
 
   return (
-    <main style={{ minHeight: '100vh', backgroundColor: '#ffffff', color: '#111615' }}>
+    <main style={{ minHeight: '100vh', backgroundColor: '#f8fafc', color: '#0f172a' }}>
       {/* TheSignaturecovers Global Light Header */}
       <Header
         onOpenConfigurator={handleOpenConfigurator}
@@ -98,17 +90,13 @@ export default function Home() {
         }}
       />
 
-      {/* Cinematic 100vh Hero Banner */}
-      <Hero
+      {/* 🌟 HYPE.LUXURY STACKED CURTAIN SCROLL SHOWCASE */}
+      <HypeCurtainScrollShowcase
         onOpenConfigurator={handleOpenConfigurator}
         onOpenEnquiry={handleOpenEnquiry}
-      />
-
-      {/* 🌟 CINEMATIC FULL-WIDTH MODEL SLIDER (Matching User Screenshot 2: DBX707 "POWER. DRIVEN." - Manual Navigation Only) */}
-      <CinematicModelSlider
-        onSelectModel={handleSelectModelFromRange}
-        onOpenConfigurator={handleOpenConfigurator}
-        onOpenEnquiry={handleOpenEnquiry}
+        onSelectTier={(tierId) => {
+          handleSelectTierFromCollection(tierId);
+        }}
       />
 
       {/* 🌟 SECTION VARIATION 2: Interactive Before/After Reveal Curtain Slider */}
@@ -116,44 +104,12 @@ export default function Home() {
         onOpenConfigurator={handleOpenConfigurator}
       />
 
-      {/* 🌟 SECTION VARIATION 3: 3-Card Kinetic Editorial Trio (Live Monogram Stitcher + 3D Exploded Layers + Silk Shimmer) */}
-      <KineticShowcaseSection
-        onOpenConfigurator={handleOpenConfigurator}
-        onOpenEnquiry={handleOpenEnquiry}
-      />
-
-      {/* TheSignaturecovers CAD Vehicle Finder */}
-      <VehicleSelector
-        onSelectVehicle={handleSelectVehicleFromFinder}
-        onOpenConfigurator={handleOpenConfigurator}
-      />
-
-      {/* TheSignaturecovers Online Configurator Studio */}
-      <BespokeConfigurator
-        selectedVehicle={selectedVehicle}
-        onAddToCommission={handleAddToCommission}
-        currencySymbol="₹"
-        currencyRate={1}
-      />
-
-      {/* Atelier by TheSignaturecovers (Bespoke Atelier) */}
-      <QAtelier onOpenEnquiry={handleOpenEnquiry} />
-
-      {/* 4 Performance Collections */}
+      {/* 🌟 MAIN ESSENTIAL 1: 4 Performance Collections */}
       <ProductCollection
         onSelectTier={handleSelectTierFromCollection}
         currencySymbol="₹"
         currencyRate={1}
       />
-
-      {/* 4-Layer Nanotechnology & Material Science */}
-      <MaterialScience />
-
-      {/* Yorkshire Craftsmanship Heritage */}
-      <CraftsmanshipSection />
-
-      {/* Collector Endorsements & FAQ */}
-      <TestimonialsFaq />
 
       {/* Aston Martin Official Footer */}
       <Footer />

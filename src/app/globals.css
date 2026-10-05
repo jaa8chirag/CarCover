@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* Official Aston Martin Typeface System */
 @font-face {
   font-family: 'AstonMartinSans';
@@ -43,31 +45,35 @@
 }
 
 :root {
-  /* Exact Aston Martin Light Theme Palette */
+  /* Ultra-Luxury Light Palette (Porsche Design / Apple Pro / Aston Martin Atelier Inspired) */
   --color-brand-green: #00665e;
-  --color-brand-green-hover: #005750;
-  --color-brand-green-active: #004944;
-  --color-brand-green-subtle: #e6f2f0;
-  --color-racing-green: #003831;
+  --color-brand-green-hover: #00796b;
+  --color-brand-green-active: #004d40;
+  --color-brand-green-subtle: rgba(0, 102, 94, 0.08);
+  --color-racing-green: #004d47;
+  --color-gold: #b38848;
+  --color-gold-hover: #9c7336;
 
-  --bg-primary: #ffffff;
-  --bg-secondary: #f6f8f8;
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
   --bg-surface: #ffffff;
-  --bg-surface-elevated: #eef2f2;
+  --bg-surface-elevated: #ffffff;
   --bg-card: #ffffff;
   
-  --text-main: #111615;
-  --text-light: #161a11;
-  --text-secondary: #5c6462;
-  --text-muted: #828c8a;
-  --text-dim: #9aa2a0;
+  --text-main: #0f172a;
+  --text-light: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
 
-  --border-hairline: #e2e6e6;
-  --border-strong: #c2caca;
+  --border-hairline: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.16);
   --border-green: #00665e;
+  --border-gold: rgba(179, 136, 72, 0.4);
 
-  --font-main: 'AstonMartinSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-flare: 'AstonMartinFlare', 'AstonMartinSans', sans-serif;
+  --font-main: 'Plus Jakarta Sans', 'AstonMartinSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-flare: 'AstonMartinFlare', 'Cinzel', 'Cormorant Garamond', serif;
+  --font-hype: 'Lexend Peta', 'AstonMartinSans', sans-serif;
 
   --transition-default: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: all 0.15s ease-out;
@@ -108,9 +114,9 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-main);
   font-family: var(--font-main);
-  letter-spacing: 0.55px;
+  letter-spacing: 0.3px;
   font-size: 15px;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 main {
@@ -118,6 +124,7 @@ main {
   max-width: 100vw;
   overflow-x: clip;
   position: relative;
+  background-color: var(--bg-primary);
 }
 
 img, svg, video, canvas {
@@ -129,14 +136,14 @@ img, svg, video, canvas {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f0f2f2;
+  background: #f8fafc;
 }
 ::-webkit-scrollbar-thumb {
-  background: #c5cbcb;
-  border-radius: 0px;
+  background: #cbd5e1;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-brand-green);
+  background: #94a3b8;
 }
 
 /* Container */
@@ -256,12 +263,13 @@ img, svg, video, canvas {
 .am-sublink {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-family: var(--font-main);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.8px;
-  color: #111615;
+  gap: 8px;
+  font-family: var(--font-hype);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-gold);
   text-decoration: none;
   cursor: pointer;
   background: transparent;
@@ -269,8 +277,8 @@ img, svg, video, canvas {
   transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
 }
 .am-sublink:hover {
-  color: #00665e;
-  transform: translateX(2px);
+  color: var(--color-gold-hover);
+  transform: translateX(3px);
 }
 .am-sublink svg {
   transition: transform 0.2s ease;
@@ -281,68 +289,73 @@ img, svg, video, canvas {
 
 /* Typography styles */
 .am-kicker {
-  font-family: var(--font-main);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 2px;
+  font-family: var(--font-hype);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: #00665e;
-  margin-bottom: 12px;
+  color: var(--color-gold);
+  margin-bottom: 14px;
   display: block;
+  text-shadow: 0 0 20px rgba(204, 164, 98, 0.3);
 }
 
 .am-title-hero {
-  font-family: var(--font-main);
+  font-family: var(--font-flare);
   font-size: clamp(38px, 6vw, 76px);
-  font-weight: 400;
-  line-height: 1.04;
-  letter-spacing: -0.5px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: #ffffff;
 }
 
 .am-title-section {
-  font-family: var(--font-main);
-  font-size: clamp(28px, 4vw, 48px);
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: 0.5px;
+  font-family: var(--font-flare);
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  color: #111615;
+  color: #ffffff;
 }
 
 .am-title-card {
-  font-family: var(--font-main);
-  font-size: 24px;
+  font-family: var(--font-flare);
+  font-size: 22px;
   font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: 1px;
+  line-height: 1.25;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #111615;
+  color: #ffffff;
 }
 
 .am-lead {
   font-family: var(--font-main);
   font-size: 16px;
-  font-weight: 400;
-  line-height: 1.6;
-  color: #5c6462;
-  letter-spacing: 0.3px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #94a3b8;
+  letter-spacing: 0.4px;
 }
 
-/* Light Card Panels */
+/* Luxury Dark Glass Card Panels */
 .am-card {
-  background-color: #ffffff;
+  background: rgba(16, 22, 30, 0.85);
   border: 1px solid var(--border-hairline);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 4px;
   transition: var(--transition-default);
 }
 .am-card:hover {
-  border-color: #c5d3d1;
-  box-shadow: 0 10px 30px rgba(0, 102, 94, 0.08);
+  border-color: rgba(204, 164, 98, 0.4);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(204, 164, 98, 0.08);
+  transform: translateY(-2px);
 }
 
-/* Header (Light Bar) */
+/* Header (Dark Frosted Glass Bar) */
 .am-header-light {
   position: fixed;
   top: 0;
@@ -352,28 +365,29 @@ img, svg, video, canvas {
   z-index: 1000;
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.96);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid #e5e8e8;
+  background: rgba(7, 9, 12, 0.88);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.3s ease;
   overflow: visible;
 }
 
 /* Header Navigation Links */
 .am-nav-link-light {
-  font-family: var(--font-main);
-  font-size: 14px;
+  font-family: var(--font-hype);
+  font-size: 11px;
   font-weight: 500;
-  color: #111615;
+  color: #cbd5e1;
   text-decoration: none;
-  letter-spacing: 0.8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   transition: color 0.2s ease;
   white-space: nowrap;
 }
 
 .am-nav-link-light:hover {
-  color: #00665e;
+  color: var(--color-gold);
 }
 
 /* Header & Global Responsive Helpers */

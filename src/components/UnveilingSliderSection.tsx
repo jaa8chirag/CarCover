@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useCallback } from 'react';
-import { ArrowLeftRight, CheckCircle2, ChevronRight } from 'lucide-react';
+import { ArrowLeftRight, CheckCircle2 } from 'lucide-react';
 
 interface UnveilingSliderSectionProps {
   onOpenConfigurator: () => void;
@@ -39,20 +39,35 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
     <section
       style={{
         padding: '120px 0 100px',
-        backgroundColor: '#f6f8f8',
-        borderTop: '1px solid #e5e8e8',
+        backgroundColor: '#ffffff',
+        borderTop: '1px solid rgba(0, 0, 0, 0.06)',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      <div className="container-am">
+      {/* Background ambient glow */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '20%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '800px',
+          height: '400px',
+          background: 'radial-gradient(circle, rgba(0, 102, 94, 0.05) 0%, transparent 70%)',
+          filter: 'blur(90px)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      <div className="container-am" style={{ position: 'relative', zIndex: 1 }}>
         {/* Section Header */}
         <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 48px' }}>
           <span className="am-kicker">INTERACTIVE REVEAL MOTION</span>
-          <h2 className="am-title-section" style={{ color: '#111615' }}>
+          <h2 className="am-title-section" style={{ color: '#0f172a' }}>
             Millimeter CAD Precision. Nothing Less.
           </h2>
-          <p className="am-lead" style={{ marginTop: '12px', color: '#5c6462' }}>
+          <p className="am-lead" style={{ marginTop: '14px', color: '#475569' }}>
             Drag the interactive slider to unveil how our bespoke tailored fleece hugs every muscular 
             haunch, aerodynamic mirror, and rear diffuser without a millimeter of excess material.
           </p>
@@ -75,12 +90,12 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
             width: '100%',
             aspectRatio: '16 / 9',
             maxHeight: '620px',
-            borderRadius: '3px',
+            borderRadius: '8px',
             overflow: 'hidden',
             cursor: isDragging ? 'ew-resize' : 'default',
             userSelect: 'none',
-            border: '1px solid #d8e0e0',
-            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.08)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            boxShadow: '0 24px 60px rgba(0, 0, 0, 0.7)',
             touchAction: 'none',
           }}
           className="unveiling-frame"
@@ -101,14 +116,15 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
                 position: 'absolute',
                 top: '24px',
                 right: '24px',
-                background: 'rgba(0, 102, 94, 0.9)',
-                backdropFilter: 'blur(15px)',
-                color: '#ffffff',
-                padding: '8px 16px',
-                borderRadius: '2px',
-                fontSize: '12px',
-                fontFamily: 'var(--font-main)',
-                letterSpacing: '1.5px',
+                background: 'rgba(7, 9, 12, 0.85)',
+                backdropFilter: 'blur(16px)',
+                border: '1px solid rgba(204, 164, 98, 0.4)',
+                color: '#cca462',
+                padding: '8px 18px',
+                borderRadius: '9999px',
+                fontSize: '11px',
+                fontFamily: "'Lexend Peta', sans-serif",
+                letterSpacing: '2px',
                 textTransform: 'uppercase',
                 fontWeight: 600,
               }}
@@ -135,15 +151,15 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
                 position: 'absolute',
                 top: '24px',
                 left: '24px',
-                background: 'rgba(255, 255, 255, 0.9)',
-                backdropFilter: 'blur(15px)',
-                border: '1px solid #dce2e2',
-                color: '#111615',
-                padding: '8px 16px',
-                borderRadius: '2px',
-                fontSize: '12px',
-                fontFamily: 'var(--font-main)',
-                letterSpacing: '1.5px',
+                background: 'rgba(7, 9, 12, 0.85)',
+                backdropFilter: 'blur(16px)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                color: '#ffffff',
+                padding: '8px 18px',
+                borderRadius: '9999px',
+                fontSize: '11px',
+                fontFamily: "'Lexend Peta', sans-serif",
+                letterSpacing: '2px',
                 textTransform: 'uppercase',
                 fontWeight: 600,
               }}
@@ -161,8 +177,8 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
               bottom: 0,
               left: `${sliderPos}%`,
               width: '2px',
-              backgroundColor: '#ffffff',
-              boxShadow: '0 0 15px rgba(0, 0, 0, 0.3), 0 0 20px #00665e',
+              backgroundColor: '#cca462',
+              boxShadow: '0 0 20px rgba(204, 164, 98, 0.8)',
               zIndex: 20,
               transform: 'translateX(-50%)',
               cursor: 'ew-resize',
@@ -178,13 +194,13 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
                 width: '46px',
                 height: '46px',
                 borderRadius: '50%',
-                backgroundColor: '#00665e',
+                backgroundColor: '#cca462',
                 border: '2px solid #ffffff',
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.25)',
+                boxShadow: '0 0 24px rgba(204, 164, 98, 0.6)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#ffffff',
+                color: '#07090c',
               }}
             >
               <ArrowLeftRight size={18} />
@@ -198,18 +214,20 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
               bottom: '24px',
               left: '50%',
               transform: 'translateX(-50%)',
-              background: 'rgba(255, 255, 255, 0.9)',
-              backdropFilter: 'blur(10px)',
-              padding: '6px 16px',
-              borderRadius: '20px',
-              fontSize: '11px',
-              letterSpacing: '1.5px',
+              background: 'rgba(255, 255, 255, 0.92)',
+              backdropFilter: 'blur(16px)',
+              padding: '8px 20px',
+              borderRadius: '9999px',
+              fontSize: '10px',
+              letterSpacing: '2.5px',
               textTransform: 'uppercase',
-              color: '#111615',
+              color: '#0f172a',
               fontWeight: 600,
               pointerEvents: 'none',
               zIndex: 10,
-              border: '1px solid #dce2e2',
+              border: '1px solid rgba(0, 0, 0, 0.12)',
+              fontFamily: "'Lexend Peta', sans-serif",
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
             }}
           >
             Drag or slide to unveil contour match
@@ -227,93 +245,65 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
         >
           <div
             style={{
-              background: '#ffffff',
-              border: '1px solid #e2e6e6',
+              background: '#f8fafc',
+              border: '1px solid #e2e8f0',
               padding: '28px',
-              borderRadius: '2px',
-              boxShadow: '0 2px 12px rgba(0,0,0,0.03)',
+              borderRadius: '6px',
+              boxShadow: '0 6px 20px rgba(0, 0, 0, 0.03)',
             }}
           >
-            <div style={{ fontSize: '13px', color: '#00665e', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <CheckCircle2 size={16} /> ZERO BILLOWING
+            <div style={{ fontSize: '11px', color: '#00665e', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px', letterSpacing: '2px', textTransform: 'uppercase', fontFamily: "'Lexend Peta', sans-serif" }}>
+              <CheckCircle2 size={15} color="#00665e" /> ZERO BILLOWING
             </div>
-            <div style={{ fontSize: '16px', color: '#111615', fontWeight: 600, marginTop: '6px' }}>
+            <div style={{ fontSize: '17px', color: '#0f172a', fontWeight: 600, marginTop: '8px', fontFamily: "'Cinzel', serif" }}>
               Sculpted 3D Drape Index
             </div>
-            <div style={{ fontSize: '13px', color: '#5c6462', marginTop: '4px' }}>
+            <div style={{ fontSize: '13px', color: '#64748b', marginTop: '6px', lineHeight: 1.6 }}>
               Elasticated perimeter hems anchor the fabric flush against wheel arches and splitters.
             </div>
           </div>
 
           <div
             style={{
-              background: '#ffffff',
-              border: '1px solid #e2e6e6',
+              background: '#f8fafc',
+              border: '1px solid #e2e8f0',
               padding: '28px',
-              borderRadius: '2px',
-              boxShadow: '0 2px 12px rgba(0,0,0,0.03)',
+              borderRadius: '6px',
+              boxShadow: '0 6px 20px rgba(0, 0, 0, 0.03)',
             }}
           >
-            <div style={{ fontSize: '13px', color: '#00665e', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <CheckCircle2 size={16} /> CERAMIC SAFE
+            <div style={{ fontSize: '11px', color: '#00665e', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px', letterSpacing: '2px', textTransform: 'uppercase', fontFamily: "'Lexend Peta', sans-serif" }}>
+              <CheckCircle2 size={15} color="#00665e" /> ZERO BUFF MARKS
             </div>
-            <div style={{ fontSize: '16px', color: '#111615', fontWeight: 600, marginTop: '6px' }}>
-              Cashmere Underside Fleece
+            <div style={{ fontSize: '17px', color: '#0f172a', fontWeight: 600, marginTop: '8px', fontFamily: "'Cinzel', serif" }}>
+              Cashmere-Fleece Contact
             </div>
-            <div style={{ fontSize: '13px', color: '#5c6462', marginTop: '4px' }}>
-              Tested zero paint swirls on ceramic-coated paint, PPF, and showroom gloss lacquer.
+            <div style={{ fontSize: '13px', color: '#64748b', marginTop: '6px', lineHeight: 1.6 }}>
+              Inner plush lining acts as an optical buffer, polishing rather than rubbing the paint coat.
             </div>
           </div>
 
           <div
             style={{
-              background: '#ffffff',
-              border: '1px solid #e2e6e6',
+              background: '#f8fafc',
+              border: '1px solid #e2e8f0',
               padding: '28px',
-              borderRadius: '2px',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              boxShadow: '0 2px 12px rgba(0,0,0,0.03)',
+              borderRadius: '6px',
+              boxShadow: '0 6px 20px rgba(0, 0, 0, 0.03)',
             }}
           >
-            <div>
-              <div style={{ fontSize: '13px', color: '#00665e', fontWeight: 600 }}>COMMISSION YOUR SPEC</div>
-              <div style={{ fontSize: '16px', color: '#111615', fontWeight: 600, marginTop: '6px' }}>
-                Tailored To Your VIN / Spec
-              </div>
+            <div style={{ fontSize: '11px', color: '#00665e', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px', letterSpacing: '2px', textTransform: 'uppercase', fontFamily: "'Lexend Peta', sans-serif" }}>
+              <CheckCircle2 size={15} color="#00665e" /> MIRROR PODS
             </div>
-            <button
-              onClick={onOpenConfigurator}
-              className="cta_button cta_button--primary-light"
-              style={{ width: '100%', height: '44px', marginTop: '16px' }}
-            >
-              <span>Launch Studio</span>
-              <ChevronRight size={16} />
-            </button>
+            <div style={{ fontSize: '17px', color: '#0f172a', fontWeight: 600, marginTop: '8px', fontFamily: "'Cinzel', serif" }}>
+              Aero-Glove Pocketing
+            </div>
+            <div style={{ fontSize: '13px', color: '#64748b', marginTop: '6px', lineHeight: 1.6 }}>
+              Precision 3D-molded ear pockets keep wing mirrors safe from dust and friction marks.
+            </div>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @media (max-width: 600px) {
-          .unveiling-frame {
-            aspect-ratio: 4/3 !important;
-            min-height: 280px !important;
-          }
-          .unveil-badge {
-            padding: 5px 10px !important;
-            font-size: 10px !important;
-            top: 14px !important;
-          }
-          .unveil-badge-right {
-            right: 12px !important;
-          }
-          .unveil-badge-left {
-            left: 12px !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }
