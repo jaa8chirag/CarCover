@@ -100,9 +100,9 @@ export default function Home() {
         }}
       />
 
-      <ShopByCover />
-
       <BrandMarquee />
+
+      <ShopByCover />
 
       {/* 🌟 SECTION VARIATION 2: Interactive Before/After Reveal Curtain Slider */}
       <UnveilingSliderSection

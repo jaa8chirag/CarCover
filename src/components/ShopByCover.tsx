@@ -143,7 +143,7 @@ export default function ShopByCover() {
   const indoor = FABRICS.filter((f) => f.group === 'indoor');
 
   return (
-    <section className="relative z-10 -mt-12 rounded-t-[3rem] bg-[#f8f6f1] pt-20 sm:pt-28 pb-20 sm:pb-28 shadow-[0_-30px_80px_-30px_rgba(0,0,0,0.55)] overflow-hidden">
+    <section className="relative bg-[#f8f6f1] pt-20 sm:pt-28 pb-20 sm:pb-28 overflow-hidden">
       <motion.div
         aria-hidden
         className="absolute -top-24 -right-24 w-[460px] h-[460px] rounded-full bg-[#cca462]/25 blur-[110px] pointer-events-none"

@@ -185,12 +185,8 @@ function HypeSection({
           hidden: {},
           visible: { transition: { staggerChildren: 0.12 } },
         }}
-        className={`relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center [text-shadow:0_2px_20px_rgba(0,0,0,0.55)] max-md:absolute max-md:inset-x-0 max-md:bottom-0 max-md:max-w-none max-md:items-start max-md:text-left max-md:bg-gradient-to-t max-md:from-black/80 max-md:via-black/45 max-md:to-transparent max-md:pt-32 max-md:pb-10`}
+        className={`relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center [text-shadow:0_2px_20px_rgba(0,0,0,0.55)] max-md:absolute max-md:inset-x-0 max-md:bottom-0 max-md:max-w-none max-md:items-start max-md:text-left max-md:bg-gradient-to-t max-md:from-black/80 max-md:via-black/45 max-md:to-transparent max-md:pt-28 max-md:pb-8`}
       >
-        <span className="md:hidden mb-3 font-lexendpeta text-[11px] font-semibold tracking-[3px]" style={{ color: slide.accentColor }}>
-          {String(index + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
-        </span>
-
         {slide.category && (
         <motion.div
           variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
@@ -219,7 +215,7 @@ function HypeSection({
             visible: { opacity: 1, y: 0 },
           }}
           transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
-          className="overflow-hidden mb-6"
+          className="overflow-hidden mb-6 max-md:mb-3"
         >
           <h1 className={`uppercase tracking-[0.005em] sm:tracking-[0.01em] text-[23px] min-[420px]:text-[27px] sm:text-[40px] md:text-[40px] lg:text-[clamp(32px,min(4.8vw,7.8vh),66px)] font-semibold leading-[1.12] text-white break-words`} style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             {slide.title}
@@ -230,7 +226,7 @@ function HypeSection({
         <motion.div
           variants={{ hidden: { width: 0, opacity: 0 }, visible: { width: '120px', opacity: 1 } }}
           transition={{ duration: 1.0, ease: 'easeOut' }}
-          className={`h-[1px] mx-auto mb-6 max-md:mx-0`}
+          className={`h-[1px] mx-auto mb-6 max-md:mx-0 max-md:mb-3`}
           style={{
             background: `linear-gradient(90deg, transparent, ${slide.accentColor}, transparent)`,
             boxShadow: `0 0 12px ${slide.accentColor}`,
@@ -241,7 +237,7 @@ function HypeSection({
         <motion.p
           variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
           transition={{ duration: 1.0, ease: [0.19, 1, 0.22, 1] }}
-          className="md:hidden text-white text-[17px] font-normal mb-7 tracking-wide"
+          className="md:hidden text-white text-[17px] font-normal mb-5 tracking-wide"
         >
           {slide.mobileLine}
         </motion.p>

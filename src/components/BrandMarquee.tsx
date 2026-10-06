@@ -49,14 +49,14 @@ function Row({ items }: { items: string[][] }) {
 
 export default function BrandMarquee() {
   return (
-    <section className="bg-[#efeae1] py-20 sm:py-28 overflow-hidden">
+    <section className="relative z-10 -mt-12 rounded-t-[3rem] bg-[#efeae1] pt-16 sm:pt-20 pb-10 sm:pb-14 shadow-[0_-30px_80px_-30px_rgba(0,0,0,0.55)] overflow-hidden">
       <style>{`
         @keyframes brand-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .brand-row:hover .brand-track { animation-play-state: paused !important; }
         .brand-logo img { transition: transform .4s ease; }
         .brand-logo:hover img { transform: scale(1.12); }
       `}</style>
-      <div className="text-center px-6 mb-14">
+      <div className="text-center px-6 mb-8">
         <div className="mx-auto mb-5 h-px w-12 bg-[#cca462]" />
         <p className="text-[11px] font-semibold tracking-[5px] uppercase text-slate-500">Tailored For Every Marque</p>
         <h2 className="mt-4 text-2xl sm:text-4xl font-light tracking-tight text-slate-900">Luxury, Performance &amp; Indian Favourites</h2>
