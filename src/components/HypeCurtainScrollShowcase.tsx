@@ -82,7 +82,8 @@ const SLIDES: SlideData[] = [
     description:
       'Cut from a 3D scan of your exact model, with mirror pockets and sculpted contours. Four-way stretch fleece that follows every body line without a single wrinkle.',
     bgSrc: '/images/ferrari_red_cover.jpg',
-    bgPos: 'center 45%',
+    bgSrcMobile: '/images/rr_cullinan_cover.jpg',
+    bgPos: 'center 40%',
     bgPosMd: 'center 58%',
     bright: true,
     tierId: 'indoor',
