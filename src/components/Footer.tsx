@@ -107,7 +107,7 @@ export default function Footer() {
           onPointerEnter={() => setOverWord(true)}
           onPointerLeave={() => setOverWord(false)}
           className="relative flex justify-center whitespace-nowrap select-none"
-          style={{ fontFamily: "'Plus Jakarta Sans', var(--font-main), sans-serif", fontWeight: 800, fontSize: 'clamp(46px, 11.4vw, 230px)', letterSpacing: '-0.06em', lineHeight: 1 }}
+          style={{ fontFamily: "'Sora', var(--font-main), sans-serif", fontWeight: 800, fontSize: 'clamp(46px, 11.4vw, 230px)', letterSpacing: '-0.06em', lineHeight: 1 }}
         >
           {WORD.map((c, i) => (
             <motion.span

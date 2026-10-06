@@ -14,7 +14,7 @@ const config: Config = {
         'luxury-gold': '#cca462',
       },
       fontFamily: {
-        lexendpeta: ["'Lexend Peta'", 'sans-serif'],
+        lexendpeta: ["'Sora'", 'sans-serif'],
       },
     },
   },

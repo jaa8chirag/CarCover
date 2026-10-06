@@ -105,7 +105,7 @@ export default function VehicleSelector({ onSelectVehicle, onOpenConfigurator }:
                   padding: '10px 22px',
                   borderRadius: '9999px',
                   fontSize: '12px',
-                  fontFamily: "'Lexend Peta', 'AstonMartinSans', sans-serif",
+                  fontFamily: "'Sora', sans-serif",
                   letterSpacing: '1.5px',
                   textTransform: 'uppercase',
                   cursor: 'pointer',
@@ -143,7 +143,7 @@ export default function VehicleSelector({ onSelectVehicle, onOpenConfigurator }:
           >
             {/* Step 1: Marque */}
             <div>
-              <label style={{ display: 'block', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: '#00665e', marginBottom: '10px', fontWeight: 600, fontFamily: "'Lexend Peta', sans-serif" }}>
+              <label style={{ display: 'block', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: '#00665e', marginBottom: '10px', fontWeight: 600, fontFamily: "'Sora', sans-serif" }}>
                 1. Selected Marque
               </label>
               <select
@@ -172,7 +172,7 @@ export default function VehicleSelector({ onSelectVehicle, onOpenConfigurator }:
 
             {/* Step 2: Model */}
             <div>
-              <label style={{ display: 'block', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: '#00665e', marginBottom: '10px', fontWeight: 600, fontFamily: "'Lexend Peta', sans-serif" }}>
+              <label style={{ display: 'block', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: '#00665e', marginBottom: '10px', fontWeight: 600, fontFamily: "'Sora', sans-serif" }}>
                 2. Model Series
               </label>
               <select
@@ -201,7 +201,7 @@ export default function VehicleSelector({ onSelectVehicle, onOpenConfigurator }:
 
             {/* Step 3: Year */}
             <div>
-              <label style={{ display: 'block', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: '#00665e', marginBottom: '10px', fontWeight: 600, fontFamily: "'Lexend Peta', sans-serif" }}>
+              <label style={{ display: 'block', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: '#00665e', marginBottom: '10px', fontWeight: 600, fontFamily: "'Sora', sans-serif" }}>
                 3. Generation / Year
               </label>
               <select
@@ -230,7 +230,7 @@ export default function VehicleSelector({ onSelectVehicle, onOpenConfigurator }:
 
             {/* Step 4: Body Variant */}
             <div>
-              <label style={{ display: 'block', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: '#00665e', marginBottom: '10px', fontWeight: 600, fontFamily: "'Lexend Peta', sans-serif" }}>
+              <label style={{ display: 'block', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: '#00665e', marginBottom: '10px', fontWeight: 600, fontFamily: "'Sora', sans-serif" }}>
                 4. Aerodynamic Body
               </label>
               <select
@@ -297,7 +297,7 @@ export default function VehicleSelector({ onSelectVehicle, onOpenConfigurator }:
                     <CheckCircle2 size={13} /> Active In Archive
                   </span>
                 </div>
-                <div style={{ fontSize: 'clamp(16px, 3.5vw, 20px)', fontWeight: 600, color: '#0f172a', wordBreak: 'break-word', lineHeight: 1.3, fontFamily: "'Cinzel', serif" }}>
+                <div style={{ fontSize: 'clamp(16px, 3.5vw, 20px)', fontWeight: 600, color: '#0f172a', wordBreak: 'break-word', lineHeight: 1.3, fontFamily: "'Sora', sans-serif" }}>
                   {currentBrand.name} {currentModel.name} • {selectedVariant} ({selectedYear})
                 </div>
                 <div style={{ fontSize: '13px', color: '#64748b', marginTop: '4px', lineHeight: 1.4 }}>

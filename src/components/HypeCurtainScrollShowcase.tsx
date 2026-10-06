@@ -27,7 +27,7 @@ interface SlideData {
 const SLIDES: SlideData[] = [
   {
     id: 'signature-fit',
-    category: 'THE SIGNATURE FIT',
+    category: '',
     title: 'EVERY CURVE. TAILORED TO THE MILLIMETRE.',
     tagline: 'A cover that fits your car like a second skin.',
     description:
@@ -39,11 +39,11 @@ const SLIDES: SlideData[] = [
     tierId: 'indoor',
     ctaText: 'EXPLORE INDOOR',
     accentColor: '#ef4444',
-    nextPreviewName: 'Showroom Presentation',
+    nextPreviewName: '',
   },
   {
     id: 'showroom-unveil',
-    category: 'SHOWROOM PRESENTATION',
+    category: '',
     title: 'WHERE EVERY UNVEILING BEGINS.',
     tagline: 'Your monogram. Your colours. Your car.',
     description:
@@ -55,11 +55,11 @@ const SLIDES: SlideData[] = [
     tierId: 'bespoke',
     ctaText: 'EXPLORE BESPOKE',
     accentColor: '#cca462',
-    nextPreviewName: 'The Apex of Bespoke Preservation',
+    nextPreviewName: '',
   },
   {
     id: 'bespoke-veiled',
-    category: 'THE APEX OF BESPOKE PRESERVATION',
+    category: '',
     title: 'THE FINEST CARS ARRIVE VEILED.',
     tagline: 'One vehicle. One bespoke cover. Entirely yours.',
     description:
@@ -75,7 +75,7 @@ const SLIDES: SlideData[] = [
   },
   {
     id: 'monsoon-armor',
-    category: 'AQUASHIELD MONSOON ARMOR',
+    category: '',
     title: 'TORRENTIAL MONSOONS. ZERO PENETRATION.',
     tagline: 'At 10,000mm hydrostatic head, rain simply ceases to exist.',
     description:
@@ -91,13 +91,15 @@ const SLIDES: SlideData[] = [
   },
   {
     id: 'atelier-commission',
-    category: 'ATELIER COMMISSION',
+    category: '',
     title: 'NOT OFF THE SHELF. COMMISSIONED ONLY FOR YOU.',
     tagline: 'Hand-embroidered monograms, contrast piping & locking security.',
     description:
       'Tailored with your initials, vehicle registration, and custom contrast stitch in gold or silver thread with heavy-duty underbody wind-locks.',
     bgSrc: '/images/reveal.jpg',
-    bgPos: 'center 86%',
+    bgSrcMobile: '/images/porsche_turbo_garage.jpg',
+    bgPos: 'center 62%',
+    bgPosMd: 'center 86%',
     bright: true,
     tierId: 'atelier',
     ctaText: 'START COMMISSION',
@@ -106,7 +108,7 @@ const SLIDES: SlideData[] = [
   },
   {
     id: 'indoor-silk',
-    category: 'CONCOURS GARAGE SANCTUARY',
+    category: '',
     title: 'SHOWROOM ELEGANCE. PURE VELVET EMBRACE.',
     tagline: 'Where your vehicle rests in absolute silence and velvet luxury.',
     description:
@@ -177,7 +179,7 @@ function HypeSection({
           {String(index + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
         </span>
 
-        {/* Category Label */}
+        {slide.category && (
         <motion.div
           variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
           transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
@@ -196,6 +198,7 @@ function HypeSection({
             </p>
           </div>
         </motion.div>
+        )}
 
         {/* Massive Headline (Glides up crisp and clear without any murky black drop-shadow cloud) */}
         <motion.div
@@ -206,7 +209,7 @@ function HypeSection({
           transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
           className="overflow-hidden mb-6"
         >
-          <h1 className={`uppercase font-lexendpeta tracking-[0.1em] sm:tracking-[0.2em] text-[21px] min-[420px]:text-2xl sm:text-4xl md:text-4xl lg:text-[clamp(30px,min(4.4vw,7.2vh),60px)] font-bold leading-tight text-white break-words`}>
+          <h1 className={`uppercase tracking-[0.005em] sm:tracking-[0.01em] text-[23px] min-[420px]:text-[27px] sm:text-[40px] md:text-[40px] lg:text-[clamp(32px,min(4.8vw,7.8vh),66px)] font-semibold leading-[1.12] text-white break-words`} style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             {slide.title}
           </h1>
         </motion.div>

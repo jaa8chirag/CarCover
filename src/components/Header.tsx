@@ -197,9 +197,9 @@ export default function Header({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.5 }}
               onClick={closeMenu}
-              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/35 backdrop-blur-[2px]"
             />
             <motion.aside
               role="dialog"
@@ -208,112 +208,90 @@ export default function Header({
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
-              transition={{ duration: 0.6, ease: SIDEBAR_EASE }}
-              className="absolute left-0 top-0 h-full w-[88vw] max-w-[440px] bg-[#0a0a0a] text-white flex flex-col overflow-y-auto border-r border-white/10 shadow-[30px_0_80px_-20px_rgba(0,0,0,0.8)]"
-              data-lenis-prevent
+              transition={{ duration: 0.7, ease: SIDEBAR_EASE }}
+              className="absolute left-0 top-0 h-full w-full sm:w-[56vw] lg:w-[42vw] lg:min-w-[520px] bg-black/75 backdrop-blur-2xl text-white flex flex-col overflow-hidden border-r border-white/10"
             >
-              <div className="pointer-events-none absolute -top-24 -right-24 w-[320px] h-[320px] rounded-full bg-[#cca462]/15 blur-[90px]" />
+              <div className="pointer-events-none absolute -bottom-32 -left-24 w-[420px] h-[420px] rounded-full bg-[#cca462]/10 blur-[110px]" />
 
-              {/* top */}
-              <div className="relative flex items-center justify-between px-7 pt-7 pb-6">
-                <Link href="/" onClick={closeMenu} className="flex items-center gap-3 no-underline text-white">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/logo-white.png" alt="" aria-hidden className="h-10 w-auto" />
-                  <span className="text-[12px] font-bold uppercase tracking-[0.32em]">Signature Covers</span>
-                </Link>
+              {/* close */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, delay: 0.3, ease: SIDEBAR_EASE }}
+                className="relative px-7 sm:px-14 pt-8 sm:pt-12"
+              >
                 <button
                   onClick={closeMenu}
                   aria-label="Close menu"
-                  className="w-11 h-11 rounded-full border border-white/20 hover:border-[#cca462] hover:text-[#cca462] hover:rotate-90 flex items-center justify-center transition-all duration-500 cursor-pointer"
+                  className="group flex items-center gap-4 text-white hover:text-[#cca462] transition-colors cursor-pointer"
                 >
-                  <X size={20} />
+                  <X size={20} className="transition-transform duration-500 group-hover:rotate-90" />
+                  <span className="text-[13px] font-semibold uppercase tracking-[0.22em]">Close</span>
                 </button>
-              </div>
+              </motion.div>
 
-              <div className="relative mx-7 h-px bg-gradient-to-r from-[#cca462]/60 via-white/10 to-transparent" />
-
-              {/* links */}
-              <nav className="relative px-7 pt-8 flex-1">
-                <span className="block text-[10px] font-bold uppercase tracking-[0.4em] text-white/40 mb-5">Navigate</span>
-                <ul className="space-y-1">
+              {/* links, right aligned, arriving one by one from the left */}
+              <nav className="relative flex-1 flex flex-col justify-center px-7 sm:pl-14 sm:pr-[22%] py-10">
+                <ul className="flex flex-col items-end gap-1">
                   {navLinks.map((link, i) => {
                     const active = pathname === link.href;
                     return (
                       <motion.li
                         key={link.id}
-                        initial={{ opacity: 0, x: -30 }}
+                        initial={{ opacity: 0, x: -90 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.7, delay: 0.25 + i * 0.08, ease: SIDEBAR_EASE }}
+                        transition={{ duration: 0.8, delay: 0.35 + i * 0.12, ease: SIDEBAR_EASE }}
                       >
                         <Link
                           href={link.href}
                           onClick={closeMenu}
-                          className="group relative flex items-center gap-5 py-4 no-underline text-white border-b border-white/[0.07]"
+                          className={`group relative block py-[clamp(8px,2.2vh,16px)] no-underline whitespace-nowrap text-[17px] sm:text-[19px] font-semibold uppercase tracking-[0.2em] transition-colors duration-500 hover:text-white ${active ? 'text-[#cca462]' : 'text-white/55'}`}
                         >
-                          <span className="text-[11px] font-mono text-[#cca462]/80 w-6">0{i + 1}</span>
-                          <span
-                            className={`flex-1 whitespace-nowrap text-[22px] min-[400px]:text-[24px] sm:text-[30px] leading-none tracking-wide transition-all duration-500 group-hover:translate-x-3 group-hover:text-[#cca462] ${active ? 'text-[#cca462]' : ''}`}
-                            style={{ fontFamily: 'var(--font-hype)', fontWeight: 500 }}
-                          >
-                            {link.label}
-                          </span>
-                          {active && <span className="w-1.5 h-1.5 rounded-full bg-[#cca462]" />}
-                          <ArrowRight size={20} className="opacity-0 -translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 text-[#cca462] transition-all duration-500" />
-                          <span className="absolute bottom-0 left-0 h-px w-0 bg-[#cca462] group-hover:w-full transition-all duration-700" />
+                          {link.label}
+                          <span className="absolute bottom-2 right-0 h-px w-0 bg-[#cca462] group-hover:w-full transition-all duration-500" />
                         </Link>
                       </motion.li>
                     );
                   })}
+                  <motion.li
+                    initial={{ opacity: 0, x: -90 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.35 + navLinks.length * 0.12, ease: SIDEBAR_EASE }}
+                  >
+                    <Link
+                      href="/collections"
+                      onClick={closeMenu}
+                      className="group relative block py-[clamp(8px,2.2vh,16px)] no-underline whitespace-nowrap text-[17px] sm:text-[19px] font-semibold uppercase tracking-[0.2em] text-[#cca462] hover:text-white transition-colors duration-500"
+                    >
+                      Shop Car Covers
+                    </Link>
+                  </motion.li>
                 </ul>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.65, ease: SIDEBAR_EASE }}
-                  className="mt-9 grid gap-3"
-                >
-                  <Link
-                    href="/collections"
-                    onClick={closeMenu}
-                    className="flex items-center justify-between px-6 py-4 rounded-full bg-white hover:bg-[#cca462] text-black text-xs font-bold uppercase tracking-[0.25em] no-underline transition-colors"
-                  >
-                    Shop Car Covers <ArrowRight size={16} />
-                  </Link>
-                  <button
-                    onClick={() => {
-                      closeMenu();
-                      if (onOpenEnquiry) onOpenEnquiry();
-                    }}
-                    className="px-6 py-4 rounded-full border border-white/25 hover:border-[#cca462] hover:text-[#cca462] text-xs font-bold uppercase tracking-[0.25em] transition-colors cursor-pointer"
-                  >
-                    Free Swatch Kit
-                  </button>
-                </motion.div>
               </nav>
 
               {/* contact */}
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-                className="relative px-7 pt-8 pb-8 mt-6 border-t border-white/10 text-[13px] text-white/60 space-y-3"
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 1.2, ease: SIDEBAR_EASE }}
+                className="relative px-7 sm:pl-14 sm:pr-[22%] pb-9 text-[12px] text-white/50 flex flex-col items-end gap-2.5 text-right"
               >
                 <a href="mailto:contact@thesignaturecovers.com" className="flex items-center gap-3 no-underline text-inherit hover:text-white transition-colors">
-                  <Mail size={15} className="text-[#cca462]" /> contact@thesignaturecovers.com
+                  contact@thesignaturecovers.com <Mail size={14} className="text-[#cca462]" />
                 </a>
                 <a href="tel:+9118008892683" className="flex items-center gap-3 no-underline text-inherit hover:text-white transition-colors">
-                  <Phone size={15} className="text-[#cca462]" /> +91 1800 889 2683
+                  +91 1800 889 2683 <Phone size={14} className="text-[#cca462]" />
                 </a>
                 <div className="flex items-center gap-3">
-                  <MapPin size={15} className="text-[#cca462]" /> BKC, Mumbai · DLF Horizon, Gurugram
+                  BKC, Mumbai · DLF Horizon, Gurugram <MapPin size={14} className="text-[#cca462]" />
                 </div>
                 <a
                   href="https://www.instagram.com/thesignaturecovers/"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-3 pt-2 text-[#cca462] no-underline text-[12px] font-bold uppercase tracking-[0.25em] hover:text-white transition-colors"
+                  className="inline-flex items-center gap-3 pt-1 text-[#cca462] no-underline font-semibold uppercase tracking-[0.22em] hover:text-white transition-colors"
                 >
-                  Follow on Instagram <ArrowRight size={14} />
+                  Instagram <ArrowRight size={13} />
                 </a>
               </motion.div>
             </motion.aside>

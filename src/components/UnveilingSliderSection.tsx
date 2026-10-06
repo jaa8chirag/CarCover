@@ -123,7 +123,7 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
                 padding: '8px 18px',
                 borderRadius: '9999px',
                 fontSize: '11px',
-                fontFamily: "'Lexend Peta', sans-serif",
+                fontFamily: "'Sora', sans-serif",
                 letterSpacing: '2px',
                 textTransform: 'uppercase',
                 fontWeight: 600,
@@ -158,7 +158,7 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
                 padding: '8px 18px',
                 borderRadius: '9999px',
                 fontSize: '11px',
-                fontFamily: "'Lexend Peta', sans-serif",
+                fontFamily: "'Sora', sans-serif",
                 letterSpacing: '2px',
                 textTransform: 'uppercase',
                 fontWeight: 600,
@@ -234,7 +234,7 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
               pointerEvents: 'none',
               zIndex: 10,
               border: '1px solid rgba(0, 0, 0, 0.12)',
-              fontFamily: "'Lexend Peta', sans-serif",
+              fontFamily: "'Sora', sans-serif",
               boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
               whiteSpace: 'nowrap',
             }}
@@ -262,10 +262,10 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
               boxShadow: '0 6px 20px rgba(0, 0, 0, 0.03)',
             }}
           >
-            <div style={{ fontSize: '11px', color: '#00665e', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px', letterSpacing: '2px', textTransform: 'uppercase', fontFamily: "'Lexend Peta', sans-serif" }}>
+            <div style={{ fontSize: '11px', color: '#00665e', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px', letterSpacing: '2px', textTransform: 'uppercase', fontFamily: "'Sora', sans-serif" }}>
               <CheckCircle2 size={15} color="#00665e" /> ZERO BILLOWING
             </div>
-            <div style={{ fontSize: '17px', color: '#0f172a', fontWeight: 600, marginTop: '8px', fontFamily: "'Cinzel', serif" }}>
+            <div style={{ fontSize: '17px', color: '#0f172a', fontWeight: 600, marginTop: '8px', fontFamily: "'Sora', sans-serif" }}>
               Sculpted 3D Drape Index
             </div>
             <div style={{ fontSize: '13px', color: '#64748b', marginTop: '6px', lineHeight: 1.6 }}>
@@ -282,10 +282,10 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
               boxShadow: '0 6px 20px rgba(0, 0, 0, 0.03)',
             }}
           >
-            <div style={{ fontSize: '11px', color: '#00665e', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px', letterSpacing: '2px', textTransform: 'uppercase', fontFamily: "'Lexend Peta', sans-serif" }}>
+            <div style={{ fontSize: '11px', color: '#00665e', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px', letterSpacing: '2px', textTransform: 'uppercase', fontFamily: "'Sora', sans-serif" }}>
               <CheckCircle2 size={15} color="#00665e" /> ZERO BUFF MARKS
             </div>
-            <div style={{ fontSize: '17px', color: '#0f172a', fontWeight: 600, marginTop: '8px', fontFamily: "'Cinzel', serif" }}>
+            <div style={{ fontSize: '17px', color: '#0f172a', fontWeight: 600, marginTop: '8px', fontFamily: "'Sora', sans-serif" }}>
               Cashmere-Fleece Contact
             </div>
             <div style={{ fontSize: '13px', color: '#64748b', marginTop: '6px', lineHeight: 1.6 }}>
@@ -302,10 +302,10 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
               boxShadow: '0 6px 20px rgba(0, 0, 0, 0.03)',
             }}
           >
-            <div style={{ fontSize: '11px', color: '#00665e', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px', letterSpacing: '2px', textTransform: 'uppercase', fontFamily: "'Lexend Peta', sans-serif" }}>
+            <div style={{ fontSize: '11px', color: '#00665e', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px', letterSpacing: '2px', textTransform: 'uppercase', fontFamily: "'Sora', sans-serif" }}>
               <CheckCircle2 size={15} color="#00665e" /> MIRROR PODS
             </div>
-            <div style={{ fontSize: '17px', color: '#0f172a', fontWeight: 600, marginTop: '8px', fontFamily: "'Cinzel', serif" }}>
+            <div style={{ fontSize: '17px', color: '#0f172a', fontWeight: 600, marginTop: '8px', fontFamily: "'Sora', sans-serif" }}>
               Aero-Glove Pocketing
             </div>
             <div style={{ fontSize: '13px', color: '#64748b', marginTop: '6px', lineHeight: 1.6 }}>
