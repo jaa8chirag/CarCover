@@ -34,8 +34,10 @@ export default function Header({
 }: HeaderProps) {
   const pathname = usePathname();
   const isHomePage = pathname === '/';
+  const solidHeader = pathname.startsWith('/shop');
 
   const [scrolled, setScrolled] = useState(false);
+  const compact = scrolled;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -131,14 +133,17 @@ export default function Header({
       <header
         className="fixed top-0 left-0 w-full z-50 transition-all duration-300 pointer-events-auto"
         style={{
-          background: '#000000',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.12)',
-          boxShadow: scrolled ? '0 12px 40px -12px rgba(0, 0, 0, 0.6)' : 'none',
+          // Glass over the page; solid black on /shop where the page behind is light
+          background: solidHeader ? '#000000' : scrolled ? 'rgba(0, 0, 0, 0.55)' : 'transparent',
+          backdropFilter: solidHeader ? undefined : scrolled ? 'blur(16px) saturate(140%)' : 'none',
+          WebkitBackdropFilter: solidHeader ? undefined : scrolled ? 'blur(16px) saturate(140%)' : 'none',
+          borderBottom: scrolled || solidHeader ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid transparent',
+          boxShadow: scrolled && solidHeader ? '0 12px 40px -12px rgba(0, 0, 0, 0.6)' : 'none',
         }}
       >
         <div className="h-[1.5px] w-full bg-gradient-to-r from-transparent via-[#cca462]/60 to-transparent pointer-events-none" />
 
-        <div className="container-am relative h-[86px] sm:h-[104px] flex items-center justify-between gap-4 px-5 sm:px-12">
+        <div className={`container-am relative flex ${compact ? 'h-[58px] sm:h-[64px]' : 'h-[86px] sm:h-[104px]'} transition-[height] duration-500 ease-out items-center justify-between gap-4 px-5 sm:px-12`}>
           {/* LEFT: sidebar menu button */}
           <div className="flex items-center flex-1 min-w-0">
             <button
@@ -162,7 +167,7 @@ export default function Header({
               <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.2 }} className="py-1">
                 <span className="flex flex-col items-center gap-1 sm:gap-1.5 text-white" style={{ fontFamily: 'var(--font-main)' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/logo-white.png" alt="" aria-hidden className="h-9 sm:h-[50px] w-auto" />
+                  <img src="/logo-white.png" alt="" aria-hidden className={`w-auto transition-all duration-500 ease-out ${compact ? 'h-0 opacity-0 -mb-1' : 'h-9 sm:h-[50px] opacity-100'}`} />
                   <span className="font-bold uppercase tracking-[0.3em] sm:tracking-[0.42em] text-[10px] sm:text-[15px] whitespace-nowrap pl-[0.3em] sm:pl-[0.42em]">Signature Covers</span>
                 </span>
               </motion.div>
