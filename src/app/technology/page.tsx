@@ -190,7 +190,7 @@ function Hero({ onEnquiry }: { onEnquiry: () => void }) {
         <motion.span initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="block text-[11px] font-bold tracking-[5px] uppercase text-[#b38848] mb-6">
           Technology &amp; Craft
         </motion.span>
-        <h1 className="uppercase max-w-5xl" style={{ fontFamily: 'var(--font-hype)', fontWeight: 500, fontSize: 'clamp(34px, 6.4vw, 92px)', lineHeight: 1.05, letterSpacing: '-0.5px' }}>
+        <h1 className="uppercase max-w-5xl" style={{ fontFamily: 'var(--font-hype)', fontWeight: 500, fontSize: 'clamp(30px, min(6.4vw, 9vh), 84px)', lineHeight: 1.05, letterSpacing: '-0.5px' }}>
           <WordReveal immediate text="How Your Cover Is" />
           <br />
           <RotatingWord />

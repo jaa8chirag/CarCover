@@ -145,7 +145,7 @@ function HypeSection({
       <div
         style={{
           backgroundImage: `url(${slide.bgSrc})`,
-          filter: 'brightness(1.12) contrast(1.06) saturate(1.08)',
+          filter: 'brightness(1.18) contrast(1.05) saturate(1.1)',
           ['--bgp' as string]: slide.bgPos ?? 'center center',
           ['--bgs-md' as string]: slide.bgSizeMd ?? 'cover',
           ['--bgp-md' as string]: slide.bgPosMd ?? slide.bgPos ?? 'center center',
@@ -155,7 +155,7 @@ function HypeSection({
 
 
       {/* 2. Zero / Invisible Overlay to preserve 100% pristine image visibility */}
-      <div className={`absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30 z-[1] pointer-events-none ${slide.bright ? 'md:from-black/55 md:via-black/45 md:to-black/60' : 'md:from-black/25 md:via-black/15 md:to-black/40'}`} />
+      <div className={`absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/15 z-[1] pointer-events-none ${slide.bright ? 'md:from-black/30 md:via-black/20 md:to-black/35' : 'md:from-black/10 md:via-black/0 md:to-black/25'}`} />
 
       {/* 3. Text Content: Glides UP into place with Crisp Staggered Motion */}
       <motion.div
@@ -166,7 +166,7 @@ function HypeSection({
           hidden: {},
           visible: { transition: { staggerChildren: 0.12 } },
         }}
-        className={`relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center max-md:absolute max-md:inset-x-0 max-md:bottom-0 max-md:max-w-none max-md:items-start max-md:text-left max-md:bg-gradient-to-t max-md:from-black/90 max-md:via-black/65 max-md:to-transparent max-md:pt-32 max-md:pb-10`}
+        className={`relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center [text-shadow:0_2px_20px_rgba(0,0,0,0.55)] max-md:absolute max-md:inset-x-0 max-md:bottom-0 max-md:max-w-none max-md:items-start max-md:text-left max-md:bg-gradient-to-t max-md:from-black/80 max-md:via-black/45 max-md:to-transparent max-md:pt-32 max-md:pb-10`}
       >
         <span className="md:hidden mb-3 font-lexendpeta text-[11px] font-semibold tracking-[3px]" style={{ color: slide.accentColor }}>
           {String(index + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
@@ -201,7 +201,7 @@ function HypeSection({
           transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
           className="overflow-hidden mb-6"
         >
-          <h1 className={`uppercase font-lexendpeta tracking-[0.1em] sm:tracking-[0.2em] text-[21px] min-[420px]:text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white break-words`}>
+          <h1 className={`uppercase font-lexendpeta tracking-[0.1em] sm:tracking-[0.2em] text-[21px] min-[420px]:text-2xl sm:text-4xl md:text-4xl lg:text-[clamp(30px,min(4.4vw,7.2vh),60px)] font-bold leading-tight text-white break-words`}>
             {slide.title}
           </h1>
         </motion.div>
@@ -224,7 +224,7 @@ function HypeSection({
             visible: { opacity: 1, y: 0 },
           }}
           transition={{ duration: 1.0, ease: [0.19, 1, 0.22, 1] }}
-          className={`text-white text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-3 font-normal tracking-wide max-md:mx-0`}
+          className={`text-white text-base sm:text-lg md:text-lg lg:text-[clamp(15px,2.6vh,20px)] max-w-3xl mx-auto mb-3 font-normal tracking-wide max-md:mx-0`}
         >
           {slide.tagline}
         </motion.p>

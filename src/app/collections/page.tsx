@@ -216,7 +216,7 @@ export default function CollectionsPage() {
               <motion.span initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.9, ease }} className="inline-flex items-center gap-3 text-[11px] font-bold tracking-[5px] uppercase text-[#cca462] mb-6">
                 <span className="w-10 h-px bg-[#cca462]" /> The Collection
               </motion.span>
-              <h1 className="uppercase max-w-4xl" style={{ fontFamily: 'var(--font-hype)', fontWeight: 500, fontSize: 'clamp(24px, 8vw, 96px)', lineHeight: 1.02 }}>
+              <h1 className="uppercase max-w-4xl" style={{ fontFamily: 'var(--font-hype)', fontWeight: 500, fontSize: 'clamp(24px, min(8vw, 9.4vh), 88px)', lineHeight: 1.02 }}>
                 {['Unparalleled', 'Protection'].map((w, i) => (
                   <span key={w} className="block overflow-hidden pb-[0.1em]">
                     <motion.span className="block" initial={{ y: '110%' }} animate={{ y: '0%' }} transition={{ duration: 1.1, delay: 0.2 + i * 0.15, ease }}>
