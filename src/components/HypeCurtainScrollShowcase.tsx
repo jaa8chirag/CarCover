@@ -11,6 +11,8 @@ interface SlideData {
   description: string;
   bgSrc: string;
   bgPos?: string;
+  /** Extra scrim for light photos so white text stays readable. */
+  bright?: boolean;
   /** Desktop-only zoom and focal point, used to keep the subject clear of the headline. */
   bgSizeMd?: string;
   bgPosMd?: string;
@@ -42,11 +44,29 @@ const SLIDES: SlideData[] = [
     tagline: 'At 10,000mm hydrostatic head, rain simply ceases to exist.',
     description:
       'Multi-ply nano-welded storm fabric engineered to repel India’s fiercest monsoons, acidic industrial fallout, and dust storms while micro-venting heat.',
-    bgSrc: '/images/cover_monsoon.jpg',
+    bgSrc: '/images/porsche_speedster.jpg',
+    bgPos: 'center 38%',
+    bgPosMd: 'center 30%',
+    bright: true,
     tierId: 'monsoon',
     ctaText: 'EXPLORE AQUASHIELD',
     accentColor: '#38bdf8',
     nextPreviewName: 'Concours Cellular Silk',
+  },
+  {
+    id: 'atelier-commission',
+    category: 'ATELIER COMMISSION',
+    title: 'NOT OFF THE SHELF. COMMISSIONED ONLY FOR YOU.',
+    tagline: 'Hand-embroidered monograms, contrast piping & locking security.',
+    description:
+      'Tailored with your initials, vehicle registration, and custom contrast stitch in gold or silver thread with heavy-duty underbody wind-locks.',
+    bgSrc: '/images/reveal.jpg',
+    bgPos: 'center 86%',
+    bright: true,
+    tierId: 'atelier',
+    ctaText: 'START COMMISSION',
+    accentColor: '#10b981',
+    nextPreviewName: 'Online 3D Configurator',
   },
   {
     id: 'indoor-silk',
@@ -61,32 +81,6 @@ const SLIDES: SlideData[] = [
     ctaText: 'EXPLORE VELVET',
     accentColor: '#cca462',
     nextPreviewName: 'Titanium Thermoflect Shield',
-  },
-  {
-    id: 'solar-heatshield',
-    category: 'SOLAR THERMAL BARRIER',
-    title: 'DEFLECT THE SUN. PRESERVE THE LEATHER.',
-    tagline: 'Drop interior cabin heat by up to 22°C under scorching summer sun.',
-    description:
-      'Aerospace metallized reflective composite reflecting 99.8% of harsh solar UV rays, shielding nappa leather, touchscreens, and dash trims from thermal fatigue.',
-    bgSrc: '/images/cover_heatshield.jpg',
-    tierId: 'heatshield',
-    ctaText: 'EXPLORE HEATSHIELD',
-    accentColor: '#f59e0b',
-    nextPreviewName: 'The Yorkshire Atelier',
-  },
-  {
-    id: 'atelier-commission',
-    category: 'ATELIER COMMISSION',
-    title: 'NOT OFF THE SHELF. COMMISSIONED ONLY FOR YOU.',
-    tagline: 'Hand-embroidered monograms, contrast piping & locking security.',
-    description:
-      'Tailored with your initials, vehicle registration, and custom contrast stitch in gold or silver thread with heavy-duty underbody wind-locks.',
-    bgSrc: '/images/cover_hero.jpg',
-    tierId: 'atelier',
-    ctaText: 'START COMMISSION',
-    accentColor: '#10b981',
-    nextPreviewName: 'Online 3D Configurator',
   },
 ];
 
@@ -112,23 +106,24 @@ function HypeSection({
     <div
       id={`slide-${index}`}
       data-index={index}
-      className="relative h-[100svh] w-full overflow-hidden flex items-center justify-center cursor-default"
+      className="relative h-[100svh] w-full overflow-hidden flex items-center justify-center cursor-default max-md:block max-md:!pt-0 max-md:!pb-0 max-md:bg-[#0a0a0a]"
       style={{ minHeight: '680px', paddingTop: 'calc(var(--header-height) + 24px)', paddingBottom: 'clamp(96px, 16vh, 170px)' }}
     >
       {/* 1. Fixed Parallax Background Image (Crystal-clear visibility) */}
       <div
         style={{
           backgroundImage: `url(${slide.bgSrc})`,
+          filter: 'brightness(1.12) contrast(1.06) saturate(1.08)',
           ['--bgp' as string]: slide.bgPos ?? 'center center',
           ['--bgs-md' as string]: slide.bgSizeMd ?? 'cover',
           ['--bgp-md' as string]: slide.bgPosMd ?? slide.bgPos ?? 'center center',
         }}
-        className={`absolute inset-0 w-full h-full z-0 bg-no-repeat [background-size:cover] [background-position:var(--bgp)] md:[background-size:var(--bgs-md)] md:[background-position:var(--bgp-md)] md:[background-attachment:fixed]`}
+        className={`absolute inset-0 w-full h-full z-0 bg-no-repeat max-md:[animation:kenburns_16s_ease-in-out_infinite_alternate] [background-size:cover] [background-position:var(--bgp)] md:[background-size:var(--bgs-md)] md:[background-position:var(--bgp-md)] md:[background-attachment:fixed]`}
       />
 
 
       {/* 2. Zero / Invisible Overlay to preserve 100% pristine image visibility */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/35 to-black/60 md:from-black/25 md:via-black/15 md:to-black/40 z-[1] pointer-events-none" />
+      <div className={`absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30 z-[1] pointer-events-none ${slide.bright ? 'md:from-black/55 md:via-black/45 md:to-black/60' : 'md:from-black/25 md:via-black/15 md:to-black/40'}`} />
 
       {/* 3. Text Content: Glides UP into place with Crisp Staggered Motion */}
       <motion.div
@@ -139,8 +134,12 @@ function HypeSection({
           hidden: {},
           visible: { transition: { staggerChildren: 0.12 } },
         }}
-        className={`relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center`}
+        className={`relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center max-md:absolute max-md:inset-x-0 max-md:bottom-0 max-md:max-w-none max-md:items-start max-md:text-left max-md:bg-gradient-to-t max-md:from-black/90 max-md:via-black/65 max-md:to-transparent max-md:pt-32 max-md:pb-10`}
       >
+        <span className="md:hidden mb-3 font-lexendpeta text-[11px] font-semibold tracking-[3px]" style={{ color: slide.accentColor }}>
+          {String(index + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
+        </span>
+
         {/* Category Label */}
         <motion.div
           variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
@@ -179,7 +178,7 @@ function HypeSection({
         <motion.div
           variants={{ hidden: { width: 0, opacity: 0 }, visible: { width: '120px', opacity: 1 } }}
           transition={{ duration: 1.0, ease: 'easeOut' }}
-          className={`h-[1px] mx-auto mb-6`}
+          className={`h-[1px] mx-auto mb-6 max-md:mx-0`}
           style={{
             background: `linear-gradient(90deg, transparent, ${slide.accentColor}, transparent)`,
             boxShadow: `0 0 12px ${slide.accentColor}`,
@@ -193,7 +192,7 @@ function HypeSection({
             visible: { opacity: 1, y: 0 },
           }}
           transition={{ duration: 1.0, ease: [0.19, 1, 0.22, 1] }}
-          className={`text-white text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-3 font-normal tracking-wide`}
+          className={`text-white text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-3 font-normal tracking-wide max-md:mx-0`}
         >
           {slide.tagline}
         </motion.p>
@@ -202,7 +201,7 @@ function HypeSection({
         <motion.p
           variants={{ hidden: { opacity: 0, y: 25 }, visible: { opacity: 1, y: 0 } }}
           transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
-          className={`text-white/90 text-xs sm:text-sm max-w-2xl mx-auto mb-8 leading-relaxed font-light`}
+          className={`text-white/80 text-[13px] sm:text-sm max-w-2xl mx-auto mb-8 leading-relaxed font-light max-md:mx-0`}
         >
           {slide.description}
         </motion.p>
@@ -222,6 +221,8 @@ function HypeSection({
   );
 }
 
+const KENBURNS_CSS = `@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.14) translateY(-2%); } }`;
+
 export default function HypeCurtainScrollShowcase({
   onOpenConfigurator,
   onOpenEnquiry,
@@ -238,6 +239,7 @@ export default function HypeCurtainScrollShowcase({
 
   return (
     <div className="relative w-full" id="hype-showcase-container">
+      <style>{KENBURNS_CSS}</style>
       {/* 5 Hype Sections */}
       {SLIDES.map((slide, index) => (
         <HypeSection

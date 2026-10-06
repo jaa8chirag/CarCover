@@ -49,7 +49,7 @@ function Row({ items }: { items: string[][] }) {
 
 export default function BrandMarquee() {
   return (
-    <section className="bg-white py-20 sm:py-28 overflow-hidden">
+    <section className="bg-[#efeae1] py-20 sm:py-28 overflow-hidden">
       <style>{`
         @keyframes brand-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .brand-row:hover .brand-track { animation-play-state: paused !important; }

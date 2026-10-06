@@ -7,6 +7,7 @@ import UnveilingSliderSection from '@/components/UnveilingSliderSection';
 import SwatchRequestModal from '@/components/SwatchRequestModal';
 import CheckoutDrawer from '@/components/CheckoutDrawer';
 import BrandMarquee from '@/components/BrandMarquee';
+import ShopByCover from '@/components/ShopByCover';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -98,6 +99,8 @@ export default function Home() {
           handleSelectTierFromCollection(tierId);
         }}
       />
+
+      <ShopByCover />
 
       <BrandMarquee />
 
