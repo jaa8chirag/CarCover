@@ -8,6 +8,8 @@ interface SlideData {
   category: string;
   title: string;
   tagline: string;
+  /** Single short line shown instead of tagline + description on phones. */
+  mobileLine: string;
   description: string;
   bgSrc: string;
   /** Phone-only photo; laptops keep bgSrc. */
@@ -30,6 +32,7 @@ const SLIDES: SlideData[] = [
     category: '',
     title: 'THE FINEST CARS ARRIVE VEILED.',
     tagline: 'One vehicle. One bespoke cover. Entirely yours.',
+    mobileLine: 'One vehicle. One bespoke cover.',
     description:
       'Precision 3D-laser CAD tailored automotive covers engineered for India’s extreme climate. Rolls-Royce, Bentley, Porsche, Aston Martin & bespoke collections.',
     bgSrc: '/images/rr_cullinan_cover.jpg',
@@ -43,42 +46,11 @@ const SLIDES: SlideData[] = [
     nextPreviewName: 'AquaShield+ Monsoon Defiance',
   },
   {
-    id: 'indoor-silk',
-    category: '',
-    title: 'SHOWROOM ELEGANCE.',
-    tagline: 'Where your vehicle rests in absolute silence and velvet luxury.',
-    description:
-      'Form-hugging four-way micro-stretch fleece that clings sensually to every curve.',
-    bgSrc: '/images/rr_garage.jpg',
-    bgSrcMobile: '/images/porsche_blue_garage.jpg',
-    bgPos: 'center 72%',
-    bgPosMd: 'center 64%',
-    tierId: 'indoor',
-    ctaText: 'EXPLORE VELVET',
-    accentColor: '#cca462',
-    nextPreviewName: 'Titanium Thermoflect Shield',
-  },
-  {
-    id: 'showroom-unveil',
-    category: '',
-    title: 'WHERE EVERY UNVEILING BEGINS.',
-    tagline: 'Your monogram. Your colours. Your car.',
-    description:
-      'Custom embroidery and contrast piping on premium stretch fabric, made for collectors, showrooms and launch events.',
-    bgSrc: '/images/cover_hero.jpg',
-    bgSrcMobile: '/images/porsche_unveil.jpg',
-    bgPos: 'center 42%',
-    bgPosMd: 'center 55%',
-    tierId: 'bespoke',
-    ctaText: 'EXPLORE BESPOKE',
-    accentColor: '#cca462',
-    nextPreviewName: '',
-  },
-  {
     id: 'signature-fit',
     category: '',
     title: 'EVERY CURVE. TAILORED TO THE MILLIMETRE.',
     tagline: 'A cover that fits your car like a second skin.',
+    mobileLine: 'Fits like a second skin.',
     description:
       'Cut from a 3D scan of your exact model, with mirror pockets and sculpted contours. Four-way stretch fleece that follows every body line without a single wrinkle.',
     bgSrc: '/images/ferrari_red_cover.jpg',
@@ -92,10 +64,45 @@ const SLIDES: SlideData[] = [
     nextPreviewName: '',
   },
   {
+    id: 'showroom-unveil',
+    category: '',
+    title: 'WHERE EVERY UNVEILING BEGINS.',
+    tagline: 'Your monogram. Your colours. Your car.',
+    mobileLine: 'Your monogram. Your colours.',
+    description:
+      'Custom embroidery and contrast piping on premium stretch fabric, made for collectors, showrooms and launch events.',
+    bgSrc: '/images/cover_hero.jpg',
+    bgSrcMobile: '/images/porsche_unveil.jpg',
+    bgPos: 'center 42%',
+    bgPosMd: 'center 55%',
+    tierId: 'bespoke',
+    ctaText: 'EXPLORE BESPOKE',
+    accentColor: '#cca462',
+    nextPreviewName: '',
+  },
+  {
+    id: 'indoor-silk',
+    category: '',
+    title: 'SHOWROOM ELEGANCE.',
+    tagline: 'Where your vehicle rests in absolute silence and velvet luxury.',
+    mobileLine: 'Silence and velvet luxury.',
+    description:
+      'Form-hugging four-way micro-stretch fleece that clings sensually to every curve.',
+    bgSrc: '/images/rr_garage.jpg',
+    bgSrcMobile: '/images/porsche_blue_garage.jpg',
+    bgPos: 'center 72%',
+    bgPosMd: 'center 64%',
+    tierId: 'indoor',
+    ctaText: 'EXPLORE VELVET',
+    accentColor: '#cca462',
+    nextPreviewName: 'Titanium Thermoflect Shield',
+  },
+  {
     id: 'monsoon-armor',
     category: '',
     title: 'TORRENTIAL MONSOONS. ZERO PENETRATION.',
     tagline: 'At 10,000mm hydrostatic head, rain simply ceases to exist.',
+    mobileLine: 'Rain simply ceases to exist.',
     description:
       'Multi-ply nano-welded storm fabric engineered to repel India’s fiercest monsoons, acidic industrial fallout, and dust storms while micro-venting heat.',
     bgSrc: '/images/porsche_speedster.jpg',
@@ -112,6 +119,7 @@ const SLIDES: SlideData[] = [
     category: '',
     title: 'NOT OFF THE SHELF. COMMISSIONED ONLY FOR YOU.',
     tagline: 'Hand-embroidered monograms, contrast piping & locking security.',
+    mobileLine: 'Embroidered monograms & piping.',
     description:
       'Tailored with your initials, vehicle registration, and custom contrast stitch in gold or silver thread with heavy-duty underbody wind-locks.',
     bgSrc: '/images/reveal.jpg',
@@ -231,12 +239,19 @@ function HypeSection({
 
         {/* Subtitle / Tagline */}
         <motion.p
+          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
+          transition={{ duration: 1.0, ease: [0.19, 1, 0.22, 1] }}
+          className="md:hidden text-white text-[17px] font-normal mb-7 tracking-wide"
+        >
+          {slide.mobileLine}
+        </motion.p>
+        <motion.p
           variants={{
             hidden: { opacity: 0, y: 30 },
             visible: { opacity: 1, y: 0 },
           }}
           transition={{ duration: 1.0, ease: [0.19, 1, 0.22, 1] }}
-          className={`text-white text-base sm:text-lg md:text-lg lg:text-[clamp(15px,2.6vh,20px)] max-w-3xl mx-auto mb-3 font-normal tracking-wide max-md:mx-0`}
+          className={`text-white text-base sm:text-lg md:text-lg lg:text-[clamp(15px,2.6vh,20px)] max-w-3xl mx-auto mb-3 font-normal tracking-wide max-md:hidden`}
         >
           {slide.tagline}
         </motion.p>
@@ -245,7 +260,7 @@ function HypeSection({
         <motion.p
           variants={{ hidden: { opacity: 0, y: 25 }, visible: { opacity: 1, y: 0 } }}
           transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
-          className={`text-white/80 text-[13px] sm:text-sm max-w-2xl mx-auto mb-8 leading-relaxed font-light max-md:mx-0`}
+          className={`text-white/80 text-[13px] sm:text-sm max-w-2xl mx-auto mb-8 leading-relaxed font-light max-md:hidden`}
         >
           {slide.description}
         </motion.p>
