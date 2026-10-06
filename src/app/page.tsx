@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import Header from '@/components/Header';
 import HypeCurtainScrollShowcase from '@/components/HypeCurtainScrollShowcase';
 import UnveilingSliderSection from '@/components/UnveilingSliderSection';
-import ProductCollection from '@/components/ProductCollection';
 import SwatchRequestModal from '@/components/SwatchRequestModal';
 import CheckoutDrawer from '@/components/CheckoutDrawer';
+import BrandMarquee from '@/components/BrandMarquee';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -99,16 +99,11 @@ export default function Home() {
         }}
       />
 
+      <BrandMarquee />
+
       {/* 🌟 SECTION VARIATION 2: Interactive Before/After Reveal Curtain Slider */}
       <UnveilingSliderSection
         onOpenConfigurator={handleOpenConfigurator}
-      />
-
-      {/* 🌟 MAIN ESSENTIAL 1: 4 Performance Collections */}
-      <ProductCollection
-        onSelectTier={handleSelectTierFromCollection}
-        currencySymbol="₹"
-        currencyRate={1}
       />
 
       {/* Aston Martin Official Footer */}

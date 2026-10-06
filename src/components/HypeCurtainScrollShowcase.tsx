@@ -50,7 +50,7 @@ const SLIDES: SlideData[] = [
     tagline: 'Where your vehicle rests in absolute silence and velvet luxury.',
     description:
       'Form-hugging four-way micro-stretch fleece that clings sensually to every curve. Buttery underside certified 100% scratch-proof for fresh ceramic coatings.',
-    bgSrc: '/images/cover_velvet.jpg',
+    bgSrc: '/images/reveal.jpg',
     tierId: 'indoor',
     ctaText: 'EXPLORE VELVET',
     accentColor: '#cca462',
@@ -106,7 +106,7 @@ function HypeSection({
     <div
       id={`slide-${index}`}
       data-index={index}
-      className="relative h-screen w-full overflow-hidden flex items-center justify-center cursor-default"
+      className="relative h-[100svh] w-full overflow-hidden flex items-center justify-center cursor-default"
       style={{ minHeight: '680px', paddingTop: 'calc(var(--header-height) + 24px)', paddingBottom: '48px' }}
     >
       {/* 1. Fixed Parallax Background Image (Crystal-clear visibility) */}
@@ -115,13 +115,12 @@ function HypeSection({
           backgroundImage: `url(${slide.bgSrc})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
-          backgroundAttachment: 'fixed',
         }}
-        className="absolute inset-0 w-full h-full z-0"
+        className="absolute inset-0 w-full h-full z-0 md:[background-attachment:fixed]"
       />
 
       {/* 2. Zero / Invisible Overlay to preserve 100% pristine image visibility */}
-      <div className="absolute inset-0 bg-transparent z-[1] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/35 to-black/60 md:bg-none md:bg-transparent z-[1] pointer-events-none" />
 
       {/* 3. Text Content: Glides UP into place with Crisp Staggered Motion */}
       <motion.div
@@ -146,7 +145,7 @@ function HypeSection({
               style={{ backgroundColor: slide.accentColor, boxShadow: `0 0 10px ${slide.accentColor}` }}
             />
             <p
-              className="uppercase font-lexendpeta tracking-[0.45em] text-xs sm:text-sm font-semibold"
+              className="uppercase font-lexendpeta tracking-[0.22em] sm:tracking-[0.45em] text-[10px] sm:text-sm font-semibold"
               style={{ color: slide.accentColor }}
             >
               {slide.category}
@@ -163,7 +162,7 @@ function HypeSection({
           transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
           className="overflow-hidden mb-6"
         >
-          <h1 className="uppercase font-lexendpeta tracking-[0.2em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
+          <h1 className="uppercase font-lexendpeta tracking-[0.1em] sm:tracking-[0.2em] text-[21px] min-[420px]:text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white break-words">
             {slide.title}
           </h1>
         </motion.div>
@@ -195,7 +194,7 @@ function HypeSection({
         <motion.p
           variants={{ hidden: { opacity: 0, y: 25 }, visible: { opacity: 1, y: 0 } }}
           transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
-          className="text-white/85 text-xs sm:text-sm max-w-2xl mx-auto mb-8 leading-relaxed font-light"
+          className="text-white/90 text-xs sm:text-sm max-w-2xl mx-auto mb-8 leading-relaxed font-light"
         >
           {slide.description}
         </motion.p>

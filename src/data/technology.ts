@@ -1,5 +1,5 @@
-import { Droplets, Sun, Wind, Sparkles, ShieldCheck, Gem, SunMedium, type LucideIcon } from 'lucide-react';
-import { COVER_TIERS } from '@/data/carData';
+import { Droplets, Sun, Wind, Sparkles, type LucideIcon } from 'lucide-react';
+import { FABRICS, type CoverGroup } from '@/data/fabrics';
 
 export const LAYERS = [
   {
@@ -66,6 +66,7 @@ export const LAYERS = [
 
 export interface FabricSheet {
   id: string;
+  group: CoverGroup;
   name: string;
   short: string;
   tagline: string;
@@ -78,78 +79,96 @@ export interface FabricSheet {
   description: string;
   features: string[];
   specs: { material: string; breathability: string; waterResistance: string; lining: string; stretch: string };
+  /** Protection levels out of 100, drawn as animated bars. */
+  bars: { water: number; uv: number; scratch: number; breath: number };
   idealFor: string;
   rating?: number;
   reviewCount?: number;
-  inShop: boolean;
 }
 
-const tier = (id: string) => COVER_TIERS.find((t) => t.id === id)!;
-
-const fromTier = (
-  id: string,
-  extra: Pick<FabricSheet, 'id' | 'short' | 'accent' | 'icon' | 'environment' | 'idealFor' | 'inShop'>,
-): FabricSheet => {
-  const t = tier(id);
-  return {
-    ...extra,
-    name: t.name,
-    tagline: t.tagline,
-    price: t.price,
-    warranty: t.warranty,
-    image: t.image,
-    description: t.description,
-    features: t.features,
-    specs: t.fabricSpecs,
-    rating: t.rating,
-    reviewCount: t.reviewCount,
-  };
+// Technical sheet copy is placeholder until the client supplies final lab figures.
+const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warranty' | 'specs' | 'bars'>> = {
+  'outdoor-standard': {
+    short: 'Outdoor Standard',
+    environment: 'Outdoor · Daily',
+    warranty: '2-Year Guarantee',
+    specs: {
+      material: 'Multi-layer polyester with UV-stable coating',
+      breathability: 'Breathable weave, releases trapped moisture',
+      waterResistance: 'Water-resistant, sheds light to moderate rain',
+      lining: 'Soft non-abrasive inner layer',
+      stretch: 'Tailored fit with elasticated hem',
+    },
+    bars: { water: 60, uv: 65, scratch: 60, breath: 80 },
+  },
+  'outdoor-pro': {
+    short: 'Outdoor Pro',
+    environment: 'Outdoor · Heat & Rain',
+    warranty: '3-Year Guarantee',
+    specs: {
+      material: 'Heat-reflective multi-layer composite',
+      breathability: 'Microporous film, condensation-free',
+      waterResistance: 'Heavy-rain resistant with sealed seams',
+      lining: 'Anti-abrasive microfibre paint-contact lining',
+      stretch: 'Tailored fit with wind-lock buckles',
+    },
+    bars: { water: 82, uv: 92, scratch: 78, breath: 85 },
+  },
+  'outdoor-elite': {
+    short: 'Outdoor Elite',
+    environment: 'Outdoor · Extreme',
+    warranty: '5-Year Guarantee',
+    specs: {
+      material: 'Four-layer nano-coated storm fabric',
+      breathability: 'Microporous vapour matrix, fully breathable',
+      waterResistance: 'Fully waterproof, ultrasonically sealed and heat-taped seams',
+      lining: 'Cashmere-soft fleece, certified scratch-safe',
+      stretch: 'Tailored fit with underbody tie-down straps',
+    },
+    bars: { water: 100, uv: 98, scratch: 90, breath: 88 },
+  },
+  'indoor-standard': {
+    short: 'Indoor Standard',
+    environment: 'Indoor · Garage',
+    warranty: '2-Year Guarantee',
+    specs: {
+      material: 'Soft breathable stretch fabric',
+      breathability: 'Fully breathable, prevents trapped humidity',
+      waterResistance: 'Not rain-proof, made for indoor use only',
+      lining: 'Soft brushed underside',
+      stretch: 'Four-way stretch, snug tailored fit',
+    },
+    bars: { water: 10, uv: 30, scratch: 82, breath: 95 },
+  },
+  'indoor-elite': {
+    short: 'Indoor Elite',
+    environment: 'Indoor · Showroom',
+    warranty: '5-Year Guarantee',
+    specs: {
+      material: 'Four-way micro-stretch velvet fleece',
+      breathability: 'Fully breathable, static-dissipating weave',
+      waterResistance: 'Not rain-proof, made for indoor use only',
+      lining: 'Ultra-dense brushed microfibre, zero friction',
+      stretch: 'Sculpted 3D drape over every body line',
+    },
+    bars: { water: 10, uv: 35, scratch: 100, breath: 96 },
+  },
 };
 
-/** Every fabric we make, with its full specification. */
-export const FABRIC_SHEETS: FabricSheet[] = [
-  fromTier('stormshield-outdoor', {
-    id: 'monsoon', short: 'Monsoon', accent: '#0284c7', icon: Droplets, environment: 'Outdoor · Rain',
-    idealFor: 'Mumbai, Kerala, Goa, coastal regions and outdoor monsoon street parking', inShop: true,
-  }),
-  fromTier('heatshield-pro', {
-    id: 'heatshield', short: 'Heat-Shield', accent: '#b45309', icon: SunMedium, environment: 'Outdoor · Heat',
-    idealFor: 'Delhi NCR, Rajasthan, Gujarat and open-sun summer parking', inShop: true,
-  }),
-  fromTier('prestige-indoor', {
-    id: 'indoor-velvet', short: 'Velvet Indoor', accent: '#854d0e', icon: Sparkles, environment: 'Indoor · Garage',
-    idealFor: 'Private garages, basements, detailing studios and ceramic-coated supercars', inShop: true,
-  }),
-  {
-    id: 'offroad-armor',
-    name: 'Heavy-Duty 4x4 Off-Road Overland Canvas',
-    short: 'Off-Road Canvas',
-    tagline: 'Ballistic tear-proof expedition guard for 4x4s with spare wheels and roof racks.',
-    price: 6499,
-    warranty: '3-Year Guarantee',
-    image: '/images/outdoor.jpg',
-    accent: '#334155',
-    icon: ShieldCheck,
-    environment: 'Outdoor · Overland',
-    description: 'Thick reinforced 600D ballistic canvas with custom CAD contours for exterior spare tyres, roof luggage racks and overland recovery gear.',
-    features: [
-      'High-density ripstop ballistic weave resistant to thorns and scratches',
-      'Tailored rear spare-wheel and roof-rack clearance pockets',
-      'Mud, grease and acid-rain impervious exterior (easy pressure wash)',
-      'Industrial tension ratchet buckles for mountain gale winds',
-    ],
-    specs: {
-      material: '600D Ballistic Ripstop Canvas',
-      breathability: 'Vented Seams with Moisture Release',
-      waterResistance: 'Water-Repellent Coated Exterior',
-      lining: 'Soft Brushed Paint-Safe Underlay',
-      stretch: 'Rigid Tailored Fit with Ratchet Tie-Downs',
-    },
-    idealFor: 'Mahindra Thar Roxx, Toyota Fortuner, Defender, Hilux and overland 4x4s',
-    inShop: true,
-  },
-  fromTier('reveal-showroom', {
-    id: 'reveal-showroom', short: 'Reveal Drape', accent: '#9d174d', icon: Gem, environment: 'Showroom · Reveal',
-    idealFor: 'Dealership unveilings, car clubs and VIP delivery presentations', inShop: false,
-  }),
-];
+/** Every cover we make, with its full specification. Prices, images and features come from the shop data. */
+export const FABRIC_SHEETS: FabricSheet[] = FABRICS.map((f) => ({
+  id: f.id,
+  group: f.group,
+  name: f.title,
+  tagline: f.subtitle,
+  price: f.price,
+  image: f.image,
+  accent: f.accentColor,
+  icon: f.icon,
+  description: f.description,
+  features: f.specs,
+  idealFor: f.idealFor,
+  rating: f.rating,
+  reviewCount: f.reviewCount,
+  ...EXTRA[f.id],
+}));

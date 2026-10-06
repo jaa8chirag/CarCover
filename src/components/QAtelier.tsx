@@ -92,7 +92,7 @@ export default function QAtelier({ onOpenEnquiry }: QAtelierProps) {
               }}
             >
               <img
-                src="/images/cover_velvet.jpg"
+                src="/images/reveal.jpg"
                 alt="TheSignaturecovers Private Atelier Commission"
                 style={{
                   width: '100%',

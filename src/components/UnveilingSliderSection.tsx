@@ -96,7 +96,7 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
             userSelect: 'none',
             border: '1px solid rgba(255, 255, 255, 0.12)',
             boxShadow: '0 24px 60px rgba(0, 0, 0, 0.7)',
-            touchAction: 'none',
+            touchAction: 'pan-y',
           }}
           className="unveiling-frame"
         >
@@ -141,7 +141,7 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
               inset: 0,
               backgroundImage: 'url(/images/thar_unveiled.jpg)',
               backgroundSize: 'cover',
-              backgroundPosition: 'center 45%',
+              backgroundPosition: 'center 62%',
               clipPath: `polygon(0 0, ${sliderPos}% 0, ${sliderPos}% 100%, 0 100%)`,
             }}
           >
@@ -207,6 +207,14 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
             </div>
           </div>
 
+          <style>{`
+            @media (max-width: 640px) {
+              .unveil-badge { font-size: 8px !important; padding: 5px 10px !important; letter-spacing: 1px !important; top: 12px !important; white-space: nowrap; }
+              .unveil-badge-left { left: 10px !important; }
+              .unveil-badge-right { right: 10px !important; }
+            }
+          `}</style>
+
           {/* Bottom Floating Hint */}
           <div
             style={{
@@ -228,9 +236,11 @@ export default function UnveilingSliderSection({ onOpenConfigurator }: Unveiling
               border: '1px solid rgba(0, 0, 0, 0.12)',
               fontFamily: "'Lexend Peta', sans-serif",
               boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+              whiteSpace: 'nowrap',
             }}
           >
-            Drag or slide to unveil contour match
+            <span className="hidden sm:inline">Drag or slide to unveil contour match</span>
+            <span className="sm:hidden">Drag to unveil</span>
           </div>
         </div>
 

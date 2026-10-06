@@ -202,7 +202,7 @@ export default function EditorialSplitSection({
             style={{
               position: 'absolute',
               inset: '-20px',
-              backgroundImage: 'url(/images/timeless.jpg)',
+              backgroundImage: 'url(/images/lux/lambo_grey.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               transform: `translate(${leftParallax.x}px, ${leftParallax.y}px) scale(1.05)`,

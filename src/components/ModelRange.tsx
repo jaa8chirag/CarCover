@@ -15,7 +15,7 @@ const MODELS_DATA = [
     tagline: 'ALL OUT. ALL ROADS.',
     description: 'Bespoke liquid titanium tailored indoor cover with Aston Martin Racing green contour piping.',
     specs: 'Lycra-Fleece • Mirror Pockets • Anti-Static',
-    image: '/images/vanquish.jpg',
+    image: '/images/lux/sclass.jpg',
     tierName: 'Prestige Tailored Indoor',
   },
   {
@@ -24,7 +24,7 @@ const MODELS_DATA = [
     tagline: 'THRILL. DRIVEN.',
     description: 'Precision sculpted British Racing Green cover engineered for aggressive aerodynamics and rear splitters.',
     specs: '280gsm Fleece • Zero-Scratch • 5-Yr Guarantee',
-    image: '/images/hero.jpg',
+    image: '/images/lux/studio.jpg',
     tierName: 'Prestige Tailored Indoor',
   },
   {
@@ -42,7 +42,7 @@ const MODELS_DATA = [
     tagline: 'POWER. DRIVEN.',
     description: 'Extreme all-weather Stormshield+ 4-layer nano-membrane with fluorescent lime aerodynamic piping.',
     specs: '100% Waterproof • Breathable • UV 50+ Shield',
-    image: '/images/dbx707.jpg',
+    image: '/images/lux/rr_hill.jpg',
     tierName: 'Stormshield+ All-Weather',
   },
   {

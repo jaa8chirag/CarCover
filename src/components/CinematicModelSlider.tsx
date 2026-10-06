@@ -81,7 +81,7 @@ const MODEL_SLIDES: ModelSlide[] = [
       { label: 'EMBROIDERY', value: 'FRENCH LOOM CREST' },
       { label: 'ARCHIVE CAD', value: 'MILLIMETER FIT' },
     ],
-    image: '/images/cover_velvet.jpg',
+    image: '/images/reveal.jpg',
     accentColor: '#cbd5e1',
     recommendedCover: 'Obsidian Velvet Concours Edition',
     coverPrice: 6999,

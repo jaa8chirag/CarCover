@@ -557,7 +557,7 @@ export const COVER_TIERS: CoverTier[] = [
       lining: 'Self-Faced Satin Zero-Friction Glaze',
       stretch: 'Fluid Gravity-Cascading Drape Cut'
     },
-    image: '/images/cover_velvet.jpg'
+    image: '/images/reveal.jpg'
   }
 ];
 

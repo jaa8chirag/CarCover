@@ -31,7 +31,7 @@ export default function ContactPage() {
             title="Contact"
             accent="Our Atelier"
             lead="Questions about a custom pattern, modified vehicle clearances, fabric suitability or fleet commissions? Our specialists are at your disposal."
-            image="/images/cover_install_2.jpg"
+            image="/images/cover_velvet.jpg"
           />
 
           <section className="relative bg-[#f8fafc] pb-24 sm:pb-32">

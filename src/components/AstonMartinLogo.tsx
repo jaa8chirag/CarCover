@@ -23,7 +23,7 @@ export default function AstonMartinLogo({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      aria-label="TheSignaturecovers - Bespoke Tailored Car Covers"
+      aria-label="Signaturecovers - Bespoke Tailored Car Covers"
       style={{ display: 'block', maxWidth: '100%', height: 'auto' }}
     >
       {/* Luxury Tailored Automotive Wing Crest (y: 2 to 13) */}
@@ -38,7 +38,7 @@ export default function AstonMartinLogo({
         <polygon points="140,2 144,7 140,12 136,7" fill={color} stroke={color} strokeWidth="0.8" />
       </g>
 
-      {/* Brand Name: THESIGNATURECOVERS (y: 19 to 28, baseline 28) */}
+      {/* Brand Name: SIGNATURECOVERS (y: 19 to 28, baseline 28) */}
       <text
         x="140"
         y="27"
@@ -51,7 +51,7 @@ export default function AstonMartinLogo({
           letterSpacing: '3.5px',
         }}
       >
-        THESIGNATURECOVERS
+        SIGNATURECOVERS
       </text>
 
       {/* Atelier Subtitle (y: 33 to 39, baseline 39) */}

@@ -37,6 +37,7 @@ export default function Header({
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
+  const [hoveredNavRight, setHoveredNavRight] = useState<string | null>(null);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -108,6 +109,9 @@ export default function Header({
     { label: 'Contact Us', href: '/contact', id: 'contact' },
   ];
 
+  const leftLinks = navLinks.filter((l) => l.id === 'collections' || l.id === 'technology');
+  const rightLinks = navLinks.filter((l) => l.id === 'about' || l.id === 'contact');
+
   const handleNavClick = () => {
     setMobileMenuOpen(false);
   };
@@ -117,17 +121,10 @@ export default function Header({
       <header
         className="fixed top-0 left-0 w-full z-50 transition-all duration-300 pointer-events-auto"
         style={{
-          background: scrolled
-            ? 'linear-gradient(180deg, rgba(255,255,255,0.68) 0%, rgba(255,255,255,0.52) 100%)'
-            : 'linear-gradient(180deg, rgba(255,255,255,0.46) 0%, rgba(255,255,255,0.28) 100%)',
-          backdropFilter: 'blur(26px) saturate(220%) brightness(1.06)',
-          WebkitBackdropFilter: 'blur(26px) saturate(220%) brightness(1.06)',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.55)',
-          boxShadow: scrolled
-            ? '0 12px 40px -12px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.85), inset 0 -1px 0 rgba(255, 255, 255, 0.25)'
-            : '0 8px 32px rgba(0, 0, 0, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -1px 0 rgba(255, 255, 255, 0.2)',
-        }}
-      >
+          background: '#000000',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.12)',
+          boxShadow: scrolled ? '0 12px 40px -12px rgba(0, 0, 0, 0.6)' : 'none',
+        }}      >
         {/* Subtle Specular Top Luxury Hairline */}
         <div className="h-[1.5px] w-full bg-gradient-to-r from-transparent via-[#cca462]/60 to-transparent pointer-events-none" />
 
@@ -140,16 +137,16 @@ export default function Header({
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-xl text-slate-800 hover:bg-white/40 transition-colors cursor-pointer backdrop-blur-md"
+              className="lg:hidden p-2.5 rounded-xl text-white hover:bg-white/10 transition-colors cursor-pointer"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? (
-                <X size={24} className="text-slate-900" />
+                <X size={24} className="text-white" />
               ) : (
                 <div className="w-5 h-4 flex flex-col justify-between">
-                  <span className="w-full h-[2px] bg-slate-900 rounded-full" />
-                  <span className="w-3/4 h-[2px] bg-slate-900 rounded-full" />
-                  <span className="w-full h-[2px] bg-slate-900 rounded-full" />
+                  <span className="w-full h-[2px] bg-white rounded-full" />
+                  <span className="w-3/4 h-[2px] bg-white rounded-full" />
+                  <span className="w-full h-[2px] bg-white rounded-full" />
                 </div>
               )}
             </button>
@@ -157,9 +154,9 @@ export default function Header({
             {/* Desktop Navigation Links with Generous Spacing & Smooth Interactive Pill */}
             <nav
               onMouseLeave={() => setHoveredNav(null)}
-              className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-semibold tracking-wide text-slate-800 relative"
+              className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-semibold tracking-wide text-white relative"
             >
-              {navLinks.map((link) => {
+              {leftLinks.map((link) => {
                 const isHovered = hoveredNav === link.id;
                 return (
                   <Link
@@ -167,13 +164,13 @@ export default function Header({
                     href={link.href}
                     onClick={handleNavClick}
                     onMouseEnter={() => setHoveredNav(link.id)}
-                    className="relative flex items-center gap-2 py-2.5 px-3.5 transition-colors cursor-pointer text-slate-800 hover:text-slate-950 no-underline"
+                    className="relative flex items-center gap-2 py-2.5 px-3.5 transition-colors cursor-pointer text-white hover:text-white no-underline"
                   >
                     {/* Smooth Animated Background Pill */}
                     {isHovered && (
                       <motion.div
                         layoutId="navHoverPill"
-                        className="absolute inset-0 bg-white/50 rounded-full border border-white/70 shadow-xs pointer-events-none"
+                        className="absolute inset-0 bg-white/15 rounded-full border border-white/25 pointer-events-none"
                         transition={{ type: 'spring', bounce: 0.15, duration: 0.32 }}
                       />
                     )}
@@ -203,7 +200,7 @@ export default function Header({
                 transition={{ duration: 0.2 }}
                 className="py-1"
               >
-                <AstonMartinLogo width={195} height={34} color="#0f172a" />
+                <AstonMartinLogo width={195} height={34} color="#ffffff" />
               </motion.div>
             </Link>
           </div>
@@ -212,17 +209,50 @@ export default function Header({
           {/* RIGHT: Search Pill, Free Swatches & Cart Bag */}
           {/* ========================================================================= */}
           <div className="flex items-center justify-end gap-3.5 flex-1 min-w-0">
+            <nav
+              onMouseLeave={() => setHoveredNavRight(null)}
+              className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-semibold tracking-wide text-white relative"
+            >
+              {rightLinks.map((link) => {
+                const isHovered = hoveredNavRight === link.id;
+                return (
+                  <Link
+                    key={link.id}
+                    href={link.href}
+                    onClick={handleNavClick}
+                    onMouseEnter={() => setHoveredNavRight(link.id)}
+                    className="relative flex items-center gap-2 py-2.5 px-3.5 transition-colors cursor-pointer text-white hover:text-white no-underline"
+                  >
+                    {/* Smooth Animated Background Pill */}
+                    {isHovered && (
+                      <motion.div
+                        layoutId="navHoverPillRight"
+                        className="absolute inset-0 bg-white/15 rounded-full border border-white/25 pointer-events-none"
+                        transition={{ type: 'spring', bounce: 0.15, duration: 0.32 }}
+                      />
+                    )}
+                    <span className="relative z-10">{link.label}</span>
+                    {link.badge && (
+                      <span className="relative z-10 text-[9px] px-2 py-0.5 rounded-full font-bold tracking-widest bg-emerald-500/20 text-[#00665e] border border-emerald-500/30">
+                        {link.badge}
+                      </span>
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
+
             {/* Saved Commissions Cart Bag */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={onOpenCart}
-              className="relative w-10 h-10 rounded-full bg-white/35 hover:bg-white/60 border border-white/60 flex items-center justify-center text-slate-800 transition-all cursor-pointer flex-shrink-0 backdrop-blur-md shadow-xs"
+              className="relative w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 flex items-center justify-center text-white transition-all cursor-pointer flex-shrink-0"
               aria-label="Saved Commissions"
             >
               <ShoppingBag size={18} />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-[18px] h-[18px] rounded-full bg-[#00665e] text-white text-[10px] font-bold flex items-center justify-center border-2 border-white shadow-xs">
+                <span className="absolute -top-1 -right-1 w-[18px] h-[18px] rounded-full bg-[#00665e] text-white text-[10px] font-bold flex items-center justify-center border-2 border-black">
                   {cartCount}
                 </span>
               )}
@@ -235,11 +265,9 @@ export default function Header({
         {/* ========================================================================= */}
         {mobileMenuOpen && (
           <div
-            className="lg:hidden fixed top-[76px] left-0 w-full h-[calc(100dvh-76px)] z-50 p-6 flex flex-col justify-between overflow-y-auto border-t border-white/40"
+            className="lg:hidden fixed top-[76px] left-0 w-full h-[calc(100dvh-76px)] z-50 p-6 flex flex-col justify-between overflow-y-auto border-t border-white/15"
             style={{
-              background: 'rgba(255, 255, 255, 0.94)',
-              backdropFilter: 'blur(30px) saturate(180%)',
-              WebkitBackdropFilter: 'blur(30px) saturate(180%)',
+              background: '#000000',
             }}
           >
             <div className="flex flex-col gap-4">
@@ -249,7 +277,7 @@ export default function Header({
                     key={link.id}
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-3.5 rounded-xl border border-slate-200 bg-white flex items-center justify-between text-sm font-bold text-slate-900 no-underline shadow-xs hover:border-[#00665e]"
+                    className="p-3.5 rounded-xl border border-white/20 bg-white/5 flex items-center justify-between text-sm font-bold text-white no-underline hover:border-white/60"
                   >
                     <span>{link.label}</span>
                     <ArrowRight size={16} className="text-[#00665e]" />
@@ -258,13 +286,13 @@ export default function Header({
               </nav>
             </div>
 
-            <div className="pt-4 border-t border-slate-200">
+            <div className="pt-4 border-t border-white/15">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   if (onOpenEnquiry) onOpenEnquiry();
                 }}
-                className="w-full py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-900 bg-white border border-slate-300 shadow-xs cursor-pointer"
+                className="w-full py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-white/10 border border-white/30 cursor-pointer"
               >
                 Request Free Fabric Swatches & Enquiry
               </button>

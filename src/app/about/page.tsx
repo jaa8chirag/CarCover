@@ -11,7 +11,7 @@ const PILLARS = [
   {
     title: 'Laser-CAD Precision',
     subtitle: 'Millimeter-Accurate Digital Patterns',
-    image: '/images/slider_dbx707.jpg',
+    image: '/images/lux/amg_blue.jpg',
     icon: Compass,
     badge: '800+ CAD BLUEPRINTS',
     description: 'Over 800+ 3D-laser scanned chassis patterns ensure every mirror pocket, antenna contour, and rear spoiler profile fits with zero billowing or fabric stress.',
