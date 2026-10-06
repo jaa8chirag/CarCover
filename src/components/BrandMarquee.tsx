@@ -52,9 +52,13 @@ export default function BrandMarquee() {
     <section className="relative z-10 -mt-12 rounded-t-[3rem] bg-[#efeae1] pt-16 sm:pt-20 pb-10 sm:pb-14 shadow-[0_-30px_80px_-30px_rgba(0,0,0,0.55)] overflow-hidden">
       <style>{`
         @keyframes brand-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .brand-row:hover .brand-track { animation-play-state: paused !important; }
-        .brand-logo img { transition: transform .4s ease; }
-        .brand-logo:hover img { transform: scale(1.12); }
+        .brand-row { touch-action: pan-y; -webkit-tap-highlight-color: transparent; }
+        .brand-logo img { transition: transform .4s ease; -webkit-user-drag: none; user-select: none; }
+        @media (hover: hover) and (pointer: fine) {
+          .brand-row:hover .brand-track { animation-play-state: paused !important; }
+          .brand-logo:hover img { transform: scale(1.12); }
+        }
+        @media (hover: none) { .brand-logo img { pointer-events: none; } }
       `}</style>
       <div className="text-center px-6 mb-8">
         <div className="mx-auto mb-5 h-px w-12 bg-[#cca462]" />
