@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import AstonMartinLogo from './AstonMartinLogo';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag,
@@ -129,21 +128,32 @@ export default function Header({
         <div className="h-[1.5px] w-full bg-gradient-to-r from-transparent via-[#cca462]/60 to-transparent pointer-events-none" />
 
         {/* Spacious, Breathable Header Container (Height 76px - 82px) */}
-        <div className="container-am h-[76px] sm:h-[82px] flex items-center justify-between gap-6 px-6 sm:px-12">
+        <div className="container-am relative h-[86px] sm:h-[104px] flex items-center justify-between gap-4 sm:gap-6 px-5 sm:px-12">
           {/* ========================================================================= */}
           {/* LEFT: Spacious, Airy, Animated Nav Links */}
           {/* ========================================================================= */}
           <div className="flex items-center gap-6 lg:gap-10 flex-1 min-w-0">
-            {/* Logo mark, far left */}
-            <Link href="/" aria-label="Signature Covers Home" className="flex-shrink-0 no-underline">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo-white.png" alt="Signature Covers" className="h-9 sm:h-12 w-auto" />
-            </Link>
+            {/* Mobile Hamburger Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden -ml-2 p-2.5 rounded-xl text-white hover:bg-white/10 transition-colors cursor-pointer"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? (
+                <X size={24} className="text-white" />
+              ) : (
+                <div className="w-5 h-4 flex flex-col justify-between">
+                  <span className="w-full h-[2px] bg-white rounded-full" />
+                  <span className="w-3/4 h-[2px] bg-white rounded-full" />
+                  <span className="w-full h-[2px] bg-white rounded-full" />
+                </div>
+              )}
+            </button>
 
             {/* Desktop Navigation Links with Generous Spacing & Smooth Interactive Pill */}
             <nav
               onMouseLeave={() => setHoveredNav(null)}
-              className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-semibold tracking-wide text-white relative"
+              className="hidden lg:flex items-center gap-6 xl:gap-8 text-[18px] font-semibold tracking-wide text-white relative"
             >
               {leftLinks.map((link) => {
                 const isHovered = hoveredNav === link.id;
@@ -178,7 +188,7 @@ export default function Header({
           {/* ========================================================================= */}
           {/* CENTER: Aston Martin Crest Logo */}
           {/* ========================================================================= */}
-          <div className="flex-shrink-0 flex items-center justify-center">
+          <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
             <Link
               href="/"
               className="group block transition-all no-underline"
@@ -189,7 +199,11 @@ export default function Header({
                 transition={{ duration: 0.2 }}
                 className="py-1"
               >
-                <AstonMartinLogo width={250} height={28} color="#ffffff" className="!w-[135px] min-[420px]:!w-[160px] sm:!w-[230px]" />
+                <span className="flex flex-col items-center gap-1 sm:gap-1.5 text-white" style={{ fontFamily: 'var(--font-main)' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/logo-white.png" alt="" aria-hidden className="h-9 sm:h-[50px] w-auto" />
+                  <span className="font-bold uppercase tracking-[0.3em] sm:tracking-[0.42em] text-[10px] sm:text-[15px] whitespace-nowrap pl-[0.3em] sm:pl-[0.42em]">Signature Covers</span>
+                </span>
               </motion.div>
             </Link>
           </div>
@@ -200,7 +214,7 @@ export default function Header({
           <div className="flex items-center justify-end gap-3.5 flex-1 min-w-0">
             <nav
               onMouseLeave={() => setHoveredNavRight(null)}
-              className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-semibold tracking-wide text-white relative"
+              className="hidden lg:flex items-center gap-6 xl:gap-8 text-[18px] font-semibold tracking-wide text-white relative"
             >
               {rightLinks.map((link) => {
                 const isHovered = hoveredNavRight === link.id;
@@ -249,22 +263,7 @@ export default function Header({
               )}
             </motion.button>
 
-            {/* Mobile Hamburger Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden -mr-1 p-2.5 rounded-xl text-white hover:bg-white/10 transition-colors cursor-pointer"
-              aria-label="Toggle navigation menu"
-            >
-              {mobileMenuOpen ? (
-                <X size={24} className="text-white" />
-              ) : (
-                <div className="w-5 h-4 flex flex-col justify-between">
-                  <span className="w-full h-[2px] bg-white rounded-full" />
-                  <span className="w-3/4 h-[2px] bg-white rounded-full" />
-                  <span className="w-full h-[2px] bg-white rounded-full" />
-                </div>
-              )}
-            </button>
+
 
 
           </div>
@@ -275,7 +274,7 @@ export default function Header({
         {/* ========================================================================= */}
         {mobileMenuOpen && (
           <div
-            className="lg:hidden fixed top-[76px] left-0 w-full h-[calc(100dvh-76px)] z-50 p-6 flex flex-col justify-between overflow-y-auto border-t border-white/15"
+            className="lg:hidden fixed top-[86px] sm:top-[104px] left-0 w-full h-[calc(100dvh-86px)] sm:h-[calc(100dvh-104px)] z-50 p-6 flex flex-col justify-between overflow-y-auto border-t border-white/15"
             style={{
               background: '#000000',
             }}
