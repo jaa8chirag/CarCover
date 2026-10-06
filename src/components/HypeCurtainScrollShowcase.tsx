@@ -49,8 +49,8 @@ const SLIDES: SlideData[] = [
     description:
       'Custom embroidery and contrast piping on premium stretch fabric, made for collectors, showrooms and launch events.',
     bgSrc: '/images/cover_hero.jpg',
-    bgSrcMobile: '/images/rr_cullinan_cover.jpg',
-    bgPos: 'center 40%',
+    bgSrcMobile: '/images/porsche_unveil.jpg',
+    bgPos: 'center 42%',
     bgPosMd: 'center 55%',
     tierId: 'bespoke',
     ctaText: 'EXPLORE BESPOKE',
