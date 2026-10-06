@@ -236,7 +236,7 @@ function HypeSection({
         <motion.p
           variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
           transition={{ duration: 1.0, ease: [0.19, 1, 0.22, 1] }}
-          className="md:hidden text-white text-[17px] font-normal mb-5 tracking-wide"
+          className="text-white text-[17px] md:text-lg lg:text-[clamp(15px,2.6vh,20px)] font-normal mb-5 md:mb-8 tracking-wide"
         >
           {slide.mobileLine}
         </motion.p>
@@ -246,7 +246,7 @@ function HypeSection({
             visible: { opacity: 1, y: 0 },
           }}
           transition={{ duration: 1.0, ease: [0.19, 1, 0.22, 1] }}
-          className={`text-white text-base sm:text-lg md:text-lg lg:text-[clamp(15px,2.6vh,20px)] max-w-3xl mx-auto mb-3 font-normal tracking-wide max-md:hidden`}
+          className={`text-white text-base sm:text-lg md:text-lg lg:text-[clamp(15px,2.6vh,20px)] max-w-3xl mx-auto mb-3 font-normal tracking-wide hidden`}
         >
           {slide.tagline}
         </motion.p>
@@ -255,7 +255,7 @@ function HypeSection({
         <motion.p
           variants={{ hidden: { opacity: 0, y: 25 }, visible: { opacity: 1, y: 0 } }}
           transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
-          className={`text-white/80 text-[13px] sm:text-sm max-w-2xl mx-auto mb-8 leading-relaxed font-light max-md:hidden`}
+          className={`text-white/80 text-[13px] sm:text-sm max-w-2xl mx-auto mb-8 leading-relaxed font-light hidden`}
         >
           {slide.description}
         </motion.p>
