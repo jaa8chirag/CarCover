@@ -185,7 +185,7 @@ function HypeSection({
           hidden: {},
           visible: { transition: { staggerChildren: 0.12 } },
         }}
-        className={`relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center [text-shadow:0_2px_20px_rgba(0,0,0,0.55)] max-md:absolute max-md:inset-x-0 max-md:bottom-0 max-md:max-w-none max-md:items-start max-md:text-left max-md:bg-gradient-to-t max-md:from-black/80 max-md:via-black/45 max-md:to-transparent max-md:pt-28 max-md:pb-8`}
+        className={`relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center [text-shadow:0_2px_20px_rgba(0,0,0,0.55)] max-md:absolute max-md:inset-x-0 max-md:bottom-0 max-md:max-w-none max-md:items-start max-md:text-left max-md:bg-gradient-to-t max-md:from-black/80 max-md:via-black/45 max-md:to-transparent max-md:pt-28 max-md:pb-8 md:absolute md:inset-x-0 md:bottom-0 md:max-w-none md:items-start md:text-left md:px-14 lg:px-24 md:pt-44 md:pb-14 lg:pb-20 md:bg-gradient-to-t md:from-black/65 md:via-black/25 md:to-transparent`}
       >
         {slide.category && (
         <motion.div
@@ -217,7 +217,7 @@ function HypeSection({
           transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
           className="overflow-hidden mb-6 max-md:mb-3"
         >
-          <h1 className={`uppercase tracking-[0.005em] sm:tracking-[0.01em] text-[23px] min-[420px]:text-[27px] sm:text-[40px] md:text-[40px] lg:text-[clamp(32px,min(4.8vw,7.8vh),66px)] font-semibold leading-[1.12] text-white break-words`} style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+          <h1 className={`uppercase tracking-[0.005em] sm:tracking-[0.01em] text-[23px] min-[420px]:text-[27px] md:text-[clamp(20px,2.85vw,52px)] md:whitespace-nowrap font-semibold leading-[1.12] text-white break-words`} style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             {slide.title}
           </h1>
         </motion.div>
@@ -226,7 +226,7 @@ function HypeSection({
         <motion.div
           variants={{ hidden: { width: 0, opacity: 0 }, visible: { width: '120px', opacity: 1 } }}
           transition={{ duration: 1.0, ease: 'easeOut' }}
-          className={`h-[1px] mx-auto mb-6 max-md:mx-0 max-md:mb-3`}
+          className={`h-[1px] mb-6 max-md:mb-3`}
           style={{
             background: `linear-gradient(90deg, transparent, ${slide.accentColor}, transparent)`,
             boxShadow: `0 0 12px ${slide.accentColor}`,
