@@ -35,10 +35,11 @@ const SLIDES: SlideData[] = [
     mobileLine: 'One vehicle. One bespoke cover.',
     description:
       'Precision 3D-laser CAD tailored automotive covers engineered for India’s extreme climate. Rolls-Royce, Bentley, Porsche, Aston Martin & bespoke collections.',
-    bgSrc: '/images/rr_spirit_ecstasy.jpg',
+    bgSrc: '/images/lambo_aventador_j.jpg',
     bgSrcMobile: '/images/porsche_classic_black.jpg',
     bgPos: 'center 55%',
-    bgPosMd: 'center 50%',
+    bgPosMd: 'center 60%',
+    bright: true,
     tierId: 'bespoke',
     ctaText: 'EXPLORE BESPOKE',
     accentColor: '#cca462',
