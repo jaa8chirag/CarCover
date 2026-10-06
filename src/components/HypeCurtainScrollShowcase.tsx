@@ -28,10 +28,10 @@ const SLIDES: SlideData[] = [
   {
     id: 'indoor-silk',
     category: '',
-    title: 'SHOWROOM ELEGANCE. PURE VELVET EMBRACE.',
+    title: 'SHOWROOM ELEGANCE.',
     tagline: 'Where your vehicle rests in absolute silence and velvet luxury.',
     description:
-      'Form-hugging four-way micro-stretch fleece that clings sensually to every curve. Buttery underside certified 100% scratch-proof for fresh ceramic coatings.',
+      'Form-hugging four-way micro-stretch fleece that clings sensually to every curve.',
     bgSrc: '/images/rr_garage.jpg',
     bgPos: 'center 64%',
     tierId: 'indoor',
