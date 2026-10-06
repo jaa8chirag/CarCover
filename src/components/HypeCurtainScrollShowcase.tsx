@@ -33,7 +33,8 @@ const SLIDES: SlideData[] = [
     description:
       'Precision 3D-laser CAD tailored automotive covers engineered for India’s extreme climate. Rolls-Royce, Bentley, Porsche, Aston Martin & bespoke collections.',
     bgSrc: '/images/rr_cullinan_cover.jpg',
-    bgPos: 'center 40%',
+    bgSrcMobile: '/images/porsche_classic_black.jpg',
+    bgPos: 'center 55%',
     bgPosMd: 'center 38%',
     bright: true,
     tierId: 'bespoke',
@@ -49,7 +50,9 @@ const SLIDES: SlideData[] = [
     description:
       'Form-hugging four-way micro-stretch fleece that clings sensually to every curve.',
     bgSrc: '/images/rr_garage.jpg',
-    bgPos: 'center 64%',
+    bgSrcMobile: '/images/porsche_blue_garage.jpg',
+    bgPos: 'center 72%',
+    bgPosMd: 'center 64%',
     tierId: 'indoor',
     ctaText: 'EXPLORE VELVET',
     accentColor: '#cca462',
