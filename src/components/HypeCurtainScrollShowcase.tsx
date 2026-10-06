@@ -26,6 +26,22 @@ interface SlideData {
 
 const SLIDES: SlideData[] = [
   {
+    id: 'bespoke-veiled',
+    category: '',
+    title: 'THE FINEST CARS ARRIVE VEILED.',
+    tagline: 'One vehicle. One bespoke cover. Entirely yours.',
+    description:
+      'Precision 3D-laser CAD tailored automotive covers engineered for India’s extreme climate. Rolls-Royce, Bentley, Porsche, Aston Martin & bespoke collections.',
+    bgSrc: '/images/rr_cullinan_cover.jpg',
+    bgPos: 'center 40%',
+    bgPosMd: 'center 38%',
+    bright: true,
+    tierId: 'bespoke',
+    ctaText: 'EXPLORE BESPOKE',
+    accentColor: '#cca462',
+    nextPreviewName: 'AquaShield+ Monsoon Defiance',
+  },
+  {
     id: 'indoor-silk',
     category: '',
     title: 'SHOWROOM ELEGANCE.',
@@ -54,22 +70,6 @@ const SLIDES: SlideData[] = [
     ctaText: 'EXPLORE BESPOKE',
     accentColor: '#cca462',
     nextPreviewName: '',
-  },
-  {
-    id: 'bespoke-veiled',
-    category: '',
-    title: 'THE FINEST CARS ARRIVE VEILED.',
-    tagline: 'One vehicle. One bespoke cover. Entirely yours.',
-    description:
-      'Precision 3D-laser CAD tailored automotive covers engineered for India’s extreme climate. Rolls-Royce, Bentley, Porsche, Aston Martin & bespoke collections.',
-    bgSrc: '/images/rr_cullinan_cover.jpg',
-    bgPos: 'center 40%',
-    bgPosMd: 'center 38%',
-    bright: true,
-    tierId: 'bespoke',
-    ctaText: 'EXPLORE BESPOKE',
-    accentColor: '#cca462',
-    nextPreviewName: 'AquaShield+ Monsoon Defiance',
   },
   {
     id: 'signature-fit',
