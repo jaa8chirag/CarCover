@@ -24,14 +24,46 @@ interface SlideData {
 
 const SLIDES: SlideData[] = [
   {
+    id: 'signature-fit',
+    category: 'THE SIGNATURE FIT',
+    title: 'EVERY CURVE. TAILORED TO THE MILLIMETRE.',
+    tagline: 'A cover that fits your car like a second skin.',
+    description:
+      'Cut from a 3D scan of your exact model, with mirror pockets and sculpted contours. Four-way stretch fleece that follows every body line without a single wrinkle.',
+    bgSrc: '/images/ferrari_red_cover.jpg',
+    bgPos: 'center 45%',
+    bgPosMd: 'center 58%',
+    bright: true,
+    tierId: 'indoor',
+    ctaText: 'EXPLORE INDOOR',
+    accentColor: '#ef4444',
+    nextPreviewName: 'Showroom Presentation',
+  },
+  {
+    id: 'showroom-unveil',
+    category: 'SHOWROOM PRESENTATION',
+    title: 'WHERE EVERY UNVEILING BEGINS.',
+    tagline: 'Your monogram. Your colours. Your car.',
+    description:
+      'Custom embroidery and contrast piping on premium stretch fabric, made for collectors, showrooms and launch events.',
+    bgSrc: '/images/cover_hero.jpg',
+    bgPos: 'center 55%',
+    tierId: 'bespoke',
+    ctaText: 'EXPLORE BESPOKE',
+    accentColor: '#cca462',
+    nextPreviewName: 'The Apex of Bespoke Preservation',
+  },
+  {
     id: 'bespoke-veiled',
     category: 'THE APEX OF BESPOKE PRESERVATION',
     title: 'THE FINEST CARS ARRIVE VEILED.',
     tagline: 'One vehicle. One bespoke cover. Entirely yours.',
     description:
       'Precision 3D-laser CAD tailored automotive covers engineered for India’s extreme climate. Rolls-Royce, Bentley, Porsche, Aston Martin & bespoke collections.',
-    bgSrc: '/images/rr_badge.jpg',
-    bgPos: 'center 55%',
+    bgSrc: '/images/rr_cullinan_cover.jpg',
+    bgPos: 'center 40%',
+    bgPosMd: 'center 38%',
+    bright: true,
     tierId: 'bespoke',
     ctaText: 'EXPLORE BESPOKE',
     accentColor: '#cca462',

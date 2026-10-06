@@ -99,7 +99,9 @@ export default function Footer() {
       </div>
 
       {/* Giant wordmark */}
-      <div className="relative px-3 sm:px-6 pt-6 sm:pt-10 pb-14 sm:pb-20">
+      <div className="relative px-3 sm:px-6 pt-10 sm:pt-14 pb-14 sm:pb-20">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logo-white.png" alt="Signature Covers logo" className="mx-auto mb-8 sm:mb-10 h-14 sm:h-20 w-auto opacity-95" />
         <div
           aria-label="Signaturecovers"
           onPointerEnter={() => setOverWord(true)}

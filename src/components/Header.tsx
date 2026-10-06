@@ -134,22 +134,11 @@ export default function Header({
           {/* LEFT: Spacious, Airy, Animated Nav Links */}
           {/* ========================================================================= */}
           <div className="flex items-center gap-6 lg:gap-10 flex-1 min-w-0">
-            {/* Mobile Hamburger Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-xl text-white hover:bg-white/10 transition-colors cursor-pointer"
-              aria-label="Toggle navigation menu"
-            >
-              {mobileMenuOpen ? (
-                <X size={24} className="text-white" />
-              ) : (
-                <div className="w-5 h-4 flex flex-col justify-between">
-                  <span className="w-full h-[2px] bg-white rounded-full" />
-                  <span className="w-3/4 h-[2px] bg-white rounded-full" />
-                  <span className="w-full h-[2px] bg-white rounded-full" />
-                </div>
-              )}
-            </button>
+            {/* Logo mark, far left */}
+            <Link href="/" aria-label="Signature Covers Home" className="flex-shrink-0 no-underline">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo-white.png" alt="Signature Covers" className="h-9 sm:h-12 w-auto" />
+            </Link>
 
             {/* Desktop Navigation Links with Generous Spacing & Smooth Interactive Pill */}
             <nav
@@ -200,7 +189,7 @@ export default function Header({
                 transition={{ duration: 0.2 }}
                 className="py-1"
               >
-                <AstonMartinLogo width={250} height={28} color="#ffffff" className="!w-[185px] sm:!w-[250px]" />
+                <AstonMartinLogo width={250} height={28} color="#ffffff" className="!w-[135px] min-[420px]:!w-[160px] sm:!w-[230px]" />
               </motion.div>
             </Link>
           </div>
@@ -243,6 +232,8 @@ export default function Header({
             </nav>
 
             {/* Saved Commissions Cart Bag */}
+
+
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -257,6 +248,25 @@ export default function Header({
                 </span>
               )}
             </motion.button>
+
+            {/* Mobile Hamburger Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden -mr-1 p-2.5 rounded-xl text-white hover:bg-white/10 transition-colors cursor-pointer"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? (
+                <X size={24} className="text-white" />
+              ) : (
+                <div className="w-5 h-4 flex flex-col justify-between">
+                  <span className="w-full h-[2px] bg-white rounded-full" />
+                  <span className="w-3/4 h-[2px] bg-white rounded-full" />
+                  <span className="w-full h-[2px] bg-white rounded-full" />
+                </div>
+              )}
+            </button>
+
+
           </div>
         </div>
 

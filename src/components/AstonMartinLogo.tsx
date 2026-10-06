@@ -34,12 +34,13 @@ export default function AstonMartinLogo({
         fill={color}
         style={{
           fontFamily: 'var(--font-main), "Optima", "Cinzel", "Cinzel Decorative", "Montserrat", sans-serif',
-          fontSize: '17px',
+          fontSize: '16px',
+          wordSpacing: '10px',
           fontWeight: 700,
-          letterSpacing: '4px',
+          letterSpacing: '3.6px',
         }}
       >
-        SIGNATURECOVERS
+        SIGNATURE COVERS
       </text>
 
     </svg>
