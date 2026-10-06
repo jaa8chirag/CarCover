@@ -8,8 +8,10 @@ import {
   ShoppingBag,
   X,
   Search,
-  Command,
   ArrowRight,
+  Mail,
+  Phone,
+  MapPin,
 } from 'lucide-react';
 import { CAR_BRANDS } from '@/data/carData';
 
@@ -35,8 +37,6 @@ export default function Header({
 
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [hoveredNav, setHoveredNav] = useState<string | null>(null);
-  const [hoveredNavRight, setHoveredNavRight] = useState<string | null>(null);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -59,6 +59,7 @@ export default function Header({
         setSearchModalOpen((prev) => !prev);
       } else if (e.key === 'Escape') {
         setSearchModalOpen(false);
+        setMobileMenuOpen(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -108,12 +109,22 @@ export default function Header({
     { label: 'Contact Us', href: '/contact', id: 'contact' },
   ];
 
-  const leftLinks = navLinks.filter((l) => l.id === 'collections' || l.id === 'technology');
-  const rightLinks = navLinks.filter((l) => l.id === 'about' || l.id === 'contact');
+  const closeMenu = () => setMobileMenuOpen(false);
 
-  const handleNavClick = () => {
+  // Lock page scroll while the sidebar is open
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
+  // Close the sidebar after navigating
+  useEffect(() => {
     setMobileMenuOpen(false);
-  };
+  }, [pathname]);
+
+  const SIDEBAR_EASE = [0.16, 1, 0.3, 1] as const;
 
   return (
     <>
@@ -123,82 +134,32 @@ export default function Header({
           background: '#000000',
           borderBottom: '1px solid rgba(255, 255, 255, 0.12)',
           boxShadow: scrolled ? '0 12px 40px -12px rgba(0, 0, 0, 0.6)' : 'none',
-        }}      >
-        {/* Subtle Specular Top Luxury Hairline */}
+        }}
+      >
         <div className="h-[1.5px] w-full bg-gradient-to-r from-transparent via-[#cca462]/60 to-transparent pointer-events-none" />
 
-        {/* Spacious, Breathable Header Container (Height 76px - 82px) */}
-        <div className="container-am relative h-[86px] sm:h-[104px] flex items-center justify-between gap-4 sm:gap-6 px-5 sm:px-12">
-          {/* ========================================================================= */}
-          {/* LEFT: Spacious, Airy, Animated Nav Links */}
-          {/* ========================================================================= */}
-          <div className="flex items-center gap-6 lg:gap-10 flex-1 min-w-0">
-            {/* Mobile Hamburger Button */}
+        <div className="container-am relative h-[86px] sm:h-[104px] flex items-center justify-between gap-4 px-5 sm:px-12">
+          {/* LEFT: sidebar menu button */}
+          <div className="flex items-center flex-1 min-w-0">
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden -ml-2 p-2.5 rounded-xl text-white hover:bg-white/10 transition-colors cursor-pointer"
-              aria-label="Toggle navigation menu"
+              onClick={() => setMobileMenuOpen(true)}
+              className="group flex items-center gap-3.5 -ml-2 px-2.5 py-2.5 rounded-xl text-white hover:bg-white/10 transition-colors cursor-pointer"
+              aria-label="Open menu"
+              aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? (
-                <X size={24} className="text-white" />
-              ) : (
-                <div className="w-5 h-4 flex flex-col justify-between">
-                  <span className="w-full h-[2px] bg-white rounded-full" />
-                  <span className="w-3/4 h-[2px] bg-white rounded-full" />
-                  <span className="w-full h-[2px] bg-white rounded-full" />
-                </div>
-              )}
+              <span className="w-6 h-[18px] flex flex-col justify-between">
+                <span className="w-full h-[2px] bg-white rounded-full transition-all group-hover:bg-[#cca462]" />
+                <span className="w-2/3 h-[2px] bg-white rounded-full transition-all group-hover:w-full group-hover:bg-[#cca462]" />
+                <span className="w-full h-[2px] bg-white rounded-full transition-all group-hover:bg-[#cca462]" />
+              </span>
+              <span className="hidden sm:block text-[13px] font-semibold uppercase tracking-[0.3em]">Menu</span>
             </button>
-
-            {/* Desktop Navigation Links with Generous Spacing & Smooth Interactive Pill */}
-            <nav
-              onMouseLeave={() => setHoveredNav(null)}
-              className="hidden lg:flex items-center gap-6 xl:gap-8 text-[18px] font-semibold tracking-wide text-white relative"
-            >
-              {leftLinks.map((link) => {
-                const isHovered = hoveredNav === link.id;
-                return (
-                  <Link
-                    key={link.id}
-                    href={link.href}
-                    onClick={handleNavClick}
-                    onMouseEnter={() => setHoveredNav(link.id)}
-                    className="relative flex items-center gap-2 py-2.5 px-3.5 transition-colors cursor-pointer text-white hover:text-white no-underline"
-                  >
-                    {/* Smooth Animated Background Pill */}
-                    {isHovered && (
-                      <motion.div
-                        layoutId="navHoverPill"
-                        className="absolute inset-0 bg-white/15 rounded-full border border-white/25 pointer-events-none"
-                        transition={{ type: 'spring', bounce: 0.15, duration: 0.32 }}
-                      />
-                    )}
-                    <span className="relative z-10">{link.label}</span>
-                    {link.badge && (
-                      <span className="relative z-10 text-[9px] px-2 py-0.5 rounded-full font-bold tracking-widest bg-emerald-500/20 text-[#00665e] border border-emerald-500/30">
-                        {link.badge}
-                      </span>
-                    )}
-                  </Link>
-                );
-              })}
-            </nav>
           </div>
 
-          {/* ========================================================================= */}
-          {/* CENTER: Aston Martin Crest Logo */}
-          {/* ========================================================================= */}
+          {/* CENTER: logo over name */}
           <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
-            <Link
-              href="/"
-              className="group block transition-all no-underline"
-              aria-label="TheSignaturecovers Home"
-            >
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.2 }}
-                className="py-1"
-              >
+            <Link href="/" className="group block transition-all no-underline" aria-label="Signature Covers Home">
+              <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.2 }} className="py-1">
                 <span className="flex flex-col items-center gap-1 sm:gap-1.5 text-white" style={{ fontFamily: 'var(--font-main)' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/logo-white.png" alt="" aria-hidden className="h-9 sm:h-[50px] w-auto" />
@@ -208,46 +169,8 @@ export default function Header({
             </Link>
           </div>
 
-          {/* ========================================================================= */}
-          {/* RIGHT: Search Pill, Free Swatches & Cart Bag */}
-          {/* ========================================================================= */}
+          {/* RIGHT: cart */}
           <div className="flex items-center justify-end gap-3.5 flex-1 min-w-0">
-            <nav
-              onMouseLeave={() => setHoveredNavRight(null)}
-              className="hidden lg:flex items-center gap-6 xl:gap-8 text-[18px] font-semibold tracking-wide text-white relative"
-            >
-              {rightLinks.map((link) => {
-                const isHovered = hoveredNavRight === link.id;
-                return (
-                  <Link
-                    key={link.id}
-                    href={link.href}
-                    onClick={handleNavClick}
-                    onMouseEnter={() => setHoveredNavRight(link.id)}
-                    className="relative flex items-center gap-2 py-2.5 px-3.5 transition-colors cursor-pointer text-white hover:text-white no-underline"
-                  >
-                    {/* Smooth Animated Background Pill */}
-                    {isHovered && (
-                      <motion.div
-                        layoutId="navHoverPillRight"
-                        className="absolute inset-0 bg-white/15 rounded-full border border-white/25 pointer-events-none"
-                        transition={{ type: 'spring', bounce: 0.15, duration: 0.32 }}
-                      />
-                    )}
-                    <span className="relative z-10">{link.label}</span>
-                    {link.badge && (
-                      <span className="relative z-10 text-[9px] px-2 py-0.5 rounded-full font-bold tracking-widest bg-emerald-500/20 text-[#00665e] border border-emerald-500/30">
-                        {link.badge}
-                      </span>
-                    )}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            {/* Saved Commissions Cart Bag */}
-
-
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -262,53 +185,141 @@ export default function Header({
                 </span>
               )}
             </motion.button>
-
-
-
-
           </div>
         </div>
+      </header>
 
-        {/* ========================================================================= */}
-        {/* 📱 MOBILE NAVIGATION DRAWER */}
-        {/* ========================================================================= */}
+      {/* SIDEBAR */}
+      <AnimatePresence>
         {mobileMenuOpen && (
-          <div
-            className="lg:hidden fixed top-[86px] sm:top-[104px] left-0 w-full h-[calc(100dvh-86px)] sm:h-[calc(100dvh-104px)] z-50 p-6 flex flex-col justify-between overflow-y-auto border-t border-white/15"
-            style={{
-              background: '#000000',
-            }}
-          >
-            <div className="flex flex-col gap-4">
-              <nav className="flex flex-col gap-2 pt-2">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.id}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="p-3.5 rounded-xl border border-white/20 bg-white/5 flex items-center justify-between text-sm font-bold text-white no-underline hover:border-white/60"
-                  >
-                    <span>{link.label}</span>
-                    <ArrowRight size={16} className="text-[#00665e]" />
-                  </Link>
-                ))}
-              </nav>
-            </div>
+          <div className="fixed inset-0 z-[70]">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              onClick={closeMenu}
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            />
+            <motion.aside
+              role="dialog"
+              aria-modal="true"
+              aria-label="Main menu"
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ duration: 0.6, ease: SIDEBAR_EASE }}
+              className="absolute left-0 top-0 h-full w-[88vw] max-w-[440px] bg-[#0a0a0a] text-white flex flex-col overflow-y-auto border-r border-white/10 shadow-[30px_0_80px_-20px_rgba(0,0,0,0.8)]"
+              data-lenis-prevent
+            >
+              <div className="pointer-events-none absolute -top-24 -right-24 w-[320px] h-[320px] rounded-full bg-[#cca462]/15 blur-[90px]" />
 
-            <div className="pt-4 border-t border-white/15">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  if (onOpenEnquiry) onOpenEnquiry();
-                }}
-                className="w-full py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-white/10 border border-white/30 cursor-pointer"
+              {/* top */}
+              <div className="relative flex items-center justify-between px-7 pt-7 pb-6">
+                <Link href="/" onClick={closeMenu} className="flex items-center gap-3 no-underline text-white">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/logo-white.png" alt="" aria-hidden className="h-10 w-auto" />
+                  <span className="text-[12px] font-bold uppercase tracking-[0.32em]">Signature Covers</span>
+                </Link>
+                <button
+                  onClick={closeMenu}
+                  aria-label="Close menu"
+                  className="w-11 h-11 rounded-full border border-white/20 hover:border-[#cca462] hover:text-[#cca462] hover:rotate-90 flex items-center justify-center transition-all duration-500 cursor-pointer"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <div className="relative mx-7 h-px bg-gradient-to-r from-[#cca462]/60 via-white/10 to-transparent" />
+
+              {/* links */}
+              <nav className="relative px-7 pt-8 flex-1">
+                <span className="block text-[10px] font-bold uppercase tracking-[0.4em] text-white/40 mb-5">Navigate</span>
+                <ul className="space-y-1">
+                  {navLinks.map((link, i) => {
+                    const active = pathname === link.href;
+                    return (
+                      <motion.li
+                        key={link.id}
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.7, delay: 0.25 + i * 0.08, ease: SIDEBAR_EASE }}
+                      >
+                        <Link
+                          href={link.href}
+                          onClick={closeMenu}
+                          className="group relative flex items-center gap-5 py-4 no-underline text-white border-b border-white/[0.07]"
+                        >
+                          <span className="text-[11px] font-mono text-[#cca462]/80 w-6">0{i + 1}</span>
+                          <span
+                            className={`flex-1 whitespace-nowrap text-[22px] min-[400px]:text-[24px] sm:text-[30px] leading-none tracking-wide transition-all duration-500 group-hover:translate-x-3 group-hover:text-[#cca462] ${active ? 'text-[#cca462]' : ''}`}
+                            style={{ fontFamily: 'var(--font-hype)', fontWeight: 500 }}
+                          >
+                            {link.label}
+                          </span>
+                          {active && <span className="w-1.5 h-1.5 rounded-full bg-[#cca462]" />}
+                          <ArrowRight size={20} className="opacity-0 -translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 text-[#cca462] transition-all duration-500" />
+                          <span className="absolute bottom-0 left-0 h-px w-0 bg-[#cca462] group-hover:w-full transition-all duration-700" />
+                        </Link>
+                      </motion.li>
+                    );
+                  })}
+                </ul>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.65, ease: SIDEBAR_EASE }}
+                  className="mt-9 grid gap-3"
+                >
+                  <Link
+                    href="/collections"
+                    onClick={closeMenu}
+                    className="flex items-center justify-between px-6 py-4 rounded-full bg-white hover:bg-[#cca462] text-black text-xs font-bold uppercase tracking-[0.25em] no-underline transition-colors"
+                  >
+                    Shop Car Covers <ArrowRight size={16} />
+                  </Link>
+                  <button
+                    onClick={() => {
+                      closeMenu();
+                      if (onOpenEnquiry) onOpenEnquiry();
+                    }}
+                    className="px-6 py-4 rounded-full border border-white/25 hover:border-[#cca462] hover:text-[#cca462] text-xs font-bold uppercase tracking-[0.25em] transition-colors cursor-pointer"
+                  >
+                    Free Swatch Kit
+                  </button>
+                </motion.div>
+              </nav>
+
+              {/* contact */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="relative px-7 pt-8 pb-8 mt-6 border-t border-white/10 text-[13px] text-white/60 space-y-3"
               >
-                Request Free Fabric Swatches & Enquiry
-              </button>
-            </div>
+                <a href="mailto:contact@thesignaturecovers.com" className="flex items-center gap-3 no-underline text-inherit hover:text-white transition-colors">
+                  <Mail size={15} className="text-[#cca462]" /> contact@thesignaturecovers.com
+                </a>
+                <a href="tel:+9118008892683" className="flex items-center gap-3 no-underline text-inherit hover:text-white transition-colors">
+                  <Phone size={15} className="text-[#cca462]" /> +91 1800 889 2683
+                </a>
+                <div className="flex items-center gap-3">
+                  <MapPin size={15} className="text-[#cca462]" /> BKC, Mumbai · DLF Horizon, Gurugram
+                </div>
+                <a
+                  href="https://www.instagram.com/thesignaturecovers/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-3 pt-2 text-[#cca462] no-underline text-[12px] font-bold uppercase tracking-[0.25em] hover:text-white transition-colors"
+                >
+                  Follow on Instagram <ArrowRight size={14} />
+                </a>
+              </motion.div>
+            </motion.aside>
           </div>
         )}
-      </header>
+      </AnimatePresence>
 
       {/* ========================================================================= */}
       {/* 🔍 CLEAN QUICK SEARCH MODAL (Command Palette) */}

@@ -10,6 +10,8 @@ interface SlideData {
   tagline: string;
   description: string;
   bgSrc: string;
+  /** Phone-only photo; laptops keep bgSrc. */
+  bgSrcMobile?: string;
   bgPos?: string;
   /** Extra scrim for light photos so white text stays readable. */
   bright?: boolean;
@@ -47,7 +49,9 @@ const SLIDES: SlideData[] = [
     description:
       'Custom embroidery and contrast piping on premium stretch fabric, made for collectors, showrooms and launch events.',
     bgSrc: '/images/cover_hero.jpg',
-    bgPos: 'center 55%',
+    bgSrcMobile: '/images/rr_cullinan_cover.jpg',
+    bgPos: 'center 40%',
+    bgPosMd: 'center 55%',
     tierId: 'bespoke',
     ctaText: 'EXPLORE BESPOKE',
     accentColor: '#cca462',
@@ -144,13 +148,14 @@ function HypeSection({
       {/* 1. Fixed Parallax Background Image (Crystal-clear visibility) */}
       <div
         style={{
-          backgroundImage: `url(${slide.bgSrc})`,
+          ['--bgi' as string]: `url(${slide.bgSrcMobile ?? slide.bgSrc})`,
+          ['--bgi-md' as string]: `url(${slide.bgSrc})`,
           filter: 'brightness(1.18) contrast(1.05) saturate(1.1)',
           ['--bgp' as string]: slide.bgPos ?? 'center center',
           ['--bgs-md' as string]: slide.bgSizeMd ?? 'cover',
           ['--bgp-md' as string]: slide.bgPosMd ?? slide.bgPos ?? 'center center',
         }}
-        className={`absolute inset-0 w-full h-full z-0 bg-no-repeat max-md:[animation:kenburns_16s_ease-in-out_infinite_alternate] [background-size:cover] [background-position:var(--bgp)] md:[background-size:var(--bgs-md)] md:[background-position:var(--bgp-md)] md:[background-attachment:fixed]`}
+        className={`absolute inset-0 w-full h-full z-0 bg-no-repeat max-md:[animation:kenburns_16s_ease-in-out_infinite_alternate] [background-image:var(--bgi)] md:[background-image:var(--bgi-md)] [background-size:cover] [background-position:var(--bgp)] md:[background-size:var(--bgs-md)] md:[background-position:var(--bgp-md)] md:[background-attachment:fixed]`}
       />
 
 
