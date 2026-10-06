@@ -200,7 +200,7 @@ export default function Header({
                 transition={{ duration: 0.2 }}
                 className="py-1"
               >
-                <AstonMartinLogo width={195} height={34} color="#ffffff" />
+                <AstonMartinLogo width={250} height={28} color="#ffffff" className="!w-[185px] sm:!w-[250px]" />
               </motion.div>
             </Link>
           </div>

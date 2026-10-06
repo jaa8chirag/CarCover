@@ -10,6 +10,10 @@ interface SlideData {
   tagline: string;
   description: string;
   bgSrc: string;
+  bgPos?: string;
+  /** Desktop-only zoom and focal point, used to keep the subject clear of the headline. */
+  bgSizeMd?: string;
+  bgPosMd?: string;
   tierId: string;
   ctaText: string;
   accentColor: string;
@@ -24,7 +28,8 @@ const SLIDES: SlideData[] = [
     tagline: 'One vehicle. One bespoke cover. Entirely yours.',
     description:
       'Precision 3D-laser CAD tailored automotive covers engineered for India’s extreme climate. Rolls-Royce, Bentley, Porsche, Aston Martin & bespoke collections.',
-    bgSrc: '/images/cover_hero.jpg',
+    bgSrc: '/images/rr_badge.jpg',
+    bgPos: 'center 55%',
     tierId: 'bespoke',
     ctaText: 'EXPLORE BESPOKE',
     accentColor: '#cca462',
@@ -50,7 +55,8 @@ const SLIDES: SlideData[] = [
     tagline: 'Where your vehicle rests in absolute silence and velvet luxury.',
     description:
       'Form-hugging four-way micro-stretch fleece that clings sensually to every curve. Buttery underside certified 100% scratch-proof for fresh ceramic coatings.',
-    bgSrc: '/images/reveal.jpg',
+    bgSrc: '/images/rr_garage.jpg',
+    bgPos: 'center 64%',
     tierId: 'indoor',
     ctaText: 'EXPLORE VELVET',
     accentColor: '#cca462',
@@ -76,7 +82,7 @@ const SLIDES: SlideData[] = [
     tagline: 'Hand-embroidered monograms, contrast piping & locking security.',
     description:
       'Tailored with your initials, vehicle registration, and custom contrast stitch in gold or silver thread with heavy-duty underbody wind-locks.',
-    bgSrc: '/images/craftsmanship.jpg',
+    bgSrc: '/images/cover_hero.jpg',
     tierId: 'atelier',
     ctaText: 'START COMMISSION',
     accentColor: '#10b981',
@@ -107,20 +113,22 @@ function HypeSection({
       id={`slide-${index}`}
       data-index={index}
       className="relative h-[100svh] w-full overflow-hidden flex items-center justify-center cursor-default"
-      style={{ minHeight: '680px', paddingTop: 'calc(var(--header-height) + 24px)', paddingBottom: '48px' }}
+      style={{ minHeight: '680px', paddingTop: 'calc(var(--header-height) + 24px)', paddingBottom: 'clamp(96px, 16vh, 170px)' }}
     >
       {/* 1. Fixed Parallax Background Image (Crystal-clear visibility) */}
       <div
         style={{
           backgroundImage: `url(${slide.bgSrc})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
+          ['--bgp' as string]: slide.bgPos ?? 'center center',
+          ['--bgs-md' as string]: slide.bgSizeMd ?? 'cover',
+          ['--bgp-md' as string]: slide.bgPosMd ?? slide.bgPos ?? 'center center',
         }}
-        className="absolute inset-0 w-full h-full z-0 md:[background-attachment:fixed]"
+        className={`absolute inset-0 w-full h-full z-0 bg-no-repeat [background-size:cover] [background-position:var(--bgp)] md:[background-size:var(--bgs-md)] md:[background-position:var(--bgp-md)] md:[background-attachment:fixed]`}
       />
 
+
       {/* 2. Zero / Invisible Overlay to preserve 100% pristine image visibility */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/35 to-black/60 md:bg-none md:bg-transparent z-[1] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/35 to-black/60 md:from-black/25 md:via-black/15 md:to-black/40 z-[1] pointer-events-none" />
 
       {/* 3. Text Content: Glides UP into place with Crisp Staggered Motion */}
       <motion.div
@@ -131,7 +139,7 @@ function HypeSection({
           hidden: {},
           visible: { transition: { staggerChildren: 0.12 } },
         }}
-        className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center"
+        className={`relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center`}
       >
         {/* Category Label */}
         <motion.div
@@ -162,7 +170,7 @@ function HypeSection({
           transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
           className="overflow-hidden mb-6"
         >
-          <h1 className="uppercase font-lexendpeta tracking-[0.1em] sm:tracking-[0.2em] text-[21px] min-[420px]:text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white break-words">
+          <h1 className={`uppercase font-lexendpeta tracking-[0.1em] sm:tracking-[0.2em] text-[21px] min-[420px]:text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white break-words`}>
             {slide.title}
           </h1>
         </motion.div>
@@ -171,7 +179,7 @@ function HypeSection({
         <motion.div
           variants={{ hidden: { width: 0, opacity: 0 }, visible: { width: '120px', opacity: 1 } }}
           transition={{ duration: 1.0, ease: 'easeOut' }}
-          className="h-[1px] mx-auto mb-6"
+          className={`h-[1px] mx-auto mb-6`}
           style={{
             background: `linear-gradient(90deg, transparent, ${slide.accentColor}, transparent)`,
             boxShadow: `0 0 12px ${slide.accentColor}`,
@@ -185,7 +193,7 @@ function HypeSection({
             visible: { opacity: 1, y: 0 },
           }}
           transition={{ duration: 1.0, ease: [0.19, 1, 0.22, 1] }}
-          className="text-white text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-3 font-normal tracking-wide"
+          className={`text-white text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-3 font-normal tracking-wide`}
         >
           {slide.tagline}
         </motion.p>
@@ -194,10 +202,21 @@ function HypeSection({
         <motion.p
           variants={{ hidden: { opacity: 0, y: 25 }, visible: { opacity: 1, y: 0 } }}
           transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
-          className="text-white/90 text-xs sm:text-sm max-w-2xl mx-auto mb-8 leading-relaxed font-light"
+          className={`text-white/90 text-xs sm:text-sm max-w-2xl mx-auto mb-8 leading-relaxed font-light`}
         >
           {slide.description}
         </motion.p>
+
+        {index === 0 && (
+          <motion.a
+            href="/collections"
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white hover:bg-[#cca462] text-black text-xs font-bold uppercase tracking-[2.5px] no-underline transition-colors shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)]"
+          >
+            Shop Car Covers <span aria-hidden>→</span>
+          </motion.a>
+        )}
       </motion.div>
     </div>
   );
