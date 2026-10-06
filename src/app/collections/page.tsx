@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import { ArrowRight, Check, ChevronDown, Ruler, Warehouse, Car, Rocket, Wrench, Palette, Truck, ShieldCheck, RefreshCcw, BadgeCheck } from 'lucide-react';
 import PageShell from '@/components/PageShell';
-import CoverStudio from '@/components/CoverStudio';
 import { FABRICS, type Fabric } from '@/data/fabrics';
 import { CAR_BRANDS, FAQS } from '@/data/carData';
 
@@ -182,7 +182,7 @@ function Orb({ className, delay = 0 }: { className: string; delay?: number }) {
 }
 
 export default function CollectionsPage() {
-  const [fabricId, setFabricId] = useState<string | null>(null);
+  const router = useRouter();
   const [subscribed, setSubscribed] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
   const modelCount = CAR_BRANDS.reduce((n, b) => n + b.models.length, 0);
@@ -195,13 +195,12 @@ export default function CollectionsPage() {
   const indoor = FABRICS.filter((f) => f.group === 'indoor');
 
   const chooseFabric = (id: string) => {
-    setFabricId(id);
-    document.getElementById('studio')?.scrollIntoView({ behavior: 'smooth' });
+    router.push(`/shop?fabric=${id}`);
   };
 
   return (
     <PageShell>
-      {({ openEnquiry, addToCart }) => (
+      {({ openEnquiry }) => (
         <>
           {/* HERO: looping film, parallax and floating light */}
           <section ref={heroRef} className="relative bg-black text-white pt-40 sm:pt-52 pb-36 sm:pb-44 overflow-hidden rounded-b-[3rem]">
@@ -328,9 +327,6 @@ export default function CollectionsPage() {
               </div>
             </div>
           </section>
-
-          {/* BUILD */}
-          <CoverStudio fabricId={fabricId} onFabricChange={setFabricId} onAddToCart={addToCart} />
 
           {/* WHAT WE OFFER */}
           <section className="py-24 sm:py-32 bg-white">

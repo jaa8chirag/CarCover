@@ -259,7 +259,7 @@ export default function Header({
                     transition={{ duration: 0.8, delay: 0.35 + navLinks.length * 0.12, ease: SIDEBAR_EASE }}
                   >
                     <Link
-                      href="/collections"
+                      href="/shop"
                       onClick={closeMenu}
                       className="group relative block py-[clamp(8px,2.2vh,16px)] no-underline whitespace-nowrap text-[17px] sm:text-[19px] font-semibold uppercase tracking-[0.2em] text-[#cca462] hover:text-white transition-colors duration-500"
                     >

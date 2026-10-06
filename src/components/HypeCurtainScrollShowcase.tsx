@@ -26,20 +26,20 @@ interface SlideData {
 
 const SLIDES: SlideData[] = [
   {
-    id: 'signature-fit',
+    id: 'bespoke-veiled',
     category: '',
-    title: 'EVERY CURVE. TAILORED TO THE MILLIMETRE.',
-    tagline: 'A cover that fits your car like a second skin.',
+    title: 'THE FINEST CARS ARRIVE VEILED.',
+    tagline: 'One vehicle. One bespoke cover. Entirely yours.',
     description:
-      'Cut from a 3D scan of your exact model, with mirror pockets and sculpted contours. Four-way stretch fleece that follows every body line without a single wrinkle.',
-    bgSrc: '/images/ferrari_red_cover.jpg',
-    bgPos: 'center 45%',
-    bgPosMd: 'center 58%',
+      'Precision 3D-laser CAD tailored automotive covers engineered for India’s extreme climate. Rolls-Royce, Bentley, Porsche, Aston Martin & bespoke collections.',
+    bgSrc: '/images/rr_cullinan_cover.jpg',
+    bgPos: 'center 40%',
+    bgPosMd: 'center 38%',
     bright: true,
-    tierId: 'indoor',
-    ctaText: 'EXPLORE INDOOR',
-    accentColor: '#ef4444',
-    nextPreviewName: '',
+    tierId: 'bespoke',
+    ctaText: 'EXPLORE BESPOKE',
+    accentColor: '#cca462',
+    nextPreviewName: 'AquaShield+ Monsoon Defiance',
   },
   {
     id: 'showroom-unveil',
@@ -58,20 +58,20 @@ const SLIDES: SlideData[] = [
     nextPreviewName: '',
   },
   {
-    id: 'bespoke-veiled',
+    id: 'signature-fit',
     category: '',
-    title: 'THE FINEST CARS ARRIVE VEILED.',
-    tagline: 'One vehicle. One bespoke cover. Entirely yours.',
+    title: 'EVERY CURVE. TAILORED TO THE MILLIMETRE.',
+    tagline: 'A cover that fits your car like a second skin.',
     description:
-      'Precision 3D-laser CAD tailored automotive covers engineered for India’s extreme climate. Rolls-Royce, Bentley, Porsche, Aston Martin & bespoke collections.',
-    bgSrc: '/images/rr_cullinan_cover.jpg',
-    bgPos: 'center 40%',
-    bgPosMd: 'center 38%',
+      'Cut from a 3D scan of your exact model, with mirror pockets and sculpted contours. Four-way stretch fleece that follows every body line without a single wrinkle.',
+    bgSrc: '/images/ferrari_red_cover.jpg',
+    bgPos: 'center 45%',
+    bgPosMd: 'center 58%',
     bright: true,
-    tierId: 'bespoke',
-    ctaText: 'EXPLORE BESPOKE',
-    accentColor: '#cca462',
-    nextPreviewName: 'AquaShield+ Monsoon Defiance',
+    tierId: 'indoor',
+    ctaText: 'EXPLORE INDOOR',
+    accentColor: '#ef4444',
+    nextPreviewName: '',
   },
   {
     id: 'monsoon-armor',
@@ -248,7 +248,7 @@ function HypeSection({
 
         {index === 0 && (
           <motion.a
-            href="/collections"
+            href="/shop"
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
             transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white hover:bg-[#cca462] text-black text-xs font-bold uppercase tracking-[2.5px] no-underline transition-colors shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)]"

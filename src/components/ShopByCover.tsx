@@ -188,7 +188,7 @@ export default function ShopByCover() {
         </div>
 
         <div className="text-center mt-14 sm:mt-16">
-          <Link href="/collections" className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-black hover:bg-[#b38848] text-white text-xs font-bold uppercase tracking-[2.5px] no-underline transition-colors shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)]">
+          <Link href="/shop" className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-black hover:bg-[#b38848] text-white text-xs font-bold uppercase tracking-[2.5px] no-underline transition-colors shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)]">
             View All Covers <ArrowRight size={15} />
           </Link>
         </div>

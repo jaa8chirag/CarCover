@@ -107,13 +107,14 @@ export default function Footer() {
           onPointerEnter={() => setOverWord(true)}
           onPointerLeave={() => setOverWord(false)}
           className="relative flex justify-center whitespace-nowrap select-none"
-          style={{ fontFamily: "'Sora', var(--font-main), sans-serif", fontWeight: 800, fontSize: 'clamp(46px, 11.4vw, 230px)', letterSpacing: '-0.06em', lineHeight: 1 }}
+          style={{ fontFamily: "'Sora', var(--font-main), sans-serif", fontWeight: 800, fontSize: 'clamp(40px, 9.6vw, 200px)', letterSpacing: '-0.03em', lineHeight: 1 }}
         >
           {WORD.map((c, i) => (
             <motion.span
               key={i}
               aria-hidden
               className="inline-block origin-bottom"
+              style={i === 9 ? { marginLeft: '0.28em' } : undefined}
               initial={{ color: '#ffffff' }}
               whileHover={{ rotate: LEAN[i], y: -10, scale: 1.04, color: GOLD, textShadow: '0 0 50px rgba(204,164,98,0.55)' }}
               transition={{ type: 'spring', stiffness: 280, damping: 16 }}
