@@ -26,6 +26,20 @@ interface SlideData {
 
 const SLIDES: SlideData[] = [
   {
+    id: 'indoor-silk',
+    category: '',
+    title: 'SHOWROOM ELEGANCE. PURE VELVET EMBRACE.',
+    tagline: 'Where your vehicle rests in absolute silence and velvet luxury.',
+    description:
+      'Form-hugging four-way micro-stretch fleece that clings sensually to every curve. Buttery underside certified 100% scratch-proof for fresh ceramic coatings.',
+    bgSrc: '/images/rr_garage.jpg',
+    bgPos: 'center 64%',
+    tierId: 'indoor',
+    ctaText: 'EXPLORE VELVET',
+    accentColor: '#cca462',
+    nextPreviewName: 'Titanium Thermoflect Shield',
+  },
+  {
     id: 'showroom-unveil',
     category: '',
     title: 'WHERE EVERY UNVEILING BEGINS.',
@@ -105,20 +119,6 @@ const SLIDES: SlideData[] = [
     ctaText: 'START COMMISSION',
     accentColor: '#10b981',
     nextPreviewName: 'Online 3D Configurator',
-  },
-  {
-    id: 'indoor-silk',
-    category: '',
-    title: 'SHOWROOM ELEGANCE. PURE VELVET EMBRACE.',
-    tagline: 'Where your vehicle rests in absolute silence and velvet luxury.',
-    description:
-      'Form-hugging four-way micro-stretch fleece that clings sensually to every curve. Buttery underside certified 100% scratch-proof for fresh ceramic coatings.',
-    bgSrc: '/images/rr_garage.jpg',
-    bgPos: 'center 64%',
-    tierId: 'indoor',
-    ctaText: 'EXPLORE VELVET',
-    accentColor: '#cca462',
-    nextPreviewName: 'Titanium Thermoflect Shield',
   },
 ];
 
