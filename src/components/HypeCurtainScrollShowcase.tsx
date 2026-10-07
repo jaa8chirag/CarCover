@@ -1,13 +1,17 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface SlideData {
   id: string;
   category: string;
   title: string;
   tagline: string;
+  /** Phones only: photos that auto-slide right to left behind this slide's fixed text. */
+  mobileSlides?: { src: string; pos: string }[];
+  /** Folded into another slide's carousel, so it is not rendered on its own. */
+  merged?: boolean;
   /** Phones only: the slide is skipped on laptops/desktops. */
   phoneOnly?: boolean;
   /** Optional per-slide shop button (slide 0 always has the default one). */
@@ -49,6 +53,26 @@ const SLIDES: SlideData[] = [
     ctaText: 'EXPLORE BESPOKE',
     accentColor: '#cca462',
     nextPreviewName: 'AquaShield+ Monsoon Defiance',
+  },
+  {
+    id: 'bentley-green',
+    phoneOnly: true,
+    category: '',
+    title: 'THE ART OF THE GRAND UNVEILING.',
+    tagline: 'Launch-night covers made in your brand colours.',
+    mobileLine: 'Launch covers in your colours.',
+    shopLabel: 'Shop Unveiling Covers',
+    shopHref: '/shop',
+    description:
+      'Custom unveiling covers with embroidered branding, made for launches, showrooms and private reveals.',
+    bgSrc: '/images/bentley_green_unveil.jpg',
+    bgSrcMobile: '/images/bentley_green_unveil.jpg',
+    bgPos: 'center 48%',
+    bgPosMd: 'center 48%',
+    tierId: 'bespoke',
+    ctaText: 'EXPLORE BESPOKE',
+    accentColor: '#cca462',
+    nextPreviewName: '',
   },
   {
     id: 'atelier-commission',
@@ -96,6 +120,11 @@ const SLIDES: SlideData[] = [
       'Custom embroidery and contrast piping on premium stretch fabric, made for collectors, showrooms and launch events.',
     bgSrc: '/images/bentley_badge_rain.jpg',
     bgSrcMobile: '/images/porsche_unveil.jpg',
+    mobileSlides: [
+      { src: '/images/porsche_unveil.jpg', pos: 'center 42%' },
+      { src: '/images/porsche_blue_garage.jpg', pos: 'center 72%' },
+      { src: '/images/porsche_speedster.jpg', pos: 'center 38%' },
+    ],
     bgPos: 'center 42%',
     bgPosMd: 'center 28%',
     tierId: 'bespoke',
@@ -105,7 +134,7 @@ const SLIDES: SlideData[] = [
   },
   {
     id: 'indoor-silk',
-    phoneOnly: true,
+    merged: true,
     category: '',
     title: 'SHOWROOM ELEGANCE.',
     tagline: 'Where your vehicle rests in absolute silence and velvet luxury.',
@@ -123,7 +152,7 @@ const SLIDES: SlideData[] = [
   },
   {
     id: 'monsoon-armor',
-    phoneOnly: true,
+    merged: true,
     category: '',
     title: 'TORRENTIAL MONSOONS. ZERO PENETRATION.',
     tagline: 'At 10,000mm hydrostatic head, rain simply ceases to exist.',
@@ -138,26 +167,6 @@ const SLIDES: SlideData[] = [
     ctaText: 'EXPLORE AQUASHIELD',
     accentColor: '#38bdf8',
     nextPreviewName: 'Concours Cellular Silk',
-  },
-  {
-    id: 'bentley-green',
-    phoneOnly: true,
-    category: '',
-    title: 'THE ART OF THE GRAND UNVEILING.',
-    tagline: 'Launch-night covers made in your brand colours.',
-    mobileLine: 'Launch covers in your colours.',
-    shopLabel: 'Shop Unveiling Covers',
-    shopHref: '/shop',
-    description:
-      'Custom unveiling covers with embroidered branding, made for launches, showrooms and private reveals.',
-    bgSrc: '/images/bentley_green_unveil.jpg',
-    bgSrcMobile: '/images/bentley_green_unveil.jpg',
-    bgPos: 'center 48%',
-    bgPosMd: 'center 48%',
-    tierId: 'bespoke',
-    ctaText: 'EXPLORE BESPOKE',
-    accentColor: '#cca462',
-    nextPreviewName: '',
   },
 ];
 
@@ -199,6 +208,8 @@ function HypeSection({
         className={`absolute inset-0 w-full h-full z-0 bg-no-repeat max-md:[animation:kenburns_16s_ease-in-out_infinite_alternate] [background-image:var(--bgi)] md:[background-image:var(--bgi-md)] [background-size:cover] [background-position:var(--bgp)] md:[background-size:var(--bgs-md)] md:[background-position:var(--bgp-md)] md:[background-attachment:fixed]`}
       />
 
+
+      {slide.mobileSlides && <PhoneCarousel slides={slide.mobileSlides} />}
 
       {/* 2. Zero / Invisible Overlay to preserve 100% pristine image visibility */}
       <div className={`absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/15 z-[1] pointer-events-none ${slide.bright ? 'md:from-black/30 md:via-black/20 md:to-black/35' : 'md:from-black/10 md:via-black/0 md:to-black/25'}`} />
@@ -303,6 +314,31 @@ function HypeSection({
   );
 }
 
+/** Photos slide in from the right and out to the left, on a timer. */
+function PhoneCarousel({ slides }: { slides: { src: string; pos: string }[] }) {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setI((v) => (v + 1) % slides.length), 3800);
+    return () => clearInterval(t);
+  }, [slides.length]);
+  const cur = slides[i];
+  return (
+    <div className="md:hidden absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]" style={{ filter: 'brightness(1.18) contrast(1.05) saturate(1.1)' }}>
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={cur.src}
+          initial={{ x: '100%' }}
+          animate={{ x: '0%' }}
+          exit={{ x: '-100%' }}
+          transition={{ duration: 0.9, ease: [0.65, 0, 0.35, 1] }}
+          className="absolute inset-0 bg-no-repeat"
+          style={{ backgroundImage: `url(${cur.src})`, backgroundSize: 'cover', backgroundPosition: cur.pos }}
+        />
+      </AnimatePresence>
+    </div>
+  );
+}
+
 const KENBURNS_CSS = `@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.14) translateY(-2%); } }`;
 
 export default function HypeCurtainScrollShowcase({
@@ -324,6 +360,7 @@ export default function HypeCurtainScrollShowcase({
       <style>{KENBURNS_CSS}</style>
       {/* 5 Hype Sections */}
       {SLIDES.map((slide, index) => (
+        slide.merged ? null : (
         <div key={slide.id} className={slide.phoneOnly ? 'md:hidden' : undefined}>
           <HypeSection
             slide={slide}
@@ -332,6 +369,7 @@ export default function HypeCurtainScrollShowcase({
             onCtaClick={handleCtaClick}
           />
         </div>
+        )
       ))}
     </div>
   );
