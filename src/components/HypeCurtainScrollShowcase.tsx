@@ -139,6 +139,26 @@ const SLIDES: SlideData[] = [
     accentColor: '#38bdf8',
     nextPreviewName: 'Concours Cellular Silk',
   },
+  {
+    id: 'bentley-green',
+    phoneOnly: true,
+    category: '',
+    title: 'THE ART OF THE GRAND UNVEILING.',
+    tagline: 'Launch-night covers made in your brand colours.',
+    mobileLine: 'Launch covers in your colours.',
+    shopLabel: 'Shop Unveiling Covers',
+    shopHref: '/shop',
+    description:
+      'Custom unveiling covers with embroidered branding, made for launches, showrooms and private reveals.',
+    bgSrc: '/images/bentley_green_unveil.jpg',
+    bgSrcMobile: '/images/bentley_green_unveil.jpg',
+    bgPos: 'center 48%',
+    bgPosMd: 'center 48%',
+    tierId: 'bespoke',
+    ctaText: 'EXPLORE BESPOKE',
+    accentColor: '#cca462',
+    nextPreviewName: '',
+  },
 ];
 
 interface HypeCurtainScrollShowcaseProps {
