@@ -8,6 +8,9 @@ interface SlideData {
   category: string;
   title: string;
   tagline: string;
+  /** Optional per-slide shop button (slide 0 always has the default one). */
+  shopLabel?: string;
+  shopHref?: string;
   /** Single short line shown instead of tagline + description on phones. */
   mobileLine: string;
   description: string;
@@ -44,6 +47,25 @@ const SLIDES: SlideData[] = [
     ctaText: 'EXPLORE BESPOKE',
     accentColor: '#cca462',
     nextPreviewName: 'AquaShield+ Monsoon Defiance',
+  },
+  {
+    id: 'atelier-commission',
+    category: '',
+    title: 'NOT OFF THE SHELF. COMMISSIONED ONLY FOR YOU.',
+    tagline: 'Hand-embroidered monograms, contrast piping & locking security.',
+    mobileLine: 'Embroidered monograms & piping.',
+    description:
+      'Tailored with your initials, vehicle registration, and custom contrast stitch in gold or silver thread with heavy-duty underbody wind-locks.',
+    bgSrc: '/images/unveil_showroom.jpg',
+    shopLabel: 'Shop Unveiling Covers',
+    shopHref: '/shop',
+    bgSrcMobile: '/images/porsche_turbo_garage.jpg',
+    bgPos: 'center 62%',
+    bgPosMd: 'center 62%',
+    tierId: 'atelier',
+    ctaText: 'START COMMISSION',
+    accentColor: '#10b981',
+    nextPreviewName: 'Online 3D Configurator',
   },
   {
     id: 'signature-fit',
@@ -112,24 +134,6 @@ const SLIDES: SlideData[] = [
     ctaText: 'EXPLORE AQUASHIELD',
     accentColor: '#38bdf8',
     nextPreviewName: 'Concours Cellular Silk',
-  },
-  {
-    id: 'atelier-commission',
-    category: '',
-    title: 'NOT OFF THE SHELF. COMMISSIONED ONLY FOR YOU.',
-    tagline: 'Hand-embroidered monograms, contrast piping & locking security.',
-    mobileLine: 'Embroidered monograms & piping.',
-    description:
-      'Tailored with your initials, vehicle registration, and custom contrast stitch in gold or silver thread with heavy-duty underbody wind-locks.',
-    bgSrc: '/images/reveal.jpg',
-    bgSrcMobile: '/images/porsche_turbo_garage.jpg',
-    bgPos: 'center 62%',
-    bgPosMd: 'center 86%',
-    bright: true,
-    tierId: 'atelier',
-    ctaText: 'START COMMISSION',
-    accentColor: '#10b981',
-    nextPreviewName: 'Online 3D Configurator',
   },
 ];
 
@@ -260,14 +264,14 @@ function HypeSection({
           {slide.description}
         </motion.p>
 
-        {index === 0 && (
+        {(index === 0 || slide.shopLabel) && (
           <motion.a
-            href="/shop"
+            href={slide.shopHref ?? '/shop'}
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
             transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white hover:bg-[#cca462] text-black text-xs font-bold uppercase tracking-[2.5px] no-underline transition-colors shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)]"
           >
-            Shop Car Covers <span aria-hidden>→</span>
+            {slide.shopLabel ?? 'Shop Car Covers'} <span aria-hidden>→</span>
           </motion.a>
         )}
       </motion.div>
