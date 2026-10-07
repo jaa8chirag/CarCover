@@ -53,11 +53,10 @@ const SLIDES: SlideData[] = [
     mobileLine: 'Fits like a second skin.',
     description:
       'Cut from a 3D scan of your exact model, with mirror pockets and sculpted contours. Four-way stretch fleece that follows every body line without a single wrinkle.',
-    bgSrc: '/images/ferrari_red_cover.jpg',
+    bgSrc: '/images/rr_spirit_rotated.jpg',
     bgSrcMobile: '/images/rr_cullinan_cover.jpg',
     bgPos: 'center 40%',
-    bgPosMd: 'center 58%',
-    bright: true,
+    bgPosMd: 'center 50%',
     tierId: 'indoor',
     ctaText: 'EXPLORE INDOOR',
     accentColor: '#ef4444',
