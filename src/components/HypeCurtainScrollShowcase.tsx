@@ -8,6 +8,8 @@ interface SlideData {
   category: string;
   title: string;
   tagline: string;
+  /** Phones only: the slide is skipped on laptops/desktops. */
+  phoneOnly?: boolean;
   /** Optional per-slide shop button (slide 0 always has the default one). */
   shopLabel?: string;
   shopHref?: string;
@@ -56,7 +58,7 @@ const SLIDES: SlideData[] = [
     mobileLine: 'Embroidered monograms & piping.',
     description:
       'Tailored with your initials, vehicle registration, and custom contrast stitch in gold or silver thread with heavy-duty underbody wind-locks.',
-    bgSrc: '/images/unveil_showroom.jpg',
+    bgSrc: '/images/unveil_gold_curtains.jpg',
     shopLabel: 'Shop Unveiling Covers',
     shopHref: '/shop',
     bgSrcMobile: '/images/porsche_turbo_garage.jpg',
@@ -103,6 +105,7 @@ const SLIDES: SlideData[] = [
   },
   {
     id: 'indoor-silk',
+    phoneOnly: true,
     category: '',
     title: 'SHOWROOM ELEGANCE.',
     tagline: 'Where your vehicle rests in absolute silence and velvet luxury.',
@@ -120,6 +123,7 @@ const SLIDES: SlideData[] = [
   },
   {
     id: 'monsoon-armor',
+    phoneOnly: true,
     category: '',
     title: 'TORRENTIAL MONSOONS. ZERO PENETRATION.',
     tagline: 'At 10,000mm hydrostatic head, rain simply ceases to exist.',
@@ -264,7 +268,7 @@ function HypeSection({
           {slide.description}
         </motion.p>
 
-        {(index === 0 || slide.shopLabel) && (
+        {(
           <motion.a
             href={slide.shopHref ?? '/shop'}
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
@@ -300,13 +304,14 @@ export default function HypeCurtainScrollShowcase({
       <style>{KENBURNS_CSS}</style>
       {/* 5 Hype Sections */}
       {SLIDES.map((slide, index) => (
-        <HypeSection
-          key={slide.id}
-          slide={slide}
-          index={index}
-          totalSlides={numSlides}
-          onCtaClick={handleCtaClick}
-        />
+        <div key={slide.id} className={slide.phoneOnly ? 'md:hidden' : undefined}>
+          <HypeSection
+            slide={slide}
+            index={index}
+            totalSlides={numSlides}
+            onCtaClick={handleCtaClick}
+          />
+        </div>
       ))}
     </div>
   );
