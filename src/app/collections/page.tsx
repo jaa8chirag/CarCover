@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import { ArrowRight, Check, ChevronDown, Ruler, Warehouse, Car, Rocket, Wrench, Palette, Truck, ShieldCheck, RefreshCcw, BadgeCheck } from 'lucide-react';
 import PageShell from '@/components/PageShell';
+import MobileSlider from '@/components/MobileSlider';
 import { FABRICS, type Fabric } from '@/data/fabrics';
 import { CAR_BRANDS, FAQS } from '@/data/carData';
 
@@ -196,7 +197,7 @@ export default function CollectionsPage() {
   const unveiling = FABRICS.filter((f) => f.group === 'unveiling');
 
   const chooseFabric = (id: string) => {
-    router.push(`/shop?fabric=${id}`);
+    router.push(`/shop/${id}`);
   };
 
   return (
@@ -267,11 +268,11 @@ export default function CollectionsPage() {
             <Orb className="w-[420px] h-[420px] top-10 -right-32 bg-[#cca462]/10" />
             <div className="container-am max-w-7xl relative">
               <SectionHead kicker="Outdoor Covers" title="Built For The Elements" lead="Monsoon, desert sun or off-road trails. Choose the fabric that matches where your car actually lives." />
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+              <MobileSlider desktopClass="md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-8">
                 {outdoor.map((f, i) => (
                   <ProductCard key={f.id} f={f} i={i} onSelect={chooseFabric} />
                 ))}
-              </div>
+              </MobileSlider>
             </div>
           </section>
 
@@ -280,11 +281,11 @@ export default function CollectionsPage() {
             <Orb className="w-[420px] h-[420px] -bottom-24 -left-24 bg-[#cca462]/15" delay={3} />
             <div className="container-am max-w-7xl relative">
               <SectionHead kicker="Indoor Covers" title="Showroom Finish, Garage Safe" lead="Soft, breathable covers that keep dust and scratches off your car while it rests indoors." />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+              <MobileSlider desktopClass="md:grid md:grid-cols-2 md:gap-8 max-w-4xl">
                 {indoor.map((f, i) => (
                   <ProductCard key={f.id} f={f} i={i} onSelect={chooseFabric} />
                 ))}
-              </div>
+              </MobileSlider>
             </div>
           </section>
 
@@ -293,11 +294,11 @@ export default function CollectionsPage() {
             <Orb className="w-[420px] h-[420px] top-10 -left-32 bg-[#cca462]/10" delay={2} />
             <div className="container-am max-w-7xl relative">
               <SectionHead kicker="Unveiling Covers" title="Made For The Big Reveal" lead="Launch nights, showroom reveals and private handovers. Pick a finish, add your branding and make the moment unforgettable." />
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+              <MobileSlider desktopClass="md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-8">
                 {unveiling.map((f, i) => (
                   <ProductCard key={f.id} f={f} i={i} onSelect={chooseFabric} />
                 ))}
-              </div>
+              </MobileSlider>
             </div>
           </section>
 

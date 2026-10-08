@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowRight, Star, Check } from 'lucide-react';
 import { FABRICS, type Fabric } from '@/data/fabrics';
+import MobileSlider from '@/components/MobileSlider';
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -94,7 +95,7 @@ function CoverCard({ f, i, wide }: { f: Fabric; i: number; wide?: boolean }) {
             <p className="mt-1.5 text-sm text-white/70">{f.subtitle}</p>
 
             {/* specs slide up on hover (always visible on touch) */}
-            <ul className="mt-4 space-y-1.5 max-h-0 opacity-0 overflow-hidden group-hover:max-h-32 group-hover:opacity-100 max-md:max-h-none max-md:opacity-100 max-md:overflow-visible transition-all duration-500">
+            <ul className="mt-4 space-y-1.5 max-h-0 opacity-0 overflow-hidden group-hover:max-h-32 group-hover:opacity-100 max-md:hidden transition-all duration-500">
               {f.specs.slice(0, 2).map((s) => (
                 <li key={s} className="flex items-start gap-2 text-[12.5px] text-white/85 leading-snug">
                   <Check size={14} className="mt-0.5 flex-shrink-0 text-[#cca462]" /> {s}
@@ -175,25 +176,25 @@ export default function ShopByCover() {
         </motion.div>
 
         <GroupHead label="Outdoor Covers" text="Rain, sun and everything in between" />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-16 sm:mb-20">
+        <MobileSlider desktopClass="md:grid md:grid-cols-3 md:gap-6 lg:gap-8 mb-16 sm:mb-20">
           {outdoor.map((f, i) => (
             <CoverCard key={f.id} f={f} i={i} />
           ))}
-        </div>
+        </MobileSlider>
 
         <GroupHead label="Indoor Covers" text="Showroom finish for garage and basement" />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <MobileSlider desktopClass="md:grid md:grid-cols-2 md:gap-6 lg:gap-8">
           {indoor.map((f, i) => (
             <CoverCard key={f.id} f={f} i={i} wide />
           ))}
-        </div>
+        </MobileSlider>
 
         <GroupHead label="Unveiling Covers" text="Reveal-night covers for launches and showrooms" />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mt-16 sm:mt-20">
+        <MobileSlider desktopClass="md:grid md:grid-cols-3 md:gap-6 lg:gap-8 mt-16 sm:mt-20">
           {unveiling.map((f, i) => (
             <CoverCard key={f.id} f={f} i={i} />
           ))}
-        </div>
+        </MobileSlider>
 
         <div className="text-center mt-14 sm:mt-16">
           <Link href="/shop" className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-black hover:bg-[#b38848] text-white text-xs font-bold uppercase tracking-[2.5px] no-underline transition-colors shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)]">
