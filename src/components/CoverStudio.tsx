@@ -165,13 +165,13 @@ export default function CoverStudio({ fabricId, onFabricChange, onAddToCart }: P
           {/* OPTIONS */}
           <div className="bg-white border border-slate-200 rounded-[2rem] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.25)] px-6 sm:px-10">
             <Block n={1} title="Choose your fabric">
-              {(['outdoor', 'indoor'] as const).map((g) => (
+              {(['outdoor', 'indoor', 'unveiling'] as const).map((g) => (
                 <div key={g} className="mb-7 last:mb-0">
                   <div className="flex items-center gap-4 mb-4">
-                    <span className="text-[11px] font-bold tracking-[4px] uppercase text-[#b38848]">{g === 'outdoor' ? 'Outdoor covers' : 'Indoor covers'}</span>
+                    <span className="text-[11px] font-bold tracking-[4px] uppercase text-[#b38848]">{g === 'outdoor' ? 'Outdoor covers' : g === 'indoor' ? 'Indoor covers' : 'Unveiling covers'}</span>
                     <span className="flex-1 h-px bg-gradient-to-r from-[#b38848]/50 to-transparent" />
                   </div>
-                  <div className={`grid gap-3 sm:gap-4 grid-cols-2 ${g === 'outdoor' ? 'sm:grid-cols-3' : ''}`}>
+                  <div className={`grid gap-3 sm:gap-4 grid-cols-2 ${g === 'indoor' ? '' : 'sm:grid-cols-3'}`}>
                     {FABRICS.filter((f) => f.group === g).map((f) => {
                       const on = f.id === fabricId;
                       const price = tier ? priceForTier(f.price, tier) : f.price;

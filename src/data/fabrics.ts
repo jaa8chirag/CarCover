@@ -1,6 +1,6 @@
-import { Droplets, SunMedium, ShieldCheck, Layers, Sparkles, type LucideIcon } from 'lucide-react';
+import { Droplets, SunMedium, ShieldCheck, Layers, Sparkles, Rocket, Award, Crown, type LucideIcon } from 'lucide-react';
 
-export type CoverGroup = 'outdoor' | 'indoor';
+export type CoverGroup = 'outdoor' | 'indoor' | 'unveiling';
 
 export interface Fabric {
   id: string;
@@ -20,7 +20,7 @@ export interface Fabric {
   bestseller?: boolean;
 }
 
-// Product range as confirmed by the client: Outdoor (Standard, Pro, Elite) and Indoor (Standard, Elite).
+// Product range: Outdoor (Standard, Pro, Elite), Indoor (Standard, Elite) and Unveiling (Showroom, Gala, Signature).
 // NOTE: prices and spec copy are placeholders until the client supplies final figures.
 export const FABRICS: Fabric[] = [
   {
@@ -120,5 +120,62 @@ export const FABRICS: Fabric[] = [
     idealFor: 'Supercars, collector garages and detailing studios',
     rating: 4.98,
     reviewCount: 890,
+  },
+  {
+    id: 'unveil-showroom',
+    group: 'unveiling',
+    title: 'Unveiling Showroom',
+    subtitle: 'Clean Satin Reveal For Dealerships',
+    badge: 'UNVEILING',
+    price: 3499,
+    accentColor: '#475569',
+    image: '/images/unveil_showroom.jpg',
+    icon: Rocket,
+    description: 'A smooth satin cover that drops away cleanly at a showroom reveal. Tailored to the model so the shape is clear before the big moment.',
+    specs: [
+      'Light satin finish that drapes and lifts away cleanly',
+      'Tailored silhouette so the car shape reads under the cover',
+      'Reusable, with a carry bag for events',
+    ],
+    idealFor: 'Dealership reveals and delivery days',
+  },
+  {
+    id: 'unveil-gala',
+    group: 'unveiling',
+    title: 'Unveiling Gala',
+    subtitle: 'Launch-Night Cover With Your Branding',
+    badge: 'UNVEILING GALA',
+    price: 6999,
+    accentColor: '#b38848',
+    image: '/images/unveil_gold_curtains.jpg',
+    icon: Award,
+    description: 'A heavier cover in a colour of your choice, with printed or embroidered branding, made for launches and press events.',
+    specs: [
+      'Choice of cover colour, matched to your event',
+      'Printed or embroidered logo on the bonnet',
+      'Weighted hem for a graceful, controlled reveal',
+    ],
+    idealFor: 'Brand launches, press events and showrooms',
+    rating: 4.94,
+    reviewCount: 212,
+  },
+  {
+    id: 'unveil-signature',
+    group: 'unveiling',
+    title: 'Unveiling Signature',
+    subtitle: 'Fully Custom, Made For One Car',
+    badge: 'UNVEILING SIGNATURE',
+    price: 11999,
+    accentColor: '#166534',
+    image: '/images/bentley_green_unveil.jpg',
+    icon: Crown,
+    description: 'Our most luxurious reveal cover. Hand-finished, fully custom in colour, piping and embroidery, and cut to your exact car.',
+    specs: [
+      'Premium stretch fabric with fully custom colour',
+      'Hand-finished piping and embroidered monogram or crest',
+      'Presentation box, ready to gift or keep as a collector piece',
+    ],
+    idealFor: 'Private collectors, handovers and flagship launches',
+    bestseller: true,
   },
 ];

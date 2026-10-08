@@ -193,6 +193,7 @@ export default function CollectionsPage() {
 
   const outdoor = FABRICS.filter((f) => f.group === 'outdoor');
   const indoor = FABRICS.filter((f) => f.group === 'indoor');
+  const unveiling = FABRICS.filter((f) => f.group === 'unveiling');
 
   const chooseFabric = (id: string) => {
     router.push(`/shop?fabric=${id}`);
@@ -225,11 +226,11 @@ export default function CollectionsPage() {
                 ))}
               </h1>
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.7 }} className="mt-7 max-w-xl text-white/75 font-light text-base sm:text-lg leading-relaxed">
-                Bespoke, CAD-tailored covers for {modelCount}+ cars on Indian roads. Five covers, made to measure and delivered free across India.
+                Bespoke, CAD-tailored covers for {modelCount}+ cars on Indian roads. Eight covers, made to measure and delivered free across India.
               </motion.p>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.9 }} className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-3">
                 <span className="text-[11px] uppercase tracking-[3px] text-white/50 mr-2">Jump to</span>
-                {[['outdoor', 'Outdoor Covers'], ['indoor', 'Indoor Covers'], ['bespoke', 'Bespoke Covers']].map(([id, label]) => (
+                {[['outdoor', 'Outdoor Covers'], ['indoor', 'Indoor Covers'], ['unveiling', 'Unveiling Covers'], ['bespoke', 'Bespoke Covers']].map(([id, label]) => (
                   <a key={id} href={`#${id}`} className="px-6 py-3 rounded-full border border-white/35 bg-white/5 backdrop-blur-md hover:bg-white hover:text-black text-xs font-bold uppercase tracking-[2px] no-underline text-white transition-all hover:-translate-y-0.5">
                     {label}
                   </a>
@@ -281,6 +282,19 @@ export default function CollectionsPage() {
               <SectionHead kicker="Indoor Covers" title="Showroom Finish, Garage Safe" lead="Soft, breathable covers that keep dust and scratches off your car while it rests indoors." />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
                 {indoor.map((f, i) => (
+                  <ProductCard key={f.id} f={f} i={i} onSelect={chooseFabric} />
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* UNVEILING */}
+          <section id="unveiling" className="relative py-24 sm:py-32 bg-white scroll-mt-20 overflow-hidden">
+            <Orb className="w-[420px] h-[420px] top-10 -left-32 bg-[#cca462]/10" delay={2} />
+            <div className="container-am max-w-7xl relative">
+              <SectionHead kicker="Unveiling Covers" title="Made For The Big Reveal" lead="Launch nights, showroom reveals and private handovers. Pick a finish, add your branding and make the moment unforgettable." />
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                {unveiling.map((f, i) => (
                   <ProductCard key={f.id} f={f} i={i} onSelect={chooseFabric} />
                 ))}
               </div>

@@ -319,7 +319,7 @@ function FabricSpecs({ onEnquiry }: { onEnquiry: () => void }) {
   return (
     <section id="fabrics" className="relative py-24 sm:py-32 bg-black text-white scroll-mt-16">
       <div className="container-am max-w-[1500px]">
-        <SectionHead light kicker="THE RANGE" title="Five Covers. Every Need." sub="Three for the outdoors and two for the garage. Hover or tap a cover to see its full specification." />
+        <SectionHead light kicker="THE RANGE" title="Eight Covers. Every Need." sub="Three for the outdoors, two for the garage and three for the big reveal. Hover or tap a cover to see its full specification." />
 
         {/* desktop: expanding panels */}
         <div className="hidden lg:flex gap-3 h-[720px]">

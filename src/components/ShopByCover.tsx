@@ -141,6 +141,7 @@ function GroupHead({ label, text }: { label: string; text: string }) {
 export default function ShopByCover() {
   const outdoor = FABRICS.filter((f) => f.group === 'outdoor');
   const indoor = FABRICS.filter((f) => f.group === 'indoor');
+  const unveiling = FABRICS.filter((f) => f.group === 'unveiling');
 
   return (
     <section className="relative bg-[#f8f6f1] pt-20 sm:pt-28 pb-20 sm:pb-28 overflow-hidden">
@@ -170,7 +171,7 @@ export default function ShopByCover() {
             Find The Cover That Fits Your Life
           </h2>
           <div className="mx-auto mt-5 h-[2px] w-20 bg-gradient-to-r from-transparent via-[#b38848] to-transparent" />
-          <p className="mt-5 text-slate-600 leading-relaxed">Five tailored covers. Pick the one that matches where your car lives, then we cut it to your exact model.</p>
+          <p className="mt-5 text-slate-600 leading-relaxed">Eight tailored covers. Pick the one that matches where your car lives, then we cut it to your exact model.</p>
         </motion.div>
 
         <GroupHead label="Outdoor Covers" text="Rain, sun and everything in between" />
@@ -184,6 +185,13 @@ export default function ShopByCover() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {indoor.map((f, i) => (
             <CoverCard key={f.id} f={f} i={i} wide />
+          ))}
+        </div>
+
+        <GroupHead label="Unveiling Covers" text="Reveal-night covers for launches and showrooms" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mt-16 sm:mt-20">
+          {unveiling.map((f, i) => (
+            <CoverCard key={f.id} f={f} i={i} />
           ))}
         </div>
 
