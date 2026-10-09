@@ -49,7 +49,7 @@ export const FABRICS: Fabric[] = [
     badge: 'OUTDOOR PRO',
     price: 4499,
     accentColor: '#b45309',
-    image: '/images/outdoor_pro_card.jpg',
+    image: '/images/cover_heatshield.jpg',
     icon: SunMedium,
     description: 'Thicker, reflective multi-layer fabric that deflects heat and UV while shedding heavy rain.',
     specs: [
@@ -90,7 +90,7 @@ export const FABRICS: Fabric[] = [
     badge: 'INDOOR',
     price: 2499,
     accentColor: '#475569',
-    image: '/images/cover_velvet.jpg',
+    image: '/images/outdoor_pro_card.jpg',
     icon: Layers,
     description: 'A soft, breathable cover that keeps garage dust and light scuffs off your paint.',
     specs: [
@@ -108,7 +108,7 @@ export const FABRICS: Fabric[] = [
     badge: 'INDOOR ELITE',
     price: 5499,
     accentColor: '#854d0e',
-    image: '/images/reveal.jpg',
+    image: '/images/indoor_elite_card.jpg',
     icon: Sparkles,
     description: 'Ultra-soft four-way stretch fleece for freshly coated, wrapped and collector cars.',
     specs: [
