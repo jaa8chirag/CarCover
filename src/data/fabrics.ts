@@ -49,7 +49,7 @@ export const FABRICS: Fabric[] = [
     badge: 'OUTDOOR PRO',
     price: 4499,
     accentColor: '#b45309',
-    image: '/images/cover_heatshield.jpg',
+    image: '/images/outdoor_pro_card.jpg',
     icon: SunMedium,
     description: 'Thicker, reflective multi-layer fabric that deflects heat and UV while shedding heavy rain.',
     specs: [
@@ -69,7 +69,7 @@ export const FABRICS: Fabric[] = [
     badge: 'OUTDOOR ELITE',
     price: 6499,
     accentColor: '#00665e',
-    image: '/images/cover_monsoon.jpg',
+    image: '/images/outdoor_elite_card.jpg',
     icon: Droplets,
     description: 'Our flagship outdoor cover. Fully waterproof, heat-reflective and built to last years in harsh weather.',
     specs: [
