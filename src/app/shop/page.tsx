@@ -8,7 +8,7 @@ import MobileSlider from '@/components/MobileSlider';
 import { FABRICS, type CoverGroup, type Fabric } from '@/data/fabrics';
 
 const GROUPS: { id: CoverGroup | 'custom'; label: string; text: string; kicker: string; after?: string; afterPos?: string }[] = [
-  { id: 'outdoor', label: 'Outdoor Covers', text: 'Built for rain, sun and dust. For cars parked outside.', kicker: 'For the open road', after: '/images/rr_black_garage.jpg', afterPos: 'center 58%'},
+  { id: 'outdoor', label: 'Outdoor Covers', text: 'Built for rain, sun and dust. For cars parked outside.', kicker: 'For the open road', after: '/images/rr_black_wide.jpg', afterPos: 'center 50%'},
   { id: 'indoor', label: 'Indoor Covers', text: 'Soft, breathable covers for the garage or showroom.', kicker: 'For the garage', after: '/images/unveil_showroom.jpg', afterPos: 'center 88%'},
   { id: 'unveiling', label: 'Unveiling Covers', text: 'Reveal-night covers for launches and handovers.', kicker: 'For the big reveal', after: '/images/lambo_aventador_j.jpg', afterPos: 'center 62%'},
   { id: 'custom', label: 'Custom Covers', text: 'Printed, monogrammed or branded. Made for one car only.', kicker: 'Made for one car'},
