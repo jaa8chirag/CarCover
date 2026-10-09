@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 import { Check, ShoppingBag } from 'lucide-react';
-import { CAR_BRANDS, FABRIC_COLORS, PIPING_COLORS, getSizeTier, priceForTier } from '@/data/carData';
+import { CAR_BRANDS, FABRIC_COLORS, getSizeTier, priceForTier } from '@/data/carData';
 import type { Fabric } from '@/data/fabrics';
 
 interface Props {
@@ -18,12 +18,13 @@ const TEXT_COLORS = [
   { id: 'black', name: 'Black', hex: '#0a0d10' },
 ];
 
-const ADDONS = [
-  { id: 'mirrorPockets', label: 'Tailored mirror pockets', price: 0, note: 'Included' },
-  { id: 'heavyDutyHoldall', label: 'Heavy-duty storage duffle bag', price: 0, note: 'Included' },
-  { id: 'lockingUnderbodyStraps', label: 'Locking underbody wind straps', price: 399, note: '' },
-  { id: 'batteryChargerFlap', label: 'Battery charger access flap', price: 299, note: '' },
-] as const;
+/** Piping is only offered on the two Elite covers. */
+const PIPING_OPTIONS = [
+  { id: 'none', name: 'No piping', hex: 'transparent' },
+  { id: 'black', name: 'Black', hex: '#0a0a0a' },
+  { id: 'white', name: 'White', hex: '#ffffff' },
+];
+const PIPING_FABRICS = ['outdoor-elite', 'indoor-elite'];
 
 const formatINR = (n: number) => '₹' + n.toLocaleString('en-IN');
 
@@ -74,27 +75,21 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
   const [year, setYear] = useState('');
   const [variant, setVariant] = useState('');
   const [colorId, setColorId] = useState(FABRIC_COLORS[1].id);
-  const [pipingId, setPipingId] = useState(PIPING_COLORS[0].id);
+  const [pipingId, setPipingId] = useState('none');
   const [monogram, setMonogram] = useState('');
   const [textColorId, setTextColorId] = useState('gold');
-  const [addons, setAddons] = useState<Record<string, boolean>>({
-    mirrorPockets: true,
-    heavyDutyHoldall: true,
-    lockingUnderbodyStraps: false,
-    batteryChargerFlap: false,
-  });
   const [added, setAdded] = useState(false);
 
   const brand = CAR_BRANDS.find((b) => b.id === brandId) ?? null;
   const model = brand?.models.find((m) => m.id === modelId) ?? null;
   const color = FABRIC_COLORS.find((c) => c.id === colorId)!;
-  const piping = PIPING_COLORS.find((c) => c.id === pipingId)!;
+  const hasPiping = PIPING_FABRICS.includes(fabric.id);
+  const piping = hasPiping ? PIPING_OPTIONS.find((c) => c.id === pipingId)! : PIPING_OPTIONS[0];
   const textColor = TEXT_COLORS.find((c) => c.id === textColorId)!;
   const tier = brand && model ? getSizeTier(brand.id, model) : null;
 
   const basePrice = tier ? priceForTier(fabric.price, tier) : fabric.price;
-  const addonsPrice = ADDONS.reduce((n, a) => n + (addons[a.id] ? a.price : 0), 0);
-  const total = basePrice + addonsPrice;
+  const total = basePrice;
   const ready = !!(brand && model);
 
   const pickBrand = (id: string) => {
@@ -123,7 +118,7 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
       pipingHex: piping.hex,
       monogram: monogram.trim() || 'No monogram',
       monogramColor: textColor.id,
-      addons,
+      addons: {},
       price: total,
       currency: '₹',
     });
@@ -172,13 +167,31 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
           </div>
         </Block>
 
-        <Block n={2} title="Choose colours" hint="Optional. Pick a cover colour and a piping colour.">
+        <Block n={2} title="Choose colours" hint={hasPiping ? 'Optional. Pick a cover colour and your piping.' : 'Optional. Pick a cover colour.'}>
           <span className="block text-[11px] font-bold tracking-[3px] uppercase text-[#b38848] mb-3">Cover colour</span>
           <Swatches items={FABRIC_COLORS} value={colorId} onChange={setColorId} />
           <p className="mt-3 text-sm text-slate-500">{color.name}</p>
-          <span className="block text-[11px] font-bold tracking-[3px] uppercase text-[#b38848] mt-7 mb-3">Piping colour</span>
-          <Swatches items={PIPING_COLORS} value={pipingId} onChange={setPipingId} />
-          <p className="mt-3 text-sm text-slate-500">{piping.name}</p>
+          {hasPiping && (
+            <>
+              <span className="block text-[11px] font-bold tracking-[3px] uppercase text-[#b38848] mt-7 mb-3">Piping</span>
+              <div className="flex flex-wrap gap-3">
+                {PIPING_OPTIONS.map((o) => {
+                  const on = o.id === pipingId;
+                  return (
+                    <button
+                      key={o.id}
+                      type="button"
+                      onClick={() => setPipingId(o.id)}
+                      className={`inline-flex items-center gap-2.5 px-5 py-3 rounded-full border text-sm cursor-pointer transition-colors ${on ? 'border-black bg-black text-white' : 'border-slate-300 hover:border-black text-black'}`}
+                    >
+                      {o.id !== 'none' && <span className="w-4 h-4 rounded-full border border-slate-400" style={{ background: o.hex }} />}
+                      {o.name}
+                    </button>
+                  );
+                })}
+              </div>
+            </>
+          )}
         </Block>
 
         <Block n={3} title="Add a monogram" hint="Optional. Up to 14 characters, stitched on the bonnet.">
@@ -205,25 +218,6 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
             </div>
           </div>
         </Block>
-
-        <Block n={4} title="Extras">
-          <div className="space-y-3">
-            {ADDONS.map((a) => (
-              <label key={a.id} className="flex items-center justify-between gap-4 p-4 rounded-2xl border border-slate-200 hover:border-black cursor-pointer transition-colors">
-                <span className="flex items-center gap-3 text-sm text-black">
-                  <input
-                    type="checkbox"
-                    className="w-4 h-4 accent-black"
-                    checked={!!addons[a.id]}
-                    onChange={(e) => setAddons((p) => ({ ...p, [a.id]: e.target.checked }))}
-                  />
-                  {a.label}
-                </span>
-                <span className="text-sm text-slate-500">{a.price ? `+${formatINR(a.price)}` : a.note}</span>
-              </label>
-            ))}
-          </div>
-        </Block>
       </div>
 
       {/* SUMMARY */}
@@ -233,7 +227,7 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
             <img src={fabric.image} alt="" className="w-full h-full object-cover" />
             <span className="absolute inset-0 mix-blend-multiply opacity-40" style={{ background: color.hex }} />
             <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
-            <span className="absolute bottom-0 inset-x-0 h-[3px]" style={{ background: piping.hex }} />
+            {piping.id !== 'none' && <span className="absolute bottom-0 inset-x-0 h-[3px]" style={{ background: piping.hex }} />}
             {monogram.trim() && (
               <span className="absolute inset-x-0 bottom-5 text-center text-xl tracking-[0.35em] font-bold" style={{ color: textColor.hex, textShadow: '0 2px 12px rgba(0,0,0,0.6)' }}>{monogram.trim()}</span>
             )}
@@ -245,7 +239,7 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
           <Row k="Cover" v={fabric.title} />
           <Row k="Car" v={brand && model ? `${brand.name} ${model.name}` : 'Not selected'} />
           <Row k="Colour" v={color.name} />
-          <Row k="Piping" v={piping.name} />
+          {hasPiping && <Row k="Piping" v={piping.name} />}
           <Row k="Monogram" v={monogram.trim() || 'None'} />
           <div className="flex items-end justify-between pt-6">
             <span className="text-xs uppercase tracking-[2px] text-white/50">Total</span>
