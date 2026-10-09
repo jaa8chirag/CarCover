@@ -49,7 +49,7 @@ export const FABRICS: Fabric[] = [
     badge: 'OUTDOOR PRO',
     price: 4499,
     accentColor: '#b45309',
-    image: '/images/cover_heatshield.jpg',
+    image: '/images/outdoor_pro_card.jpg',
     icon: SunMedium,
     description: 'Thicker, reflective multi-layer fabric that deflects heat and UV while shedding heavy rain.',
     specs: [
