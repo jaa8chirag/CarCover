@@ -299,16 +299,22 @@ function HypeSection({
           {slide.description}
         </motion.p>
 
-        {(
-          <motion.a
-            href={slide.shopHref ?? '/shop'}
-            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-            transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white hover:bg-[#cca462] text-black text-xs font-bold uppercase tracking-[2.5px] no-underline transition-colors shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)]"
-          >
-            {slide.shopLabel ?? 'Shop Car Covers'} <span aria-hidden>→</span>
-          </motion.a>
-        )}
+        <div className="flex flex-wrap items-center justify-center gap-3 max-md:flex-col max-md:items-start">
+          {[
+            { label: 'Shop Car Covers', href: '/shop', solid: true },
+            { label: 'Shop Unveiling Covers', href: '/shop#unveiling', solid: false },
+          ].map((b) => (
+            <motion.a
+              key={b.label}
+              href={b.href}
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+              transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
+              className={`inline-flex items-center gap-3 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-[2.5px] no-underline transition-colors ${b.solid ? 'bg-white hover:bg-[#cca462] text-black shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)]' : 'bg-black/35 backdrop-blur-md border border-white/70 hover:bg-white hover:text-black text-white'}`}
+            >
+              {b.label} <span aria-hidden>→</span>
+            </motion.a>
+          ))}
+        </div>
       </motion.div>
     </div>
   );
