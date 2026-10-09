@@ -46,7 +46,7 @@ export default function MobileSlider({ children, desktopClass, itemClass = 'max-
       <div
         ref={track}
         onScroll={onScroll}
-        className={`flex gap-4 overflow-x-auto snap-x snap-mandatory max-md:-mx-5 max-md:px-5 max-md:pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:overflow-visible md:snap-none ${desktopClass}`}
+        className={`flex gap-4 overflow-x-auto snap-x snap-mandatory max-md:-mx-5 max-md:px-5 max-md:pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:overflow-visible md:snap-none ${items.length === 1 ? 'max-md:justify-center' : ''} ${desktopClass}`}
       >
         {items.map((child, i) => (
           <div key={i} className={`${itemClass} max-md:shrink-0 max-md:snap-center md:w-auto md:min-w-0 h-full`}>

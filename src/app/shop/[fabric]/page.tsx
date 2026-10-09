@@ -29,7 +29,7 @@ export default function ProductPage() {
             ) : (
               <>
                 <div className="grid md:grid-cols-2 gap-8 lg:gap-14 items-center mb-14">
-                  <div className="relative aspect-square overflow-hidden rounded-[2rem] bg-slate-900 shadow-[0_30px_80px_-35px_rgba(0,0,0,0.5)]">
+                  <div className="relative aspect-[5/4] overflow-hidden rounded-[2rem] bg-slate-900 shadow-[0_30px_80px_-35px_rgba(0,0,0,0.5)]">
                     <img src={fabric.image} alt={fabric.title} className="w-full h-full object-cover" />
                     {fabric.bestseller && (
                       <span className="absolute top-4 left-4 bg-gradient-to-r from-[#cca462] to-[#f6e3b4] text-black text-[10px] font-bold tracking-[2px] px-4 py-2 rounded-full shadow-lg">BESTSELLER</span>

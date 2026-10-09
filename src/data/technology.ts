@@ -154,7 +154,7 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
     bars: { water: 10, uv: 35, scratch: 100, breath: 96 },
   },
   'unveil-showroom': {
-    short: 'Unveiling Showroom',
+    short: 'Unveiling Cover',
     environment: 'Indoor · Reveal',
     warranty: '1-Year Guarantee',
     specs: {
@@ -165,32 +165,6 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
       stretch: 'Tailored silhouette, clean release at the reveal',
     },
     bars: { water: 8, uv: 25, scratch: 80, breath: 85 },
-  },
-  'unveil-gala': {
-    short: 'Unveiling Gala',
-    environment: 'Indoor · Launch',
-    warranty: '2-Year Guarantee',
-    specs: {
-      material: 'Heavy satin-finish stretch fabric in custom colours',
-      breathability: 'Breathable, made for event use',
-      waterResistance: 'Not rain-proof, made for indoor events',
-      lining: 'Soft brushed underside, paint-safe',
-      stretch: 'Weighted hem for a controlled, graceful reveal',
-    },
-    bars: { water: 10, uv: 30, scratch: 90, breath: 88 },
-  },
-  'unveil-signature': {
-    short: 'Unveiling Signature',
-    environment: 'Indoor · Collector',
-    warranty: '5-Year Guarantee',
-    specs: {
-      material: 'Premium four-way stretch fabric, fully custom',
-      breathability: 'Breathable, static-dissipating weave',
-      waterResistance: 'Not rain-proof, made for indoor use',
-      lining: 'Ultra-dense brushed microfibre, zero friction',
-      stretch: 'Hand-finished 3D fit with embroidered crest',
-    },
-    bars: { water: 10, uv: 35, scratch: 98, breath: 94 },
   },
 };
 

@@ -108,7 +108,7 @@ function ProductCard({ f, i, onSelect }: { f: Fabric; i: number; onSelect: (id: 
           onClick={() => onSelect(f.id)}
           className="group cursor-pointer h-full flex flex-col bg-white rounded-[2rem] overflow-hidden shadow-[0_10px_40px_-18px_rgba(0,0,0,0.25)] hover:shadow-[0_40px_90px_-30px_rgba(0,0,0,0.45)] transition-shadow duration-500"
         >
-          <div className="relative aspect-square overflow-hidden bg-slate-900" style={{ transform: 'translateZ(0)' }}>
+          <div className="relative aspect-[5/4] overflow-hidden bg-slate-900" style={{ transform: 'translateZ(0)' }}>
             <img src={f.image} alt={f.title} className="w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.12]" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             {/* sweeping shine */}
@@ -227,7 +227,7 @@ export default function CollectionsPage() {
                 ))}
               </h1>
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.7 }} className="mt-7 max-w-xl text-white/75 font-light text-base sm:text-lg leading-relaxed">
-                Bespoke, CAD-tailored covers for {modelCount}+ cars on Indian roads. Eight covers, made to measure and delivered free across India.
+                Bespoke, CAD-tailored covers for {modelCount}+ cars on Indian roads. Six covers, made to measure and delivered free across India.
               </motion.p>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.9 }} className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-3">
                 <span className="text-[11px] uppercase tracking-[3px] text-white/50 mr-2">Jump to</span>
@@ -294,7 +294,7 @@ export default function CollectionsPage() {
             <Orb className="w-[420px] h-[420px] top-10 -left-32 bg-[#cca462]/10" delay={2} />
             <div className="container-am max-w-7xl relative">
               <SectionHead kicker="Unveiling Covers" title="Made For The Big Reveal" lead="Launch nights, showroom reveals and private handovers. Pick a finish, add your branding and make the moment unforgettable." />
-              <MobileSlider desktopClass="md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-8">
+              <MobileSlider desktopClass="md:grid md:grid-cols-1 md:max-w-md md:mx-auto md:gap-8">
                 {unveiling.map((f, i) => (
                   <ProductCard key={f.id} f={f} i={i} onSelect={chooseFabric} />
                 ))}

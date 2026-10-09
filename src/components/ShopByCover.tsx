@@ -172,7 +172,7 @@ export default function ShopByCover() {
             Find The Cover That Fits Your Life
           </h2>
           <div className="mx-auto mt-5 h-[2px] w-20 bg-gradient-to-r from-transparent via-[#b38848] to-transparent" />
-          <p className="mt-5 text-slate-600 leading-relaxed">Eight tailored covers. Pick the one that matches where your car lives, then we cut it to your exact model.</p>
+          <p className="mt-5 text-slate-600 leading-relaxed">Six tailored covers. Pick the one that matches where your car lives, then we cut it to your exact model.</p>
         </motion.div>
 
         <GroupHead label="Outdoor Covers" text="Rain, sun and everything in between" />
@@ -190,7 +190,7 @@ export default function ShopByCover() {
         </MobileSlider>
 
         <GroupHead label="Unveiling Covers" text="Reveal-night covers for launches and showrooms" />
-        <MobileSlider desktopClass="md:grid md:grid-cols-3 md:gap-6 lg:gap-8 mt-16 sm:mt-20">
+        <MobileSlider desktopClass="md:grid md:grid-cols-1 md:max-w-sm md:mx-auto md:gap-6 lg:gap-8 mt-16 sm:mt-20">
           {unveiling.map((f, i) => (
             <CoverCard key={f.id} f={f} i={i} />
           ))}
