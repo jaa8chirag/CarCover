@@ -11,13 +11,6 @@ interface Props {
   onAddToCart: (item: any) => void;
 }
 
-const TEXT_COLORS = [
-  { id: 'gold', name: 'Gold', hex: '#cca462' },
-  { id: 'silver', name: 'Silver', hex: '#d8dee6' },
-  { id: 'white', name: 'White', hex: '#ffffff' },
-  { id: 'black', name: 'Black', hex: '#0a0d10' },
-];
-
 /** Piping is only offered on the two Elite covers. */
 const PIPING_OPTIONS = [
   { id: 'none', name: 'No piping', hex: 'transparent' },
@@ -68,7 +61,7 @@ function Swatches({ items, value, onChange }: { items: { id: string; name: strin
   );
 }
 
-/** Order form for one chosen cover: pick the car, then optional colour, monogram and extras. */
+/** Order form for one chosen cover: pick the car, then optional colour and any extra details. */
 export default function CoverStudio({ fabric, onAddToCart }: Props) {
   const [brandId, setBrandId] = useState('');
   const [modelId, setModelId] = useState('');
@@ -76,8 +69,7 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
   const [variant, setVariant] = useState('');
   const [colorId, setColorId] = useState(FABRIC_COLORS[1].id);
   const [pipingId, setPipingId] = useState('none');
-  const [monogram, setMonogram] = useState('');
-  const [textColorId, setTextColorId] = useState('gold');
+  const [notes, setNotes] = useState('');
   const [added, setAdded] = useState(false);
 
   const brand = CAR_BRANDS.find((b) => b.id === brandId) ?? null;
@@ -85,7 +77,6 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
   const color = FABRIC_COLORS.find((c) => c.id === colorId)!;
   const hasPiping = PIPING_FABRICS.includes(fabric.id);
   const piping = hasPiping ? PIPING_OPTIONS.find((c) => c.id === pipingId)! : PIPING_OPTIONS[0];
-  const textColor = TEXT_COLORS.find((c) => c.id === textColorId)!;
   const tier = brand && model ? getSizeTier(brand.id, model) : null;
 
   const basePrice = tier ? priceForTier(fabric.price, tier) : fabric.price;
@@ -116,8 +107,7 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
       fabricHex: color.hex,
       pipingColor: piping.name,
       pipingHex: piping.hex,
-      monogram: monogram.trim() || 'No monogram',
-      monogramColor: textColor.id,
+      notes: notes.trim() || 'None',
       addons: {},
       price: total,
       currency: '₹',
@@ -194,29 +184,15 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
           )}
         </Block>
 
-        <Block n={3} title="Add a monogram" hint="Optional. Up to 14 characters, stitched on the bonnet.">
-          <div className="grid sm:grid-cols-[1fr_auto] gap-5 items-center">
-            <input
-              className={FIELD}
-              maxLength={14}
-              placeholder="e.g. THAR-4X4"
-              value={monogram}
-              onChange={(e) => setMonogram(e.target.value.toUpperCase())}
-            />
-            <div className="flex gap-3">
-              {TEXT_COLORS.map((c) => (
-                <button
-                  key={c.id}
-                  type="button"
-                  title={c.name}
-                  aria-label={c.name}
-                  onClick={() => setTextColorId(c.id)}
-                  className={`w-9 h-9 rounded-full border border-slate-300 cursor-pointer ${c.id === textColorId ? 'ring-2 ring-offset-2 ring-black' : ''}`}
-                  style={{ background: c.hex }}
-                />
-              ))}
-            </div>
-          </div>
+        <Block n={3} title="Additional information" hint="Optional. Tell us anything else we should know about your car or your cover.">
+          <textarea
+            className={`${FIELD} min-h-[130px] resize-y`}
+            maxLength={500}
+            placeholder="e.g. custom text or logo, delivery notes, parking conditions..."
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+          />
+          <p className="mt-2 text-right text-xs text-slate-400">{notes.length}/500</p>
         </Block>
       </div>
 
@@ -228,9 +204,6 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
             <span className="absolute inset-0 mix-blend-multiply opacity-40" style={{ background: color.hex }} />
             <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
             {piping.id !== 'none' && <span className="absolute bottom-0 inset-x-0 h-[3px]" style={{ background: piping.hex }} />}
-            {monogram.trim() && (
-              <span className="absolute inset-x-0 bottom-5 text-center text-xl tracking-[0.35em] font-bold" style={{ color: textColor.hex, textShadow: '0 2px 12px rgba(0,0,0,0.6)' }}>{monogram.trim()}</span>
-            )}
             <span className="absolute top-3 left-3 text-[10px] font-bold tracking-[2px] uppercase px-3 py-1.5 rounded-full bg-black/55 backdrop-blur-md text-white/90">Live preview</span>
           </div>
         </div>
@@ -240,7 +213,7 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
           <Row k="Car" v={brand && model ? `${brand.name} ${model.name}` : 'Not selected'} />
           <Row k="Colour" v={color.name} />
           {hasPiping && <Row k="Piping" v={piping.name} />}
-          <Row k="Monogram" v={monogram.trim() || 'None'} />
+          <Row k="Notes" v={notes.trim() ? (notes.trim().length > 28 ? notes.trim().slice(0, 28) + '...' : notes.trim()) : 'None'} />
           <div className="flex items-end justify-between pt-6">
             <span className="text-xs uppercase tracking-[2px] text-white/50">Total</span>
             <span className="text-3xl font-semibold" style={{ fontFamily: 'var(--font-hype)' }}>{formatINR(total)}</span>

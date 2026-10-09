@@ -221,8 +221,8 @@ export default function CheckoutDrawer({
                           <span style={{ color: '#111615', fontWeight: 600 }}>{item.pipingColor}</span>
                         </div>
                         <div>
-                          <span>Monogram: </span>
-                          <span style={{ color: '#00665e', fontWeight: 600 }}>{item.monogram}</span>
+                          <span>Notes: </span>
+                          <span style={{ color: '#00665e', fontWeight: 600 }}>{item.notes ?? item.monogram}</span>
                         </div>
                         <div>
                           <span>Warranty: </span>
