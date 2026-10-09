@@ -7,11 +7,11 @@ import PageShell from '@/components/PageShell';
 import MobileSlider from '@/components/MobileSlider';
 import { FABRICS, type CoverGroup, type Fabric } from '@/data/fabrics';
 
-const GROUPS: { id: CoverGroup | 'custom'; label: string; text: string; kicker: string; band: string; theme: 'light' | 'dark'; image: string }[] = [
-  { id: 'outdoor', label: 'Outdoor Covers', text: 'Built for rain, sun and dust. For cars parked outside.', kicker: 'For the open road', band: 'bg-white', theme: 'light', image: '/images/outdoor.jpg' },
-  { id: 'indoor', label: 'Indoor Covers', text: 'Soft, breathable covers for the garage or showroom.', kicker: 'For the garage', band: 'bg-[#eceef1]', theme: 'light', image: '/images/cover_velvet.jpg' },
-  { id: 'unveiling', label: 'Unveiling Covers', text: 'Reveal-night covers for launches and handovers.', kicker: 'For the big reveal', band: 'bg-[#ece3d2]', theme: 'light', image: '/images/unveil_gold_curtains.jpg' },
-  { id: 'custom', label: 'Custom Covers', text: 'Printed, monogrammed or branded. Made for one car only.', kicker: 'Made for one car', band: 'bg-white', theme: 'light', image: '/images/reveal.jpg' },
+const GROUPS: { id: CoverGroup | 'custom'; label: string; text: string; kicker: string; after?: string }[] = [
+  { id: 'outdoor', label: 'Outdoor Covers', text: 'Built for rain, sun and dust. For cars parked outside.', kicker: 'For the open road', after: '/images/rr_black_garage.jpg'},
+  { id: 'indoor', label: 'Indoor Covers', text: 'Soft, breathable covers for the garage or showroom.', kicker: 'For the garage', after: '/images/unveil_showroom.jpg'},
+  { id: 'unveiling', label: 'Unveiling Covers', text: 'Reveal-night covers for launches and handovers.', kicker: 'For the big reveal', after: '/images/lambo_aventador_j.jpg'},
+  { id: 'custom', label: 'Custom Covers', text: 'Printed, monogrammed or branded. Made for one car only.', kicker: 'Made for one car'},
 ];
 
 /** Full-width photo banner. */
@@ -28,6 +28,15 @@ const CUSTOM = [
   { id: 'custom-printed', title: 'Custom Printed Cover', text: 'Your artwork, livery or branding printed edge to edge on premium stretch fabric.', image: '/images/cover_install_2.jpg', points: ['Any artwork, logo or livery', 'Sharp, fade-resistant printing', 'Cut to your exact car'] },
   { id: 'custom-monogram', title: 'Monogram & Piping Cover', text: 'Contrast piping, an embroidered monogram and your choice of colours on any of our fabrics.', image: '/images/cover_install_3.jpg', points: ['Embroidered monogram or crest', 'Contrast piping in any colour', 'Works on every fabric we make'] },
 ];
+
+/** Full-width photo between two sections. */
+function PhotoBreak({ src }: { src: string }) {
+  return (
+    <div className="w-full bg-black">
+      <img src={src} alt="Bespoke car cover" loading="lazy" className="block w-full h-auto" />
+    </div>
+  );
+}
 
 function CustomCard({ c }: { c: (typeof CUSTOM)[number] }) {
   return (
@@ -119,40 +128,27 @@ export default function ShopPage() {
 
           <Banner />
 
-          {GROUPS.map((g, gi) => {
-            const dark = g.theme === 'dark';
-            return (
-              <section
-                key={g.id}
-                id={g.id}
-                className={`relative scroll-mt-20 pt-16 sm:pt-24 pb-20 sm:pb-28 ${g.band} ${gi > 0 ? 'rounded-t-[3rem] -mt-10 sm:-mt-12 shadow-[0_-30px_70px_-30px_rgba(0,0,0,0.45)]' : ''}`}
-                style={{ zIndex: gi + 1 }}
-              >
-                {dark && <div aria-hidden className="pointer-events-none absolute -top-20 right-0 w-[420px] h-[420px] rounded-full bg-[#cca462]/15 blur-[110px]" />}
-                <div className="container-am max-w-7xl relative">
-                  {/* section header: photo band with the title on it */}
-                  <div className="relative overflow-hidden rounded-[2rem] aspect-video mb-10 sm:mb-14 bg-black">
-                    <img src={g.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-black/10" />
-                    <div className="absolute inset-0 flex items-center px-6 sm:px-12">
-                      <span className="hidden sm:block mr-8 text-7xl font-light leading-none text-transparent [-webkit-text-stroke:1px_rgba(204,164,98,0.9)]" style={{ fontFamily: 'var(--font-hype)' }}>0{gi + 1}</span>
-                      <div>
-                        <span className="block text-[11px] font-bold tracking-[4px] uppercase text-[#cca462] mb-2">0{gi + 1} · {g.kicker}</span>
-                        <h2 className="uppercase text-white font-semibold" style={{ fontFamily: 'var(--font-hype)', fontSize: 'clamp(24px, 3.2vw, 44px)', lineHeight: 1.05 }}>{g.label}</h2>
-                        <p className="mt-2 max-w-md text-sm sm:text-base text-white/75">{g.text}</p>
-                      </div>
-                    </div>
+          {GROUPS.map((g, gi) => (
+            <React.Fragment key={g.id}>
+              <section id={g.id} className={`scroll-mt-20 py-16 sm:py-24 ${gi % 2 === 0 ? 'bg-white' : 'bg-[#f3f1ed]'}`}>
+                <div className="container-am max-w-7xl">
+                  <div className="mb-10 sm:mb-14 text-center">
+                    <span className="block text-[11px] sm:text-xs tracking-[6px] uppercase text-slate-400 mb-3">{g.kicker}</span>
+                    <h2 className="text-black" style={{ fontFamily: 'var(--font-hype)', fontWeight: 400, fontSize: 'clamp(28px, 3.6vw, 46px)', lineHeight: 1.1 }}>{g.label}</h2>
+                    <p className="mt-4 mx-auto max-w-xl text-slate-600">{g.text}</p>
                   </div>
 
-                  <MobileSlider desktopClass={`md:grid md:gap-8 ${g.id === 'indoor' || g.id === 'custom' ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-2 xl:grid-cols-3'}`}>
+                  <MobileSlider desktopClass={`md:grid md:gap-8 md:mx-auto ${g.id === 'indoor' || g.id === 'custom' ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-2 xl:grid-cols-3'}`}>
                     {g.id === 'custom'
                       ? CUSTOM.map((c) => <CustomCard key={c.id} c={c} />)
                       : FABRICS.filter((f) => f.group === g.id).map((f) => <RangeCard key={f.id} f={f} />)}
                   </MobileSlider>
                 </div>
               </section>
-            );
-          })}
+
+              {g.after && <PhotoBreak src={g.after} />}
+            </React.Fragment>
+          ))}
         </div>
       )}
     </PageShell>
