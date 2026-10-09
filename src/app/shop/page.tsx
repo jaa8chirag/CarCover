@@ -7,10 +7,10 @@ import PageShell from '@/components/PageShell';
 import MobileSlider from '@/components/MobileSlider';
 import { FABRICS, type CoverGroup, type Fabric } from '@/data/fabrics';
 
-const GROUPS: { id: CoverGroup | 'custom'; label: string; text: string; kicker: string; after?: string }[] = [
-  { id: 'outdoor', label: 'Outdoor Covers', text: 'Built for rain, sun and dust. For cars parked outside.', kicker: 'For the open road', after: '/images/rr_black_garage.jpg'},
-  { id: 'indoor', label: 'Indoor Covers', text: 'Soft, breathable covers for the garage or showroom.', kicker: 'For the garage', after: '/images/unveil_showroom.jpg'},
-  { id: 'unveiling', label: 'Unveiling Covers', text: 'Reveal-night covers for launches and handovers.', kicker: 'For the big reveal', after: '/images/lambo_aventador_j.jpg'},
+const GROUPS: { id: CoverGroup | 'custom'; label: string; text: string; kicker: string; after?: string; afterPos?: string }[] = [
+  { id: 'outdoor', label: 'Outdoor Covers', text: 'Built for rain, sun and dust. For cars parked outside.', kicker: 'For the open road', after: '/images/rr_black_garage.jpg', afterPos: 'center 58%'},
+  { id: 'indoor', label: 'Indoor Covers', text: 'Soft, breathable covers for the garage or showroom.', kicker: 'For the garage', after: '/images/unveil_showroom.jpg', afterPos: 'center 88%'},
+  { id: 'unveiling', label: 'Unveiling Covers', text: 'Reveal-night covers for launches and handovers.', kicker: 'For the big reveal', after: '/images/lambo_aventador_j.jpg', afterPos: 'center 62%'},
   { id: 'custom', label: 'Custom Covers', text: 'Printed, monogrammed or branded. Made for one car only.', kicker: 'Made for one car'},
 ];
 
@@ -30,10 +30,10 @@ const CUSTOM = [
 ];
 
 /** Full-width photo between two sections. */
-function PhotoBreak({ src }: { src: string }) {
+function PhotoBreak({ src, pos = 'center 58%' }: { src: string; pos?: string }) {
   return (
-    <div className="w-full bg-black">
-      <img src={src} alt="Bespoke car cover" loading="lazy" className="block w-full h-auto" />
+    <div className="relative w-full h-[56vh] sm:h-[68vh] min-h-[320px] overflow-hidden bg-black">
+      <img src={src} alt="Bespoke car cover" loading="lazy" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: pos }} />
     </div>
   );
 }
@@ -146,7 +146,7 @@ export default function ShopPage() {
                 </div>
               </section>
 
-              {g.after && <PhotoBreak src={g.after} />}
+              {g.after && <PhotoBreak src={g.after} pos={g.afterPos} />}
             </React.Fragment>
           ))}
         </div>
