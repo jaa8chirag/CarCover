@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight, ArrowUpRight } from 'lucide-react';
 import PageShell from '@/components/PageShell';
 import MobileSlider from '@/components/MobileSlider';
 import { FABRICS, type CoverGroup, type Fabric } from '@/data/fabrics';
@@ -12,6 +12,40 @@ const GROUPS: { id: CoverGroup; label: string; text: string }[] = [
   { id: 'indoor', label: 'Indoor Covers', text: 'Soft, breathable covers for the garage or showroom.' },
   { id: 'unveiling', label: 'Unveiling Covers', text: 'Reveal-night covers for launches and handovers.' },
 ];
+
+const BANNER = [
+  '/images/rr_cullinan_cover.jpg', '/images/ferrari_red_cover.jpg', '/images/bentley_street.jpg',
+  '/images/unveil_gold_curtains.jpg', '/images/porsche_speedster.jpg',
+];
+
+/** Full-width photo banner that cross-fades slowly. */
+function Banner() {
+  const [i, setI] = useState(0);
+  const [prev, setPrev] = useState(-1);
+  useEffect(() => {
+    const t = setInterval(() => setI((v) => { setPrev(v); return (v + 1) % BANNER.length; }), 5000);
+    return () => clearInterval(t);
+  }, []);
+  return (
+    <div className="relative w-full h-[56vh] sm:h-[68vh] min-h-[320px] overflow-hidden bg-black">
+      {BANNER.map((src, k) => (
+        <img
+          key={src}
+          src={src}
+          alt="Bespoke car cover"
+          className={`absolute inset-0 w-full h-full object-cover ${k === i ? 'z-10 opacity-100' : k === prev ? 'z-0 opacity-100' : 'z-0 opacity-0'}`}
+          style={{ transform: k === i ? 'scale(1.06)' : 'scale(1)', transition: 'opacity 1600ms ease-in-out, transform 7000ms ease-out' }}
+        />
+      ))}
+      <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute z-30 bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
+        {BANNER.map((_, k) => (
+          <button key={k} aria-label={`Photo ${k + 1}`} onClick={() => setI(k)} className={`h-1.5 rounded-full cursor-pointer transition-all duration-500 ${k === i ? 'w-7 bg-white' : 'w-1.5 bg-white/50'}`} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function RangeCard({ f }: { f: Fabric }) {
   return (
@@ -50,23 +84,30 @@ export default function ShopPage() {
   return (
     <PageShell>
       {() => (
-        <div className="bg-[#f3f1ed] pt-32 sm:pt-44 pb-24">
-          <div className="container-am max-w-7xl">
-            <span className="block text-[11px] font-bold tracking-[4px] uppercase text-[#b38848] mb-3">Shop Car Covers</span>
-            <h1 className="uppercase text-black" style={{ fontFamily: 'var(--font-hype)', fontWeight: 500, fontSize: 'clamp(28px, 4vw, 52px)', lineHeight: 1.08 }}>
-              Choose Your Cover
-            </h1>
-            <p className="mt-4 max-w-xl text-slate-600">Pick the type of cover first. On the next page you tell us your car and we cut it to fit.</p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <span className="text-[11px] uppercase tracking-[3px] text-slate-400 mr-1">Jump to</span>
-              {GROUPS.map((g) => (
-                <a key={g.id} href={`#${g.id}`} className="px-5 py-2.5 rounded-full border border-slate-300 hover:bg-black hover:text-white hover:border-black text-xs font-bold uppercase tracking-[2px] no-underline text-black transition-colors">
-                  {g.label}
-                </a>
-              ))}
+        <div className="bg-[#f3f1ed]">
+          {/* INTRO */}
+          <div className="bg-white pt-32 sm:pt-40 pb-14 sm:pb-20">
+            <div className="container-am max-w-4xl text-center">
+              <span className="block text-[11px] sm:text-xs tracking-[6px] uppercase text-slate-400 mb-5">Unparalleled Protection</span>
+              <h1 className="text-black" style={{ fontFamily: 'var(--font-hype)', fontWeight: 400, fontSize: 'clamp(32px, 4.6vw, 58px)', lineHeight: 1.1 }}>
+                Car Covers
+              </h1>
+              <p className="mt-7 text-slate-700 leading-[1.9] text-[15px] sm:text-base">
+                Every Signature Covers cover is tailor-made to fit your car&apos;s exact make, model and year. Our range includes soft indoor covers for dust protection, UV-protective outdoor covers, and fully waterproof, breathable options for all-weather defence. We also make unveiling covers for launch events, with a choice of colours, materials and customisation, so every cover gives the perfect blend of protection and style.
+              </p>
+              <div className="mt-9 flex flex-wrap items-center justify-center gap-3 sm:gap-5">
+                {GROUPS.map((g) => (
+                  <a key={g.id} href={`#${g.id}`} className="inline-flex items-center gap-3 px-6 sm:px-8 py-4 bg-black hover:bg-[#b38848] text-white text-sm font-medium no-underline transition-colors">
+                    {g.label} <ArrowUpRight size={16} />
+                  </a>
+                ))}
+              </div>
             </div>
+          </div>
 
+          <Banner />
+
+          <div className="container-am max-w-7xl pt-4 pb-24">
             {GROUPS.map((g) => (
               <section key={g.id} id={g.id} className="mt-16 sm:mt-20 scroll-mt-28">
                 <div className="mb-8">
