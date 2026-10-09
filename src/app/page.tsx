@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Header from '@/components/Header';
 import HypeCurtainScrollShowcase from '@/components/HypeCurtainScrollShowcase';
-import UnveilingSliderSection from '@/components/UnveilingSliderSection';
 import SwatchRequestModal from '@/components/SwatchRequestModal';
 import CheckoutDrawer from '@/components/CheckoutDrawer';
 import BrandMarquee from '@/components/BrandMarquee';
@@ -103,11 +102,6 @@ export default function Home() {
       <BrandMarquee />
 
       <ShopByCover />
-
-      {/* 🌟 SECTION VARIATION 2: Interactive Before/After Reveal Curtain Slider */}
-      <UnveilingSliderSection
-        onOpenConfigurator={handleOpenConfigurator}
-      />
 
       {/* Aston Martin Official Footer */}
       <Footer />
