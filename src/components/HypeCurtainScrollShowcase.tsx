@@ -8,6 +8,8 @@ interface SlideData {
   category: string;
   title: string;
   tagline: string;
+  /** Laptops/desktops only: which shop buttons this slide shows. Phones always show both. */
+  desktopShop?: 'both' | 'car' | 'unveil';
   /** Phones only: photos that auto-slide right to left behind this slide's fixed text. */
   mobileSlides?: { src: string; pos: string }[];
   /** Folded into another slide's carousel, so it is not rendered on its own. */
@@ -76,6 +78,7 @@ const SLIDES: SlideData[] = [
   },
   {
     id: 'atelier-commission',
+    desktopShop: 'unveil',
     category: '',
     title: 'NOT OFF THE SHELF. COMMISSIONED ONLY FOR YOU.',
     tagline: 'Hand-embroidered monograms, contrast piping & locking security.',
@@ -95,6 +98,7 @@ const SLIDES: SlideData[] = [
   },
   {
     id: 'signature-fit',
+    desktopShop: 'car',
     category: '',
     title: 'EVERY CURVE. TAILORED TO THE MILLIMETRE.',
     tagline: 'A cover that fits your car like a second skin.',
@@ -112,6 +116,7 @@ const SLIDES: SlideData[] = [
   },
   {
     id: 'showroom-unveil',
+    desktopShop: 'car',
     category: '',
     title: 'WHERE EVERY UNVEILING BEGINS.',
     tagline: 'Your monogram. Your colours. Your car.',
@@ -301,15 +306,15 @@ function HypeSection({
 
         <div className="flex flex-wrap items-center justify-center gap-3 max-md:flex-col max-md:items-start">
           {[
-            { label: 'Shop Car Covers', href: '/shop', solid: true },
-            { label: 'Shop Unveiling Covers', href: '/shop#unveiling', solid: false },
+            { key: 'car', label: 'Shop Car Covers', href: '/shop', solid: true },
+            { key: 'unveil', label: 'Shop Unveiling Covers', href: '/shop#unveiling', solid: false },
           ].map((b) => (
             <motion.a
               key={b.label}
               href={b.href}
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
               transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
-              className={`inline-flex items-center gap-3 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-[2.5px] no-underline transition-colors ${b.solid ? 'bg-white hover:bg-[#cca462] text-black shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)]' : 'bg-black/35 backdrop-blur-md border border-white/70 hover:bg-white hover:text-black text-white'}`}
+              className={`inline-flex items-center gap-3 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-[2.5px] no-underline transition-colors ${(slide.desktopShop ?? 'both') !== 'both' && slide.desktopShop !== b.key ? 'md:hidden' : ''} ${b.solid ? 'bg-white hover:bg-[#cca462] text-black shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)]' : 'bg-black/35 backdrop-blur-md border border-white/70 hover:bg-white hover:text-black text-white'}`}
             >
               {b.label} <span aria-hidden>→</span>
             </motion.a>
