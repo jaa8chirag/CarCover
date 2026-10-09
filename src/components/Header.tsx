@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag,
+  Home as HomeIcon,
   X,
   Search,
   ArrowRight,
@@ -105,6 +106,7 @@ export default function Header({
   }
 
   const navLinks: NavLinkItem[] = [
+    { label: 'Home', href: '/', id: 'home' },
     { label: 'Collections', href: '/collections', id: 'collections' },
     { label: 'Technology', href: '/technology', id: 'technology' },
     { label: 'About Us', href: '/about', id: 'about' },
@@ -159,6 +161,14 @@ export default function Header({
               </span>
               <span className="hidden sm:block text-[13px] font-semibold uppercase tracking-[0.3em]">Menu</span>
             </button>
+            <Link
+              href="/"
+              aria-label="Home"
+              className={`ml-1 sm:ml-3 flex items-center gap-2 px-2.5 py-2.5 rounded-xl no-underline transition-colors hover:bg-white/10 ${pathname === '/' ? 'text-[#cca462]' : 'text-white hover:text-[#cca462]'}`}
+            >
+              <HomeIcon size={18} />
+              <span className="hidden sm:block text-[13px] font-semibold uppercase tracking-[0.3em]">Home</span>
+            </Link>
           </div>
 
           {/* CENTER: logo over name */}

@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
  * On phones the cards sit side by side in a swipeable row with back and next buttons,
  * so long lists do not need endless vertical scrolling. From md up it is a normal grid.
  */
-export default function MobileSlider({ children, desktopClass, itemClass = 'max-md:w-[78vw] max-md:max-w-[340px]' }: { children: React.ReactNode; desktopClass: string; itemClass?: string }) {
+export default function MobileSlider({ children, desktopClass, itemClass = 'max-md:w-[78vw] max-md:max-w-[340px]', wrapperClass = '' }: { children: React.ReactNode; desktopClass: string; itemClass?: string; wrapperClass?: string }) {
   const items = React.Children.toArray(children);
   const track = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
@@ -42,7 +42,7 @@ export default function MobileSlider({ children, desktopClass, itemClass = 'max-
   };
 
   return (
-    <div>
+    <div className={wrapperClass}>
       <div
         ref={track}
         onScroll={onScroll}

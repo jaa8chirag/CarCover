@@ -176,21 +176,21 @@ export default function ShopByCover() {
         </motion.div>
 
         <GroupHead label="Outdoor Covers" text="Rain, sun and everything in between" />
-        <MobileSlider desktopClass="md:grid md:grid-cols-3 md:gap-6 lg:gap-8 mb-16 sm:mb-20">
+        <MobileSlider wrapperClass="mb-16 sm:mb-20" desktopClass="md:grid md:grid-cols-3 md:gap-6 lg:gap-8">
           {outdoor.map((f, i) => (
             <CoverCard key={f.id} f={f} i={i} />
           ))}
         </MobileSlider>
 
         <GroupHead label="Indoor Covers" text="Showroom finish for garage and basement" />
-        <MobileSlider desktopClass="md:grid md:grid-cols-2 md:gap-6 lg:gap-8">
+        <MobileSlider wrapperClass="mb-16 sm:mb-20" desktopClass="md:grid md:grid-cols-2 md:gap-6 lg:gap-8">
           {indoor.map((f, i) => (
             <CoverCard key={f.id} f={f} i={i} wide />
           ))}
         </MobileSlider>
 
         <GroupHead label="Unveiling Covers" text="Reveal-night covers for launches and showrooms" />
-        <MobileSlider desktopClass="md:grid md:grid-cols-1 md:max-w-sm md:mx-auto md:gap-6 lg:gap-8 mt-16 sm:mt-20">
+        <MobileSlider desktopClass="md:grid md:grid-cols-1 md:max-w-sm md:mx-auto md:gap-6 lg:gap-8">
           {unveiling.map((f, i) => (
             <CoverCard key={f.id} f={f} i={i} />
           ))}
