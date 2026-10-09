@@ -31,7 +31,7 @@ export const FABRICS: Fabric[] = [
     badge: 'OUTDOOR',
     price: 2999,
     accentColor: '#334155',
-    image: '/images/outdoor.jpg',
+    image: '/images/outdoor_standard_card.jpg',
     icon: ShieldCheck,
     description: 'A dependable water-resistant, UV-stable cover for daily outdoor parking. Tailored to your exact model.',
     specs: [

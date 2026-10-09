@@ -62,7 +62,7 @@ function CoverCard({ f, i, wide }: { f: Fabric; i: number; wide?: boolean }) {
       <Tilt className="h-full">
         <Link
           href={`/collections#${f.group}`}
-          className={`group relative block overflow-hidden rounded-[2rem] no-underline bg-black shadow-[0_24px_60px_-28px_rgba(0,0,0,0.55)] hover:shadow-[0_50px_100px_-35px_rgba(0,0,0,0.65)] transition-shadow duration-500 ${wide ? 'aspect-[4/5] sm:aspect-[16/10]' : 'aspect-[4/5]'}`}
+          className={`group relative block overflow-hidden rounded-[2rem] no-underline bg-black shadow-[0_24px_60px_-28px_rgba(0,0,0,0.55)] hover:shadow-[0_50px_100px_-35px_rgba(0,0,0,0.65)] transition-shadow duration-500 aspect-square`}
         >
           <img
             src={f.image}
@@ -205,3 +205,4 @@ export default function ShopByCover() {
     </section>
   );
 }
+

@@ -74,7 +74,7 @@ function RangeCard({ f }: { f: Fabric }) {
       href={`/shop/${f.id}`}
       className="group flex flex-col h-full bg-white rounded-[2rem] overflow-hidden no-underline text-inherit border border-slate-200 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.25)] hover:shadow-[0_40px_90px_-30px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-500"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-slate-900">
+      <div className="relative aspect-square overflow-hidden bg-slate-900">
         <img src={f.image} alt={f.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] group-hover:scale-110" />
         {f.bestseller && (
           <span className="absolute top-4 left-4 bg-gradient-to-r from-[#cca462] to-[#f6e3b4] text-black text-[10px] font-bold tracking-[2px] px-4 py-2 rounded-full shadow-lg">BESTSELLER</span>
@@ -154,3 +154,5 @@ export default function ShopPage() {
     </PageShell>
   );
 }
+
+

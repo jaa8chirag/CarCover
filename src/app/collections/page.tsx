@@ -108,7 +108,7 @@ function ProductCard({ f, i, onSelect }: { f: Fabric; i: number; onSelect: (id: 
           onClick={() => onSelect(f.id)}
           className="group cursor-pointer h-full flex flex-col bg-white rounded-[2rem] overflow-hidden shadow-[0_10px_40px_-18px_rgba(0,0,0,0.25)] hover:shadow-[0_40px_90px_-30px_rgba(0,0,0,0.45)] transition-shadow duration-500"
         >
-          <div className="relative aspect-[4/3] overflow-hidden bg-slate-900" style={{ transform: 'translateZ(0)' }}>
+          <div className="relative aspect-square overflow-hidden bg-slate-900" style={{ transform: 'translateZ(0)' }}>
             <img src={f.image} alt={f.title} className="w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.12]" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             {/* sweeping shine */}
@@ -407,3 +407,4 @@ export default function CollectionsPage() {
     </PageShell>
   );
 }
+
