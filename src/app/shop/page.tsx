@@ -94,9 +94,9 @@ const FABRIC_TONES: Record<string, { tone: string; image?: string }> = {
   'outdoor-standard': { tone: '#6b7686', image: '/images/fabric_outdoor_standard.jpg' },
   'outdoor-pro': { tone: '#8a5a1f', image: '/images/fabric_outdoor_pro.jpg' },
   'outdoor-elite': { tone: '#1d2430', image: '/images/fabric_outdoor_elite.jpg' },
-  'indoor-standard': { tone: '#3b4250' },
+  'indoor-standard': { tone: '#3b4250', image: '/images/fabric_indoor_standard.jpg' },
   'indoor-elite': { tone: '#15171c' },
-  'unveil-showroom': { tone: '#4a4038' },
+  'unveil-showroom': { tone: '#4a4038', image: '/images/fabric_unveiling.jpg' },
 };
 
 /** Every cover card: hover (or tap the button on touch) flips it over. The back opens with a fabric picture, then the details. */
