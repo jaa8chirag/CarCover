@@ -95,7 +95,7 @@ const FABRIC_TONES: Record<string, { tone: string; image?: string }> = {
   'outdoor-pro': { tone: '#8a5a1f', image: '/images/fabric_outdoor_pro.jpg' },
   'outdoor-elite': { tone: '#1d2430', image: '/images/fabric_outdoor_elite.jpg' },
   'indoor-standard': { tone: '#3b4250', image: '/images/fabric_indoor_standard.jpg' },
-  'indoor-elite': { tone: '#15171c' },
+  'indoor-elite': { tone: '#15171c', image: '/images/fabric_indoor_elite.jpg' },
   'unveil-showroom': { tone: '#4a4038', image: '/images/fabric_unveiling.jpg' },
 };
 
