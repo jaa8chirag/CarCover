@@ -91,8 +91,8 @@ const SPEC_LABELS: [keyof NonNullable<ReturnType<typeof sheetFor>>['specs'], str
 
 /** Colour of each cover's cloth. Add an `image` (a real fabric photo) to any entry and it replaces the drawn weave. */
 const FABRIC_TONES: Record<string, { tone: string; image?: string }> = {
-  'outdoor-standard': { tone: '#6b7686' },
-  'outdoor-pro': { tone: '#8a5a1f' },
+  'outdoor-standard': { tone: '#6b7686', image: '/images/fabric_outdoor_standard.jpg' },
+  'outdoor-pro': { tone: '#8a5a1f', image: '/images/fabric_outdoor_pro.jpg' },
   'outdoor-elite': { tone: '#1d2430', image: '/images/fabric_outdoor_elite.jpg' },
   'indoor-standard': { tone: '#3b4250' },
   'indoor-elite': { tone: '#15171c' },
