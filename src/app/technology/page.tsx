@@ -188,45 +188,31 @@ function HeroStats() {
 }
 
 function Hero({ onEnquiry }: { onEnquiry: () => void }) {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
-  const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
   return (
-    <section ref={ref} className="relative min-h-[56vh] sm:min-h-[68vh] flex items-end overflow-hidden bg-[#0b0b0b] text-white">
-      <motion.div style={{ y }} className="absolute inset-0">
-        <img src="/images/porsche_wheel_cover.jpg" alt="Porsche under a bespoke cover" className="absolute inset-0 w-full h-[112%] object-cover" style={{ objectPosition: 'center 84%' }} />
-      </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/30 to-black/5" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/40" />
-      <motion.div
-        aria-hidden
-        className="absolute -top-40 -right-40 w-[620px] h-[620px] rounded-full bg-[#cca462]/30 blur-[120px]"
-        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.9, 0.5] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-      />
+    <>
+      {/* INTRO: short text and the three entry buttons, like the shop page */}
+      <div className="bg-white pt-32 sm:pt-40 pb-12 sm:pb-16">
+        <div className="container-am max-w-4xl text-center">
+          <span className="block text-[11px] sm:text-xs tracking-[6px] uppercase text-slate-400 mb-5">Technology &amp; Craft</span>
+          <h1 className="text-black" style={{ fontFamily: 'var(--font-hype)', fontWeight: 400, fontSize: 'clamp(30px, 4.2vw, 54px)', lineHeight: 1.1 }}>
+            How Your Cover Is Engineered
+          </h1>
+          <p className="mt-6 text-slate-700 leading-[1.9] text-[15px] sm:text-base">
+            From a 3D scan of your car to the last hand-stitched seam. Explore every cover, fabric, process and machine behind it.
+          </p>
+          <div className="mt-8 grid grid-cols-2 sm:flex sm:flex-nowrap items-stretch justify-center gap-3 sm:gap-4">
+            <a href="#fabrics" className="inline-flex items-center justify-center px-5 sm:px-6 py-4 bg-black hover:bg-[#b38848] text-white text-[13px] sm:text-sm font-medium no-underline transition-colors whitespace-nowrap">Explore The Covers</a>
+            <a href="#process" className="inline-flex items-center justify-center px-5 sm:px-6 py-4 bg-black hover:bg-[#b38848] text-white text-[13px] sm:text-sm font-medium no-underline transition-colors whitespace-nowrap">See The Process</a>
+            <button onClick={onEnquiry} className="col-span-2 sm:col-span-1 inline-flex items-center justify-center px-5 sm:px-6 py-4 bg-black hover:bg-[#b38848] text-white text-[13px] sm:text-sm font-medium transition-colors whitespace-nowrap cursor-pointer">Order Swatch Kit</button>
+          </div>
+        </div>
+      </div>
 
-      <motion.div style={{ opacity: fade }} className="container-am max-w-7xl relative w-full pt-28 sm:pt-32 pb-6 sm:pb-8">
-        <motion.span initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="block text-[11px] font-bold tracking-[5px] uppercase text-[#cca462] mb-6">
-          Technology &amp; Craft
-        </motion.span>
-        <h1 className="uppercase max-w-5xl" style={{ fontFamily: 'var(--font-hype)', fontWeight: 500, fontSize: 'clamp(30px, min(6.4vw, 9vh), 84px)', lineHeight: 1.05, letterSpacing: '-0.5px' }}>
-          <WordReveal immediate text="How Your Cover Is" />
-          <br />
-          <RotatingWord />
-        </h1>
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.8 }} className="mt-5 max-w-2xl text-base sm:text-lg text-white/80 font-light leading-relaxed">
-          From a 3D scan of your car to the last hand-stitched seam. Explore every cover, fabric, process and machine behind it.
-        </motion.p>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 1 }} className="mt-7 flex flex-wrap gap-3">
-          <a href="#fabrics" className="px-8 py-4 rounded-full bg-white hover:bg-[#cca462] text-black text-xs font-bold uppercase tracking-[2px] no-underline transition-colors">Explore The Covers</a>
-          <a href="#process" className="px-8 py-4 rounded-full border border-white/60 hover:bg-white hover:text-black text-white text-xs font-bold uppercase tracking-[2px] no-underline transition-colors">See The Process</a>
-          <button onClick={onEnquiry} className="px-8 py-4 rounded-full border border-white/60 hover:bg-white hover:text-black text-white text-xs font-bold uppercase tracking-[2px] transition-colors cursor-pointer">Order Swatch Kit</button>
-        </motion.div>
-
-      </motion.div>
-    </section>
+      {/* IMAGE */}
+      <div className="relative w-full h-[56vh] sm:h-[68vh] min-h-[320px] overflow-hidden bg-black">
+        <img src="/images/porsche_wheel_cover.jpg" alt="Porsche under a bespoke cover" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: 'center 84%' }} />
+      </div>
+    </>
   );
 }
 
