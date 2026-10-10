@@ -33,16 +33,6 @@ const MATERIALS = [
   { icon: Thermometer, name: 'UV-stable bonded thread', use: 'All stitching and piping', metric: 'Fade resistance', value: 96, label: 'Sun-proof', color: '#f87171' },
 ];
 
-const MACHINES = [
-  { icon: ScanLine, name: '3D Laser Scanner' },
-  { icon: Cpu, name: 'CAD / CAM Software' },
-  { icon: Scissors, name: 'CNC Laser Cutter' },
-  { icon: Zap, name: 'Ultrasonic Welder' },
-  { icon: FlaskConical, name: 'Hydrostatic Tester' },
-  { icon: Package, name: 'Embroidery Machines' },
-  { icon: Thermometer, name: 'UV Arc Chamber' },
-];
-
 const TESTS = [
   { label: 'Waterproof head', value: 10000, suffix: 'mm', ring: 1, color: '#38bdf8', note: 'Hydrostatic head test' },
   { label: 'UV rays blocked', value: 99.8, suffix: '%', decimals: 1, ring: 0.998, color: '#fbbf24', note: 'Solar reflectance test' },
@@ -706,30 +696,6 @@ function LabTests() {
 
 /* --------------------------------------------------------------- machines */
 
-function Machines() {
-  const row = [...MACHINES, ...MACHINES];
-  return (
-    <section className="py-20 sm:py-24 bg-[#efeae1] overflow-hidden">
-      <SectionHead kicker="THE ATELIER FLOOR" title="Machines & Tools" sub="Precision equipment, run by experienced craftspeople." />
-      <div className="relative [mask-image:linear-gradient(90deg,transparent,#000_10%,#000_90%,transparent)]">
-        <motion.div className="flex gap-5 w-max" animate={{ x: ['0%', '-50%'] }} transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}>
-          {row.map((m, i) => {
-            const Icon = m.icon;
-            return (
-              <div key={i} className="grad-border flex items-center gap-4 pl-5 pr-8 py-5 rounded-2xl bg-white shadow-sm min-w-[260px]">
-                <span className="w-12 h-12 rounded-xl bg-slate-950 text-[#cca462] flex items-center justify-center flex-shrink-0">
-                  <Icon size={22} />
-                </span>
-                <span className="font-bold text-slate-900 whitespace-nowrap">{m.name}</span>
-              </div>
-            );
-          })}
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
 /* ------------------------------------------------------------------- page */
 
 export default function TechnologyPage() {
@@ -745,7 +711,6 @@ export default function TechnologyPage() {
           <Materials />
           <LayerExplorer />
           <LabTests />
-          <Machines />
 
           <section className="relative bg-[#f8f6f1] text-slate-950 py-24 sm:py-32 overflow-hidden">
             <motion.div aria-hidden className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#cca462]/25 blur-[130px]" animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }} />
