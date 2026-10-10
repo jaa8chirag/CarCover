@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ALL as BRAND_LOGOS } from '@/data/brands';
 
 interface SlideData {
   id: string;
@@ -219,6 +220,8 @@ function HypeSection({
       {/* 2. Zero / Invisible Overlay to preserve 100% pristine image visibility */}
       <div className={`absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/15 z-[1] pointer-events-none ${slide.bright ? 'md:from-black/30 md:via-black/20 md:to-black/35' : 'md:from-black/10 md:via-black/0 md:to-black/25'}`} />
 
+      {index === 0 && <HeroLogoStrip />}
+
       {/* 3. Text Content: Glides UP into place with Crisp Staggered Motion */}
       <motion.div
         initial={index === 0 ? 'visible' : 'hidden'}
@@ -346,6 +349,28 @@ function PhoneCarousel({ slides }: { slides: { src: string; pos: string }[] }) {
           style={{ backgroundImage: `url(${cur.src})`, backgroundSize: 'cover', backgroundPosition: cur.pos }}
         />
       </AnimatePresence>
+    </div>
+  );
+}
+
+/** Drifting row of marque logos in their own colours, with a soft light halo so dark marks still read on the photo. */
+function HeroLogoStrip() {
+  const loop = [...BRAND_LOGOS, ...BRAND_LOGOS];
+  const mask = 'linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)';
+  return (
+    <div
+      className="absolute inset-x-0 z-[2] overflow-hidden pointer-events-none [touch-action:pan-y]"
+      style={{ top: 'calc(var(--header-height) + 2.5vh)', maskImage: mask, WebkitMaskImage: mask }}
+    >
+      <style>{`@keyframes hero-logos { from { transform: translateX(0); } to { transform: translateX(-50%); } }`}</style>
+      <div className="flex items-center w-max" style={{ animation: `hero-logos ${BRAND_LOGOS.length * 4}s linear infinite` }}>
+        {loop.map(([name, file], i) => (
+          <div key={i} className="flex items-center justify-center mx-5 sm:mx-9 h-9 sm:h-14 w-20 sm:w-32 flex-shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={`/brands/${file}`} alt={name} loading="lazy" className="max-h-full max-w-full object-contain" style={{ filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.9)) drop-shadow(0 0 14px rgba(255,255,255,0.45))' }} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
