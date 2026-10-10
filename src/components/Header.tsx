@@ -35,7 +35,7 @@ export default function Header({
 }: HeaderProps) {
   const pathname = usePathname();
   const isHomePage = pathname === '/';
-  const solidHeader = pathname.startsWith('/shop') || pathname.startsWith('/technology');
+  const solidHeader = pathname.startsWith('/shop') || pathname.startsWith('/technology') || pathname.startsWith('/collections');
 
   const [scrolled, setScrolled] = useState(false);
   const compact = scrolled;
