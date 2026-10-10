@@ -7,6 +7,7 @@ import {
   ScanLine, Ruler, Scissors, Zap, Brush, ClipboardCheck, Cpu, Flame, Droplets, Sun, Wind, Layers, Thermometer,
   FlaskConical, Package, CheckCircle2, ArrowRight, ChevronDown, Star, MapPin, ShieldCheck, Gauge, Shirt, Waves, Expand, Clock,
 } from 'lucide-react';
+import BrandMarquee from '@/components/BrandMarquee';
 import PageShell from '@/components/PageShell';
 import ProcessIllustration from '@/components/TechIllustrations';
 import { btnGlass, btnPrimary } from '@/components/PageHero';
@@ -217,32 +218,6 @@ function Hero({ onEnquiry }: { onEnquiry: () => void }) {
         </motion.div>
       </motion.div>
     </section>
-  );
-}
-
-/* ----------------------------------------------------------------- ticker */
-
-const TICKER = ['3D Laser Scan', 'CAD Pattern', 'CNC Laser Cut', 'Ultrasonic Weld', 'Hand Finished', 'Lab Tested', 'Fit Guaranteed'];
-
-function Ticker() {
-  const loop = [...TICKER, ...TICKER, ...TICKER, ...TICKER];
-  return (
-    <div className="bg-[#efeae1] border-y border-[#e0d9cc] overflow-hidden py-6">
-      <style>{`@keyframes tech-ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }`}</style>
-      <div className="flex w-max items-center" style={{ animation: 'tech-ticker 40s linear infinite' }}>
-        {loop.map((t, i) => (
-          <span key={i} className="flex items-center">
-            <span
-              className="uppercase px-8 whitespace-nowrap"
-              style={{ fontFamily: 'var(--font-hype)', fontSize: 'clamp(22px, 3vw, 40px)', color: 'transparent', WebkitTextStroke: '1px rgba(15,23,42,0.45)' }}
-            >
-              {t}
-            </span>
-            <span className="text-[#cca462] text-xl">✦</span>
-          </span>
-        ))}
-      </div>
-    </div>
   );
 }
 
@@ -768,7 +743,7 @@ export default function TechnologyPage() {
       {({ openEnquiry }) => (
         <>
           <Hero onEnquiry={openEnquiry} />
-          <Ticker />
+          <BrandMarquee flat />
           <FabricSpecs onEnquiry={openEnquiry} />
           <Process />
           <Materials />

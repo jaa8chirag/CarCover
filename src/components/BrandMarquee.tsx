@@ -47,9 +47,10 @@ function Row({ items }: { items: string[][] }) {
   );
 }
 
-export default function BrandMarquee() {
+/** `flat` drops the rounded overlap with the section above, for pages where it sits under a plain hero. */
+export default function BrandMarquee({ flat = false }: { flat?: boolean }) {
   return (
-    <section className="relative z-10 -mt-12 rounded-t-[3rem] bg-[#efeae1] pt-16 sm:pt-20 pb-10 sm:pb-14 shadow-[0_-30px_80px_-30px_rgba(0,0,0,0.55)] overflow-hidden">
+    <section className={`relative z-10 bg-[#efeae1] pb-10 sm:pb-14 overflow-hidden ${flat ? 'pt-12 sm:pt-16' : '-mt-12 rounded-t-[3rem] pt-16 sm:pt-20 shadow-[0_-30px_80px_-30px_rgba(0,0,0,0.55)]'}`}>
       <style>{`
         @keyframes brand-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .brand-row { touch-action: pan-y; -webkit-tap-highlight-color: transparent; }
