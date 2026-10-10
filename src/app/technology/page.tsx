@@ -210,7 +210,7 @@ function Hero({ onEnquiry }: { onEnquiry: () => void }) {
 
       {/* IMAGE */}
       <div className="relative w-full h-[56vh] sm:h-[68vh] min-h-[320px] overflow-hidden bg-black">
-        <img src="/images/porsche_wheel_cover.jpg" alt="Porsche under a bespoke cover" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: 'center 84%' }} />
+        <img src="/images/rr_garage_cover.jpg" alt="Rolls-Royce under a bespoke cover" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: 'center 62%' }} />
       </div>
     </>
   );
