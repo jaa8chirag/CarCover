@@ -175,10 +175,13 @@ function Hero({ onEnquiry }: { onEnquiry: () => void }) {
 
   return (
     <section ref={ref} className="relative min-h-[100vh] flex items-end overflow-hidden bg-[#f8f6f2] text-slate-950">
-      <motion.div style={{ y }} className="absolute inset-0">
-        <video className="w-full h-[120%] object-cover" src="/videos/hero_cover_install.mp4" poster="/images/craftsmanship.jpg" autoPlay muted loop playsInline />
+      <motion.div style={{ y }} className="absolute inset-y-0 right-0 w-full md:w-[58%]">
+        <img src="/images/porsche_wheel_cover.jpg" alt="Porsche under a bespoke cover" className="w-full h-full object-cover" style={{ objectPosition: 'center 92%' }} />
+        <div className="hidden md:block absolute inset-y-0 left-0 w-2/5 bg-gradient-to-r from-[#f8f6f2] via-[#f8f6f2]/60 to-transparent" />
       </motion.div>
-      <div className="absolute inset-0 bg-[#f8f6f2]/80 md:bg-transparent md:bg-gradient-to-r md:from-[#f8f6f2]/95 md:via-[#f8f6f2]/55 md:to-transparent" />
+      <div className="absolute inset-0 bg-[#f8f6f2]/60 md:bg-transparent" />
+      {/* keeps the white header text readable over the light left side */}
+      <div aria-hidden className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-black/45 via-black/15 to-transparent pointer-events-none" />
       <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#f8f6f2] via-[#f8f6f2]/70 to-transparent" />
       <motion.div
         aria-hidden
