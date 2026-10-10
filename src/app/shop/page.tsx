@@ -93,7 +93,7 @@ const SPEC_LABELS: [keyof NonNullable<ReturnType<typeof sheetFor>>['specs'], str
 const FABRIC_TONES: Record<string, { tone: string; image?: string }> = {
   'outdoor-standard': { tone: '#6b7686' },
   'outdoor-pro': { tone: '#8a5a1f' },
-  'outdoor-elite': { tone: '#1d2430' },
+  'outdoor-elite': { tone: '#1d2430', image: '/images/fabric_outdoor_elite.jpg' },
   'indoor-standard': { tone: '#3b4250' },
   'indoor-elite': { tone: '#15171c' },
   'unveil-showroom': { tone: '#4a4038' },
@@ -304,7 +304,7 @@ export default function ShopPage() {
                   <MobileSlider desktopClass={`md:grid md:gap-8 md:mx-auto ${g.id === 'unveiling' ? 'md:grid-cols-1 max-w-md' : g.id === 'indoor' || g.id === 'custom' ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-2 xl:grid-cols-3'}`}>
                     {g.id === 'custom'
                       ? CUSTOM.map((c) => <CustomCard key={c.id} c={c} />)
-                      : FABRICS.filter((f) => f.group === g.id).map((f) => f.id === 'outdoor-standard' ? <FlipCard key={f.id} f={f} /> : f.id === 'outdoor-pro' ? <SplitCard key={f.id} f={f} /> : <RangeCard key={f.id} f={f} />)}
+                      : FABRICS.filter((f) => f.group === g.id).map((f) => <FlipCard key={f.id} f={f} />)}
                   </MobileSlider>
                 </div>
               </section>
