@@ -174,7 +174,7 @@ function Hero({ onEnquiry }: { onEnquiry: () => void }) {
   const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} className="relative min-h-[100vh] flex items-end overflow-hidden bg-[#0b0b0b] text-white">
+    <section ref={ref} className="relative md:min-h-[765px] 2xl:min-h-[765px] flex items-end overflow-hidden rounded-b-[3rem] bg-[#0b0b0b] text-white">
       <motion.div style={{ y }} className="absolute inset-0">
         <img src="/images/porsche_wheel_cover.jpg" alt="Porsche under a bespoke cover" className="absolute inset-0 w-full h-[112%] object-cover" style={{ objectPosition: 'center 84%' }} />
       </motion.div>
@@ -186,7 +186,7 @@ function Hero({ onEnquiry }: { onEnquiry: () => void }) {
         transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      <motion.div style={{ opacity: fade }} className="container-am max-w-7xl relative w-full pt-44 pb-12 sm:pb-16">
+      <motion.div style={{ opacity: fade }} className="container-am max-w-7xl relative w-full pt-32 sm:pt-36 pb-8 sm:pb-10">
         <motion.span initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="block text-[11px] font-bold tracking-[5px] uppercase text-[#cca462] mb-6">
           Technology &amp; Craft
         </motion.span>
@@ -195,16 +195,16 @@ function Hero({ onEnquiry }: { onEnquiry: () => void }) {
           <br />
           <RotatingWord />
         </h1>
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.8 }} className="mt-7 max-w-2xl text-base sm:text-lg text-white/80 font-light leading-relaxed">
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.8 }} className="mt-5 max-w-2xl text-base sm:text-lg text-white/80 font-light leading-relaxed">
           From a 3D scan of your car to the last hand-stitched seam. Explore every cover, fabric, process and machine behind it.
         </motion.p>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 1 }} className="mt-10 flex flex-wrap gap-3">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 1 }} className="mt-7 flex flex-wrap gap-3">
           <a href="#fabrics" className="px-8 py-4 rounded-full bg-white hover:bg-[#cca462] text-black text-xs font-bold uppercase tracking-[2px] no-underline transition-colors">Explore The Covers</a>
           <a href="#process" className="px-8 py-4 rounded-full border border-white/60 hover:bg-white hover:text-black text-white text-xs font-bold uppercase tracking-[2px] no-underline transition-colors">See The Process</a>
           <button onClick={onEnquiry} className="px-8 py-4 rounded-full border border-white/60 hover:bg-white hover:text-black text-white text-xs font-bold uppercase tracking-[2px] transition-colors cursor-pointer">Order Swatch Kit</button>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 1.2 }} className="mt-14 sm:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-x-6 border-t border-white/25">
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 1.2 }} className="mt-8 sm:mt-10 grid grid-cols-2 lg:grid-cols-4 gap-x-6 border-t border-white/25">
           {HERO_STATS.map((s) => (
             <div key={s.label} className="py-6 min-w-0">
               <div className="whitespace-nowrap font-semibold text-white leading-none" style={{ fontFamily: 'var(--font-hype)', fontSize: 'clamp(22px, 2.5vw, 38px)' }}>
