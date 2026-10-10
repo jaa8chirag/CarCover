@@ -1,11 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { Check, ArrowRight, ArrowUpRight } from 'lucide-react';
+import { Check, ArrowRight, ArrowUpRight, RotateCw } from 'lucide-react';
 import PageShell from '@/components/PageShell';
 import MobileSlider from '@/components/MobileSlider';
 import { FABRICS, type CoverGroup, type Fabric } from '@/data/fabrics';
+import { FABRIC_SHEETS } from '@/data/technology';
 
 const GROUPS: { id: CoverGroup | 'custom'; label: string; text: string; kicker: string; after?: string; afterPos?: string }[] = [
   { id: 'outdoor', label: 'Outdoor Covers', text: 'Built for rain, sun and dust. For cars parked outside.', kicker: 'For the open road', after: '/images/rr_black_wide.jpg', afterPos: 'center 0%'},
@@ -62,6 +63,168 @@ function CustomCard({ c }: { c: (typeof CUSTOM)[number] }) {
         </ul>
         <span className="mt-6 inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-black group-hover:bg-[#b38848] text-white text-xs font-bold uppercase tracking-[2px] transition-colors">
           Enquire now <ArrowRight size={14} />
+        </span>
+      </div>
+    </Link>
+  );
+}
+
+/** A woven-cloth look, tinted per cover. Swap for a real fabric photo whenever one is available. */
+function weave(hex: string): React.CSSProperties {
+  return {
+    backgroundColor: hex,
+    backgroundImage:
+      'repeating-linear-gradient(45deg, rgba(255,255,255,0.13) 0 2px, transparent 2px 7px), repeating-linear-gradient(-45deg, rgba(0,0,0,0.22) 0 2px, transparent 2px 7px), radial-gradient(circle at 30% 20%, rgba(255,255,255,0.18), transparent 60%)',
+  };
+}
+
+function sheetFor(id: string) {
+  return FABRIC_SHEETS.find((x) => x.id === id);
+}
+
+const SPEC_LABELS: [keyof NonNullable<ReturnType<typeof sheetFor>>['specs'], string][] = [
+  ['material', 'Material'],
+  ['waterResistance', 'Water'],
+  ['breathability', 'Breathability'],
+  ['lining', 'Lining'],
+];
+
+/** Colour of each cover's cloth. Add an `image` (a real fabric photo) to any entry and it replaces the drawn weave. */
+const FABRIC_TONES: Record<string, { tone: string; image?: string }> = {
+  'outdoor-standard': { tone: '#6b7686' },
+  'outdoor-pro': { tone: '#8a5a1f' },
+  'outdoor-elite': { tone: '#1d2430' },
+  'indoor-standard': { tone: '#3b4250' },
+  'indoor-elite': { tone: '#15171c' },
+  'unveil-showroom': { tone: '#4a4038' },
+};
+
+/** Every cover card: hover (or tap the button on touch) flips it over. The back opens with a fabric picture, then the details. */
+function FlipCard({ f }: { f: Fabric }) {
+  const [flipped, setFlipped] = useState(false);
+  const sheet = sheetFor(f.id);
+  const fab = FABRIC_TONES[f.id] ?? { tone: '#444' };
+  return (
+    <div
+      className="h-full [perspective:1400px]"
+      onMouseEnter={() => { if (window.matchMedia('(hover: hover)').matches) setFlipped(true); }}
+      onMouseLeave={() => setFlipped(false)}
+    >
+      <div className="relative h-full grid transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] [transform-style:preserve-3d]" style={{ transform: flipped ? 'rotateY(180deg)' : 'none' }}>
+        {/* FRONT */}
+        <div className="[grid-area:1/1] [backface-visibility:hidden] flex flex-col bg-white rounded-[2rem] overflow-hidden border border-slate-200 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.25)]">
+          <div className="relative aspect-[5/4] overflow-hidden bg-slate-900">
+            <img src={f.image} alt={f.title} loading="lazy" className="w-full h-full object-cover" />
+            {f.bestseller && (
+              <span className="absolute top-4 left-4 bg-gradient-to-r from-[#cca462] to-[#f6e3b4] text-black text-[10px] font-bold tracking-[2px] px-4 py-2 rounded-full shadow-lg">BESTSELLER</span>
+            )}
+            <button
+              type="button"
+              onClick={() => setFlipped(true)}
+              className="absolute bottom-4 right-4 hidden [@media(hover:none)]:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-[2px] cursor-pointer"
+            >
+              <RotateCw size={12} /> See the fabric
+            </button>
+          </div>
+          <div className="p-6 sm:p-7 flex flex-col flex-1">
+            <span className="block text-[10px] font-bold uppercase tracking-[2px] text-slate-400">Starting from</span>
+            <span className="text-2xl font-semibold text-black" style={{ fontFamily: 'var(--font-hype)' }}>₹{f.price.toLocaleString('en-IN')}</span>
+            <h3 className="mt-3 uppercase font-bold tracking-wide text-black leading-snug">{f.title}</h3>
+            <p className="mt-1 text-sm text-slate-500">{f.subtitle}</p>
+            <ul className="mt-4 space-y-2 flex-1">
+              {f.specs.slice(0, 3).map((x) => (
+                <li key={x} className="flex items-start gap-2.5 text-[13px] text-slate-700 leading-snug">
+                  <span className="mt-0.5 w-4 h-4 rounded-full bg-[#b38848]/15 flex items-center justify-center flex-shrink-0"><Check size={10} className="text-[#b38848]" /></span>
+                  {x}
+                </li>
+              ))}
+            </ul>
+            <Link href={`/shop/${f.id}`} className="mt-6 inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-black hover:bg-[#b38848] text-white text-xs font-bold uppercase tracking-[2px] no-underline transition-colors">
+              Choose this cover <ArrowRight size={14} />
+            </Link>
+          </div>
+        </div>
+
+        {/* BACK: fabric picture on top, details below */}
+        <div className="[grid-area:1/1] [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col bg-white rounded-[2rem] overflow-hidden border border-slate-200 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.35)]">
+          <div className="relative aspect-[5/4] overflow-hidden" style={fab.image ? undefined : weave(fab.tone)}>
+            {fab.image && <img src={fab.image} alt={`${f.title} fabric`} className="absolute inset-0 w-full h-full object-cover" />}
+            <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10" />
+            <span className="absolute bottom-4 left-5 text-[10px] font-bold tracking-[4px] uppercase text-[#f6e3b4]">The fabric</span>
+          </div>
+          <div className="p-6 sm:p-7 flex flex-col flex-1">
+            <h3 className="uppercase font-bold tracking-wide text-black leading-snug">{f.title}</h3>
+            <dl className="mt-4 space-y-3 flex-1">
+              {sheet && SPEC_LABELS.map(([k, label]) => (
+                <div key={k}>
+                  <dt className="text-[10px] tracking-[2px] uppercase text-slate-400">{label}</dt>
+                  <dd className="text-[13px] leading-snug text-slate-800">{sheet.specs[k]}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="mt-5 flex gap-3">
+              <button type="button" onClick={() => setFlipped(false)} className="px-5 py-3.5 rounded-full border border-slate-300 hover:border-black text-black text-xs font-bold uppercase tracking-[2px] cursor-pointer transition-colors">Back</button>
+              <Link href={`/shop/${f.id}`} className="flex-1 inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-black hover:bg-[#b38848] text-white text-xs font-bold uppercase tracking-[2px] no-underline transition-colors">
+                Choose <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Outdoor Pro: a normal photo card. Hover it (or tap the button on touch screens) and the fabric slides in over one half of the picture. */
+function SplitCard({ f }: { f: Fabric }) {
+  const [show, setShow] = useState(false);
+  const sheet = sheetFor(f.id);
+  const fab = FABRIC_TONES[f.id] ?? { tone: '#444' };
+  return (
+    <Link
+      href={`/shop/${f.id}`}
+      onMouseEnter={() => { if (window.matchMedia('(hover: hover)').matches) setShow(true); }}
+      onMouseLeave={() => setShow(false)}
+      className="group flex flex-col h-full bg-white rounded-[2rem] overflow-hidden no-underline text-inherit border border-slate-200 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.25)] hover:shadow-[0_40px_90px_-30px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-500"
+    >
+      <div className="relative aspect-[5/4] overflow-hidden bg-slate-900">
+        <img src={f.image} alt={f.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+        {/* fabric: slides in over the left half */}
+        <div
+          className="absolute inset-0 transition-[clip-path] duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+          style={{ ...(fab.image ? { backgroundImage: `url(${fab.image})`, backgroundSize: 'cover' } : weave(fab.tone)), clipPath: show ? 'inset(0 50% 0 0)' : 'inset(0 100% 0 0)' }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-black/0 via-black/20 to-black/60" />
+          <div className={`absolute inset-0 py-4 flex flex-col justify-center items-center text-center pr-[54%] pl-4 transition-opacity duration-500 ${show ? 'opacity-100 delay-300' : 'opacity-0'}`}>
+            <span className="text-[9px] font-bold tracking-[3px] uppercase text-[#f6e3b4]">The fabric</span>
+            <span className="mt-1 text-[11px] sm:text-[12px] leading-snug text-white font-medium line-clamp-3">{sheet?.specs.material}</span>
+            <span className="mt-1.5 text-[10px] leading-snug text-white/75 line-clamp-2">{sheet?.specs.waterResistance}</span>
+          </div>
+        </div>
+        <span aria-hidden className={`absolute inset-y-0 left-1/2 w-px bg-[#cca462] transition-opacity duration-500 ${show ? 'opacity-100' : 'opacity-0'}`} />
+        <button
+          type="button"
+          onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShow((v) => !v); }}
+          className="absolute bottom-4 right-4 hidden [@media(hover:none)]:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-[2px] cursor-pointer"
+        >
+          <RotateCw size={12} /> {show ? 'Hide fabric' : 'See the fabric'}
+        </button>
+      </div>
+      <div className="p-6 sm:p-7 flex flex-col flex-1">
+        <span className="block text-[10px] font-bold uppercase tracking-[2px] text-slate-400">Starting from</span>
+        <span className="text-2xl font-semibold text-black" style={{ fontFamily: 'var(--font-hype)' }}>₹{f.price.toLocaleString('en-IN')}</span>
+        <h3 className="mt-3 uppercase font-bold tracking-wide text-black leading-snug">{f.title}</h3>
+        <p className="mt-1 text-sm text-slate-500">{f.subtitle}</p>
+        <ul className="mt-4 space-y-2 flex-1">
+          {f.specs.slice(0, 3).map((x) => (
+            <li key={x} className="flex items-start gap-2.5 text-[13px] text-slate-700 leading-snug">
+              <span className="mt-0.5 w-4 h-4 rounded-full bg-[#b38848]/15 flex items-center justify-center flex-shrink-0"><Check size={10} className="text-[#b38848]" /></span>
+              {x}
+            </li>
+          ))}
+        </ul>
+        <span className="mt-6 inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-black group-hover:bg-[#b38848] text-white text-xs font-bold uppercase tracking-[2px] transition-colors">
+          Choose this cover <ArrowRight size={14} />
         </span>
       </div>
     </Link>
@@ -141,7 +304,7 @@ export default function ShopPage() {
                   <MobileSlider desktopClass={`md:grid md:gap-8 md:mx-auto ${g.id === 'unveiling' ? 'md:grid-cols-1 max-w-md' : g.id === 'indoor' || g.id === 'custom' ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-2 xl:grid-cols-3'}`}>
                     {g.id === 'custom'
                       ? CUSTOM.map((c) => <CustomCard key={c.id} c={c} />)
-                      : FABRICS.filter((f) => f.group === g.id).map((f) => <RangeCard key={f.id} f={f} />)}
+                      : FABRICS.filter((f) => f.group === g.id).map((f) => f.id === 'outdoor-standard' ? <FlipCard key={f.id} f={f} /> : f.id === 'outdoor-pro' ? <SplitCard key={f.id} f={f} /> : <RangeCard key={f.id} f={f} />)}
                   </MobileSlider>
                 </div>
               </section>
