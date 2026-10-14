@@ -12,6 +12,10 @@ interface SlideData {
   desktopShop?: 'both' | 'car' | 'unveil';
   /** Phones only: photos that auto-slide right to left behind this slide's fixed text. */
   mobileSlides?: { src: string; pos: string }[];
+  /** All screens: photos that auto-slide behind this slide's fixed text. */
+  sliderSlides?: { src: string; pos: string }[];
+  /** Only these shop buttons are shown on this slide. */
+  buttonKeys?: string[];
   /** Folded into another slide's carousel, so it is not rendered on its own. */
   merged?: boolean;
   /** Phones only: the slide is skipped on laptops/desktops. */
@@ -55,6 +59,26 @@ const SLIDES: SlideData[] = [
     ctaText: 'EXPLORE BESPOKE',
     accentColor: '#cca462',
     nextPreviewName: 'AquaShield+ Monsoon Defiance',
+  },
+  {
+    id: 'bespoke-covers-slider',
+    buttonKeys: ['bespoke'],
+    category: '',
+    title: 'BESPOKE COVERS. MADE FOR ONE CAR.',
+    tagline: 'Your colours. Your number. Your cover.',
+    mobileLine: 'Your colours. Your cover.',
+    description:
+      'Printed, monogrammed or branded covers cut to your exact car.',
+    bgSrc: '/images/bespoke_slide_1.jpg',
+    sliderSlides: [
+      { src: '/images/bespoke_slide_1.jpg', pos: 'center center' },
+      { src: '/images/bespoke_slide_2.jpg', pos: 'center center' },
+    ],
+    bgPos: 'center center',
+    tierId: 'bespoke',
+    ctaText: 'EXPLORE BESPOKE',
+    accentColor: '#cca462',
+    nextPreviewName: '',
   },
   {
     id: 'signature-fit',
@@ -215,6 +239,7 @@ function HypeSection({
 
 
       {slide.mobileSlides && <PhoneCarousel slides={slide.mobileSlides} />}
+      {slide.sliderSlides && <PhoneCarousel slides={slide.sliderSlides} allScreens />}
 
       {/* 2. Zero / Invisible Overlay to preserve 100% pristine image visibility */}
       <div className={`absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/15 z-[1] pointer-events-none ${slide.bright ? 'md:from-black/30 md:via-black/20 md:to-black/35' : 'md:from-black/10 md:via-black/0 md:to-black/25'}`} />
@@ -228,7 +253,7 @@ function HypeSection({
           hidden: {},
           visible: { transition: { staggerChildren: 0.12 } },
         }}
-        className={`relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center [text-shadow:0_2px_20px_rgba(0,0,0,0.55)] max-md:absolute max-md:inset-x-0 max-md:bottom-0 max-md:max-w-none max-md:items-start max-md:text-left max-md:bg-gradient-to-t max-md:from-black/80 max-md:via-black/45 max-md:to-transparent max-md:pt-28 max-md:pb-8 md:absolute md:inset-x-0 md:bottom-0 md:max-w-none md:items-start md:text-left md:px-14 lg:px-24 md:pt-44 md:pb-14 lg:pb-20 md:bg-gradient-to-t md:from-black/65 md:via-black/25 md:to-transparent`}
+        className={`relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center [text-shadow:0_2px_20px_rgba(0,0,0,0.55)] max-md:absolute max-md:inset-x-0 max-md:bottom-0 max-md:max-w-none max-md:items-center max-md:text-center max-md:bg-gradient-to-t max-md:from-black/80 max-md:via-black/45 max-md:to-transparent max-md:pt-28 max-md:pb-8 md:absolute md:inset-x-0 md:bottom-0 md:max-w-none md:items-center md:text-center md:px-14 lg:px-24 md:pt-44 md:pb-14 lg:pb-20 md:bg-gradient-to-t md:from-black/65 md:via-black/25 md:to-transparent`}
       >
         {slide.category && (
         <motion.div
@@ -269,7 +294,7 @@ function HypeSection({
         <motion.div
           variants={{ hidden: { width: 0, opacity: 0 }, visible: { width: '120px', opacity: 1 } }}
           transition={{ duration: 1.0, ease: 'easeOut' }}
-          className={`h-[1px] mb-6 max-md:mb-3`}
+          className={`h-[1px] mx-auto mb-6 max-md:mb-3`}
           style={{
             background: `linear-gradient(90deg, transparent, ${slide.accentColor}, transparent)`,
             boxShadow: `0 0 12px ${slide.accentColor}`,
@@ -304,17 +329,18 @@ function HypeSection({
           {slide.description}
         </motion.p>
 
-        <div className="flex flex-wrap items-center justify-center gap-3 max-md:flex-col max-md:items-start">
+        <div className="flex flex-wrap items-center justify-center gap-3 max-md:flex-col max-md:items-center">
           {[
             { key: 'car', label: 'Shop Car Covers', href: '/shop', solid: true },
             { key: 'unveil', label: 'Shop Unveiling Covers', href: '/shop#unveiling', solid: false },
-          ].map((b) => (
+            ...(slide.id === 'bespoke-veiled' || slide.id === 'bespoke-covers-slider' ? [{ key: 'bespoke', label: 'Bespoke Covers', href: '/shop#custom', solid: false }] : []),
+          ].filter((b) => !slide.buttonKeys || slide.buttonKeys.includes(b.key)).map((b) => (
             <motion.a
               key={b.label}
               href={b.href}
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
               transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
-              className={`inline-flex items-center gap-3 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-[2.5px] no-underline transition-colors ${(slide.desktopShop ?? 'both') !== 'both' && slide.desktopShop !== b.key ? 'md:hidden' : ''} ${b.solid ? 'bg-white hover:bg-[#cca462] text-black shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)]' : 'bg-black/35 backdrop-blur-md border border-white/70 hover:bg-white hover:text-black text-white'}`}
+              className={`inline-flex items-center gap-3 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-[2.5px] no-underline transition-colors ${b.key !== 'bespoke' && (slide.desktopShop ?? 'both') !== 'both' && slide.desktopShop !== b.key ? 'md:hidden' : ''} ${b.solid ? 'bg-white hover:bg-[#cca462] text-black shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)]' : 'bg-black/35 backdrop-blur-md border border-white/70 hover:bg-white hover:text-black text-white'}`}
             >
               {b.label} <span aria-hidden>→</span>
             </motion.a>
@@ -326,7 +352,7 @@ function HypeSection({
 }
 
 /** Photos slide in from the right and out to the left, on a timer. */
-function PhoneCarousel({ slides }: { slides: { src: string; pos: string }[] }) {
+function PhoneCarousel({ slides, allScreens }: { slides: { src: string; pos: string }[]; allScreens?: boolean }) {
   const [i, setI] = useState(0);
   useEffect(() => {
     const t = setInterval(() => setI((v) => (v + 1) % slides.length), 3800);
@@ -334,7 +360,7 @@ function PhoneCarousel({ slides }: { slides: { src: string; pos: string }[] }) {
   }, [slides.length]);
   const cur = slides[i];
   return (
-    <div className="md:hidden absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]" style={{ filter: 'brightness(1.18) contrast(1.05) saturate(1.1)' }}>
+    <div className={`${allScreens ? '' : 'md:hidden '}absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]`} style={{ filter: 'brightness(1.18) contrast(1.05) saturate(1.1)' }}>
       <AnimatePresence initial={false}>
         <motion.div
           key={cur.src}
