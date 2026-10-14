@@ -6,7 +6,7 @@ import PageShell from '@/components/PageShell';
 import SlideHero from '@/components/SlideHero';
 
 const GALLERY = [
-  '/images/cover_hero.jpg', '/images/cover_rr_garage.jpg', '/images/cover_rr_garage_portrait.jpg', '/images/cover_landrover.jpg', '/images/cover_ferrari.jpg',
+  '/images/cover_showroom.jpg', '/images/cover_rr_garage.jpg', '/images/cover_rr_garage_portrait.jpg', '/images/cover_landrover.jpg', '/images/cover_ferrari.jpg',
   '/images/outdoor.jpg', '/images/cover_mini.jpg', '/images/cover_heatshield.jpg',
 ];
 
