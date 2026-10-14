@@ -6,7 +6,7 @@ import PageShell from '@/components/PageShell';
 import SlideHero from '@/components/SlideHero';
 
 const GALLERY = [
-  '/images/cover_showroom.jpg', '/images/cover_rr_garage.jpg', '/images/cover_rangerover.jpg', '/images/cover_landrover.jpg', '/images/cover_ferrari.jpg',
+  '/images/cover_showroom.jpg', '/images/cover_rr_garage_portrait.jpg', '/images/cover_rangerover.jpg', '/images/cover_landrover_portrait.jpg', '/images/cover_ferrari.jpg',
   '/images/outdoor.jpg', '/images/cover_mini.jpg', '/images/cover_heatshield.jpg',
 ];
 
@@ -27,7 +27,7 @@ function GalleryStrip() {
         {loop.map((src, i) => (
           <div
             key={i}
-            className={`group relative flex-shrink-0 w-[70vw] sm:w-[34vw] lg:w-[26vw] overflow-hidden rounded-[2rem] border border-white/10 ${(i % GALLERY.length) % 2 ? 'aspect-[4/3] translate-y-6' : 'aspect-[4/5] -translate-y-2'}`}
+            className={`group relative flex-shrink-0 w-[70vw] sm:w-[34vw] lg:w-[26vw] overflow-hidden rounded-[2rem] border border-white/10 aspect-[4/5] ${(i % GALLERY.length) % 2 ? 'translate-y-6' : '-translate-y-2'}`}
           >
             <img src={src} alt="Bespoke covered car" loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] group-hover:scale-110" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-70 group-hover:opacity-30 transition-opacity duration-500" />
