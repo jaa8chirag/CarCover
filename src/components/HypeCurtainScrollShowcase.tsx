@@ -16,6 +16,8 @@ interface SlideData {
   sliderSlides?: { src: string; pos: string }[];
   /** Only these shop buttons are shown on this slide. */
   buttonKeys?: string[];
+  /** Laptops/desktops only: position in the page (default is index * 10). Phones keep the array order. */
+  desktopOrder?: number;
   /** Folded into another slide's carousel, so it is not rendered on its own. */
   merged?: boolean;
   /** Phones only: the slide is skipped on laptops/desktops. */
@@ -179,6 +181,7 @@ const SLIDES: SlideData[] = [
   },
   {
     id: 'atelier-commission',
+    desktopOrder: 15,
     desktopShop: 'unveil',
     category: '',
     title: 'NOT OFF THE SHELF. COMMISSIONED ONLY FOR YOU.',
@@ -393,12 +396,16 @@ export default function HypeCurtainScrollShowcase({
   };
 
   return (
-    <div className="relative w-full" id="hype-showcase-container">
+    <div className="relative w-full flex flex-col" id="hype-showcase-container">
       <style>{KENBURNS_CSS}</style>
       {/* 5 Hype Sections */}
       {SLIDES.map((slide, index) => (
         slide.merged ? null : (
-        <div key={slide.id} className={slide.phoneOnly ? 'md:hidden' : undefined}>
+        <div
+          key={slide.id}
+          className={`md:[order:var(--o)] ${slide.phoneOnly ? 'md:hidden' : ''}`}
+          style={{ ['--o' as string]: slide.desktopOrder ?? index * 10 }}
+        >
           <HypeSection
             slide={slide}
             index={index}

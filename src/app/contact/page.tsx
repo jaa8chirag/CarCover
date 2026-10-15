@@ -8,7 +8,6 @@ import PageShell from '@/components/PageShell';
 const WHATSAPP_NUMBER = '918585996669';
 const WHATSAPP_DISPLAY = '+91 85859 96669';
 
-const COVER_TYPES = ['Outdoor cover', 'Indoor cover', 'Unveiling cover', 'Custom cover', 'Not sure yet'];
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -24,7 +23,7 @@ const FIELD =
   'w-full px-4 py-3.5 rounded-xl border border-slate-300 bg-white text-sm text-black placeholder:text-slate-400 focus:outline-none focus:border-black';
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: '', phone: '', vehicle: '', type: COVER_TYPES[0], message: '' });
+  const [form, setForm] = useState({ name: '', phone: '', vehicle: '', message: '' });
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm({ ...form, [k]: e.target.value });
 
@@ -38,7 +37,6 @@ export default function ContactPage() {
       `Name: ${form.name}`,
       `Phone: ${form.phone}`,
       form.vehicle && `Car: ${form.vehicle}`,
-      `Interested in: ${form.type}`,
       form.message && `Message: ${form.message}`,
     ].filter(Boolean) as string[];
     window.open(waLink(lines.join('\n')), '_blank', 'noopener,noreferrer');
@@ -163,17 +161,9 @@ export default function ContactPage() {
                         <span className="text-xs font-semibold text-slate-700 block mb-1.5">Phone *</span>
                         <input type="tel" required value={form.phone} onChange={set('phone')} placeholder="+91 98765 43210" className={FIELD} />
                       </label>
-                      <label className="block">
+                      <label className="block sm:col-span-2">
                         <span className="text-xs font-semibold text-slate-700 block mb-1.5">Your car</span>
                         <input type="text" value={form.vehicle} onChange={set('vehicle')} placeholder="e.g. Porsche 911, Thar Roxx" className={FIELD} />
-                      </label>
-                      <label className="block">
-                        <span className="text-xs font-semibold text-slate-700 block mb-1.5">Interested in</span>
-                        <select value={form.type} onChange={set('type')} className={FIELD}>
-                          {COVER_TYPES.map((t) => (
-                            <option key={t} value={t}>{t}</option>
-                          ))}
-                        </select>
                       </label>
                     </div>
                     <label className="block">

@@ -27,7 +27,6 @@ function Banner() {
 
 const CUSTOM = [
   { id: 'custom-printed', title: 'Custom Printed Cover', text: 'Your artwork, livery or branding printed edge to edge on premium stretch fabric.', image: '/images/cover_custom_printed.jpg', points: ['Any artwork, logo or livery', 'Sharp, fade-resistant printing', 'Cut to your exact car'] },
-  { id: 'custom-monogram', title: 'Monogram & Piping Cover', text: 'Contrast piping, an embroidered monogram and your choice of colours on any of our fabrics.', image: '/images/cover_install_3.jpg', points: ['Embroidered monogram or crest', 'Contrast piping in any colour', 'Works on every fabric we make'] },
 ];
 
 /** Full-width photo between two sections. */
@@ -300,7 +299,7 @@ export default function ShopPage() {
                     <p className="mt-4 mx-auto max-w-xl text-slate-600">{g.text}</p>
                   </div>
 
-                  <MobileSlider desktopClass={`md:grid md:gap-8 md:mx-auto ${g.id === 'unveiling' ? 'md:grid-cols-1 max-w-md' : g.id === 'indoor' || g.id === 'custom' ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-2 xl:grid-cols-3'}`}>
+                  <MobileSlider desktopClass={`md:grid md:gap-8 md:mx-auto ${g.id === 'unveiling' || g.id === 'custom' ? 'md:grid-cols-1 max-w-md' : g.id === 'indoor' ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-2 xl:grid-cols-3'}`}>
                     {g.id === 'custom'
                       ? CUSTOM.map((c) => <CustomCard key={c.id} c={c} />)
                       : FABRICS.filter((f) => f.group === g.id).map((f) => <FlipCard key={f.id} f={f} />)}
