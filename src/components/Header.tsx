@@ -145,7 +145,7 @@ export default function Header({
       >
         <div className="h-[1.5px] w-full bg-gradient-to-r from-transparent via-[#cca462]/60 to-transparent pointer-events-none" />
 
-        <div className={`container-am relative flex ${compact ? 'h-[58px] sm:h-[64px]' : 'h-[86px] sm:h-[104px]'} transition-[height] duration-500 ease-out items-center justify-between gap-4 px-5 sm:px-12`}>
+        <div className={`container-am relative flex ${compact ? 'h-[58px] sm:h-[64px]' : 'h-[72px] sm:h-[84px]'} transition-[height] duration-500 ease-out items-center justify-between gap-4 px-5 sm:px-12`}>
           {/* LEFT: sidebar menu button */}
           <div className="flex items-center flex-1 min-w-0">
             <button
@@ -178,7 +178,7 @@ export default function Header({
                 <span className="flex flex-col items-center gap-1 sm:gap-1.5 text-white" style={{ fontFamily: 'var(--font-main)' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/logo-white.png" alt="" aria-hidden className={`w-auto transition-all duration-500 ease-out ${compact ? 'h-0 opacity-0 -mb-1' : 'h-9 sm:h-[50px] opacity-100'}`} />
-                  <span className="font-bold uppercase tracking-[0.3em] sm:tracking-[0.42em] text-[10px] sm:text-[15px] whitespace-nowrap pl-[0.3em] sm:pl-[0.42em]">Signature Covers</span>
+                  <span className={`font-bold uppercase tracking-[0.3em] sm:tracking-[0.42em] text-[10px] sm:text-[15px] whitespace-nowrap pl-[0.3em] sm:pl-[0.42em] transition-all duration-500 ease-out ${compact ? 'max-h-6 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>Signature Covers</span>
                 </span>
               </motion.div>
             </Link>
