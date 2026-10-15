@@ -11,7 +11,7 @@ import { FABRIC_SHEETS } from '@/data/technology';
 const GROUPS: { id: CoverGroup | 'custom'; label: string; text: string; kicker: string; after?: string; afterPos?: string }[] = [
   { id: 'outdoor', label: 'Outdoor Covers', text: 'Built for rain, sun and dust. For cars parked outside.', kicker: 'For the open road', after: '/images/rr_black_wide.jpg', afterPos: 'center 0%'},
   { id: 'indoor', label: 'Indoor Covers', text: 'Soft, breathable covers for the garage or showroom.', kicker: 'For the garage', after: '/images/unveil_gold_wide.jpg', afterPos: 'center 50%'},
-  { id: 'unveiling', label: 'Unveiling Covers', text: 'Reveal-night covers for launches and handovers.', kicker: 'For the big reveal', after: '/images/lambo_aventador_j.jpg', afterPos: 'center 62%'},
+  { id: 'unveiling', label: 'Unveiling Covers', text: 'Reveal-night covers for launches and handovers.', kicker: 'For the big reveal', after: '/images/bespoke_slide_2.jpg', afterPos: 'center 55%'},
   { id: 'custom', label: 'Bespoke Covers', text: 'Printed, monogrammed or branded. Made for one car only.', kicker: 'Made for one car'},
 ];
 

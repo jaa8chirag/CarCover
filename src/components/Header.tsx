@@ -35,7 +35,7 @@ export default function Header({
 }: HeaderProps) {
   const pathname = usePathname();
   const isHomePage = pathname === '/';
-  const solidHeader = pathname.startsWith('/shop') || pathname.startsWith('/technology') || pathname.startsWith('/collections');
+  const solidHeader = pathname.startsWith('/shop') || pathname.startsWith('/technology') || pathname.startsWith('/collections') || pathname.startsWith('/about');
 
   const [scrolled, setScrolled] = useState(false);
   const compact = scrolled;
@@ -136,10 +136,10 @@ export default function Header({
         className="fixed top-0 left-0 w-full z-50 transition-all duration-300 pointer-events-auto"
         style={{
           // Glass over the page; solid black on /shop where the page behind is light
-          background: solidHeader ? '#000000' : scrolled ? 'rgba(0, 0, 0, 0.55)' : 'transparent',
-          backdropFilter: solidHeader ? undefined : scrolled ? 'blur(16px) saturate(140%)' : 'none',
-          WebkitBackdropFilter: solidHeader ? undefined : scrolled ? 'blur(16px) saturate(140%)' : 'none',
-          borderBottom: scrolled || solidHeader ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid transparent',
+          background: solidHeader ? '#000000' : scrolled ? 'rgba(0, 0, 0, 0.55)' : 'rgba(0, 0, 0, 0.35)',
+          backdropFilter: solidHeader ? undefined : scrolled ? 'blur(16px) saturate(140%)' : 'blur(14px) saturate(140%)',
+          WebkitBackdropFilter: solidHeader ? undefined : scrolled ? 'blur(16px) saturate(140%)' : 'blur(14px) saturate(140%)',
+          borderBottom: scrolled || solidHeader ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(255, 255, 255, 0.08)',
           boxShadow: scrolled && solidHeader ? '0 12px 40px -12px rgba(0, 0, 0, 0.6)' : 'none',
         }}
       >
