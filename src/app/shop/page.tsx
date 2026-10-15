@@ -26,7 +26,7 @@ function Banner() {
 }
 
 const CUSTOM = [
-  { id: 'custom-printed', title: 'Custom Printed Cover', text: 'Your artwork, livery or branding printed edge to edge on premium stretch fabric.', image: '/images/cover_install_2.jpg', points: ['Any artwork, logo or livery', 'Sharp, fade-resistant printing', 'Cut to your exact car'] },
+  { id: 'custom-printed', title: 'Custom Printed Cover', text: 'Your artwork, livery or branding printed edge to edge on premium stretch fabric.', image: '/images/cover_custom_printed.jpg', points: ['Any artwork, logo or livery', 'Sharp, fade-resistant printing', 'Cut to your exact car'] },
   { id: 'custom-monogram', title: 'Monogram & Piping Cover', text: 'Contrast piping, an embroidered monogram and your choice of colours on any of our fabrics.', image: '/images/cover_install_3.jpg', points: ['Embroidered monogram or crest', 'Contrast piping in any colour', 'Works on every fabric we make'] },
 ];
 
@@ -49,7 +49,6 @@ function CustomCard({ c }: { c: (typeof CUSTOM)[number] }) {
         <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] group-hover:scale-110" />
       </div>
       <div className="p-6 sm:p-7 flex flex-col flex-1">
-        <span className="block text-[10px] font-bold uppercase tracking-[2px] text-slate-400">Starting from</span>
         <span className="text-2xl font-semibold text-black" style={{ fontFamily: 'var(--font-hype)' }}>Price on application</span>
         <h3 className="mt-3 uppercase font-bold tracking-wide text-black leading-snug">{c.title}</h3>
         <p className="mt-1 text-sm text-slate-500">{c.text}</p>
