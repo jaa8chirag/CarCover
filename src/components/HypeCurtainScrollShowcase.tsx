@@ -45,7 +45,7 @@ const SLIDES: SlideData[] = [
   {
     id: 'bespoke-veiled',
     category: '',
-    title: 'THE FINEST CARS ARRIVE VEILED.',
+    title: 'THE FINEST CAR COVERS',
     tagline: 'One vehicle. One bespoke cover. Entirely yours.',
     mobileLine: 'One vehicle. One bespoke cover.',
     description:
