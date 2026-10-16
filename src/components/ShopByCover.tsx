@@ -4,7 +4,7 @@ import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowRight, Star, Check } from 'lucide-react';
-import { FABRICS, type Fabric } from '@/data/fabrics';
+import { FABRICS, PRICE_NOTE, type Fabric } from '@/data/fabrics';
 import MobileSlider from '@/components/MobileSlider';
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -107,6 +107,7 @@ function CoverCard({ f, i, wide }: { f: Fabric; i: number; wide?: boolean }) {
               <div>
                 <span className="block text-[10px] uppercase tracking-[2px] text-white/55">Starting from</span>
                 <span className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-hype)' }}>₹{f.price.toLocaleString('en-IN')}</span>
+                <span className="block text-[11px] text-white/55 mt-0.5">{PRICE_NOTE}</span>
               </div>
               <span className="inline-flex items-center gap-2 pl-5 pr-2 py-2 rounded-full bg-white text-black text-[11px] font-bold uppercase tracking-[2px] group-hover:bg-[#cca462] transition-colors duration-500">
                 Shop

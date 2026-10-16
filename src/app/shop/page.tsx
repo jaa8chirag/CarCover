@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Check, ArrowRight, ArrowUpRight, RotateCw } from 'lucide-react';
 import PageShell from '@/components/PageShell';
 import MobileSlider from '@/components/MobileSlider';
-import { FABRICS, type CoverGroup, type Fabric } from '@/data/fabrics';
+import { FABRICS, PRICE_NOTE, type CoverGroup, type Fabric } from '@/data/fabrics';
 import { FABRIC_SHEETS } from '@/data/technology';
 
 const GROUPS: { id: CoverGroup | 'custom'; label: string; text: string; kicker: string; after?: string; afterPos?: string }[] = [
@@ -48,7 +48,8 @@ function CustomCard({ c }: { c: (typeof CUSTOM)[number] }) {
         <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] group-hover:scale-110" />
       </div>
       <div className="p-6 sm:p-7 flex flex-col flex-1">
-        <span className="text-2xl font-semibold text-black" style={{ fontFamily: 'var(--font-hype)' }}>Price on application</span>
+        <span className="text-2xl font-semibold text-black" style={{ fontFamily: 'var(--font-hype)' }}>₹26,999</span>
+        <span className="block text-[11px] text-slate-500 mt-0.5">{PRICE_NOTE}</span>
         <h3 className="mt-3 uppercase font-bold tracking-wide text-black leading-snug">{c.title}</h3>
         <p className="mt-1 text-sm text-slate-500">{c.text}</p>
         <ul className="mt-4 space-y-2 flex-1">
@@ -127,6 +128,7 @@ function FlipCard({ f }: { f: Fabric }) {
           <div className="p-6 sm:p-7 flex flex-col flex-1">
             <span className="block text-[10px] font-bold uppercase tracking-[2px] text-slate-400">Starting from</span>
             <span className="text-2xl font-semibold text-black" style={{ fontFamily: 'var(--font-hype)' }}>₹{f.price.toLocaleString('en-IN')}</span>
+            <span className="block text-[11px] text-slate-500 mt-0.5">{PRICE_NOTE}</span>
             <h3 className="mt-3 uppercase font-bold tracking-wide text-black leading-snug">{f.title}</h3>
             <p className="mt-1 text-sm text-slate-500">{f.subtitle}</p>
             <ul className="mt-4 space-y-2 flex-1">
@@ -211,6 +213,7 @@ function SplitCard({ f }: { f: Fabric }) {
       <div className="p-6 sm:p-7 flex flex-col flex-1">
         <span className="block text-[10px] font-bold uppercase tracking-[2px] text-slate-400">Starting from</span>
         <span className="text-2xl font-semibold text-black" style={{ fontFamily: 'var(--font-hype)' }}>₹{f.price.toLocaleString('en-IN')}</span>
+        <span className="block text-[11px] text-slate-500 mt-0.5">{PRICE_NOTE}</span>
         <h3 className="mt-3 uppercase font-bold tracking-wide text-black leading-snug">{f.title}</h3>
         <p className="mt-1 text-sm text-slate-500">{f.subtitle}</p>
         <ul className="mt-4 space-y-2 flex-1">
@@ -244,6 +247,7 @@ function RangeCard({ f }: { f: Fabric }) {
       <div className="p-6 sm:p-7 flex flex-col flex-1">
         <span className="block text-[10px] font-bold uppercase tracking-[2px] text-slate-400">Starting from</span>
         <span className="text-2xl font-semibold text-black" style={{ fontFamily: 'var(--font-hype)' }}>₹{f.price.toLocaleString('en-IN')}</span>
+        <span className="block text-[11px] text-slate-500 mt-0.5">{PRICE_NOTE}</span>
         <h3 className="mt-3 uppercase font-bold tracking-wide text-black leading-snug">{f.title}</h3>
         <p className="mt-1 text-sm text-slate-500">{f.subtitle}</p>
         <ul className="mt-4 space-y-2 flex-1">

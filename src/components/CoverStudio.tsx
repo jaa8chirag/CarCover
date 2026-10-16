@@ -1,5 +1,6 @@
 'use client';
 
+import { gstOn } from '@/data/fabrics';
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 import { Check, ShoppingBag } from 'lucide-react';
@@ -100,6 +101,9 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
   const addToCart = () => {
     if (!brand || !model) return;
     onAddToCart({
+      fabricId: fabric.id,
+      brandId: brand.id,
+      modelId: model.id,
       vehicle: `${brand.name} ${model.name}`,
       variant: `${year} · ${variant}`,
       tier: fabric.title,
@@ -214,9 +218,12 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
           <Row k="Colour" v={color.name} />
           {hasPiping && <Row k="Piping" v={piping.name} />}
           <Row k="Notes" v={notes.trim() ? (notes.trim().length > 28 ? notes.trim().slice(0, 28) + '...' : notes.trim()) : 'None'} />
+          <Row k="Cover price" v={formatINR(total)} />
+          <Row k="Shipping" v="Free" />
+          <Row k="GST (18%)" v={formatINR(gstOn(total))} />
           <div className="flex items-end justify-between pt-6">
-            <span className="text-xs uppercase tracking-[2px] text-white/50">Total</span>
-            <span className="text-3xl font-semibold" style={{ fontFamily: 'var(--font-hype)' }}>{formatINR(total)}</span>
+            <span className="text-xs uppercase tracking-[2px] text-white/50">Total (incl. GST)</span>
+            <span className="text-3xl font-semibold" style={{ fontFamily: 'var(--font-hype)' }}>{formatINR(total + gstOn(total))}</span>
           </div>
           <button
             onClick={addToCart}

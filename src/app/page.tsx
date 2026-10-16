@@ -8,6 +8,7 @@ import CheckoutDrawer from '@/components/CheckoutDrawer';
 import BrandMarquee from '@/components/BrandMarquee';
 import ShopByCover from '@/components/ShopByCover';
 import Footer from '@/components/Footer';
+import { useCart } from '@/lib/useCart';
 
 export default function Home() {
   const [selectedVehicle, setSelectedVehicle] = useState({
@@ -17,21 +18,8 @@ export default function Home() {
     variant: 'AX7L Luxury 4x4 (With Spare Wheel)',
   });
 
-  const [cartItems, setCartItems] = useState<any[]>([
-    {
-      vehicle: 'Mahindra Thar Roxx 4x4',
-      tier: 'AquaShield+ Extreme Monsoon Outdoor',
-      fabricColor: 'Obsidian Midnight Black',
-      fabricHex: '#0a0d10',
-      pipingColor: 'Neon Acid Lime (High-Vis)',
-      pipingHex: '#c5e838',
-      monogram: 'THAR-4X4',
-      monogramColor: 'gold',
-      addons: { mirrorPockets: true, heavyDutyHoldall: true, lockingUnderbodyStraps: true, batteryChargerFlap: false },
-      price: 4999,
-      currency: '₹',
-    }
-  ]);
+  const cart = useCart();
+  const cartItems = cart.items;
 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSwatchModalOpen, setIsSwatchModalOpen] = useState(false);
@@ -59,12 +47,12 @@ export default function Home() {
   };
 
   const handleAddToCommission = (newItem: any) => {
-    setCartItems([...cartItems, newItem]);
+    cart.add(newItem);
     setIsCartOpen(true);
   };
 
   const handleRemoveCartItem = (index: number) => {
-    setCartItems(cartItems.filter((_, i) => i !== index));
+    cart.remove(index);
   };
 
   const handleSelectTierFromCollection = (tierId: string) => {
@@ -117,6 +105,7 @@ export default function Home() {
         onClose={() => setIsCartOpen(false)}
         items={cartItems}
         onRemoveItem={handleRemoveCartItem}
+        onOrderPlaced={cart.clear}
         currencySymbol="₹"
       />
     </main>

@@ -22,6 +22,12 @@ export interface Fabric {
 
 // Product range: Outdoor (Standard, Pro, Elite), Indoor (Standard, Elite) and Unveiling (one cover).
 // NOTE: prices and spec copy are placeholders until the client supplies final figures.
+/** Shown under every price. */
+export const PRICE_NOTE = 'Includes shipping. GST 18% extra.';
+
+export const GST_RATE = 0.18;
+export const gstOn = (amount: number) => Math.round(amount * GST_RATE);
+
 export const FABRICS: Fabric[] = [
   {
     id: 'outdoor-standard',
@@ -29,7 +35,7 @@ export const FABRICS: Fabric[] = [
     title: 'Outdoor Standard',
     subtitle: 'Everyday All-Weather Protection',
     badge: 'OUTDOOR',
-    price: 2999,
+    price: 3899,
     accentColor: '#334155',
     image: '/images/outdoor_standard_card.jpg',
     icon: ShieldCheck,
@@ -47,7 +53,7 @@ export const FABRICS: Fabric[] = [
     title: 'Outdoor Pro',
     subtitle: 'Heavy-Duty Sun & Rain Defence',
     badge: 'OUTDOOR PRO',
-    price: 4499,
+    price: 5499,
     accentColor: '#b45309',
     image: '/images/outdoor_pro_card.jpg',
     icon: SunMedium,
@@ -67,7 +73,7 @@ export const FABRICS: Fabric[] = [
     title: 'Outdoor Elite',
     subtitle: 'Our Most Protective Outdoor Cover',
     badge: 'OUTDOOR ELITE',
-    price: 6499,
+    price: 8999,
     accentColor: '#00665e',
     image: '/images/outdoor_elite_card.jpg',
     icon: Droplets,

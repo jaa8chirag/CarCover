@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CheckoutDrawer from '@/components/CheckoutDrawer';
 import SwatchRequestModal from '@/components/SwatchRequestModal';
+import { useCart } from '@/lib/useCart';
 
 export interface PageShellApi {
   openEnquiry: () => void;
@@ -13,7 +14,8 @@ export interface PageShellApi {
 
 /** Shared chrome for inner pages: header, footer, cart drawer and swatch modal. */
 export default function PageShell({ children }: { children: (api: PageShellApi) => React.ReactNode }) {
-  const [cartItems, setCartItems] = useState<any[]>([]);
+  const cart = useCart();
+  const cartItems = cart.items;
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSwatchOpen, setIsSwatchOpen] = useState(false);
 
@@ -33,7 +35,7 @@ export default function PageShell({ children }: { children: (api: PageShellApi) 
         {children({
           openEnquiry: () => setIsSwatchOpen(true),
           addToCart: (item) => {
-            setCartItems((prev) => [...prev, item]);
+            cart.add(item);
             setIsCartOpen(true);
           },
         })}
@@ -45,7 +47,8 @@ export default function PageShell({ children }: { children: (api: PageShellApi) 
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
         items={cartItems}
-        onRemoveItem={(idx) => setCartItems((prev) => prev.filter((_, i) => i !== idx))}
+        onRemoveItem={cart.remove}
+        onOrderPlaced={cart.clear}
         currencySymbol="₹"
       />
       <SwatchRequestModal isOpen={isSwatchOpen} onClose={() => setIsSwatchOpen(false)} />

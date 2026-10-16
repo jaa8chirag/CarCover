@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 import { ArrowLeft, Check } from 'lucide-react';
 import PageShell from '@/components/PageShell';
 import CoverStudio from '@/components/CoverStudio';
-import { FABRICS } from '@/data/fabrics';
+import { FABRICS, PRICE_NOTE } from '@/data/fabrics';
 
 export default function ProductPage() {
   const params = useParams<{ fabric: string }>();
@@ -52,6 +52,7 @@ export default function ProductPage() {
                     <div className="mt-6">
                       <span className="block text-[10px] font-bold uppercase tracking-[2px] text-slate-400">Starting from</span>
                       <span className="text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-hype)' }}>₹{fabric.price.toLocaleString('en-IN')}</span>
+                      <span className="block text-xs text-slate-500 mt-0.5">{PRICE_NOTE}</span>
                     </div>
                   </div>
                 </div>

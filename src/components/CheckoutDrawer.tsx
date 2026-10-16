@@ -1,5 +1,6 @@
 'use client';
 
+import { gstOn } from '@/data/fabrics';
 import React, { useState } from 'react';
 import { X, Trash2, ArrowRight, CheckCircle2, Lock } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -10,7 +11,21 @@ interface CheckoutDrawerProps {
   items: any[];
   onRemoveItem: (index: number) => void;
   currencySymbol: string;
+  /** Called once the order is saved, so the cart can be emptied. */
+  onOrderPlaced?: () => void;
 }
+
+const fieldStyle: React.CSSProperties = {
+  width: '100%',
+  minWidth: 0,
+  background: '#ffffff',
+  border: '1px solid #d4dedd',
+  padding: '10px 12px',
+  color: '#111615',
+  fontSize: '13px',
+  outline: 'none',
+  borderRadius: '2px',
+};
 
 export default function CheckoutDrawer({
   isOpen,
@@ -18,31 +33,73 @@ export default function CheckoutDrawer({
   items,
   onRemoveItem,
   currencySymbol,
+  onOrderPlaced,
 }: CheckoutDrawerProps) {
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const [orderNumber, setOrderNumber] = useState('');
   const [clientDetails, setClientDetails] = useState({
     name: '',
     email: '',
     phone: '',
     address: '',
+    city: '',
+    state: '',
+    pincode: '',
+    landmark: '',
     chassisVin: '',
   });
 
   if (!isOpen) return null;
 
-  const total = items.reduce((sum, item) => sum + (item.price || 0), 0);
+  const subtotal = items.reduce((sum, item) => sum + (item.price || 0), 0);
+  const gst = gstOn(subtotal);
+  const total = subtotal + gst;
 
-  const handleConfirmCommission = (e: React.FormEvent) => {
+  const handleConfirmCommission = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting) return;
+    setError('');
+    setSubmitting(true);
     try {
-      confetti({
-        particleCount: 100,
-        spread: 80,
-        origin: { y: 0.5 },
-        colors: ['#00665e', '#004d47', '#ffffff', '#dfc287'],
+      const res = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customer: { name: clientDetails.name, email: clientDetails.email, phone: clientDetails.phone },
+          shipping: {
+            address: clientDetails.address,
+            city: clientDetails.city,
+            state: clientDetails.state,
+            pincode: clientDetails.pincode,
+            landmark: clientDetails.landmark,
+          },
+          vin: clientDetails.chassisVin,
+          items,
+        }),
       });
-    } catch (err) {}
-    setIsSuccess(true);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        setError(data.message || 'Something went wrong. Please try again.');
+        return;
+      }
+      setOrderNumber(data.orderNumber);
+      onOrderPlaced?.();
+      try {
+        confetti({
+          particleCount: 100,
+          spread: 80,
+          origin: { y: 0.5 },
+          colors: ['#00665e', '#004d47', '#ffffff', '#dfc287'],
+        });
+      } catch (err) {}
+      setIsSuccess(true);
+    } catch {
+      setError('Could not reach the server. Check your internet and try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -303,20 +360,62 @@ export default function CheckoutDrawer({
                   <div style={{ marginBottom: '12px' }}>
                     <input
                       required
+                      type="tel"
+                      inputMode="numeric"
+                      placeholder="Mobile Number (WhatsApp)"
+                      value={clientDetails.phone}
+                      onChange={(e) => setClientDetails({ ...clientDetails, phone: e.target.value })}
+                      style={fieldStyle}
+                    />
+                  </div>
+
+                  <div style={{ marginBottom: '12px' }}>
+                    <input
+                      required
                       type="text"
-                      placeholder="Destination Street, Estate or Dealership Address"
+                      placeholder="Shipping Address (house, street, area)"
                       value={clientDetails.address}
                       onChange={(e) => setClientDetails({ ...clientDetails, address: e.target.value })}
-                      style={{
-                        width: '100%',
-                        background: '#ffffff',
-                        border: '1px solid #d4dedd',
-                        padding: '10px 12px',
-                        color: '#111615',
-                        fontSize: '13px',
-                        outline: 'none',
-                        borderRadius: '2px',
-                      }}
+                      style={fieldStyle}
+                    />
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', marginBottom: '12px' }}>
+                    <input
+                      required
+                      type="text"
+                      placeholder="City"
+                      value={clientDetails.city}
+                      onChange={(e) => setClientDetails({ ...clientDetails, city: e.target.value })}
+                      style={fieldStyle}
+                    />
+                    <input
+                      required
+                      type="text"
+                      placeholder="State"
+                      value={clientDetails.state}
+                      onChange={(e) => setClientDetails({ ...clientDetails, state: e.target.value })}
+                      style={fieldStyle}
+                    />
+                    <input
+                      required
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={6}
+                      placeholder="Pincode"
+                      value={clientDetails.pincode}
+                      onChange={(e) => setClientDetails({ ...clientDetails, pincode: e.target.value.replace(/\D/g, '') })}
+                      style={fieldStyle}
+                    />
+                  </div>
+
+                  <div style={{ marginBottom: '12px' }}>
+                    <input
+                      type="text"
+                      placeholder="Landmark (optional)"
+                      value={clientDetails.landmark}
+                      onChange={(e) => setClientDetails({ ...clientDetails, landmark: e.target.value })}
+                      style={fieldStyle}
                     />
                   </div>
 
@@ -339,6 +438,22 @@ export default function CheckoutDrawer({
                     />
                   </div>
 
+                  {/* Price breakdown */}
+                  <div style={{ fontSize: '13px', color: '#5c6462', marginBottom: '14px', borderTop: '1px solid #e4e8e7', paddingTop: '14px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                      <span>Subtotal</span>
+                      <span>{currencySymbol}{subtotal.toLocaleString('en-IN')}</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                      <span>Shipping</span>
+                      <span style={{ color: '#00665e', fontWeight: 600 }}>Free</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span>GST (18%)</span>
+                      <span>{currencySymbol}{gst.toLocaleString('en-IN')}</span>
+                    </div>
+                  </div>
+
                   {/* Summary Total */}
                   <div
                     style={{
@@ -350,7 +465,7 @@ export default function CheckoutDrawer({
                   >
                     <div>
                       <div style={{ fontSize: '11px', color: '#5c6462', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                        Total Atelier Investment
+                        Total (incl. GST)
                       </div>
                       <div style={{ fontSize: '12px', color: '#00665e', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px', fontWeight: 600 }}>
                         <Lock size={12} /> Free Pan-India Insured Express + COD/UPI
@@ -369,12 +484,19 @@ export default function CheckoutDrawer({
                     </div>
                   </div>
 
+                  {error && (
+                    <div role="alert" style={{ marginBottom: '12px', padding: '10px 12px', background: '#fdecec', border: '1px solid #f5b5b5', color: '#a11d1d', fontSize: '13px', borderRadius: '2px' }}>
+                      {error}
+                    </div>
+                  )}
+
                   <button
                     type="submit"
+                    disabled={submitting}
                     className="cta_button cta_button--primary-light"
-                    style={{ width: '100%', height: '52px' }}
+                    style={{ width: '100%', height: '52px', opacity: submitting ? 0.6 : 1, cursor: submitting ? 'wait' : 'pointer' }}
                   >
-                    <span>Reserve Production Slot</span>
+                    <span>{submitting ? 'Placing your order...' : 'Reserve Production Slot'}</span>
                     <ArrowRight size={16} />
                   </button>
                 </form>
@@ -431,9 +553,7 @@ export default function CheckoutDrawer({
                 maxWidth: '380px',
               }}
             >
-              Thank you, {clientDetails.name || 'Client'}. Your commission order has been allocated to our 
-              Yorkshire master patternmakers. A digital CAD verification summary has been dispatched to {clientDetails.email || 'your email'}.
-            </p>
+              Thank you, {clientDetails.name || 'Client'}. Your order has been received. Our team will contact you on {clientDetails.phone || 'your phone'} to confirm the details of your cover and your delivery.</p>
 
             <div
               style={{
@@ -449,7 +569,7 @@ export default function CheckoutDrawer({
                 fontWeight: 600,
               }}
             >
-              Production Order: #VLM-{Math.floor(100000 + Math.random() * 900000)}
+              Order Number: {orderNumber}
             </div>
 
             <button
