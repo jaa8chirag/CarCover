@@ -5,13 +5,13 @@ import Link from 'next/link';
 import { Compass, Shield, Sparkles, CheckCircle2, Quote } from 'lucide-react';
 import { motion } from 'framer-motion';
 import PageShell from '@/components/PageShell';
-import PageHero, { btnGlass, btnPrimary } from '@/components/PageHero';
+import SlideHero from '@/components/SlideHero';
 
 const PILLARS = [
   {
     title: 'Laser-CAD Precision',
     subtitle: 'Millimeter-Accurate Digital Patterns',
-    image: '/images/lux/amg_blue.jpg',
+    image: '/images/about_pattern.jpg',
     icon: Compass,
     badge: '800+ CAD BLUEPRINTS',
     description: 'Over 800+ 3D-laser scanned chassis patterns ensure every mirror pocket, antenna contour, and rear spoiler profile fits with zero billowing or fabric stress.',
@@ -37,7 +37,7 @@ const PILLARS = [
   {
     title: 'Concours Atelier Standards',
     subtitle: 'Hand-Finished Artisan Tailoring',
-    image: '/images/craftsmanship.jpg',
+    image: '/images/about_craft.jpg',
     icon: Sparkles,
     badge: 'HANDCRAFTED HERITAGE',
     description: 'Each bespoke commission undergoes hand-finished blind-stitching, individual serial number stamping, and is certified safe for freshly applied ceramic coatings.',
@@ -54,22 +54,32 @@ export default function AboutPage() {
     <PageShell>
       {({ openEnquiry }) => (
         <>
-          <PageHero
-            kicker="CRAFTSMANSHIP & BESPOKE HERITAGE"
-            title="Preserving"
-            accent="Automotive Artistry"
-            lead="TheSignaturecovers was founded on a singular conviction: extraordinary motor cars deserve protection engineered with the same obsessive precision as the cars themselves."
-            image="/images/craftsmanship.jpg"
-            stats={[
-              { value: '800+', label: 'CAD Blueprints' },
-              { value: '100%', label: 'Hand Finished' },
-              { value: '48°C', label: 'Heat Tested' },
-              { value: 'Pan-India', label: 'Free Delivery' },
-            ]}
-          >
-            <button onClick={openEnquiry} className={btnPrimary}>Request Consultation</button>
-            <Link href="/collections" className={btnGlass + ' no-underline'}>View Collections</Link>
-          </PageHero>
+          <SlideHero kicker="About Us" title="Preserving Automotive Artistry" />
+
+          <section className="bg-white">
+            <div className="container-am max-w-6xl py-10 sm:py-14 text-center">
+              <p className="mx-auto max-w-3xl text-slate-700 leading-[1.9] text-[15px] sm:text-base">
+                TheSignaturecovers was founded on a singular conviction: extraordinary motor cars deserve protection engineered with the same obsessive precision as the cars themselves.
+              </p>
+              <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+                {[
+                  { value: '800+', label: 'CAD Blueprints' },
+                  { value: '100%', label: 'Hand Finished' },
+                  { value: '48°C', label: 'Heat Tested' },
+                  { value: 'Pan-India', label: 'Free Delivery' },
+                ].map((st) => (
+                  <div key={st.label}>
+                    <div className="text-2xl sm:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-hype)' }}>{st.value}</div>
+                    <div className="mt-1 text-[10px] sm:text-[11px] tracking-[2px] uppercase text-slate-500">{st.label}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+                <button onClick={openEnquiry} className="px-8 py-4 bg-black hover:bg-[#b38848] text-white text-sm font-medium transition-colors cursor-pointer">Request Consultation</button>
+                <Link href="/shop" className="px-8 py-4 border border-black hover:bg-black hover:text-white text-black text-sm font-medium no-underline transition-colors">Shop Car Covers</Link>
+              </div>
+            </div>
+          </section>
 
           <section className="py-20 sm:py-28 bg-[#f8fafc]">
             <div className="container-am max-w-6xl space-y-16 sm:space-y-28">
@@ -121,6 +131,10 @@ export default function AboutPage() {
             </div>
           </section>
 
+          <div className="relative w-full h-[56vh] sm:h-[68vh] min-h-[320px] overflow-hidden bg-black">
+            <img src="/images/about_workshop.jpg" alt="A bespoke cover being made ready in the workshop" loading="lazy" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: 'center 60%' }} />
+          </div>
+
           <section className="relative bg-[#050808] text-white py-20 sm:py-28 overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(204,164,98,0.2),transparent_60%)]" />
             <div className="container-am max-w-3xl relative text-center">
@@ -132,7 +146,7 @@ export default function AboutPage() {
               <p className="mt-5 text-white/70 font-light leading-relaxed">
                 If your commission does not seat perfectly over your vehicle&apos;s mirrors, antenna and bumpers, our master tailors will alter or remanufacture it at no charge. Guaranteed.
               </p>
-              <button onClick={openEnquiry} className={btnPrimary + ' mt-8'}>Request Consultation</button>
+              <button onClick={openEnquiry} className="mt-8 px-8 py-4 bg-black hover:bg-[#b38848] text-white text-sm font-medium transition-colors cursor-pointer">Request Consultation</button>
             </div>
           </section>
         </>

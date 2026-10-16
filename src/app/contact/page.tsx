@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import PageShell from '@/components/PageShell';
+import SlideHero from '@/components/SlideHero';
 
 const WHATSAPP_NUMBER = '918585996669';
 const WHATSAPP_DISPLAY = '+91 85859 96669';
@@ -46,37 +47,11 @@ export default function ContactPage() {
     <PageShell>
       {() => (
         <div className="bg-[#f3f1ed]">
-          {/* HERO */}
-          <section className="relative overflow-hidden bg-black text-white">
-            <img src="/images/bentley_street.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-45" style={{ objectPosition: 'center 58%' }} />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black" />
-            <div className="container-am max-w-5xl relative pt-36 sm:pt-48 pb-28 sm:pb-36 text-center">
-              <motion.span initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }} className="block text-[11px] sm:text-xs tracking-[6px] uppercase text-[#cca462] mb-5">
-                Get in touch
-              </motion.span>
-              <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1, ease }} style={{ fontFamily: 'var(--font-hype)', fontWeight: 400, fontSize: 'clamp(36px, 6vw, 76px)', lineHeight: 1.05 }}>
-                Contact Us
-              </motion.h1>
-              <motion.p initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.2, ease }} className="mt-6 mx-auto max-w-xl text-white/75 text-base sm:text-lg font-light leading-relaxed">
-                Questions about a cover, your car or a custom order? Message us on WhatsApp and a real person replies, usually within minutes.
-              </motion.p>
-              <motion.a
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: 0.3, ease }}
-                href={waLink('Hello Signature Covers, I would like to know more about your car covers.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-9 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] text-black text-xs font-bold uppercase tracking-[2px] no-underline transition-colors shadow-[0_20px_50px_-15px_rgba(37,211,102,0.6)]"
-              >
-                <WhatsAppIcon /> Chat on WhatsApp
-              </motion.a>
-            </div>
-          </section>
+          <SlideHero kicker="Get in touch" title="Contact Us" />
 
           {/* CONTENT */}
-          <section className="relative pb-24 sm:pb-32">
-            <div className="container-am max-w-6xl -mt-14 sm:-mt-16 relative z-10">
+          <section className="relative py-16 sm:py-24">
+            <div className="container-am max-w-6xl relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
                 {/* CONTACT CARDS */}
                 <motion.aside
@@ -181,6 +156,10 @@ export default function ContactPage() {
               </div>
             </div>
           </section>
+
+          <div className="relative w-full h-[56vh] sm:h-[68vh] min-h-[320px] overflow-hidden bg-black">
+            <img src="/images/contact_studio.jpg" alt="Rolls-Royce in the studio" loading="lazy" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: 'center 60%' }} />
+          </div>
         </div>
       )}
     </PageShell>
