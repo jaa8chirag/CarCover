@@ -177,8 +177,8 @@ export default function Header({
               <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.2 }} className="py-1">
                 <span className="flex flex-col items-center gap-1 sm:gap-1.5 text-white" style={{ fontFamily: 'var(--font-main)' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/logo-white.png" alt="" aria-hidden className={`w-auto transition-all duration-500 ease-out ${compact ? 'h-0 opacity-0 -mb-1' : 'h-9 sm:h-[50px] opacity-100'}`} />
-                  <span className={`font-bold uppercase tracking-[0.3em] sm:tracking-[0.42em] text-[10px] sm:text-[15px] whitespace-nowrap pl-[0.3em] sm:pl-[0.42em] transition-all duration-500 ease-out ${compact ? 'max-h-6 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>Signature Covers</span>
+                  <img src="/logo-white.png" alt="" aria-hidden className={`w-auto transition-all duration-500 ease-out ${compact ? 'h-9 sm:h-[50px] opacity-100' : 'h-0 opacity-0 -mb-1'}`} />
+                  <span className={`font-bold uppercase tracking-[0.3em] sm:tracking-[0.42em] text-[10px] sm:text-[15px] whitespace-nowrap pl-[0.3em] sm:pl-[0.42em] transition-all duration-500 ease-out ${compact ? 'max-h-0 opacity-0 overflow-hidden' : 'max-h-6 opacity-100'}`}>Signature Covers</span>
                 </span>
               </motion.div>
             </Link>
