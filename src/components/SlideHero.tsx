@@ -41,11 +41,12 @@ function HeroSlides() {
 }
 
 /** Page opener: the home hero photos cross-fading under a small label and one large light heading. */
-export default function SlideHero({ kicker, title, offsetHeader = true }: { kicker: string; title: string; offsetHeader?: boolean }) {
+export default function SlideHero({ kicker, title, offsetHeader = true }: { kicker?: string; title?: string; offsetHeader?: boolean }) {
   return (
     <section className={`relative overflow-hidden bg-black text-white h-[clamp(420px,76vh,768px)] ${offsetHeader ? 'mt-[var(--header-height)]' : ''}`}>
       <HeroSlides />
       <div className="absolute inset-0 bg-black/45" />
+      {title && (
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
         <motion.span initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }} className="block text-[11px] sm:text-xs tracking-[6px] uppercase text-white/70 mb-5">
           {kicker}
@@ -54,6 +55,7 @@ export default function SlideHero({ kicker, title, offsetHeader = true }: { kick
           {title}
         </motion.h1>
       </div>
+      )}
     </section>
   );
 }

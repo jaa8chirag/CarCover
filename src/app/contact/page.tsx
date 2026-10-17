@@ -49,6 +49,15 @@ export default function ContactPage() {
         <div className="bg-[#f3f1ed]">
           <div className="relative w-full mt-[var(--header-height)] h-[56vh] sm:h-[68vh] min-h-[320px] overflow-hidden bg-black">
             <img src="/images/contact_studio.jpg" alt="Rolls-Royce in the studio" loading="lazy" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: 'center 60%' }} />
+            <div className="absolute inset-0 bg-black/45" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 text-white">
+              <motion.span initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }} className="block text-[11px] sm:text-xs tracking-[6px] uppercase text-white/70 mb-5">
+                Contact Us
+              </motion.span>
+              <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1, ease }} style={{ fontFamily: 'var(--font-hype)', fontWeight: 300, fontSize: 'clamp(34px, 6vw, 84px)', lineHeight: 1.05 }}>
+                Get In Touch
+              </motion.h1>
+            </div>
           </div>
 
           {/* CONTENT */}
@@ -159,7 +168,7 @@ export default function ContactPage() {
             </div>
           </section>
 
-          <SlideHero kicker="Get in touch" title="Contact Us" offsetHeader={false} />
+          <SlideHero offsetHeader={false} />
         </div>
       )}
     </PageShell>
