@@ -238,7 +238,7 @@ export default function Header({
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ duration: 0.7, ease: SIDEBAR_EASE }}
-              className="absolute left-0 top-0 h-full w-full sm:w-[56vw] lg:w-[42vw] lg:min-w-[520px] bg-black/75 backdrop-blur-2xl text-white flex flex-col overflow-hidden border-r border-white/10"
+              className="absolute left-0 top-0 h-full w-full bg-black/20 backdrop-blur-3xl text-white flex flex-col overflow-hidden"
             >
               <div className="pointer-events-none absolute -bottom-32 -left-24 w-[420px] h-[420px] rounded-full bg-[#cca462]/10 blur-[110px]" />
 
@@ -247,7 +247,7 @@ export default function Header({
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, delay: 0.3, ease: SIDEBAR_EASE }}
-                className="relative px-7 sm:px-14 pt-8 sm:pt-12"
+                className="relative px-7 pt-8 sm:pt-12 flex justify-center"
               >
                 <button
                   onClick={closeMenu}
@@ -259,9 +259,9 @@ export default function Header({
                 </button>
               </motion.div>
 
-              {/* links, right aligned, arriving one by one from the left */}
-              <nav className="relative flex-1 flex flex-col justify-center px-7 sm:pl-14 sm:pr-[22%] py-10">
-                <ul className="flex flex-col items-end gap-1">
+              {/* links, centered, arriving one by one from the left */}
+              <nav className="relative flex-1 flex flex-col justify-center items-center px-7 py-10">
+                <ul className="flex flex-col items-center gap-1">
                   {navLinks.map((link, i) => {
                     const active = pathname === link.href;
                     return (
@@ -274,10 +274,10 @@ export default function Header({
                         <Link
                           href={link.href}
                           onClick={closeMenu}
-                          className={`group relative block py-[clamp(8px,2.2vh,16px)] no-underline whitespace-nowrap text-[17px] sm:text-[19px] font-semibold uppercase tracking-[0.2em] transition-colors duration-500 hover:text-white ${active ? 'text-[#cca462]' : 'text-white/55'}`}
+                          className={`group relative block py-[clamp(8px,2.2vh,16px)] no-underline whitespace-nowrap text-[17px] sm:text-[19px] font-semibold uppercase tracking-[0.2em] text-center transition-colors duration-500 hover:text-white ${active ? 'text-[#cca462]' : 'text-white/55'}`}
                         >
                           {link.label}
-                          <span className="absolute bottom-2 right-0 h-px w-0 bg-[#cca462] group-hover:w-full transition-all duration-500" />
+                          <span className="absolute bottom-2 left-1/2 -translate-x-1/2 h-px w-0 bg-[#cca462] group-hover:w-full transition-all duration-500" />
                         </Link>
                       </motion.li>
                     );
@@ -290,7 +290,7 @@ export default function Header({
                     <Link
                       href="/shop"
                       onClick={closeMenu}
-                      className="group relative block py-[clamp(8px,2.2vh,16px)] no-underline whitespace-nowrap text-[17px] sm:text-[19px] font-semibold uppercase tracking-[0.2em] text-[#cca462] hover:text-white transition-colors duration-500"
+                      className="group relative block py-[clamp(8px,2.2vh,16px)] no-underline whitespace-nowrap text-[17px] sm:text-[19px] font-semibold uppercase tracking-[0.2em] text-center text-[#cca462] hover:text-white transition-colors duration-500"
                     >
                       Shop Car Covers
                     </Link>
@@ -303,7 +303,7 @@ export default function Header({
                 initial={{ opacity: 0, x: -40 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 1.2, ease: SIDEBAR_EASE }}
-                className="relative px-7 sm:pl-14 sm:pr-[22%] pb-9 text-[12px] text-white/50 flex flex-col items-end gap-2.5 text-right"
+                className="relative px-7 pb-9 text-[12px] text-white/50 flex flex-col items-center gap-2.5 text-center"
               >
                 <a href="mailto:contact@thesignaturecovers.com" className="flex items-center gap-3 no-underline text-inherit hover:text-white transition-colors">
                   contact@thesignaturecovers.com <Mail size={14} className="text-[#cca462]" />
