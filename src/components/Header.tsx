@@ -135,14 +135,12 @@ export default function Header({
         className="fixed top-0 left-0 w-full z-50 transition-all duration-300 pointer-events-auto"
         style={{
           // Always a solid bar, matching hype.luxury's header colour.
-          background: '#141414',
+          background: '#000000',
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
           boxShadow: scrolled ? '0 12px 40px -12px rgba(0, 0, 0, 0.6)' : 'none',
         }}
       >
-        <div className="h-[1.5px] w-full bg-gradient-to-r from-transparent via-[#cca462]/60 to-transparent pointer-events-none" />
-
-        <div className={`relative w-full flex ${compact ? 'h-[76px] sm:h-[112px]' : 'h-[100px] sm:h-[152px]'} transition-[height] duration-500 ease-out items-center justify-between gap-4 px-4`}>
+        <div className={`relative w-full flex ${compact ? 'h-[60px] sm:h-[86px]' : 'h-[76px] sm:h-[114px]'} transition-[height] duration-500 ease-out items-center justify-between gap-4 px-4`}>
           {/* LEFT: sidebar menu button */}
           <div className="flex items-center flex-1 min-w-0">
             <button
@@ -151,7 +149,7 @@ export default function Header({
               aria-label="Open menu"
               aria-expanded={mobileMenuOpen}
             >
-              <span className="w-6 h-[18px] sm:w-8 sm:h-6 flex flex-col justify-between">
+              <span className="w-5 h-4 sm:w-6 sm:h-[18px] flex flex-col justify-between">
                 <span className="w-full h-[2px] bg-white rounded-full transition-all group-hover:bg-[#cca462]" />
                 <span className="w-2/3 h-[2px] bg-white rounded-full transition-all group-hover:w-full group-hover:bg-[#cca462]" />
                 <span className="w-full h-[2px] bg-white rounded-full transition-all group-hover:bg-[#cca462]" />
@@ -163,7 +161,7 @@ export default function Header({
               aria-label="Home"
               className={`hidden sm:flex ml-1 sm:ml-3 items-center gap-2 px-2.5 py-2.5 rounded-xl no-underline transition-colors hover:bg-white/10 ${pathname === '/' ? 'text-[#cca462]' : 'text-white hover:text-[#cca462]'}`}
             >
-              <HomeIcon className="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px]" />
+              <HomeIcon className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
               <span className="hidden sm:block text-[15px] font-semibold uppercase tracking-[0.3em]">Home</span>
             </Link>
           </div>
@@ -174,8 +172,8 @@ export default function Header({
               <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.2 }} className="py-1">
                 <span className="flex flex-col items-center gap-1.5 sm:gap-2 text-white" style={{ fontFamily: 'var(--font-main)' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/logo-white.png" alt="" aria-hidden className="w-auto h-11 sm:h-[64px] opacity-100 transition-all duration-500 ease-out" />
-                  <span className={`font-bold uppercase tracking-[0.3em] sm:tracking-[0.42em] text-[12px] sm:text-[19px] whitespace-nowrap pl-[0.3em] sm:pl-[0.42em] transition-all duration-500 ease-out ${compact ? 'max-h-0 opacity-0 overflow-hidden' : 'max-h-6 opacity-100'}`}>Signature Covers</span>
+                  <img src="/logo-white.png" alt="" aria-hidden className="w-auto h-8 sm:h-[42px] opacity-100 transition-all duration-500 ease-out" />
+                  <span className={`font-bold uppercase tracking-[0.3em] sm:tracking-[0.42em] text-[10px] sm:text-[13px] whitespace-nowrap pl-[0.3em] sm:pl-[0.42em] transition-all duration-500 ease-out ${compact ? 'max-h-0 opacity-0 overflow-hidden' : 'max-h-6 opacity-100'}`}>Signature Covers</span>
                 </span>
               </motion.div>
             </Link>
@@ -191,7 +189,7 @@ export default function Header({
               rel="noopener noreferrer"
               aria-label="Chat on WhatsApp"
               title="Chat on WhatsApp"
-              className="hidden sm:flex w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] text-black items-center justify-center transition-colors flex-shrink-0 no-underline"
+              className="hidden sm:flex w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] text-black items-center justify-center transition-colors flex-shrink-0 no-underline"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="w-5 h-5 sm:w-6 sm:h-6">
                 <path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88a9.82 9.82 0 0 1 6.99 2.9 9.8 9.8 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88zM20.52 3.45A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.17-3.48-8.45z" />
@@ -201,10 +199,10 @@ export default function Header({
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={onOpenCart}
-              className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 flex items-center justify-center text-white transition-all cursor-pointer flex-shrink-0"
+              className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 flex items-center justify-center text-white transition-all cursor-pointer flex-shrink-0"
               aria-label="Saved Commissions"
             >
-              <ShoppingBag className="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px]" />
+              <ShoppingBag className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#00665e] text-white text-[11px] font-bold flex items-center justify-center border-2 border-black">
                   {cartCount}

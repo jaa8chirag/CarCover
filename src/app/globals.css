@@ -78,12 +78,12 @@
   --transition-default: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: all 0.15s ease-out;
 
-  --header-height: 152px;
+  --header-height: 114px;
 }
 
 @media (max-width: 768px) {
   :root {
-    --header-height: 100px;
+    --header-height: 76px;
   }
 }
 
