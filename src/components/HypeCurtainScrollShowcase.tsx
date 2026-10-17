@@ -48,6 +48,7 @@ interface SlideData {
 const SLIDES: SlideData[] = [
   {
     id: 'bespoke-veiled',
+    buttonKeys: ['car'],
     category: '',
     title: 'THE FINEST CAR COVERS',
     tagline: 'One vehicle. One bespoke cover. Entirely yours.',
