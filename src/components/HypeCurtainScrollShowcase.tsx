@@ -78,13 +78,8 @@ const SLIDES: SlideData[] = [
     mobileLine: 'Your colours. Your cover.',
     description:
       'Printed, monogrammed or branded covers cut to your exact car.',
-    bgSrc: '/images/bespoke_slide_1.jpg',
-    // Phones: a single static photo (no slider). Laptops: the two-photo slider below.
+    bgSrc: '/images/bespoke_slide_2.jpg',
     bgSrcMobile: '/images/cover_ferrari_garage_mobile.jpg',
-    sliderSlides: [
-      { src: '/images/bespoke_slide_1.jpg', pos: 'center center' },
-      { src: '/images/bespoke_slide_2.jpg', pos: 'center center' },
-    ],
     bgPos: 'center center',
     tierId: 'bespoke',
     ctaText: 'EXPLORE BESPOKE',
