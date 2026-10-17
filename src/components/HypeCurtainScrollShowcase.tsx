@@ -76,10 +76,8 @@ const SLIDES: SlideData[] = [
       { src: '/images/bespoke_slide_1.jpg', pos: 'center center' },
       { src: '/images/bespoke_slide_2.jpg', pos: 'center center' },
     ],
-    // Phones only: same two photos plus the Rolls-Royce reveal as a third slide. Laptops keep sliderSlides above.
+    // Phones only: the Rolls-Royce reveal photo. Laptops keep sliderSlides above (unaffected).
     mobileSlides: [
-      { src: '/images/bespoke_slide_1.jpg', pos: 'center center' },
-      { src: '/images/bespoke_slide_2.jpg', pos: 'center center' },
       { src: '/images/cover_rr_showroom_mobile.jpg', pos: 'center center' },
     ],
     bgPos: 'center center',
