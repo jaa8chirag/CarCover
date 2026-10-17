@@ -72,13 +72,11 @@ const SLIDES: SlideData[] = [
     description:
       'Printed, monogrammed or branded covers cut to your exact car.',
     bgSrc: '/images/bespoke_slide_1.jpg',
+    // Phones: a single static photo (no slider). Laptops: the two-photo slider below.
+    bgSrcMobile: '/images/cover_rr_showroom_mobile.jpg',
     sliderSlides: [
       { src: '/images/bespoke_slide_1.jpg', pos: 'center center' },
       { src: '/images/bespoke_slide_2.jpg', pos: 'center center' },
-    ],
-    // Phones only: the Rolls-Royce reveal photo. Laptops keep sliderSlides above (unaffected).
-    mobileSlides: [
-      { src: '/images/cover_rr_showroom_mobile.jpg', pos: 'center center' },
     ],
     bgPos: 'center center',
     tierId: 'bespoke',
@@ -246,7 +244,7 @@ function HypeSection({
 
 
       {slide.mobileSlides && <PhoneCarousel slides={slide.mobileSlides} />}
-      {slide.sliderSlides && <PhoneCarousel slides={slide.sliderSlides} allScreens={!slide.mobileSlides} />}
+      {slide.sliderSlides && <PhoneCarousel slides={slide.sliderSlides} desktopOnly />}
 
       {/* 2. Zero / Invisible Overlay to preserve 100% pristine image visibility */}
       <div className={`absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/15 z-[1] pointer-events-none ${slide.bright ? 'md:from-black/30 md:via-black/20 md:to-black/35' : 'md:from-black/10 md:via-black/0 md:to-black/25'}`} />
@@ -359,7 +357,7 @@ function HypeSection({
 }
 
 /** Photos slide in from the right and out to the left, on a timer. */
-function PhoneCarousel({ slides, allScreens }: { slides: { src: string; pos: string }[]; allScreens?: boolean }) {
+function PhoneCarousel({ slides, allScreens, desktopOnly }: { slides: { src: string; pos: string }[]; allScreens?: boolean; desktopOnly?: boolean }) {
   const [i, setI] = useState(0);
   useEffect(() => {
     const t = setInterval(() => setI((v) => (v + 1) % slides.length), 3800);
@@ -367,7 +365,7 @@ function PhoneCarousel({ slides, allScreens }: { slides: { src: string; pos: str
   }, [slides.length]);
   const cur = slides[i];
   return (
-    <div className={`${allScreens ? '' : 'md:hidden '}absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]`} style={{ filter: 'brightness(1.18) contrast(1.05) saturate(1.1)' }}>
+    <div className={`${desktopOnly ? 'hidden md:block ' : allScreens ? '' : 'md:hidden '}absolute inset-0 z-0 overflow-hidden bg-[#0a0a0a]`} style={{ filter: 'brightness(1.18) contrast(1.05) saturate(1.1)' }}>
       <AnimatePresence initial={false}>
         <motion.div
           key={cur.src}
