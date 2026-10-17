@@ -24,6 +24,8 @@ interface SlideData {
   phoneOnly?: boolean;
   /** Laptops/desktops only: hidden on phones. */
   desktopOnly?: boolean;
+  /** Phones only: turns off the slow Ken Burns zoom on the static background. */
+  noKenBurns?: boolean;
   /** Optional per-slide shop button (slide 0 always has the default one). */
   shopLabel?: string;
   shopHref?: string;
@@ -163,6 +165,7 @@ const SLIDES: SlideData[] = [
   {
     id: 'bentley-green',
     phoneOnly: true,
+    noKenBurns: true,
     buttonKeys: ['unveil'],
     category: '',
     title: 'THE ART OF THE GRAND UNVEILING.',
@@ -240,7 +243,7 @@ function HypeSection({
           ['--bgs-md' as string]: slide.bgSizeMd ?? 'cover',
           ['--bgp-md' as string]: slide.bgPosMd ?? slide.bgPos ?? 'center center',
         }}
-        className={`absolute inset-0 w-full h-full z-0 bg-no-repeat max-md:[animation:kenburns_16s_ease-in-out_infinite_alternate] [background-image:var(--bgi)] md:[background-image:var(--bgi-md)] [background-size:cover] [background-position:var(--bgp)] md:[background-size:var(--bgs-md)] md:[background-position:var(--bgp-md)] md:[background-attachment:fixed]`}
+        className={`absolute inset-0 w-full h-full z-0 bg-no-repeat ${slide.noKenBurns ? '' : 'max-md:[animation:kenburns_16s_ease-in-out_infinite_alternate]'} [background-image:var(--bgi)] md:[background-image:var(--bgi-md)] [background-size:cover] [background-position:var(--bgp)] md:[background-size:var(--bgs-md)] md:[background-position:var(--bgp-md)] md:[background-attachment:fixed]`}
       />
 
 
