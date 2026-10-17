@@ -4,7 +4,7 @@ import { gstOn } from '@/data/fabrics';
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 import { Check, ShoppingBag } from 'lucide-react';
-import { CAR_BRANDS, FABRIC_COLORS, getSizeTier, priceForTier } from '@/data/carData';
+import { FABRIC_COLORS } from '@/data/carData';
 import type { Fabric } from '@/data/fabrics';
 
 interface Props {
@@ -64,48 +64,28 @@ function Swatches({ items, value, onChange }: { items: { id: string; name: strin
 
 /** Order form for one chosen cover: pick the car, then optional colour and any extra details. */
 export default function CoverStudio({ fabric, onAddToCart }: Props) {
-  const [brandId, setBrandId] = useState('');
-  const [modelId, setModelId] = useState('');
+  const [brand, setBrand] = useState('');
+  const [model, setModel] = useState('');
   const [year, setYear] = useState('');
-  const [variant, setVariant] = useState('');
   const [colorId, setColorId] = useState(FABRIC_COLORS[1].id);
   const [pipingId, setPipingId] = useState('none');
   const [notes, setNotes] = useState('');
   const [added, setAdded] = useState(false);
 
-  const brand = CAR_BRANDS.find((b) => b.id === brandId) ?? null;
-  const model = brand?.models.find((m) => m.id === modelId) ?? null;
   const color = FABRIC_COLORS.find((c) => c.id === colorId)!;
   const hasPiping = PIPING_FABRICS.includes(fabric.id);
   const piping = hasPiping ? PIPING_OPTIONS.find((c) => c.id === pipingId)! : PIPING_OPTIONS[0];
-  const tier = brand && model ? getSizeTier(brand.id, model) : null;
 
-  const basePrice = tier ? priceForTier(fabric.price, tier) : fabric.price;
-  const total = basePrice;
-  const ready = !!(brand && model);
-
-  const pickBrand = (id: string) => {
-    setBrandId(id);
-    setModelId('');
-    setYear('');
-    setVariant('');
-  };
-
-  const pickModel = (id: string) => {
-    setModelId(id);
-    const m = brand?.models.find((x) => x.id === id);
-    setYear(m?.years[0] ?? '');
-    setVariant(m?.variants[0] ?? '');
-  };
+  // The customer tells us the car; we don't look it up, so every cover starts at the fabric's base price.
+  const total = fabric.price;
+  const ready = !!(brand.trim() && model.trim() && year.trim());
 
   const addToCart = () => {
-    if (!brand || !model) return;
+    if (!ready) return;
     onAddToCart({
       fabricId: fabric.id,
-      brandId: brand.id,
-      modelId: model.id,
-      vehicle: `${brand.name} ${model.name}`,
-      variant: `${year} · ${variant}`,
+      vehicle: `${brand.trim()} ${model.trim()}`,
+      variant: year.trim(),
       tier: fabric.title,
       fabricColor: color.name,
       fabricHex: color.hex,
@@ -132,32 +112,11 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
     <div className="grid lg:grid-cols-[1fr_400px] gap-8 items-start">
       {/* OPTIONS */}
       <div className="bg-white border border-slate-200 rounded-[2rem] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.25)] px-6 sm:px-10">
-        <Block n={1} title="Select your car" hint="We cut the cover to your exact model, so the fit is perfect.">
-          <div className="grid sm:grid-cols-2 gap-4">
-            <select className={FIELD} value={brandId} onChange={(e) => pickBrand(e.target.value)}>
-              <option value="">Select brand</option>
-              {CAR_BRANDS.map((b) => (
-                <option key={b.id} value={b.id}>{b.name}</option>
-              ))}
-            </select>
-            <select className={FIELD} value={modelId} disabled={!brand} onChange={(e) => pickModel(e.target.value)}>
-              <option value="">Select model</option>
-              {brand?.models.map((m) => (
-                <option key={m.id} value={m.id}>{m.name}</option>
-              ))}
-            </select>
-            <select className={FIELD} value={year} disabled={!model} onChange={(e) => setYear(e.target.value)}>
-              {!model && <option value="">Year</option>}
-              {model?.years.map((y) => (
-                <option key={y} value={y}>{y}</option>
-              ))}
-            </select>
-            <select className={FIELD} value={variant} disabled={!model} onChange={(e) => setVariant(e.target.value)}>
-              {!model && <option value="">Variant</option>}
-              {model?.variants.map((v) => (
-                <option key={v} value={v}>{v}</option>
-              ))}
-            </select>
+        <Block n={1} title="Your car" hint="Tell us your brand, model and year, and we'll confirm the exact fit with you.">
+          <div className="grid sm:grid-cols-3 gap-4">
+            <input className={FIELD} placeholder="Brand (e.g. Rolls-Royce)" maxLength={60} value={brand} onChange={(e) => setBrand(e.target.value)} />
+            <input className={FIELD} placeholder="Model (e.g. Cullinan)" maxLength={60} value={model} onChange={(e) => setModel(e.target.value)} />
+            <input className={FIELD} placeholder="Year (e.g. 2023)" maxLength={10} value={year} onChange={(e) => setYear(e.target.value)} />
           </div>
         </Block>
 
@@ -214,7 +173,7 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
         <div className="p-7">
           <span className="block text-[11px] font-bold tracking-[3px] uppercase text-[#cca462] mb-3">Your order</span>
           <Row k="Cover" v={fabric.title} />
-          <Row k="Car" v={brand && model ? `${brand.name} ${model.name}` : 'Not selected'} />
+          <Row k="Car" v={brand.trim() && model.trim() ? `${brand.trim()} ${model.trim()}${year.trim() ? ` (${year.trim()})` : ''}` : 'Not entered'} />
           <Row k="Colour" v={color.name} />
           {hasPiping && <Row k="Piping" v={piping.name} />}
           <Row k="Notes" v={notes.trim() ? (notes.trim().length > 28 ? notes.trim().slice(0, 28) + '...' : notes.trim()) : 'None'} />
@@ -231,7 +190,7 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
             className="mt-6 w-full py-4 rounded-full bg-white hover:bg-[#cca462] text-black text-xs font-bold uppercase tracking-[2px] flex items-center justify-center gap-2 cursor-pointer transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
           >
             {added ? <Check size={15} /> : <ShoppingBag size={15} />}
-            {added ? 'Added to cart' : ready ? 'Add to cart' : 'Select your car first'}
+            {added ? 'Added to cart' : ready ? 'Add to cart' : 'Enter your car first'}
           </button>
           <p className="mt-4 text-xs text-white/50 text-center">Free delivery · 100% fit guarantee · 7-day returns</p>
         </div>
