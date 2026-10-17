@@ -164,6 +164,7 @@ const SLIDES: SlideData[] = [
   {
     id: 'bentley-green',
     phoneOnly: true,
+    buttonKeys: ['unveil'],
     category: '',
     title: 'THE ART OF THE GRAND UNVEILING.',
     tagline: 'Launch-night covers made in your brand colours.',
@@ -259,7 +260,7 @@ function HypeSection({
           hidden: {},
           visible: { transition: { staggerChildren: 0.12 } },
         }}
-        className={`relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center [text-shadow:0_2px_20px_rgba(0,0,0,0.55)] max-md:absolute max-md:inset-x-0 max-md:bottom-0 max-md:max-w-none max-md:items-center max-md:text-center max-md:bg-gradient-to-t max-md:from-black/80 max-md:via-black/45 max-md:to-transparent max-md:pt-28 max-md:pb-8 md:absolute md:inset-x-0 md:bottom-0 md:max-w-none md:items-center md:text-center md:px-14 lg:px-24 md:pt-44 md:pb-14 lg:pb-20 md:bg-gradient-to-t md:from-black/65 md:via-black/25 md:to-transparent`}
+        className={`relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center [text-shadow:0_2px_20px_rgba(0,0,0,0.55)] max-md:absolute max-md:inset-x-0 max-md:bottom-0 max-md:max-w-none max-md:items-center max-md:text-center max-md:bg-gradient-to-t max-md:from-black/80 max-md:via-black/45 max-md:to-transparent max-md:pt-28 max-md:pb-24 md:absolute md:inset-x-0 md:bottom-0 md:max-w-none md:items-center md:text-center md:px-14 lg:px-24 md:pt-44 md:pb-14 lg:pb-20 md:bg-gradient-to-t md:from-black/65 md:via-black/25 md:to-transparent`}
       >
         {slide.category && (
         <motion.div
