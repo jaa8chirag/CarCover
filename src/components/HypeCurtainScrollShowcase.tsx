@@ -114,7 +114,7 @@ const SLIDES: SlideData[] = [
     description:
       'Custom embroidery and contrast piping on premium stretch fabric, made for collectors, showrooms and launch events.',
     bgSrc: '/images/bentley_badge_rain.jpg',
-    bgSrcMobile: '/images/porsche_unveil.jpg',
+    bgSrcMobile: '/images/porsche_speedster.jpg',
     bgPos: 'center 42%',
     bgPosMd: 'center 28%',
     tierId: 'bespoke',
