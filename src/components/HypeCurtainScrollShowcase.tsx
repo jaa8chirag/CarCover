@@ -101,6 +101,12 @@ const SLIDES: SlideData[] = [
       'Cut from a 3D scan of your exact model, with mirror pockets and sculpted contours. Four-way stretch fleece that follows every body line without a single wrinkle.',
     bgSrc: '/images/rr_spirit_rotated.jpg',
     bgSrcMobile: '/images/bentley_street_drive_mobile.jpg',
+    // Phones only: cycles through all three photos.
+    mobileSlides: [
+      { src: '/images/bentley_street_drive_mobile.jpg', pos: 'center center' },
+      { src: '/images/cover_bentley_showroom_mobile.jpg', pos: 'center center' },
+      { src: '/images/cover_rr_wheel_mobile.jpg', pos: 'center center' },
+    ],
     bgPos: 'center 40%',
     bgPosMd: 'center 50%',
     tierId: 'indoor',
