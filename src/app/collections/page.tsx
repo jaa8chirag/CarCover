@@ -7,7 +7,7 @@ import SlideHero from '@/components/SlideHero';
 
 const GALLERY = [
   '/images/cover_showroom.jpg', '/images/cover_rr_garage_portrait.jpg', '/images/cover_rangerover.jpg', '/images/cover_landrover_portrait.jpg', '/images/cover_ferrari.jpg',
-  '/images/outdoor.jpg', '/images/cover_mini.jpg', '/images/cover_heatshield.jpg', '/images/cover_bmw.jpg',
+  '/images/cover_rr_showroom.jpg', '/images/cover_mini.jpg', '/images/cover_bentley_bag.jpg', '/images/cover_bmw.jpg',
 ];
 
 const ease = [0.16, 1, 0.3, 1] as const;
