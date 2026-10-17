@@ -76,6 +76,12 @@ const SLIDES: SlideData[] = [
       { src: '/images/bespoke_slide_1.jpg', pos: 'center center' },
       { src: '/images/bespoke_slide_2.jpg', pos: 'center center' },
     ],
+    // Phones only: same two photos plus the Rolls-Royce reveal as a third slide. Laptops keep sliderSlides above.
+    mobileSlides: [
+      { src: '/images/bespoke_slide_1.jpg', pos: 'center center' },
+      { src: '/images/bespoke_slide_2.jpg', pos: 'center center' },
+      { src: '/images/cover_rr_showroom_mobile.jpg', pos: 'center center' },
+    ],
     bgPos: 'center center',
     tierId: 'bespoke',
     ctaText: 'EXPLORE BESPOKE',
@@ -242,7 +248,7 @@ function HypeSection({
 
 
       {slide.mobileSlides && <PhoneCarousel slides={slide.mobileSlides} />}
-      {slide.sliderSlides && <PhoneCarousel slides={slide.sliderSlides} allScreens />}
+      {slide.sliderSlides && <PhoneCarousel slides={slide.sliderSlides} allScreens={!slide.mobileSlides} />}
 
       {/* 2. Zero / Invisible Overlay to preserve 100% pristine image visibility */}
       <div className={`absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/15 z-[1] pointer-events-none ${slide.bright ? 'md:from-black/30 md:via-black/20 md:to-black/35' : 'md:from-black/10 md:via-black/0 md:to-black/25'}`} />
