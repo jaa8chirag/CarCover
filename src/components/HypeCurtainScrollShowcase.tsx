@@ -91,8 +91,8 @@ const SLIDES: SlideData[] = [
     mobileLine: 'Fits like a second skin.',
     description:
       'Cut from a 3D scan of your exact model, with mirror pockets and sculpted contours. Four-way stretch fleece that follows every body line without a single wrinkle.',
-    bgSrc: '/images/rr_spirit_rotated.jpg',
-    bgSrcMobile: '/images/rr_cullinan_cover.jpg',
+    bgSrc: '/images/bentley_street_drive.jpg',
+    bgSrcMobile: '/images/bentley_street_drive.jpg',
     bgPos: 'center 40%',
     bgPosMd: 'center 50%',
     tierId: 'indoor',
