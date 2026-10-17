@@ -22,6 +22,8 @@ interface SlideData {
   merged?: boolean;
   /** Phones only: the slide is skipped on laptops/desktops. */
   phoneOnly?: boolean;
+  /** Laptops/desktops only: hidden on phones. */
+  desktopOnly?: boolean;
   /** Optional per-slide shop button (slide 0 always has the default one). */
   shopLabel?: string;
   shopHref?: string;
@@ -91,8 +93,8 @@ const SLIDES: SlideData[] = [
     mobileLine: 'Fits like a second skin.',
     description:
       'Cut from a 3D scan of your exact model, with mirror pockets and sculpted contours. Four-way stretch fleece that follows every body line without a single wrinkle.',
-    bgSrc: '/images/bentley_street_drive.jpg',
-    bgSrcMobile: '/images/bentley_street_drive.jpg',
+    bgSrc: '/images/rr_spirit_rotated.jpg',
+    bgSrcMobile: '/images/bentley_street_drive_mobile.jpg',
     bgPos: 'center 40%',
     bgPosMd: 'center 50%',
     tierId: 'indoor',
@@ -182,6 +184,7 @@ const SLIDES: SlideData[] = [
   {
     id: 'atelier-commission',
     desktopOrder: 15,
+    desktopOnly: true,
     desktopShop: 'unveil',
     category: '',
     title: 'NOT OFF THE SHELF. COMMISSIONED ONLY FOR YOU.',
@@ -403,7 +406,7 @@ export default function HypeCurtainScrollShowcase({
         slide.merged ? null : (
         <div
           key={slide.id}
-          className={`md:[order:var(--o)] ${slide.phoneOnly ? 'md:hidden' : ''}`}
+          className={`md:[order:var(--o)] ${slide.phoneOnly ? 'md:hidden' : slide.desktopOnly ? 'hidden md:block' : ''}`}
           style={{ ['--o' as string]: slide.desktopOrder ?? index * 10 }}
         >
           <HypeSection
