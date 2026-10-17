@@ -88,6 +88,7 @@ const SLIDES: SlideData[] = [
   {
     id: 'signature-fit',
     desktopShop: 'car',
+    buttonKeys: ['car'],
     category: '',
     title: 'EVERY CURVE. TAILORED TO THE MILLIMETRE.',
     tagline: 'A cover that fits your car like a second skin.',
