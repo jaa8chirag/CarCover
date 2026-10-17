@@ -192,7 +192,6 @@ function Hero({ onEnquiry }: { onEnquiry: () => void }) {
           </p>
           <div className="mt-8 grid grid-cols-2 sm:flex sm:flex-nowrap items-stretch justify-center gap-3 sm:gap-4">
             <a href="#fabrics" className="inline-flex items-center justify-center px-5 sm:px-6 py-4 bg-black hover:bg-[#b38848] text-white text-[13px] sm:text-sm font-medium no-underline transition-colors whitespace-nowrap">Explore The Covers</a>
-            <a href="#process" className="inline-flex items-center justify-center px-5 sm:px-6 py-4 bg-black hover:bg-[#b38848] text-white text-[13px] sm:text-sm font-medium no-underline transition-colors whitespace-nowrap">See The Process</a>
             <button onClick={onEnquiry} className="col-span-2 sm:col-span-1 inline-flex items-center justify-center px-5 sm:px-6 py-4 bg-black hover:bg-[#b38848] text-white text-[13px] sm:text-sm font-medium transition-colors whitespace-nowrap cursor-pointer">Order Swatch Kit</button>
           </div>
         </div>
@@ -707,7 +706,6 @@ export default function TechnologyPage() {
           <HeroStats />
           <BrandMarquee flat />
           <FabricSpecs onEnquiry={openEnquiry} />
-          <Process />
           <Materials />
           <LayerExplorer />
           <LabTests />

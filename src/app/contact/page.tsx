@@ -47,7 +47,9 @@ export default function ContactPage() {
     <PageShell>
       {() => (
         <div className="bg-[#f3f1ed]">
-          <SlideHero kicker="Get in touch" title="Contact Us" />
+          <div className="relative w-full mt-[var(--header-height)] h-[56vh] sm:h-[68vh] min-h-[320px] overflow-hidden bg-black">
+            <img src="/images/contact_studio.jpg" alt="Rolls-Royce in the studio" loading="lazy" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: 'center 60%' }} />
+          </div>
 
           {/* CONTENT */}
           <section className="relative py-16 sm:py-24">
@@ -157,9 +159,7 @@ export default function ContactPage() {
             </div>
           </section>
 
-          <div className="relative w-full h-[56vh] sm:h-[68vh] min-h-[320px] overflow-hidden bg-black">
-            <img src="/images/contact_studio.jpg" alt="Rolls-Royce in the studio" loading="lazy" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: 'center 60%' }} />
-          </div>
+          <SlideHero kicker="Get in touch" title="Contact Us" offsetHeader={false} />
         </div>
       )}
     </PageShell>
