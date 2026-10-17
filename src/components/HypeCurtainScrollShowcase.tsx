@@ -26,6 +26,8 @@ interface SlideData {
   desktopOnly?: boolean;
   /** Phones only: turns off the slow Ken Burns zoom on the static background. */
   noKenBurns?: boolean;
+  /** Laptops/desktops only: hidden on phones (opposite of phoneOnly). */
+  mobileHidden?: boolean;
   /** Optional per-slide shop button (slide 0 always has the default one). */
   shopLabel?: string;
   shopHref?: string;
@@ -58,7 +60,7 @@ const SLIDES: SlideData[] = [
     description:
       'Precision 3D-laser CAD tailored automotive covers engineered for India’s extreme climate. Rolls-Royce, Bentley, Porsche, Aston Martin & bespoke collections.',
     bgSrc: '/images/bentley_street.jpg',
-    bgSrcMobile: '/images/porsche_classic_black.jpg',
+    bgSrcMobile: '/images/cover_bentley_showroom_mobile.jpg',
     bgPos: 'center 55%',
     bgPosMd: 'center 60%',
     bright: true,
@@ -93,6 +95,7 @@ const SLIDES: SlideData[] = [
     id: 'signature-fit',
     desktopShop: 'car',
     buttonKeys: ['car'],
+    mobileHidden: true,
     category: '',
     title: 'EVERY CURVE. TAILORED TO THE MILLIMETRE.',
     tagline: 'A cover that fits your car like a second skin.',
@@ -119,6 +122,11 @@ const SLIDES: SlideData[] = [
       'Custom embroidery and contrast piping on premium stretch fabric, made for collectors, showrooms and launch events.',
     bgSrc: '/images/bentley_badge_rain.jpg',
     bgSrcMobile: '/images/porsche_speedster.jpg',
+    // Phones only: the photo that used to open slide 1, plus this slide's own photo.
+    mobileSlides: [
+      { src: '/images/porsche_classic_black.jpg', pos: 'center 48%' },
+      { src: '/images/porsche_speedster.jpg', pos: 'center 38%' },
+    ],
     bgPos: 'center 42%',
     bgPosMd: 'center 28%',
     tierId: 'bespoke',
@@ -409,7 +417,7 @@ export default function HypeCurtainScrollShowcase({
         slide.merged ? null : (
         <div
           key={slide.id}
-          className={`md:[order:var(--o)] ${slide.phoneOnly ? 'md:hidden' : slide.desktopOnly ? 'hidden md:block' : ''}`}
+          className={`md:[order:var(--o)] ${slide.phoneOnly ? 'md:hidden' : slide.desktopOnly || slide.mobileHidden ? 'hidden md:block' : ''}`}
           style={{ ['--o' as string]: slide.desktopOrder ?? index * 10 }}
         >
           <HypeSection
