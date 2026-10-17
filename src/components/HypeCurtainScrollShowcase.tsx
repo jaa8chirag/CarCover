@@ -382,7 +382,7 @@ function PhoneCarousel({ slides, allScreens, desktopOnly }: { slides: { src: str
   );
 }
 
-const KENBURNS_CSS = `@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.14) translateY(-2%); } }`;
+const KENBURNS_CSS = `@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.07) translateY(-1%); } }`;
 
 export default function HypeCurtainScrollShowcase({
   onOpenConfigurator,
