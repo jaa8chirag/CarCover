@@ -73,7 +73,7 @@ const SLIDES: SlideData[] = [
     id: 'bespoke-covers-slider',
     buttonKeys: ['bespoke'],
     category: '',
-    title: 'BESPOKE COVERS. MADE FOR ONE CAR.',
+    title: 'THE BESPOKE COVERS',
     tagline: 'Your colours. Your number. Your cover.',
     mobileLine: 'Your colours. Your cover.',
     description:
