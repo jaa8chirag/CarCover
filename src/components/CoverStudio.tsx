@@ -3,7 +3,7 @@
 import { gstOn } from '@/data/fabrics';
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Check, ShoppingBag, Plus, Trash2 } from 'lucide-react';
+import { Check, ShoppingBag, Plus, Trash2, PhoneCall } from 'lucide-react';
 import { FABRIC_COLORS } from '@/data/carData';
 import type { Fabric } from '@/data/fabrics';
 
@@ -65,6 +65,7 @@ function Swatches({ items, value, onChange }: { items: { id: string; name: strin
 /** Order form for one chosen cover: pick the car, then optional colour and any extra details. */
 export default function CoverStudio({ fabric, onAddToCart }: Props) {
   const isUnveiling = fabric.group === 'unveiling';
+  const isBespoke = fabric.group === 'custom';
 
   // Standard single car state
   const [brand, setBrand] = useState('');
@@ -335,12 +336,24 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
           </>
         )}
 
-        <Block n={isUnveiling ? 2 : 3} title="Additional information" hint="Optional. Tell us anything else we should know about your car, launch date or event.">
+        <Block
+          n={isUnveiling ? 2 : 3}
+          title="Additional information"
+          hint={
+            isBespoke
+              ? "Optional. Tell us about your custom artwork, livery, logo, preferred colours or monogramming."
+              : isUnveiling
+              ? "Optional. Tell us anything else we should know about your launch date, showroom or reveal event."
+              : "Optional. Tell us anything else we should know about your car or your cover."
+          }
+        >
           <textarea
             className={`${FIELD} min-h-[130px] resize-y`}
             maxLength={500}
             placeholder={
-              isUnveiling
+              isBespoke
+                ? "e.g. description of your artwork or livery, custom text or monogram, sponsor logos, launch date..."
+                : isUnveiling
                 ? "e.g. dealership name, reveal date, logo or monogram embroidery requirements, delivery location..."
                 : "e.g. custom text or logo, any body kit or spoiler, delivery notes, parking conditions..."
             }
@@ -349,6 +362,33 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
           />
           <p className="mt-2 text-right text-xs text-slate-400">{notes.length}/500</p>
         </Block>
+
+        {/* Contact atelier assistance banner */}
+        <div className="my-7 p-5 sm:p-6 rounded-2xl bg-[#faf7f2] border border-[#cca462]/35 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-full bg-[#cca462]/15 text-[#b38848] flex items-center justify-center flex-shrink-0">
+              <PhoneCall size={18} />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-slate-900">
+                {isBespoke
+                  ? 'Have questions about your bespoke design or artwork?'
+                  : 'Have questions about your car cover or exact fit?'}
+              </p>
+              <p className="text-xs text-slate-500">
+                Contact our team directly at <a href="tel:+918585996669" className="font-semibold text-black underline">+91 85859 96669</a> or chat on WhatsApp.
+              </p>
+            </div>
+          </div>
+          <a
+            href="https://wa.me/918585996669?text=Hello%20Signature%20Covers%2C%20I%20have%20questions%20about%20ordering%20a%20car%20cover."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] text-black text-xs font-bold uppercase tracking-wider transition-colors no-underline whitespace-nowrap shadow-sm"
+          >
+            Chat on WhatsApp
+          </a>
+        </div>
       </div>
 
       {/* SUMMARY */}
@@ -441,6 +481,11 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
               : 'Enter your car first'}
           </button>
           <p className="mt-4 text-xs text-white/50 text-center">Free delivery · 100% fit guarantee · 7-day returns</p>
+          <div className="mt-4 pt-4 border-t border-white/10 text-center">
+            <p className="text-xs text-white/70">
+              Have questions? Call <a href="tel:+918585996669" className="text-[#cca462] underline font-semibold">+91 85859 96669</a> or <a href="https://wa.me/918585996669?text=Hello%20Signature%20Covers%2C%20I%20have%20questions%20about%20ordering%20a%20car%20cover." target="_blank" rel="noopener noreferrer" className="text-[#25D366] underline font-semibold">WhatsApp us</a>
+            </p>
+          </div>
         </div>
       </aside>
     </div>

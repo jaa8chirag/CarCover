@@ -97,6 +97,7 @@ const FABRIC_TONES: Record<string, { tone: string; image?: string }> = {
   'outdoor-elite': { tone: '#1d2430', image: '/images/fabric_outdoor_elite.jpg' },
   'indoor-standard': { tone: '#3b4250', image: '/images/fabric_indoor_standard.jpg' },
   'indoor-elite': { tone: '#15171c', image: '/images/fabric_indoor_elite.jpg' },
+  'custom-printed': { tone: '#1a1a1a', image: '/images/cover_custom_printed.jpg' },
   'unveil-showroom': { tone: '#4a4038', image: '/images/fabric_unveiling.jpg' },
 };
 
@@ -317,10 +318,19 @@ export default function ShopPage() {
                   </div>
 
                   <MobileSlider desktopClass={`md:grid md:gap-8 md:mx-auto ${g.id === 'unveiling' || g.id === 'custom' ? 'md:grid-cols-1 max-w-md' : g.id === 'indoor' ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-2 xl:grid-cols-3'}`}>
-                    {g.id === 'custom'
-                      ? CUSTOM.map((c) => <CustomCard key={c.id} c={c} />)
-                      : FABRICS.filter((f) => f.group === g.id).map((f) => <FlipCard key={f.id} f={f} />)}
+                    {FABRICS.filter((f) => f.group === g.id).map((f) => <FlipCard key={f.id} f={f} />)}
                   </MobileSlider>
+
+                  {g.id === 'custom' && (
+                    <div className="mt-10 sm:mt-12 text-center max-w-xl mx-auto p-5 rounded-2xl bg-black/[0.03] border border-black/10">
+                      <p className="text-sm text-slate-700 leading-relaxed">
+                        Have questions about custom artwork, livery or monogramming? Call our atelier at{' '}
+                        <a href="tel:+918585996669" className="font-semibold text-black underline whitespace-nowrap">+91 85859 96669</a>
+                        {' '}or{' '}
+                        <a href="https://wa.me/918585996669?text=Hello%20Signature%20Covers%2C%20I%20have%20questions%20about%20ordering%20a%20Bespoke%20Cover." target="_blank" rel="noopener noreferrer" className="font-semibold text-[#1ebe5b] underline whitespace-nowrap">chat with us on WhatsApp</a>.
+                      </p>
+                    </div>
+                  )}
                 </div>
               </section>
 

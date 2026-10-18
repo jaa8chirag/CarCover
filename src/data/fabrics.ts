@@ -1,6 +1,6 @@
 import { Droplets, SunMedium, ShieldCheck, Layers, Sparkles, Rocket, type LucideIcon } from 'lucide-react';
 
-export type CoverGroup = 'outdoor' | 'indoor' | 'unveiling';
+export type CoverGroup = 'outdoor' | 'indoor' | 'unveiling' | 'custom';
 
 export interface Fabric {
   id: string;
@@ -144,5 +144,24 @@ export const FABRICS: Fabric[] = [
       'Reusable, with a carry bag for events',
     ],
     idealFor: 'Dealership reveals and delivery days',
+  },
+  {
+    id: 'custom-printed',
+    group: 'custom',
+    title: 'Bespoke Printed Cover',
+    subtitle: 'Printed, Monogrammed & Branded',
+    badge: 'BESPOKE',
+    price: 26999,
+    accentColor: '#cca462',
+    image: '/images/cover_custom_printed.jpg',
+    icon: Sparkles,
+    description: 'Your artwork, livery, stripes or branding printed edge-to-edge on premium four-way stretch indoor fabric. Tailored for your exact car.',
+    specs: [
+      'Edge-to-edge sublimation printing for any livery or artwork',
+      'Ultra-dense soft fleece backing protecting gloss paint and PPF',
+      'Tailored mirror pockets and sculpted contour cut',
+      'Washable and fade-resistant pigment technology',
+    ],
+    idealFor: 'Collectors, liveried supercars, brand promotions & custom builds',
   },
 ];

@@ -143,6 +143,7 @@ function GroupHead({ label, text }: { label: string; text: string }) {
 export default function ShopByCover() {
   const outdoor = FABRICS.filter((f) => f.group === 'outdoor');
   const indoor = FABRICS.filter((f) => f.group === 'indoor');
+  const custom = FABRICS.filter((f) => f.group === 'custom');
   const unveiling = FABRICS.filter((f) => f.group === 'unveiling');
 
   return (
@@ -173,7 +174,7 @@ export default function ShopByCover() {
             Find The Cover That Fits Your Life
           </h2>
           <div className="mx-auto mt-5 h-[2px] w-20 bg-gradient-to-r from-transparent via-[#b38848] to-transparent" />
-          <p className="mt-5 text-slate-600 leading-relaxed">Six tailored covers. Pick the one that matches where your car lives, then we cut it to your exact model.</p>
+          <p className="mt-5 text-slate-600 leading-relaxed">Seven tailored covers. Pick the one that matches where your car lives, then we cut it to your exact model.</p>
         </motion.div>
 
         <GroupHead label="Outdoor Covers" text="Rain, sun and everything in between" />
@@ -187,6 +188,13 @@ export default function ShopByCover() {
         <MobileSlider wrapperClass="mb-16 sm:mb-20" desktopClass="md:grid md:grid-cols-2 md:gap-6 lg:gap-8">
           {indoor.map((f, i) => (
             <CoverCard key={f.id} f={f} i={i} wide />
+          ))}
+        </MobileSlider>
+
+        <GroupHead label="Bespoke Covers" text="Printed, monogrammed or branded. Made for one car only" />
+        <MobileSlider wrapperClass="mb-16 sm:mb-20" desktopClass="md:grid md:grid-cols-1 md:max-w-sm md:mx-auto md:gap-6 lg:gap-8">
+          {custom.map((f, i) => (
+            <CoverCard key={f.id} f={f} i={i} />
           ))}
         </MobileSlider>
 

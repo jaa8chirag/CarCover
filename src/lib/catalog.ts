@@ -33,6 +33,7 @@ export interface CollectionDoc {
 const GROUP_INFO: Record<string, { title: string; description: string; productType: string }> = {
   outdoor: { title: 'Outdoor Covers', description: 'Built for rain, sun and dust. For cars parked outside.', productType: 'Outdoor Cover' },
   indoor: { title: 'Indoor Covers', description: 'Soft, breathable covers for the garage or showroom.', productType: 'Indoor Cover' },
+  custom: { title: 'Bespoke Covers', description: 'Printed, monogrammed or branded covers.', productType: 'Bespoke Cover' },
   unveiling: { title: 'Unveiling Covers', description: 'Reveal-night covers for launches and handovers.', productType: 'Unveiling Cover' },
 };
 

@@ -172,6 +172,19 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
     },
     bars: { water: 8, uv: 25, scratch: 80, breath: 85 },
   },
+  'custom-printed': {
+    short: 'Bespoke Printed',
+    environment: 'Indoor · Custom',
+    warranty: '5-Year Guarantee',
+    specs: {
+      material: 'Bespoke sublimation stretch fabric with fleece lining',
+      breathability: 'Micro-porous breathable finish',
+      waterResistance: 'Made for indoor storage, garage & paddock',
+      lining: 'Scratch-free ultra-plush velvet fleece',
+      stretch: 'Full four-way contour stretch',
+    },
+    bars: { water: 15, uv: 45, scratch: 98, breath: 92 },
+  },
 };
 
 /** Every cover we make, with its full specification. Prices, images and features come from the shop data. */
