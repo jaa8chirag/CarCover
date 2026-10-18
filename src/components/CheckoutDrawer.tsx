@@ -55,6 +55,18 @@ export default function CheckoutDrawer({
   const [sr, setSr] = useState<{ enabled: boolean; scriptUrl?: string; cssUrl?: string }>({ enabled: false });
   useEffect(() => {
     if (!isOpen) return;
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prevBodyOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
     fetch('/api/shiprocket/status')
       .then((r) => r.json())
       .then((d) => setSr(d))
@@ -154,6 +166,8 @@ export default function CheckoutDrawer({
 
   return (
     <div
+      data-lenis-prevent
+      onWheel={(e) => e.stopPropagation()}
       style={{
         position: 'fixed',
         inset: 0,
@@ -162,24 +176,31 @@ export default function CheckoutDrawer({
         justifyContent: 'flex-end',
         background: 'rgba(0, 0, 0, 0.55)',
         backdropFilter: 'blur(8px)',
+        overscrollBehavior: 'contain',
       }}
     >
       <div 
         onClick={onClose} 
+        onTouchMove={(e) => e.preventDefault()}
         style={{ position: 'absolute', inset: 0 }} 
       />
 
       {/* Drawer Panel */}
       <div
+        data-lenis-prevent
+        onWheel={(e) => e.stopPropagation()}
         style={{
           position: 'relative',
           width: '100%',
           maxWidth: '540px',
           height: '100%',
+          maxHeight: '100dvh',
           backgroundColor: '#ffffff',
           borderLeft: '1px solid #dce2e2',
-          padding: '40px 32px',
+          padding: '40px 32px 80px',
           overflowY: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          overscrollBehavior: 'contain',
           display: 'flex',
           flexDirection: 'column',
           boxShadow: '-10px 0 50px rgba(0,0,0,0.15)',
