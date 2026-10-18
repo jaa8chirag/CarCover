@@ -79,8 +79,8 @@ const SLIDES: SlideData[] = [
     buttonKeys: ['bespoke'],
     category: '',
     title: 'THE BESPOKE COVERS',
-    tagline: 'Your colours. Your number. Your cover.',
-    mobileLine: 'Your colours. Your cover.',
+    tagline: '',
+    mobileLine: '',
     description:
       'Printed, monogrammed or branded covers cut to your exact car.',
     bgSrc: '/images/bespoke_slide_2.jpg',
@@ -97,9 +97,9 @@ const SLIDES: SlideData[] = [
     noKenBurns: true,
     buttonKeys: ['unveil'],
     category: '',
-    title: 'THE ART OF THE GRAND UNVEILING.',
-    tagline: 'Launch-night covers made in your brand colours.',
-    mobileLine: 'Launch covers in your colours.',
+    title: 'THE ART OF UNVEILING',
+    tagline: '',
+    mobileLine: '',
     shopLabel: 'Shop Unveiling Covers',
     shopHref: '/shop',
     description:
@@ -178,9 +178,9 @@ const SLIDES: SlideData[] = [
     desktopOnly: true,
     desktopShop: 'unveil',
     category: '',
-    title: 'WHERE EVERY UNVEILING BEGINS.',
-    tagline: 'Your monogram. Your colours. Your car.',
-    mobileLine: 'Your monogram. Your colours.',
+    title: 'THE ART OF UNVEILING',
+    tagline: '',
+    mobileLine: '',
     description:
       'Custom embroidery and contrast piping on premium stretch fabric, made for collectors, showrooms and launch events.',
     bgSrc: '/images/unveil_gold_curtains.jpg',
@@ -299,6 +299,7 @@ function HypeSection({
         />
 
         {/* Subtitle / Tagline */}
+        {slide.mobileLine && (
         <motion.p
           variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
           transition={{ duration: 1.0, ease: [0.19, 1, 0.22, 1] }}
@@ -306,6 +307,7 @@ function HypeSection({
         >
           {slide.mobileLine}
         </motion.p>
+        )}
         <motion.p
           variants={{
             hidden: { opacity: 0, y: 30 },

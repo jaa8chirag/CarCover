@@ -151,6 +151,9 @@ function FlipCard({ f }: { f: Fabric }) {
             {fab.image && <img src={fab.image} alt={`${f.title} fabric`} className="absolute inset-0 w-full h-full object-cover" />}
             <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10" />
             <span className="absolute bottom-4 left-5 text-[10px] font-bold tracking-[4px] uppercase text-[#f6e3b4]">The fabric</span>
+            <button type="button" onClick={() => setFlipped(false)} className="absolute bottom-4 right-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-[2px] cursor-pointer">
+              <RotateCw size={12} /> Back
+            </button>
           </div>
           <div className="p-6 sm:p-7 flex flex-col flex-1">
             <h3 className="uppercase font-bold tracking-wide text-black leading-snug">{f.title}</h3>
@@ -163,7 +166,6 @@ function FlipCard({ f }: { f: Fabric }) {
               ))}
             </dl>
             <div className="mt-5 flex gap-3">
-              <button type="button" onClick={() => setFlipped(false)} className="px-5 py-3.5 rounded-full border border-slate-300 hover:border-black text-black text-xs font-bold uppercase tracking-[2px] cursor-pointer transition-colors">Back</button>
               <Link href={`/shop/${f.id}`} className="flex-1 inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-black hover:bg-[#b38848] text-white text-xs font-bold uppercase tracking-[2px] no-underline transition-colors">
                 Choose <ArrowRight size={14} />
               </Link>

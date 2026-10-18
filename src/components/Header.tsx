@@ -167,7 +167,7 @@ export default function Header({
           </div>
 
           {/* CENTER: logo over name */}
-          <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
             <Link href="/" className="group block transition-all no-underline" aria-label="Signature Covers Home">
               <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.2 }} className="py-1">
                 <span className="flex flex-col items-center gap-1.5 sm:gap-2 text-white" style={{ fontFamily: 'var(--font-main)' }}>
