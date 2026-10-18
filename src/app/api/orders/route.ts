@@ -63,7 +63,15 @@ export async function POST(req: Request) {
         coverColor: color,
         piping: str(it?.pipingColor, 60),
         notes: str(it?.notes, 500) === 'None' ? '' : str(it?.notes, 500),
-        price: serverPrice ?? Math.max(0, Number(it?.price) || 0),
+        price: (serverPrice !== null
+          ? serverPrice +
+            (fabric && ['outdoor-elite', 'indoor-elite'].includes(fabric.id) &&
+            it?.pipingColor &&
+            it?.pipingColor !== 'No piping' &&
+            !String(it?.pipingColor).toLowerCase().includes('none')
+              ? 1999
+              : 0)
+          : Math.max(0, Number(it?.price) || 0)),
         priceVerified: serverPrice !== null && !!tier,
       });
     }

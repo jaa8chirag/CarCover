@@ -76,8 +76,12 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
   const hasPiping = PIPING_FABRICS.includes(fabric.id);
   const piping = hasPiping ? PIPING_OPTIONS.find((c) => c.id === pipingId)! : PIPING_OPTIONS[0];
 
-  // The customer tells us the car; we don't look it up, so every cover starts at the fabric's base price.
-  const total = fabric.price;
+  const PIPING_PRICE = 1999;
+  const pipingPrice = hasPiping && piping.id !== 'none' ? PIPING_PRICE : 0;
+  const basePrice = fabric.price;
+  const subtotal = basePrice + pipingPrice;
+  const gst = gstOn(subtotal);
+  const total = subtotal + gst;
   const ready = !!(brand.trim() && model.trim() && year.trim());
 
   const addToCart = () => {
@@ -89,11 +93,11 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
       tier: fabric.title,
       fabricColor: color.name,
       fabricHex: color.hex,
-      pipingColor: piping.name,
+      pipingColor: piping.id !== 'none' ? `${piping.name} (+₹1,999)` : piping.name,
       pipingHex: piping.hex,
       notes: notes.trim() || 'None',
-      addons: {},
-      price: total,
+      addons: pipingPrice > 0 ? { piping: pipingPrice } : {},
+      price: subtotal,
       currency: '₹',
     });
     setAdded(true);
@@ -126,19 +130,34 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
           <p className="mt-3 text-sm text-slate-500">{color.name}</p>
           {hasPiping && (
             <>
-              <span className="block text-[11px] font-bold tracking-[3px] uppercase text-[#b38848] mt-7 mb-3">Piping</span>
+              <div className="flex items-center justify-between mt-7 mb-3">
+                <span className="block text-[11px] font-bold tracking-[3px] uppercase text-[#b38848]">Piping</span>
+                <span className="text-xs text-slate-500 font-medium">+₹1,999 extra</span>
+              </div>
               <div className="flex flex-wrap gap-3">
                 {PIPING_OPTIONS.map((o) => {
                   const on = o.id === pipingId;
+                  const isPaid = o.id !== 'none';
                   return (
                     <button
                       key={o.id}
                       type="button"
                       onClick={() => setPipingId(o.id)}
-                      className={`inline-flex items-center gap-2.5 px-5 py-3 rounded-full border text-sm cursor-pointer transition-colors ${on ? 'border-black bg-black text-white' : 'border-slate-300 hover:border-black text-black'}`}
+                      className={`inline-flex items-center gap-2.5 px-5 py-3 rounded-full border text-sm cursor-pointer transition-colors ${
+                        on ? 'border-black bg-black text-white' : 'border-slate-300 hover:border-black text-black'
+                      }`}
                     >
                       {o.id !== 'none' && <span className="w-4 h-4 rounded-full border border-slate-400" style={{ background: o.hex }} />}
-                      {o.name}
+                      <span>{o.name}</span>
+                      {isPaid && (
+                        <span
+                          className={`text-[11px] px-2 py-0.5 rounded-full font-semibold transition-colors ${
+                            on ? 'bg-[#cca462] text-black' : 'bg-slate-100 text-slate-600'
+                          }`}
+                        >
+                          +₹1,999
+                        </span>
+                      )}
                     </button>
                   );
                 })}
@@ -175,14 +194,20 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
           <Row k="Cover" v={fabric.title} />
           <Row k="Car" v={brand.trim() && model.trim() ? `${brand.trim()} ${model.trim()}${year.trim() ? ` (${year.trim()})` : ''}` : 'Not entered'} />
           <Row k="Colour" v={color.name} />
-          {hasPiping && <Row k="Piping" v={piping.name} />}
+          {hasPiping && (
+            <Row
+              k="Piping"
+              v={piping.id !== 'none' ? `${piping.name} (+${formatINR(pipingPrice)})` : 'No piping'}
+            />
+          )}
           <Row k="Notes" v={notes.trim() ? (notes.trim().length > 28 ? notes.trim().slice(0, 28) + '...' : notes.trim()) : 'None'} />
-          <Row k="Cover price" v={formatINR(total)} />
+          <Row k="Cover price" v={formatINR(basePrice)} />
+          {hasPiping && pipingPrice > 0 && <Row k="Piping trim" v={`+${formatINR(pipingPrice)}`} />}
           <Row k="Shipping" v="Free" />
-          <Row k="GST (18%)" v={formatINR(gstOn(total))} />
+          <Row k="GST (18%)" v={formatINR(gst)} />
           <div className="flex items-end justify-between pt-6">
             <span className="text-xs uppercase tracking-[2px] text-white/50">Total (incl. GST)</span>
-            <span className="text-3xl font-semibold" style={{ fontFamily: 'var(--font-hype)' }}>{formatINR(total + gstOn(total))}</span>
+            <span className="text-3xl font-semibold" style={{ fontFamily: 'var(--font-hype)' }}>{formatINR(total)}</span>
           </div>
           <button
             onClick={addToCart}

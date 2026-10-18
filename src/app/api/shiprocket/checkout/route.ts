@@ -35,7 +35,13 @@ export async function POST(req: Request) {
       if (!fabric || !product || product.status !== 'active') {
         return Response.json({ ok: false, message: 'One of the covers in your cart is no longer available.' }, { status: 400 });
       }
-      const price = product.basePrice;
+      const hasPipingFee =
+        ['outdoor-elite', 'indoor-elite'].includes(fabric.id) &&
+        it?.pipingColor &&
+        it?.pipingColor !== 'No piping' &&
+        !String(it?.pipingColor).toLowerCase().includes('none');
+      const pipingFee = hasPipingFee ? 1999 : 0;
+      const price = product.basePrice + pipingFee;
       items.push({
         fabricId: fabric.id,
         vehicle: str(it?.vehicle, 120),
