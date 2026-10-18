@@ -178,7 +178,7 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
     environment: 'Indoor · Custom',
     warranty: '5-Year Guarantee',
     specs: {
-      material: 'Bespoke sublimation stretch fabric with fleece lining',
+      material: 'Bespoke stretch fabric with fleece lining',
       breathability: 'Micro-porous breathable finish',
       waterResistance: 'Made for indoor storage, garage & paddock',
       lining: 'Scratch-free ultra-plush velvet fleece',
