@@ -33,7 +33,7 @@ export const FABRICS: Fabric[] = [
     id: 'outdoor-standard',
     group: 'outdoor',
     title: 'Outdoor Standard',
-    subtitle: 'Everyday All-Weather Protection',
+    subtitle: 'Everyday Protection',
     badge: 'OUTDOOR',
     price: 3899,
     accentColor: '#334155',
