@@ -161,7 +161,7 @@ export const FABRICS: Fabric[] = [
     icon: Sparkles,
     description: 'Your artwork, livery, stripes or branding printed edge-to-edge on premium four-way stretch indoor fabric. Tailored for your exact car.',
     specs: [
-      'Edge-to-edge sublimation printing for any livery or artwork',
+      'Edge-to-edge printing replicating your exact car design',
       'Ultra-dense soft fleece backing protecting gloss paint and PPF',
       'Tailored mirror pockets and sculpted contour cut',
       'Washable and fade-resistant pigment technology',
