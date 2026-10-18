@@ -61,7 +61,7 @@ export const FABRICS: Fabric[] = [
     specs: [
       'Heavy-rain resistant with sealed seams',
       'Heat and UV reflective outer surface',
-      'Anti-abrasive microfibre paint-contact lining',
+      'Anti-abrasive microfibre lining',
       'Car brand logo printed on the cover',
     ],
     idealFor: 'Open parking in hot or rainy cities',
