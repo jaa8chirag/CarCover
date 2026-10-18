@@ -103,6 +103,7 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
       material: 'Polyester with UV-stable coating',
       waterResistance: 'Water-resistant, sheds light to moderate rain',
       uvProtection: 'Protection from UV rays',
+      lining: 'Standard lining',
       stretch: 'Tailored fit with elasticated hem',
     },
     bars: { water: 60, uv: 65, scratch: 60, breath: 80 },
