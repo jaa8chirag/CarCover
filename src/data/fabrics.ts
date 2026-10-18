@@ -44,6 +44,7 @@ export const FABRICS: Fabric[] = [
       'Waterproof',
       'UV-stabilised fabric',
       'Tailored fit with mirror pockets',
+      'Car brand logo printed on the cover',
     ],
     idealFor: 'Daily outdoor and society parking',
   },
