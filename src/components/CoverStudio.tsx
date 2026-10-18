@@ -342,9 +342,7 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
           n={isUnveiling || isBespoke ? 2 : 3}
           title="Additional information"
           hint={
-            isBespoke
-              ? "Optional. Tell us about your custom artwork, livery, logo, preferred colours or monogramming."
-              : isUnveiling
+            isUnveiling
               ? "Optional. Tell us anything else we should know about your launch date, showroom or reveal event."
               : "Optional. Tell us anything else we should know about your car or your cover."
           }
@@ -353,11 +351,9 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
             className={`${FIELD} min-h-[130px] resize-y`}
             maxLength={500}
             placeholder={
-              isBespoke
-                ? "e.g. description of your artwork or livery, custom text or monogram, sponsor logos, launch date..."
-                : isUnveiling
-                ? "e.g. dealership name, reveal date, logo or monogram embroidery requirements, delivery location..."
-                : "e.g. custom text or logo, any body kit or spoiler, delivery notes, parking conditions..."
+              isUnveiling
+                ? "e.g. dealership name, reveal date, logo or monogram embroidery requirements..."
+                : "e.g. custom text or logo, any body kit or spoiler..."
             }
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
