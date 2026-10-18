@@ -8,6 +8,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL((process.env.SITE_URL || 'https://thesignaturecovers.com').replace(/\/$/, '')),
+  // Optional Search Console HTML-tag check; the DNS check needs nothing here.
+  verification: process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : undefined,
   title: 'THESIGNATURECOVERS | Bespoke Tailored Car Covers | India',
   description: 'Precision 3D-laser CAD tailored luxury automotive covers engineered for Indian weather by TheSignaturecovers. 100% Waterproof monsoon shield, 48°C UV heat deflection & zero-scratch cashmere fleece. Free delivery across India.',
   keywords: 'TheSignaturecovers, bespoke car covers India, luxury car covers, tailored car cover, Mahindra Thar car cover, Fortuner car cover, Creta car cover, waterproof car cover India, specialized covers',
@@ -20,6 +23,7 @@ export const metadata: Metadata = {
 };
 
 import SmoothScrollProvider from '@/components/SmoothScrollProvider';
+import Analytics from '@/components/Analytics';
 
 export default function RootLayout({
   children,
@@ -37,6 +41,7 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning>
+        <Analytics />
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>

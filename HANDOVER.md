@@ -79,6 +79,12 @@ If Shiprocket ever stops working, remove the key and secret and restart. The sit
 
 Full set-up steps for a new server are in `DEPLOY.md`.
 
+## Visitor tracking: Microsoft Clarity and Google Search Console
+
+- **Microsoft Clarity** (recordings and heatmaps): create a free project at clarity.microsoft.com, copy its Project ID, then add it as the environment variable `NEXT_PUBLIC_CLARITY_ID`. The ID is built into the site, so after adding it you must rebuild and restart (see "Updating the website"). It is never loaded on `/admin`.
+- **Google Search Console** (how Google sees the site): add `thesignaturecovers.com` as a *Domain* property and verify it with the DNS TXT record Google gives you (add it in Cloudflare). Then submit `https://thesignaturecovers.com/sitemap.xml`. The site already publishes `/sitemap.xml` and `/robots.txt`.
+- Clarity records what visitors do on the pages, so mention analytics in your privacy policy.
+
 ## Things to know
 
 - **Photos** are in `public/images`. Replace a file with one of the same name to change a picture.
