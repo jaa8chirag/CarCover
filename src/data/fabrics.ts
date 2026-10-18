@@ -41,8 +41,8 @@ export const FABRICS: Fabric[] = [
     icon: ShieldCheck,
     description: 'A dependable water-resistant, UV-stable cover for daily outdoor parking. Tailored to your exact model.',
     specs: [
-      'Water-resistant',
-      'UV-stabilised against dashboard heat',
+      'Waterproof',
+      'UV-stabilised fabric',
       'Tailored fit with mirror pockets',
     ],
     idealFor: 'Daily outdoor and society parking',
