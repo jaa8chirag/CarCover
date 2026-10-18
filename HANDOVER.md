@@ -85,6 +85,17 @@ Full set-up steps for a new server are in `DEPLOY.md`.
 - **Google Search Console** (how Google sees the site): add `thesignaturecovers.com` as a *Domain* property and verify it with the DNS TXT record Google gives you (add it in Cloudflare). Then submit `https://thesignaturecovers.com/sitemap.xml`. The site already publishes `/sitemap.xml` and `/robots.txt`.
 - Clarity records what visitors do on the pages, so mention analytics in your privacy policy.
 
+## SEO: what is already done
+
+- **Every page** has its own title, description, canonical address and social-share card (WhatsApp, Facebook, X). Share image: `public/og-image.jpg`. The text lives in each page's `layout.tsx` (home: `src/app/layout.tsx`).
+- **Headings:** each page has one main heading (h1), with sections as h2 and questions as h3.
+- **Structured data (what Google reads):** the business (Organization and LocalBusiness), the website, the product list and a Product with price for every cover, breadcrumbs, and the home page FAQ.
+- **`/sitemap.xml`, `/robots.txt`** and a web app manifest are generated automatically. `/admin`, `/api` and `/order-complete` are hidden from Google.
+- **Speed:** photos are compressed and cached for a month in the browser; page text is compressed; basic security headers are on.
+- **Home page text and FAQ:** `src/components/HomeIntro.tsx`. Keep the FAQ answers true, because Google shows them.
+
+To change a page's title or description, edit its `layout.tsx` and redeploy. Prices in the structured data follow the shop prices automatically.
+
 ## Things to know
 
 - **Photos** are in `public/images`. Replace a file with one of the same name to change a picture.

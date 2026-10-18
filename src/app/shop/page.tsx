@@ -6,6 +6,7 @@ import { Check, ArrowRight, ArrowUpRight, RotateCw } from 'lucide-react';
 import PageShell from '@/components/PageShell';
 import MobileSlider from '@/components/MobileSlider';
 import { FABRICS, PRICE_NOTE, type CoverGroup, type Fabric } from '@/data/fabrics';
+import { SITE_URL, absolute, jsonLd } from '@/lib/seo';
 import { FABRIC_SHEETS } from '@/data/technology';
 
 const GROUPS: { id: CoverGroup | 'custom'; label: string; text: string; kicker: string; after?: string; afterPos?: string }[] = [
@@ -113,7 +114,7 @@ function FlipCard({ f }: { f: Fabric }) {
         {/* FRONT */}
         <div className="[grid-area:1/1] [backface-visibility:hidden] flex flex-col bg-white rounded-[2rem] overflow-hidden border border-slate-200 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.25)]">
           <div className="relative aspect-[5/4] overflow-hidden bg-slate-900">
-            <img src={f.image} alt={f.title} loading="lazy" className="w-full h-full object-cover" />
+            <img src={f.image} alt={`${f.title} car cover`} loading="lazy" className="w-full h-full object-cover" />
             {f.bestseller && (
               <span className="absolute top-4 left-4 bg-gradient-to-r from-[#cca462] to-[#f6e3b4] text-black text-[10px] font-bold tracking-[2px] px-4 py-2 rounded-full shadow-lg">BESTSELLER</span>
             )}
@@ -190,7 +191,7 @@ function SplitCard({ f }: { f: Fabric }) {
       className="group flex flex-col h-full bg-white rounded-[2rem] overflow-hidden no-underline text-inherit border border-slate-200 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.25)] hover:shadow-[0_40px_90px_-30px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-500"
     >
       <div className="relative aspect-[5/4] overflow-hidden bg-slate-900">
-        <img src={f.image} alt={f.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+        <img src={f.image} alt={`${f.title} car cover`} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
         {/* fabric: slides in over the left half */}
         <div
           className="absolute inset-0 transition-[clip-path] duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
@@ -241,7 +242,7 @@ function RangeCard({ f }: { f: Fabric }) {
       className="group flex flex-col h-full bg-white rounded-[2rem] overflow-hidden no-underline text-inherit border border-slate-200 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.25)] hover:shadow-[0_40px_90px_-30px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-500"
     >
       <div className="relative aspect-[5/4] overflow-hidden bg-slate-900">
-        <img src={f.image} alt={f.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] group-hover:scale-110" />
+        <img src={f.image} alt={`${f.title} car cover`} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] group-hover:scale-110" />
         {f.bestseller && (
           <span className="absolute top-4 left-4 bg-gradient-to-r from-[#cca462] to-[#f6e3b4] text-black text-[10px] font-bold tracking-[2px] px-4 py-2 rounded-full shadow-lg">BESTSELLER</span>
         )}
@@ -268,11 +269,20 @@ function RangeCard({ f }: { f: Fabric }) {
   );
 }
 
+const SHOP_LD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'ItemList', name: 'Signature Covers range', itemListElement: FABRICS.map((f, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE_URL}/shop/${f.id}`, name: f.title, image: absolute(f.image) })) },
+    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL }, { '@type': 'ListItem', position: 2, name: 'Shop', item: `${SITE_URL}/shop` }] },
+  ],
+};
+
 export default function ShopPage() {
   return (
     <PageShell>
       {() => (
         <div className="bg-[#f3f1ed]">
+          <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(SHOP_LD)} />
           {/* INTRO */}
           <div className="bg-white pt-32 sm:pt-40 pb-14 sm:pb-20">
             <div className="container-am max-w-5xl text-center">

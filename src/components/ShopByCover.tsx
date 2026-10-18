@@ -66,7 +66,7 @@ function CoverCard({ f, i, wide }: { f: Fabric; i: number; wide?: boolean }) {
         >
           <img
             src={f.image}
-            alt={f.title}
+            alt={`${f.title} car cover`}
             loading="lazy"
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.1]"
           />

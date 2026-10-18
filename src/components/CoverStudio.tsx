@@ -163,7 +163,7 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
       <aside className="lg:sticky lg:top-28 bg-black text-white rounded-[2rem] overflow-hidden shadow-[0_40px_90px_-30px_rgba(0,0,0,0.6)]">
         <div className="aspect-[16/10] overflow-hidden bg-slate-900">
           <div className="relative w-full h-full">
-            <img src={fabric.image} alt="" className="w-full h-full object-cover" />
+            <img src={fabric.image} alt={`${fabric.title} car cover preview`} className="w-full h-full object-cover" />
             <span className="absolute inset-0 mix-blend-multiply opacity-40" style={{ background: color.hex }} />
             <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
             {piping.id !== 'none' && <span className="absolute bottom-0 inset-x-0 h-[3px]" style={{ background: piping.hex }} />}

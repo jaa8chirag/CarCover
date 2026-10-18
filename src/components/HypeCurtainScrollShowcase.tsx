@@ -214,6 +214,8 @@ function HypeSection({
   totalSlides: number;
   onCtaClick: (tierId: string) => void;
 }) {
+  // Only the first slide is the page's h1; the others are h2 so the page has a single main heading.
+  const Heading = (index === 0 ? 'h1' : 'h2') as 'h1' | 'h2';
   return (
     <div
       id={`slide-${index}`}
@@ -282,9 +284,9 @@ function HypeSection({
           transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
           className="overflow-hidden mb-6 max-md:mb-3"
         >
-          <h1 className={`uppercase tracking-[0.005em] sm:tracking-[0.01em] text-[23px] min-[420px]:text-[27px] md:text-[clamp(20px,2.85vw,52px)] md:whitespace-nowrap font-semibold leading-[1.12] text-white break-words`} style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+          <Heading className={`uppercase tracking-[0.005em] sm:tracking-[0.01em] text-[23px] min-[420px]:text-[27px] md:text-[clamp(20px,2.85vw,52px)] md:whitespace-nowrap font-semibold leading-[1.12] text-white break-words`} style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             {slide.title}
-          </h1>
+          </Heading>
         </motion.div>
 
         {/* Golden Hairline Divider (Expands from center) */}

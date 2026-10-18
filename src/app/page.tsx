@@ -6,6 +6,7 @@ import HypeCurtainScrollShowcase from '@/components/HypeCurtainScrollShowcase';
 import SwatchRequestModal from '@/components/SwatchRequestModal';
 import CheckoutDrawer from '@/components/CheckoutDrawer';
 import BrandMarquee from '@/components/BrandMarquee';
+import HomeIntro from '@/components/HomeIntro';
 import ShopByCover from '@/components/ShopByCover';
 import Footer from '@/components/Footer';
 import { useCart } from '@/lib/useCart';
@@ -90,6 +91,8 @@ export default function Home() {
       <BrandMarquee />
 
       <ShopByCover />
+
+      <HomeIntro />
 
       {/* Aston Martin Official Footer */}
       <Footer />
