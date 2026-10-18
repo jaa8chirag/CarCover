@@ -2,8 +2,9 @@
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-const STATUSES = ['new', 'confirmed', 'in_production', 'shipped', 'delivered', 'cancelled'] as const;
+const STATUSES = ['awaiting_payment', 'new', 'confirmed', 'in_production', 'shipped', 'delivered', 'cancelled'] as const;
 const STATUS_LABEL: Record<string, string> = {
+  awaiting_payment: 'Awaiting payment',
   new: 'New',
   confirmed: 'Confirmed',
   in_production: 'In production',
@@ -12,6 +13,7 @@ const STATUS_LABEL: Record<string, string> = {
   cancelled: 'Cancelled',
 };
 const STATUS_COLOR: Record<string, string> = {
+  awaiting_payment: '#64748b',
   new: '#b45309',
   confirmed: '#1d4ed8',
   in_production: '#7c3aed',
@@ -113,6 +115,9 @@ function OrderDetail({ order, onClose, onSaved }: { order: any; onClose: () => v
         </div>
 
         <section className="mt-6">
+          {order.shiprocketOrderId && (
+            <p className="mb-4 text-xs text-slate-500">Shiprocket order {order.shiprocketOrderId} · payment {order.paymentStatus || 'pending'}{order.paymentType ? ` (${order.paymentType.toLowerCase().replace('_', ' ')})` : ''}</p>
+          )}
           <h3 className="text-xs font-bold tracking-[2px] uppercase text-[#b38848] mb-2">Customer</h3>
           <p className="text-black font-medium">{order.customer.name}</p>
           <p className="text-sm text-slate-600">

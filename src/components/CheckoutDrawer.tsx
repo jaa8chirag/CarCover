@@ -1,7 +1,7 @@
 'use client';
 
 import { gstOn } from '@/data/fabrics';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, Trash2, ArrowRight, CheckCircle2, Lock } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -51,15 +51,65 @@ export default function CheckoutDrawer({
     chassisVin: '',
   });
 
+  // When Shiprocket is switched on, it collects the address and takes the payment; otherwise the form below is used.
+  const [sr, setSr] = useState<{ enabled: boolean; scriptUrl?: string; cssUrl?: string }>({ enabled: false });
+  useEffect(() => {
+    if (!isOpen) return;
+    fetch('/api/shiprocket/status')
+      .then((r) => r.json())
+      .then((d) => setSr(d))
+      .catch(() => setSr({ enabled: false }));
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const subtotal = items.reduce((sum, item) => sum + (item.price || 0), 0);
   const gst = gstOn(subtotal);
   const total = subtotal + gst;
 
+  const loadShiprocket = () =>
+    new Promise<void>((resolve, reject) => {
+      if ((window as any).HeadlessCheckout) return resolve();
+      if (sr.cssUrl && !document.querySelector(`link[href="${sr.cssUrl}"]`)) {
+        const l = document.createElement('link');
+        l.rel = 'stylesheet';
+        l.href = sr.cssUrl;
+        document.head.appendChild(l);
+      }
+      const t = document.createElement('script');
+      t.src = sr.scriptUrl || '';
+      t.onload = () => resolve();
+      t.onerror = () => reject(new Error('script'));
+      document.body.appendChild(t);
+    });
+
+  const payWithShiprocket = async (event: Event) => {
+    setError('');
+    setSubmitting(true);
+    try {
+      const res = await fetch('/api/shiprocket/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        setError(data.message || 'We could not start the payment page. Please try again.');
+        return;
+      }
+      await loadShiprocket();
+      (window as any).HeadlessCheckout.addToCart(event, data.token, { fallbackUrl: `${window.location.origin}/shop`, isInitiatedFromApp: false });
+    } catch {
+      setError('Could not open the payment page. Check your internet and try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   const handleConfirmCommission = async (e: React.FormEvent) => {
     e.preventDefault();
     if (submitting) return;
+    if (sr.enabled) return payWithShiprocket(e.nativeEvent);
     setError('');
     setSubmitting(true);
     try {
@@ -320,6 +370,8 @@ export default function CheckoutDrawer({
                     paddingTop: '24px',
                   }}
                 >
+                  {!sr.enabled && (
+                  <>
                   <span className="am-kicker">CLIENT & DELIVERY VERIFICATION</span>
 
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', marginBottom: '12px' }}>
@@ -438,6 +490,9 @@ export default function CheckoutDrawer({
                     />
                   </div>
 
+                  </>
+                  )}
+
                   {/* Price breakdown */}
                   <div style={{ fontSize: '13px', color: '#5c6462', marginBottom: '14px', borderTop: '1px solid #e4e8e7', paddingTop: '14px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
@@ -468,7 +523,7 @@ export default function CheckoutDrawer({
                         Total (incl. GST)
                       </div>
                       <div style={{ fontSize: '12px', color: '#00665e', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px', fontWeight: 600 }}>
-                        <Lock size={12} /> Free Pan-India Insured Express + COD/UPI
+                        <Lock size={12} /> {sr.enabled ? 'Secure payment by Shiprocket · address next' : 'Free Pan-India Insured Express + COD/UPI'}
                       </div>
                     </div>
 
@@ -496,7 +551,7 @@ export default function CheckoutDrawer({
                     className="cta_button cta_button--primary-light"
                     style={{ width: '100%', height: '52px', opacity: submitting ? 0.6 : 1, cursor: submitting ? 'wait' : 'pointer' }}
                   >
-                    <span>{submitting ? 'Placing your order...' : 'Reserve Production Slot'}</span>
+                    <span>{submitting ? (sr.enabled ? 'Opening payment...' : 'Placing your order...') : sr.enabled ? 'Pay securely' : 'Reserve Production Slot'}</span>
                     <ArrowRight size={16} />
                   </button>
                 </form>

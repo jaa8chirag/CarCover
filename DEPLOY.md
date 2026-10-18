@@ -19,7 +19,7 @@ cPanel > **Setup Node.js App** > Create Application
 - Application startup file: **server.cjs**
 
 Under **Environment variables** add (same as `.env.example`):
-`DB_HOST` (`localhost`), `DB_PORT` (`3306`), `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `ADMIN_PASSWORD`, `ADMIN_SECRET`, and optionally `SHIPROCKET_API_KEY`.
+`DB_HOST` (`localhost`), `DB_PORT` (`3306`), `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `ADMIN_PASSWORD`, `ADMIN_SECRET`, `SITE_URL` (your live address, e.g. `https://yourdomain.com`), and, once Shiprocket gives them to you, `SHIPROCKET_API_KEY` and `SHIPROCKET_API_SECRET`.
 
 ## 3. GitHub
 cPanel > **Git Version Control** > Create
@@ -40,4 +40,4 @@ This copies the code into the app folder, runs `npm ci` and `npm run build`, and
 ## Notes
 - Put the domain on HTTPS (AutoSSL). The admin cookie is only sent over HTTPS in production.
 - If the build is killed for memory, ask the host for more RAM for the account, or build locally and upload the `.next` folder.
-- Shiprocket calls `/api/shiprocket/*` on your domain; give it the same `SHIPROCKET_API_KEY` as the `X-Api-Key`.
+- Shiprocket: see `HANDOVER.md`, section "Shiprocket".

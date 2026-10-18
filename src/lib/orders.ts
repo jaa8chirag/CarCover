@@ -1,6 +1,6 @@
 import { ensureSchema, exec, query, withTransaction } from '@/lib/db';
 
-export const ORDER_STATUSES = ['new', 'confirmed', 'in_production', 'shipped', 'delivered', 'cancelled'] as const;
+export const ORDER_STATUSES = ['awaiting_payment', 'new', 'confirmed', 'in_production', 'shipped', 'delivered', 'cancelled'] as const;
 export type OrderStatus = (typeof ORDER_STATUSES)[number];
 
 export interface OrderItem {
@@ -32,6 +32,10 @@ export interface OrderDoc {
   total: number;
   tracking: { courier: string; awb: string };
   adminNote: string;
+  /** Shiprocket checkout order id, when the order was paid through Shiprocket. */
+  shiprocketOrderId: string | null;
+  paymentStatus: string;
+  paymentType: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -53,13 +57,16 @@ function rowToOrder(r: any): OrderDoc {
     total: Number(r.total),
     tracking: { courier: r.courier, awb: r.awb },
     adminNote: r.admin_note,
+    shiprocketOrderId: r.sr_order_id ?? null,
+    paymentStatus: r.payment_status ?? '',
+    paymentType: r.payment_type ?? '',
     createdAt: new Date(r.created_at),
     updatedAt: new Date(r.updated_at),
   };
 }
 
 /** Saves a new order and gives it the next number (SC-1000, SC-1001, ...). */
-export async function createOrder(doc: Omit<OrderDoc, 'orderNumber' | 'createdAt' | 'updatedAt'>): Promise<OrderDoc> {
+export async function createOrder(doc: Omit<OrderDoc, 'orderNumber' | 'createdAt' | 'updatedAt' | 'shiprocketOrderId' | 'paymentStatus' | 'paymentType'>): Promise<OrderDoc> {
   await ensureSchema();
   const now = new Date();
   const number = await withTransaction(async (c) => {
@@ -85,7 +92,7 @@ export async function createOrder(doc: Omit<OrderDoc, 'orderNumber' | 'createdAt
     await c.query('UPDATE orders SET order_number = ? WHERE id = ?', [orderNumber, res.insertId]);
     return orderNumber;
   });
-  return { ...doc, orderNumber: number, createdAt: now, updatedAt: now };
+  return { ...doc, orderNumber: number, shiprocketOrderId: null, paymentStatus: '', paymentType: '', createdAt: now, updatedAt: now };
 }
 
 export async function listOrders(opts: { status?: string; q?: string; page: number; limit: number }) {
@@ -166,4 +173,56 @@ export async function listCustomers() {
     spent: Number(r.spent),
     lastOrder: new Date(r.last_order),
   }));
+}
+
+/** Saved when the customer is sent to Shiprocket to pay; the address and payment arrive later by webhook. */
+export async function createAwaitingOrder(o: { srOrderId: string; items: OrderItem[]; subtotal: number; gst: number; total: number }) {
+  await ensureSchema();
+  const now = new Date();
+  return withTransaction(async (c) => {
+    const [existing]: any = await c.query('SELECT order_number FROM orders WHERE sr_order_id = ?', [o.srOrderId]);
+    if (existing.length) return existing[0].order_number as string;
+    const [res]: any = await c.query(
+      `INSERT INTO orders (order_number, status, customer_name, customer_email, customer_phone, ship_address, ship_city, ship_state, ship_pincode, ship_landmark, ship_country, vin, items, subtotal, gst, total, courier, awb, admin_note, sr_order_id, payment_status, payment_type, created_at, updated_at)
+       VALUES (?, 'awaiting_payment', '', '', '', '', '', '', '', '', 'India', '', ?, ?, ?, ?, '', '', '', ?, 'Pending', '', ?, ?)`,
+      [`tmp-${now.getTime()}-${Math.random().toString(36).slice(2, 8)}`, JSON.stringify(o.items), o.subtotal, o.gst, o.total, o.srOrderId, now, now],
+    );
+    const orderNumber = `SC-${res.insertId}`;
+    await c.query('UPDATE orders SET order_number = ? WHERE id = ?', [orderNumber, res.insertId]);
+    return orderNumber;
+  });
+}
+
+const s1 = (v: unknown, max: number) => (typeof v === 'string' ? v.trim().slice(0, max) : v == null ? '' : String(v).slice(0, max));
+
+/**
+ * Applies what Shiprocket's Order Details API says about an order (never the raw webhook body).
+ * SUCCESS moves a waiting order to "new"; FAILED cancels it.
+ */
+export async function applyShiprocketDetails(srOrderId: string, d: any): Promise<{ orderNumber: string; status: OrderStatus } | null> {
+  await ensureSchema();
+  const [row] = await query<any>('SELECT order_number, status FROM orders WHERE sr_order_id = ?', [srOrderId]);
+  if (!row) return null;
+  const ship = d?.shipping_address ?? {};
+  const name = [ship.first_name, ship.last_name].filter(Boolean).join(' ') || [d?.billing_address?.first_name, d?.billing_address?.last_name].filter(Boolean).join(' ');
+  const srStatus = String(d?.status ?? '').toUpperCase();
+  let status: OrderStatus = row.status;
+  if (srStatus === 'SUCCESS' && row.status === 'awaiting_payment') status = 'new';
+  else if (srStatus === 'FAILED' && row.status === 'awaiting_payment') status = 'cancelled';
+  const total = Number(d?.total_amount_payable);
+  await exec(
+    `UPDATE orders SET status = ?, customer_name = ?, customer_email = ?, customer_phone = ?,
+       ship_address = ?, ship_city = ?, ship_state = ?, ship_pincode = ?, ship_landmark = ?, ship_country = ?,
+       payment_status = ?, payment_type = ?, total = IF(? > 0, ?, total), updated_at = ?
+     WHERE sr_order_id = ?`,
+    [
+      status,
+      s1(name, 100), s1(d?.email ?? ship.email, 150), s1(String(d?.phone ?? ship.phone ?? '').replace(/\D/g, '').slice(-10), 20),
+      s1([ship.line1, ship.line2].filter(Boolean).join(', '), 400), s1(ship.city, 80), s1(ship.state, 80), s1(ship.pincode, 12), s1(ship.landmark, 120), s1(ship.country || 'India', 40),
+      s1(d?.payment_status, 20), s1(d?.payment_type, 20),
+      Number.isFinite(total) ? total : 0, Number.isFinite(total) ? total : 0,
+      new Date(), srOrderId,
+    ],
+  );
+  return { orderNumber: row.order_number, status };
 }

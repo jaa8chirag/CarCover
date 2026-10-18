@@ -103,12 +103,24 @@ export function ensureSchema(): Promise<void> {
         courier VARCHAR(80) NOT NULL DEFAULT '',
         awb VARCHAR(80) NOT NULL DEFAULT '',
         admin_note VARCHAR(1000) NOT NULL DEFAULT '',
+        sr_order_id VARCHAR(64) NULL UNIQUE,
+        payment_status VARCHAR(20) NOT NULL DEFAULT '',
+        payment_type VARCHAR(20) NOT NULL DEFAULT '',
         created_at DATETIME NOT NULL,
         updated_at DATETIME NOT NULL,
         KEY idx_orders_created (created_at),
         KEY idx_orders_phone (customer_phone),
         KEY idx_orders_status (status)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1000`);
+
+      // Databases created before Shiprocket was added get the new columns here.
+      const have = await query<{ COLUMN_NAME: string }>(
+        "SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'orders'",
+      );
+      const names = new Set(have.map((c) => c.COLUMN_NAME));
+      if (!names.has('sr_order_id')) await exec('ALTER TABLE orders ADD COLUMN sr_order_id VARCHAR(64) NULL UNIQUE');
+      if (!names.has('payment_status')) await exec("ALTER TABLE orders ADD COLUMN payment_status VARCHAR(20) NOT NULL DEFAULT ''");
+      if (!names.has('payment_type')) await exec("ALTER TABLE orders ADD COLUMN payment_type VARCHAR(20) NOT NULL DEFAULT ''");
     })().catch((e) => {
       g._schema = undefined;
       throw e;

@@ -133,7 +133,7 @@ export const FABRICS: Fabric[] = [
     title: 'Unveiling Cover',
     subtitle: 'The Cover For Your Big Reveal',
     badge: 'UNVEILING',
-    price: 3499,
+    price: 8499,
     accentColor: '#475569',
     image: '/images/unveil_cover_card.jpg',
     icon: Rocket,
