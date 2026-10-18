@@ -80,9 +80,8 @@ export const FABRICS: Fabric[] = [
     icon: Droplets,
     description: 'Our flagship outdoor cover. Fully waterproof, heat-reflective and built to last years in harsh weather.',
     specs: [
-      'Fully waterproof with heat-taped seams',
+      'Fully waterproof',
       'Premium UV and heat reflective multi-layer shell',
-      'Underbody tie-down straps and lockable wind buckles',
     ],
     idealFor: 'Coastal, monsoon-heavy and exposed parking',
     rating: 4.96,
