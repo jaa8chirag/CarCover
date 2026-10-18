@@ -40,8 +40,10 @@ export async function POST(req: Request) {
         it?.pipingColor &&
         it?.pipingColor !== 'No piping' &&
         !String(it?.pipingColor).toLowerCase().includes('none');
+      const qty = Math.min(10, Math.max(1, Number(it?.quantity) || 1));
       const pipingFee = hasPipingFee ? 1999 : 0;
-      const price = product.basePrice + pipingFee;
+      const unitPrice = product.basePrice + pipingFee;
+      const price = unitPrice * qty;
       items.push({
         fabricId: fabric.id,
         vehicle: str(it?.vehicle, 120),
@@ -55,12 +57,12 @@ export async function POST(req: Request) {
       });
       // Shiprocket wants one line per variant, so identical covers are merged into a quantity.
       const line = perFabric.get(fabric.id);
-      if (line) line.quantity += 1;
+      if (line) line.quantity += qty;
       else
         perFabric.set(fabric.id, {
           variantId: product.id * 100 + 1,
-          quantity: 1,
-          price: price + gstOn(price),
+          quantity: qty,
+          price: unitPrice + gstOn(unitPrice),
           name: `${fabric.title} (GST included)`,
           imageUrl: `${origin}${product.image}`,
         });

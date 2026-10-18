@@ -304,6 +304,23 @@ export default function CheckoutDrawer({
                         }}
                       >
                         {item.vehicle}
+                        {item.quantity && item.quantity > 1 && (
+                          <span
+                            style={{
+                              marginLeft: '8px',
+                              fontSize: '11px',
+                              fontWeight: 700,
+                              background: '#cca462',
+                              color: '#000000',
+                              padding: '2px 8px',
+                              borderRadius: '999px',
+                              verticalAlign: 'middle',
+                              display: 'inline-block',
+                            }}
+                          >
+                            Qty: {item.quantity}
+                          </span>
+                        )}
                       </div>
 
                       {/* Specs */}
