@@ -370,9 +370,9 @@ function Comparison({ activeId, onPick }: { activeId: string; onPick: (id: strin
     { label: 'Best environment', get: (f) => f.environment },
     { label: 'Material', get: (f) => f.specs.material },
     { label: 'Weather protection', get: (f) => f.specs.waterResistance },
-    { label: 'Breathability', get: (f) => f.specs.breathability },
-    { label: 'Lining', get: (f) => f.specs.lining },
-    { label: 'Fit', get: (f) => f.specs.stretch },
+    { label: 'Breathability', get: (f) => f.specs.breathability ?? '—' },
+    { label: 'Lining', get: (f) => f.specs.lining ?? '—' },
+    { label: 'Fit', get: (f) => f.specs.stretch ?? '—' },
     { label: 'Warranty', get: (f) => f.warranty },
     { label: 'Starting price', get: (f) => inr(f.price) },
   ];
