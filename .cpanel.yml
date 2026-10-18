@@ -1,10 +1,9 @@
 ---
 # Runs when cPanel "Git Version Control" > "Deploy HEAD Commit" is clicked.
-# Replace CPANELUSER with your cPanel username and APPNAME with the Node.js app folder name
-# you used in "Setup Node.js App" (the app root is /home/CPANELUSER/APPNAME).
+# The Node.js app in "Setup Node.js App" must use the application root "signaturecovers".
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/CPANELUSER/APPNAME
+    - export DEPLOYPATH=/home/thesignaturecove/signaturecovers
     - /bin/rsync -a --delete --exclude node_modules --exclude .next --exclude .git --exclude .env --exclude tmp ./ $DEPLOYPATH/
-    - cd $DEPLOYPATH && source /home/CPANELUSER/nodevenv/APPNAME/20/bin/activate && npm ci && npm run build
+    - cd $DEPLOYPATH && . $(ls -d /home/thesignaturecove/nodevenv/signaturecovers/*/bin/activate | tail -1) && npm ci && npm run build
     - mkdir -p $DEPLOYPATH/tmp && touch $DEPLOYPATH/tmp/restart.txt
