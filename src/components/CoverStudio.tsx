@@ -151,7 +151,7 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
           <textarea
             className={`${FIELD} min-h-[130px] resize-y`}
             maxLength={500}
-            placeholder="e.g. custom text or logo, delivery notes, parking conditions..."
+            placeholder="e.g. custom text or logo, any body kit or spoiler, delivery notes, parking conditions..."
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
           />

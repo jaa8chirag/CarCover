@@ -104,10 +104,10 @@ const SLIDES: SlideData[] = [
     shopHref: '/shop',
     description:
       'Custom unveiling covers with embroidered branding, made for launches, showrooms and private reveals.',
-    bgSrc: '/images/bentley_green_unveil.jpg',
-    bgSrcMobile: '/images/cover_rr_showroom_mobile.jpg',
-    bgPos: 'center 48%',
-    bgPosMd: 'center 48%',
+    bgSrc: '/images/cover_porsche_unveil_mobile.jpg',
+    bgSrcMobile: '/images/cover_porsche_unveil_mobile.jpg',
+    bgPos: 'center 50%',
+    bgPosMd: 'center 50%',
     tierId: 'bespoke',
     ctaText: 'EXPLORE BESPOKE',
     accentColor: '#cca462',
@@ -252,13 +252,13 @@ function HypeSection({
           hidden: {},
           visible: { transition: { staggerChildren: 0.12 } },
         }}
-        className={`relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center [text-shadow:0_2px_20px_rgba(0,0,0,0.55)] max-md:absolute max-md:inset-x-0 max-md:bottom-0 max-md:max-w-none max-md:items-center max-md:text-center max-md:bg-gradient-to-t max-md:from-black/80 max-md:via-black/45 max-md:to-transparent max-md:pt-28 max-md:pb-24 md:absolute md:inset-x-0 md:bottom-0 md:max-w-none md:items-center md:text-center md:px-14 lg:px-24 md:pt-44 md:pb-14 lg:pb-20 md:bg-gradient-to-t md:from-black/65 md:via-black/25 md:to-transparent`}
+        className={`relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center [text-shadow:0_2px_20px_rgba(0,0,0,0.55)] max-md:absolute max-md:inset-x-0 max-md:bottom-0 max-md:max-w-none max-md:items-center max-md:text-center max-md:bg-gradient-to-t max-md:from-black/80 max-md:via-black/45 max-md:to-transparent max-md:pt-28 max-md:pb-20 md:absolute md:inset-x-0 md:bottom-0 md:max-w-none md:items-center md:text-center md:px-14 lg:px-24 md:pt-44 ${slide.mobileLine ? 'md:pb-[115px] lg:pb-[130px]' : 'md:pb-[145px] lg:pb-[160px]'} md:bg-gradient-to-t md:from-black/65 md:via-black/25 md:to-transparent`}
       >
         {slide.category && (
         <motion.div
           variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
           transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
-          className="overflow-hidden mb-4"
+          className="overflow-hidden mb-3"
         >
           <div className="inline-flex items-center gap-2.5">
             <span
@@ -282,7 +282,7 @@ function HypeSection({
             visible: { opacity: 1, y: 0 },
           }}
           transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
-          className="overflow-hidden mb-6 max-md:mb-3"
+          className="overflow-hidden mb-2.5 max-md:mb-2"
         >
           <Heading className={`uppercase tracking-[0.005em] sm:tracking-[0.01em] text-[23px] min-[420px]:text-[27px] md:text-[clamp(20px,2.85vw,52px)] md:whitespace-nowrap font-semibold leading-[1.12] text-white break-words`} style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             {slide.title}
@@ -293,7 +293,7 @@ function HypeSection({
         <motion.div
           variants={{ hidden: { width: 0, opacity: 0 }, visible: { width: '120px', opacity: 1 } }}
           transition={{ duration: 1.0, ease: 'easeOut' }}
-          className={`h-[1px] mx-auto mb-6 max-md:mb-3`}
+          className={`h-[1px] mx-auto ${slide.mobileLine ? 'mb-3 max-md:mb-2' : 'mb-5 md:mb-6 max-md:mb-3'}`}
           style={{
             background: `linear-gradient(90deg, transparent, ${slide.accentColor}, transparent)`,
             boxShadow: `0 0 12px ${slide.accentColor}`,
@@ -305,7 +305,7 @@ function HypeSection({
         <motion.p
           variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
           transition={{ duration: 1.0, ease: [0.19, 1, 0.22, 1] }}
-          className="text-white text-[17px] md:text-lg lg:text-[clamp(15px,2.6vh,20px)] font-normal mb-5 md:mb-8 tracking-wide"
+          className="text-white text-[17px] md:text-lg lg:text-[clamp(15px,2.6vh,20px)] font-normal mb-4 md:mb-5 tracking-wide"
         >
           {slide.mobileLine}
         </motion.p>

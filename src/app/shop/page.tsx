@@ -85,6 +85,7 @@ function sheetFor(id: string) {
 const SPEC_LABELS: [keyof NonNullable<ReturnType<typeof sheetFor>>['specs'], string][] = [
   ['material', 'Material'],
   ['waterResistance', 'Water'],
+  ['uvProtection', 'UV Protection'],
   ['breathability', 'Breathability'],
   ['lining', 'Lining'],
 ];
@@ -133,7 +134,7 @@ function FlipCard({ f }: { f: Fabric }) {
             <h3 className="mt-3 uppercase font-bold tracking-wide text-black leading-snug">{f.title}</h3>
             <p className="mt-1 text-sm text-slate-500">{f.subtitle}</p>
             <ul className="mt-4 space-y-2 flex-1">
-              {f.specs.slice(0, 3).map((x) => (
+              {f.specs.map((x) => (
                 <li key={x} className="flex items-start gap-2.5 text-[13px] text-slate-700 leading-snug">
                   <span className="mt-0.5 w-4 h-4 rounded-full bg-[#b38848]/15 flex items-center justify-center flex-shrink-0"><Check size={10} className="text-[#b38848]" /></span>
                   {x}
@@ -159,7 +160,7 @@ function FlipCard({ f }: { f: Fabric }) {
           <div className="p-6 sm:p-7 flex flex-col flex-1">
             <h3 className="uppercase font-bold tracking-wide text-black leading-snug">{f.title}</h3>
             <dl className="mt-4 space-y-3 flex-1">
-              {sheet && SPEC_LABELS.map(([k, label]) => (
+              {sheet && SPEC_LABELS.filter(([k]) => Boolean(sheet.specs[k])).map(([k, label]) => (
                 <div key={k}>
                   <dt className="text-[10px] tracking-[2px] uppercase text-slate-400">{label}</dt>
                   <dd className="text-[13px] leading-snug text-slate-800">{sheet.specs[k]}</dd>
@@ -220,7 +221,7 @@ function SplitCard({ f }: { f: Fabric }) {
         <h3 className="mt-3 uppercase font-bold tracking-wide text-black leading-snug">{f.title}</h3>
         <p className="mt-1 text-sm text-slate-500">{f.subtitle}</p>
         <ul className="mt-4 space-y-2 flex-1">
-          {f.specs.slice(0, 3).map((x) => (
+          {f.specs.map((x) => (
             <li key={x} className="flex items-start gap-2.5 text-[13px] text-slate-700 leading-snug">
               <span className="mt-0.5 w-4 h-4 rounded-full bg-[#b38848]/15 flex items-center justify-center flex-shrink-0"><Check size={10} className="text-[#b38848]" /></span>
               {x}
@@ -254,7 +255,7 @@ function RangeCard({ f }: { f: Fabric }) {
         <h3 className="mt-3 uppercase font-bold tracking-wide text-black leading-snug">{f.title}</h3>
         <p className="mt-1 text-sm text-slate-500">{f.subtitle}</p>
         <ul className="mt-4 space-y-2 flex-1">
-          {f.specs.slice(0, 3).map((s) => (
+          {f.specs.map((s) => (
             <li key={s} className="flex items-start gap-2.5 text-[13px] text-slate-700 leading-snug">
               <span className="mt-0.5 w-4 h-4 rounded-full bg-[#b38848]/15 flex items-center justify-center flex-shrink-0"><Check size={10} className="text-[#b38848]" /></span>
               {s}

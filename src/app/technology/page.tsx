@@ -43,6 +43,7 @@ const TESTS = [
 const SPEC_ROWS = [
   { key: 'material', label: 'Material', icon: Shirt },
   { key: 'waterResistance', label: 'Weather protection', icon: Waves },
+  { key: 'uvProtection', label: 'UV defence', icon: Sun },
   { key: 'breathability', label: 'Breathability', icon: Wind },
   { key: 'lining', label: 'Paint-contact lining', icon: Layers },
   { key: 'stretch', label: 'Fit & stretch', icon: Expand },
@@ -241,7 +242,7 @@ function FabricDetail({ f, onEnquiry }: { f: (typeof FABRIC_SHEETS)[number]; onE
       </div>
 
       <dl className="mt-7 grid sm:grid-cols-2 gap-x-8 gap-y-4 max-w-2xl">
-        {SPEC_ROWS.slice(0, 4).map(({ key, label }, i) => (
+        {SPEC_ROWS.filter(({ key }) => Boolean(f.specs[key])).slice(0, 4).map(({ key, label }, i) => (
           <motion.div key={key} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.08 }} className="border-t border-white/15 pt-3">
             <dt className="text-[10px] uppercase tracking-[2.5px] text-[#cca462]">{label}</dt>
             <dd className="mt-1 text-[13px] text-white/85 leading-snug">{f.specs[key]}</dd>

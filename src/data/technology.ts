@@ -78,7 +78,14 @@ export interface FabricSheet {
   environment: string;
   description: string;
   features: string[];
-  specs: { material: string; breathability: string; waterResistance: string; lining: string; stretch: string };
+  specs: {
+    material: string;
+    breathability?: string;
+    waterResistance: string;
+    lining?: string;
+    uvProtection?: string;
+    stretch?: string;
+  };
   /** Protection levels out of 100, drawn as animated bars. */
   bars: { water: number; uv: number; scratch: number; breath: number };
   idealFor: string;
@@ -93,10 +100,9 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
     environment: 'Outdoor · Daily',
     warranty: '2-Year Guarantee',
     specs: {
-      material: 'Multi-layer polyester with UV-stable coating',
-      breathability: 'Breathable weave, releases trapped moisture',
+      material: 'Polyester with UV-stable coating',
       waterResistance: 'Water-resistant, sheds light to moderate rain',
-      lining: 'Soft non-abrasive inner layer',
+      uvProtection: 'Protection from UV rays',
       stretch: 'Tailored fit with elasticated hem',
     },
     bars: { water: 60, uv: 65, scratch: 60, breath: 80 },
