@@ -116,7 +116,7 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
       material: 'Heat-reflective multi-layer composite',
       breathability: 'Microporous film, condensation-free',
       waterResistance: 'Heavy-rain resistant',
-      lining: 'Anti-abrasive microfibre paint-contact lining',
+      lining: 'Anti-abrasive microfibre lining',
       stretch: 'Tailored fit with wind-lock buckles',
     },
     bars: { water: 82, uv: 92, scratch: 78, breath: 85 },
