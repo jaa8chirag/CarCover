@@ -145,8 +145,8 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
         variant: year.trim(),
         quantity: 1,
         tier: fabric.title,
-        fabricColor: color.name,
-        fabricHex: color.hex,
+        fabricColor: isBespoke ? 'Custom Printed Design' : color.name,
+        fabricHex: isBespoke ? '#cca462' : color.hex,
         pipingColor: piping.id !== 'none' ? `${piping.name} (+₹1,999)` : piping.name,
         pipingHex: piping.hex,
         notes: notes.trim() || 'None',
@@ -292,52 +292,54 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
               </div>
             </Block>
 
-            <Block n={2} title="Choose colours" hint={hasPiping ? 'Optional. Pick a cover colour and your piping.' : 'Optional. Pick a cover colour.'}>
-              <span className="block text-[11px] font-bold tracking-[3px] uppercase text-[#b38848] mb-3">Cover colour</span>
-              <Swatches items={FABRIC_COLORS} value={colorId} onChange={setColorId} />
-              <p className="mt-3 text-sm text-slate-500">{color.name}</p>
-              {hasPiping && (
-                <>
-                  <div className="flex items-center justify-between mt-7 mb-3">
-                    <span className="block text-[11px] font-bold tracking-[3px] uppercase text-[#b38848]">Piping</span>
-                    <span className="text-xs text-slate-500 font-medium">+₹1,999 extra</span>
-                  </div>
-                  <div className="flex flex-wrap gap-3">
-                    {PIPING_OPTIONS.map((o) => {
-                      const on = o.id === pipingId;
-                      const isPaid = o.id !== 'none';
-                      return (
-                        <button
-                          key={o.id}
-                          type="button"
-                          onClick={() => setPipingId(o.id)}
-                          className={`inline-flex items-center gap-2.5 px-5 py-3 rounded-full border text-sm cursor-pointer transition-colors ${
-                            on ? 'border-black bg-black text-white' : 'border-slate-300 hover:border-black text-black'
-                          }`}
-                        >
-                          {o.id !== 'none' && <span className="w-4 h-4 rounded-full border border-slate-400" style={{ background: o.hex }} />}
-                          <span>{o.name}</span>
-                          {isPaid && (
-                            <span
-                              className={`text-[11px] px-2 py-0.5 rounded-full font-semibold transition-colors ${
-                                on ? 'bg-[#cca462] text-black' : 'bg-slate-100 text-slate-600'
-                              }`}
-                            >
-                              +₹1,999
-                            </span>
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </>
-              )}
-            </Block>
+            {!isBespoke && (
+              <Block n={2} title="Choose colours" hint={hasPiping ? 'Optional. Pick a cover colour and your piping.' : 'Optional. Pick a cover colour.'}>
+                <span className="block text-[11px] font-bold tracking-[3px] uppercase text-[#b38848] mb-3">Cover colour</span>
+                <Swatches items={FABRIC_COLORS} value={colorId} onChange={setColorId} />
+                <p className="mt-3 text-sm text-slate-500">{color.name}</p>
+                {hasPiping && (
+                  <>
+                    <div className="flex items-center justify-between mt-7 mb-3">
+                      <span className="block text-[11px] font-bold tracking-[3px] uppercase text-[#b38848]">Piping</span>
+                      <span className="text-xs text-slate-500 font-medium">+₹1,999 extra</span>
+                    </div>
+                    <div className="flex flex-wrap gap-3">
+                      {PIPING_OPTIONS.map((o) => {
+                        const on = o.id === pipingId;
+                        const isPaid = o.id !== 'none';
+                        return (
+                          <button
+                            key={o.id}
+                            type="button"
+                            onClick={() => setPipingId(o.id)}
+                            className={`inline-flex items-center gap-2.5 px-5 py-3 rounded-full border text-sm cursor-pointer transition-colors ${
+                              on ? 'border-black bg-black text-white' : 'border-slate-300 hover:border-black text-black'
+                            }`}
+                          >
+                            {o.id !== 'none' && <span className="w-4 h-4 rounded-full border border-slate-400" style={{ background: o.hex }} />}
+                            <span>{o.name}</span>
+                            {isPaid && (
+                              <span
+                                className={`text-[11px] px-2 py-0.5 rounded-full font-semibold transition-colors ${
+                                  on ? 'bg-[#cca462] text-black' : 'bg-slate-100 text-slate-600'
+                                }`}
+                              >
+                                +₹1,999
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </>
+                )}
+              </Block>
+            )}
           </>
         )}
 
         <Block
-          n={isUnveiling ? 2 : 3}
+          n={isUnveiling || isBespoke ? 2 : 3}
           title="Additional information"
           hint={
             isBespoke
@@ -396,10 +398,12 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
         <div className="aspect-[16/10] overflow-hidden bg-slate-900">
           <div className="relative w-full h-full">
             <img src={fabric.image} alt={`${fabric.title} car cover preview`} className="w-full h-full object-cover" />
-            <span
-              className="absolute inset-0 mix-blend-multiply opacity-40"
-              style={{ background: isUnveiling ? (FABRIC_COLORS.find(f => f.id === unveilCars[0]?.colorId)?.hex || '#111827') : color.hex }}
-            />
+            {!isBespoke && (
+              <span
+                className="absolute inset-0 mix-blend-multiply opacity-40"
+                style={{ background: isUnveiling ? (FABRIC_COLORS.find(f => f.id === unveilCars[0]?.colorId)?.hex || '#111827') : color.hex }}
+              />
+            )}
             <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
             {!isUnveiling && piping.id !== 'none' && <span className="absolute bottom-0 inset-x-0 h-[3px]" style={{ background: piping.hex }} />}
             <span className="absolute top-3 left-3 text-[10px] font-bold tracking-[2px] uppercase px-3 py-1.5 rounded-full bg-black/55 backdrop-blur-md text-white/90">Live preview</span>
@@ -441,7 +445,11 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
           ) : (
             <>
               <Row k="Car" v={brand.trim() && model.trim() ? `${brand.trim()} ${model.trim()}${year.trim() ? ` (${year.trim()})` : ''}` : 'Not entered'} />
-              <Row k="Colour" v={color.name} />
+              {isBespoke ? (
+                <Row k="Design" v="Custom printed livery / artwork" />
+              ) : (
+                <Row k="Colour" v={color.name} />
+              )}
               {hasPiping && (
                 <Row
                   k="Piping"

@@ -59,7 +59,7 @@ export const FABRICS: Fabric[] = [
     icon: SunMedium,
     description: 'Thicker, reflective multi-layer fabric that deflects heat and UV while shedding heavy rain.',
     specs: [
-      'Heavy-rain resistant with sealed seams',
+      'Heavy-rain resistant',
       'Heat and UV reflective outer surface',
       'Anti-abrasive microfibre lining',
       'Car brand logo printed on the cover',
