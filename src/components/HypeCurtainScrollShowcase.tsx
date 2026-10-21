@@ -61,10 +61,6 @@ const SLIDES: SlideData[] = [
       'Precision 3D-laser CAD tailored automotive covers engineered for India’s extreme climate. Rolls-Royce, Bentley, Porsche, Aston Martin & bespoke collections.',
     bgSrc: '/images/bentley_street.jpg',
     bgSrcMobile: '/images/cover_bentley_showroom_mobile.jpg',
-    mobileSlides: [
-      { src: '/images/cover_bentley_showroom_mobile.jpg', pos: 'center center' },
-      { src: '/images/bmw_m5_blue_mobile.jpg', pos: 'center center' },
-    ],
     // Laptops only: slideshow between this photo and the one that used to be on its own slide.
     sliderSlides: [
       { src: '/images/bentley_street.jpg', pos: 'center 60%' },
@@ -88,8 +84,9 @@ const SLIDES: SlideData[] = [
     description:
       'Printed, monogrammed or branded covers cut to your exact car.',
     bgSrc: '/images/bespoke_slide_2.jpg',
-    bgSrcMobile: '/images/cover_ferrari_garage_mobile.jpg',
+    bgSrcMobile: '/images/bmw_m5_blue_mobile.jpg',
     bgPos: 'center center',
+    noKenBurns: true,
     tierId: 'bespoke',
     ctaText: 'EXPLORE BESPOKE',
     accentColor: '#cca462',
