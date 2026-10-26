@@ -28,9 +28,23 @@ cPanel > **Git Version Control** > Create
 
 Open `.cpanel.yml` in the repo and replace `CPANELUSER` and `APPNAME` (same `APPNAME` as step 2; the Node version folder `20` must match the version you chose). Commit and push.
 
-## 4. Deploy
+## 4. Deploy & Live Update
+
+### Option A: 1-Line Terminal Command (Recommended for WHM / Terminal)
+Run this single command in the terminal to pull changes, clear cache, rebuild, fix permissions and restart the Node.js process:
+
+```bash
+cd /home/thesignaturecove/signaturecovers && git pull origin main && rm -rf .next/cache && npm run build && chown -R thesignaturecove:thesignaturecove /home/thesignaturecove/signaturecovers && pkill -9 -u thesignaturecove -f node
+```
+
+> **Why this command is required:**
+> 1. `rm -rf .next/cache` prevents outdated HTML from serving deleted chunk hashes.
+> 2. `chown -R thesignaturecove:thesignaturecove` ensures the cPanel user has full read/write access if the build was run as root.
+> 3. `pkill -9 -u thesignaturecove -f node` kills the frozen Node process in RAM so Passenger immediately launches a fresh process.
+
+### Option B: cPanel Git Version Control (1-Click UI)
 Git Version Control > Manage > **Update from Remote**, then **Deploy HEAD Commit**.
-This copies the code into the app folder, runs `npm ci` and `npm run build`, and restarts the app. Do this again after every push.
+After deployment, go to **Setup Node.js App** and click **Restart (🔄)**.
 
 ## 5. Check
 - `https://yourdomain/` opens the site
@@ -39,5 +53,6 @@ This copies the code into the app folder, runs `npm ci` and `npm run build`, and
 
 ## Notes
 - Put the domain on HTTPS (AutoSSL). The admin cookie is only sent over HTTPS in production.
-- If the build is killed for memory, ask the host for more RAM for the account, or build locally and upload the `.next` folder.
+- If the browser shows "This page couldn't load" or chunk 500 error after deployment, run the 1-Line Terminal Command above and test in an **Incognito Window (`Ctrl + Shift + N`)**.
+- If the build is killed for memory, build locally and upload the `next_build.zip` into the app folder, extract it, and restart.
 - Shiprocket: see `HANDOVER.md`, section "Shiprocket".

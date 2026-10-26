@@ -75,7 +75,11 @@ If Shiprocket ever stops working, remove the key and secret and restart. The sit
 ## Updating the website
 
 1. Change the code and push it to GitHub (`main`).
-2. In cPanel, Git Version Control, Manage, **Update from Remote**, then **Deploy HEAD Commit**.
+2. Run this single command in the server/WHM terminal (recommended):
+   ```bash
+   cd /home/thesignaturecove/signaturecovers && git pull origin main && rm -rf .next/cache && npm run build && chown -R thesignaturecove:thesignaturecove /home/thesignaturecove/signaturecovers && pkill -9 -u thesignaturecove -f node
+   ```
+   *Or via cPanel UI:* Git Version Control > Manage > **Update from Remote**, then **Deploy HEAD Commit**, and restart in **Setup Node.js App**.
 
 Full set-up steps for a new server are in `DEPLOY.md`.
 
