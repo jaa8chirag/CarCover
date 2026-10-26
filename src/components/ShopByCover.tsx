@@ -3,7 +3,7 @@
 import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { ArrowRight, Star, Check } from 'lucide-react';
+import { ArrowRight, Star, Check, Sparkles } from 'lucide-react';
 import { FABRICS, PRICE_NOTE, type Fabric } from '@/data/fabrics';
 import MobileSlider from '@/components/MobileSlider';
 
@@ -141,7 +141,8 @@ function GroupHead({ label, text }: { label: string; text: string }) {
 
 /** Light, colourful product section that breaks up the dark hero slides and gives shoppers a direct way in. */
 export default function ShopByCover() {
-  const outdoor = FABRICS.filter((f) => f.group === 'outdoor');
+  const outdoorStandard = FABRICS.filter((f) => f.group === 'outdoor' && f.id !== 'outdoor-signature');
+  const outdoorSignature = FABRICS.find((f) => f.id === 'outdoor-signature');
   const indoor = FABRICS.filter((f) => f.group === 'indoor');
   const custom = FABRICS.filter((f) => f.group === 'custom');
   const unveiling = FABRICS.filter((f) => f.group === 'unveiling');
@@ -174,15 +175,97 @@ export default function ShopByCover() {
             Find The Cover That Fits Your Life
           </h2>
           <div className="mx-auto mt-5 h-[2px] w-20 bg-gradient-to-r from-transparent via-[#b38848] to-transparent" />
-          <p className="mt-5 text-slate-600 leading-relaxed">Seven tailored covers. Pick the one that matches where your car lives, then we cut it to your exact model.</p>
+          <p className="mt-5 text-slate-600 leading-relaxed">Eight tailored covers. Pick the one that matches where your car lives, then we cut it to your exact model.</p>
         </motion.div>
 
         <GroupHead label="Outdoor Covers" text="Rain, sun and everything in between" />
-        <MobileSlider wrapperClass="mb-16 sm:mb-20" desktopClass="md:grid md:grid-cols-3 md:gap-6 lg:gap-8">
-          {outdoor.map((f, i) => (
+        <MobileSlider wrapperClass="mb-8 sm:mb-10" desktopClass="md:grid md:grid-cols-3 md:gap-6 lg:gap-8">
+          {outdoorStandard.map((f, i) => (
             <CoverCard key={f.id} f={f} i={i} />
           ))}
         </MobileSlider>
+
+        {outdoorSignature && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.9, ease }}
+            className="mb-16 sm:mb-20"
+          >
+            <div className="relative rounded-[2.5rem] p-[2px] bg-gradient-to-r from-[#cca462] via-[#ffe5a3] to-[#b38848] shadow-[0_25px_80px_-20px_rgba(204,164,98,0.45)] hover:shadow-[0_35px_100px_-20px_rgba(204,164,98,0.65)] transition-all duration-700">
+              <div className="group rounded-[2.4rem] bg-[#0c0e14] text-white overflow-hidden relative">
+                <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-[#cca462]/10 rounded-full blur-[110px] pointer-events-none" />
+                <div className="grid lg:grid-cols-12 items-stretch">
+                  <div className="lg:col-span-7 relative min-h-[320px] sm:min-h-[400px] overflow-hidden bg-slate-950">
+                    <img
+                      src={outdoorSignature.image}
+                      alt={`${outdoorSignature.title} car cover`}
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c0e14] via-transparent to-black/30 lg:bg-gradient-to-r lg:from-transparent lg:via-[#0c0e14]/25 lg:to-[#0c0e14]" />
+                    <div className="absolute top-5 left-5 flex items-center gap-2">
+                      <span className="bg-gradient-to-r from-[#cca462] via-[#faecc7] to-[#cca462] text-black text-[10px] sm:text-[11px] font-extrabold tracking-[2px] uppercase px-4 py-2 rounded-full shadow-2xl flex items-center gap-1.5">
+                        <Sparkles size={13} className="text-black" />
+                        OUR FLAGSHIP OUTDOOR
+                      </span>
+                    </div>
+                    <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-center justify-between gap-2 text-xs text-white/90 backdrop-blur-md bg-black/55 px-4 py-2.5 rounded-full border border-[#cca462]/35">
+                      <span className="flex items-center gap-2 font-medium">
+                        <span className="w-2 h-2 rounded-full bg-[#cca462] animate-pulse" />
+                        Hand-finished signature contrast piping
+                      </span>
+                      <span className="text-[#f6e3b4] font-semibold text-[11px] tracking-wider uppercase">10,000mm Waterproof</span>
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-5 p-7 sm:p-9 lg:p-10 flex flex-col justify-between relative z-10">
+                    <div>
+                      <div className="flex items-center gap-2 text-[#cca462] text-[11px] font-bold tracking-[3px] uppercase mb-2">
+                        <span>Pinnacle Edition</span>
+                        <span className="h-px w-8 bg-[#cca462]/60" />
+                      </div>
+                      <h3 className="text-white text-2xl sm:text-3xl font-semibold tracking-wide uppercase leading-tight" style={{ fontFamily: 'var(--font-hype)' }}>
+                        {outdoorSignature.title}
+                      </h3>
+                      <p className="mt-1 text-sm text-[#f6e3b4] font-medium">{outdoorSignature.subtitle}</p>
+                      <p className="mt-3 text-slate-300 text-xs sm:text-sm leading-relaxed">{outdoorSignature.description}</p>
+
+                      <div className="mt-5 space-y-2">
+                        {outdoorSignature.specs.slice(0, 4).map((s) => (
+                          <div key={s} className="flex items-start gap-2.5 text-[12.5px] text-slate-200 leading-snug">
+                            <span className="mt-0.5 w-4 h-4 rounded-full bg-[#cca462]/20 border border-[#cca462]/60 flex items-center justify-center flex-shrink-0">
+                              <Check size={10} className="text-[#cca462]" />
+                            </span>
+                            <span>{s}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mt-7 pt-5 border-t border-white/10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                      <div>
+                        <span className="block text-[10px] font-bold uppercase tracking-[2px] text-[#cca462]">Starting from</span>
+                        <span className="text-3xl font-semibold text-white" style={{ fontFamily: 'var(--font-hype)' }}>
+                          ₹{outdoorSignature.price.toLocaleString('en-IN')}
+                        </span>
+                        <span className="block text-[11px] text-slate-400 mt-0.5">{PRICE_NOTE}</span>
+                      </div>
+                      <Link
+                        href={`/shop/${outdoorSignature.id}`}
+                        className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#cca462] to-[#f6e3b4] hover:brightness-110 text-black text-xs font-bold uppercase tracking-[2px] transition-all no-underline shadow-[0_12px_28px_-6px_rgba(204,164,98,0.5)] whitespace-nowrap"
+                      >
+                        <span>Choose Signature</span>
+                        <ArrowRight size={14} />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
 
         <GroupHead label="Indoor Covers" text="Showroom finish for garage and basement" />
         <MobileSlider wrapperClass="mb-16 sm:mb-20" desktopClass="md:grid md:grid-cols-2 md:gap-6 lg:gap-8">

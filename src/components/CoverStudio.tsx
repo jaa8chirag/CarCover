@@ -3,22 +3,23 @@
 import { gstOn } from '@/data/fabrics';
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Check, ShoppingBag, Plus, Trash2, PhoneCall } from 'lucide-react';
+import { Check, ShoppingBag, Plus, Trash2, PhoneCall, ArrowRight } from 'lucide-react';
 import { FABRIC_COLORS } from '@/data/carData';
 import type { Fabric } from '@/data/fabrics';
 
 interface Props {
   fabric: Fabric;
-  onAddToCart: (item: any) => void;
+  onAddToCart: (item: any, openDrawer?: boolean) => void;
+  onOpenCart?: () => void;
 }
 
-/** Piping is only offered on the two Elite covers. */
+/** Piping is offered on Signature and Elite covers. */
 const PIPING_OPTIONS = [
   { id: 'none', name: 'No piping', hex: 'transparent' },
   { id: 'black', name: 'Black', hex: '#0a0a0a' },
   { id: 'white', name: 'White', hex: '#ffffff' },
 ];
-const PIPING_FABRICS = ['outdoor-elite', 'indoor-elite'];
+const PIPING_FABRICS = ['outdoor-signature', 'outdoor-elite', 'indoor-elite'];
 
 const formatINR = (n: number) => '₹' + n.toLocaleString('en-IN');
 
@@ -73,7 +74,7 @@ interface StudioCar {
 }
 
 /** Order form for one chosen cover: configure one or multiple vehicles and quantities. */
-export default function CoverStudio({ fabric, onAddToCart }: Props) {
+export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) {
   const isUnveiling = fabric.group === 'unveiling';
   const isBespoke = fabric.group === 'custom';
   const hasPiping = PIPING_FABRICS.includes(fabric.id);
@@ -131,8 +132,12 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
 
   const ready = cars.length > 0 && cars.every((c) => c.brand.trim() && c.model.trim() && c.year.trim());
 
-  const addToCart = () => {
+  const submitItems = (openDrawer: boolean) => {
     if (!ready) return;
+    if (added && openDrawer) {
+      if (onOpenCart) onOpenCart();
+      return;
+    }
     cars.forEach((c) => {
       const cColor = FABRIC_COLORS.find((fc) => fc.id === c.colorId) || FABRIC_COLORS[1];
       const cPiping = hasPiping ? PIPING_OPTIONS.find((p) => p.id === c.pipingId) || PIPING_OPTIONS[0] : PIPING_OPTIONS[0];
@@ -158,12 +163,18 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
         },
         price: itemPrice,
         currency: '₹',
-      });
+      }, openDrawer);
     });
     setAdded(true);
     confetti({ particleCount: 90, spread: 70, origin: { y: 0.7 }, colors: ['#cca462', '#000000', '#ffffff'] });
-    setTimeout(() => setAdded(false), 2500);
+    setTimeout(() => setAdded(false), 3000);
+    if (openDrawer && onOpenCart) {
+      onOpenCart();
+    }
   };
+
+  const addToCart = () => submitItems(false);
+  const checkout = () => submitItems(true);
 
   const Row = ({ k, v }: { k: string; v: string }) => (
     <div className="flex justify-between gap-4 py-2.5 border-b border-white/10 text-sm">
@@ -459,22 +470,33 @@ export default function CoverStudio({ fabric, onAddToCart }: Props) {
             <span className="text-xs uppercase tracking-[2px] text-white/50">Total (incl. GST)</span>
             <span className="text-3xl font-semibold" style={{ fontFamily: 'var(--font-hype)' }}>{formatINR(total)}</span>
           </div>
-          <button
-            onClick={addToCart}
-            disabled={!ready}
-            className="mt-6 w-full py-4 rounded-full bg-white hover:bg-[#cca462] text-black text-xs font-bold uppercase tracking-[2px] flex items-center justify-center gap-2 cursor-pointer transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            {added ? (
-              <Check size={15} />
-            ) : (
-              <ShoppingBag size={15} />
-            )}
-            {added
-              ? 'Added to cart'
-              : ready
-              ? `Add ${totalCovers} ${totalCovers === 1 ? 'cover' : 'covers'} to cart`
-              : 'Enter all vehicle details'}
-          </button>
+          {/* ACTION BUTTONS: Checkout + Add to Cart */}
+          <div className="mt-6 flex flex-col gap-2.5">
+            <button
+              type="button"
+              onClick={checkout}
+              disabled={!ready}
+              className="w-full py-4 rounded-full bg-gradient-to-r from-[#cca462] to-[#e7d29d] hover:brightness-105 text-black text-xs font-bold uppercase tracking-[2px] flex items-center justify-center gap-2 cursor-pointer transition-all shadow-[0_12px_28px_-8px_rgba(204,164,98,0.5)] disabled:opacity-30 disabled:cursor-not-allowed disabled:shadow-none"
+            >
+              <span>Checkout</span>
+              <ArrowRight size={15} />
+            </button>
+
+            <button
+              type="button"
+              onClick={addToCart}
+              disabled={!ready}
+              className="w-full py-3.5 rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 text-white text-xs font-bold uppercase tracking-[1.5px] flex items-center justify-center gap-2 cursor-pointer transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              {added ? <Check size={15} className="text-[#cca462]" /> : <ShoppingBag size={15} />}
+              <span>{added ? 'Added to Cart ✓' : `Add ${totalCovers} ${totalCovers === 1 ? 'cover' : 'covers'} to cart`}</span>
+            </button>
+          </div>
+          {!ready && (
+            <p className="mt-2.5 text-center text-[11px] text-[#cca462]/90 font-medium">
+              Enter vehicle brand, model & year above to continue
+            </p>
+          )}
           <p className="mt-4 text-xs text-white/50 text-center">Free delivery · 100% fit guarantee · 7-day returns</p>
           <div className="mt-4 pt-4 border-t border-white/10 text-center">
             <p className="text-xs text-white/70">

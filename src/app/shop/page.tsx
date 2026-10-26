@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Check, ArrowRight, ArrowUpRight, RotateCw } from 'lucide-react';
+import { Check, ArrowRight, ArrowUpRight, RotateCw, Sparkles } from 'lucide-react';
 import PageShell from '@/components/PageShell';
 import MobileSlider from '@/components/MobileSlider';
 import { FABRICS, PRICE_NOTE, type CoverGroup, type Fabric } from '@/data/fabrics';
@@ -95,6 +95,7 @@ const FABRIC_TONES: Record<string, { tone: string; image?: string }> = {
   'outdoor-standard': { tone: '#6b7686', image: '/images/fabric_outdoor_standard.jpg' },
   'outdoor-pro': { tone: '#8a5a1f', image: '/images/fabric_outdoor_pro.jpg' },
   'outdoor-elite': { tone: '#1d2430', image: '/images/fabric_outdoor_elite.jpg' },
+  'outdoor-signature': { tone: '#0b0c0e', image: '/images/fabric_outdoor_elite.jpg' },
   'indoor-standard': { tone: '#3b4250', image: '/images/fabric_indoor_standard.jpg' },
   'indoor-elite': { tone: '#15171c', image: '/images/fabric_indoor_elite.jpg' },
   'custom-printed': { tone: '#1a1a1a', image: '/images/cover_custom_printed.jpg' },
@@ -271,6 +272,87 @@ function RangeCard({ f }: { f: Fabric }) {
   );
 }
 
+/** Featured full-width luxury showcase for our top pinnacle Outdoor Signature cover. */
+function SignatureFeatureCard({ f }: { f: Fabric }) {
+  return (
+    <div className="mt-12 sm:mt-16 relative rounded-[2.5rem] p-[2px] bg-gradient-to-r from-[#cca462] via-[#ffe5a3] to-[#b38848] shadow-[0_25px_80px_-20px_rgba(204,164,98,0.45)] hover:shadow-[0_35px_100px_-20px_rgba(204,164,98,0.65)] transition-all duration-700">
+      <div className="group rounded-[2.4rem] bg-[#0c0e14] text-white overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#cca462]/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="grid lg:grid-cols-12 items-stretch">
+          {/* IMAGE */}
+          <div className="lg:col-span-7 relative min-h-[340px] sm:min-h-[440px] lg:min-h-[480px] overflow-hidden bg-slate-950">
+            <img
+              src={f.image}
+              alt={`${f.title} car cover`}
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0c0e14] via-black/20 to-black/30 lg:bg-gradient-to-r lg:from-transparent lg:via-[#0c0e14]/25 lg:to-[#0c0e14]" />
+
+            <div className="absolute top-5 left-5 flex items-center gap-2">
+              <span className="bg-gradient-to-r from-[#cca462] via-[#faecc7] to-[#cca462] text-black text-[10px] sm:text-[11px] font-extrabold tracking-[2px] uppercase px-4 py-2 rounded-full shadow-2xl flex items-center gap-1.5">
+                <Sparkles size={13} className="text-black" />
+                OUR FLAGSHIP OUTDOOR
+              </span>
+            </div>
+
+            <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-center justify-between gap-2 text-xs text-white/90 backdrop-blur-md bg-black/55 px-4 py-2.5 rounded-full border border-[#cca462]/35">
+              <span className="flex items-center gap-2 font-medium">
+                <span className="w-2 h-2 rounded-full bg-[#cca462] animate-pulse" />
+                Hand-finished signature contrast piping
+              </span>
+              <span className="text-[#f6e3b4] font-semibold text-[11px] tracking-wider uppercase">10,000mm Waterproof</span>
+            </div>
+          </div>
+
+          {/* CONTENT */}
+          <div className="lg:col-span-5 p-7 sm:p-9 lg:p-11 flex flex-col justify-between relative z-10">
+            <div>
+              <div className="flex items-center gap-2 text-[#cca462] text-[11px] font-bold tracking-[3px] uppercase mb-2">
+                <span>The Pinnacle Tier</span>
+                <span className="h-px w-8 bg-[#cca462]/60" />
+              </div>
+              <h3 className="text-white text-3xl sm:text-4xl font-semibold tracking-wide uppercase leading-tight" style={{ fontFamily: 'var(--font-hype)' }}>
+                {f.title}
+              </h3>
+              <p className="mt-1 text-sm text-[#f6e3b4] font-medium">{f.subtitle}</p>
+              <p className="mt-3.5 text-slate-300 text-sm leading-relaxed">{f.description}</p>
+
+              <div className="mt-6 space-y-2.5">
+                {f.specs.map((s) => (
+                  <div key={s} className="flex items-start gap-2.5 text-[13px] text-slate-200 leading-snug">
+                    <span className="mt-0.5 w-4 h-4 rounded-full bg-[#cca462]/20 border border-[#cca462]/60 flex items-center justify-center flex-shrink-0">
+                      <Check size={10} className="text-[#cca462]" />
+                    </span>
+                    <span>{s}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-end justify-between gap-5">
+              <div>
+                <span className="block text-[10px] font-bold uppercase tracking-[2px] text-[#cca462]">Starting from</span>
+                <span className="text-3xl font-semibold text-white" style={{ fontFamily: 'var(--font-hype)' }}>
+                  ₹{f.price.toLocaleString('en-IN')}
+                </span>
+                <span className="block text-[11px] text-slate-400 mt-0.5">{PRICE_NOTE}</span>
+              </div>
+              <Link
+                href={`/shop/${f.id}`}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#cca462] to-[#f6e3b4] hover:brightness-110 text-black text-xs font-bold uppercase tracking-[2px] transition-all no-underline shadow-[0_12px_28px_-6px_rgba(204,164,98,0.5)] whitespace-nowrap"
+              >
+                <span>Choose Signature</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const SHOP_LD = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -317,9 +399,16 @@ export default function ShopPage() {
                     <p className="mt-4 mx-auto max-w-xl text-slate-600">{g.text}</p>
                   </div>
 
-                  <MobileSlider desktopClass={`md:grid md:gap-8 md:mx-auto ${g.id === 'unveiling' || g.id === 'custom' ? 'md:grid-cols-1 max-w-md' : g.id === 'indoor' ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-2 xl:grid-cols-3'}`}>
-                    {FABRICS.filter((f) => f.group === g.id).map((f) => <FlipCard key={f.id} f={f} />)}
+                  {/* Core cards in row 1 */}
+                  <MobileSlider desktopClass={`md:grid md:gap-8 md:mx-auto ${g.id === 'unveiling' || g.id === 'custom' ? 'md:grid-cols-1 max-w-md' : g.id === 'indoor' ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-3 max-w-7xl'}`}>
+                    {FABRICS.filter((f) => f.group === g.id && (g.id !== 'outdoor' || f.id !== 'outdoor-signature')).map((f) => <FlipCard key={f.id} f={f} />)}
                   </MobileSlider>
+
+                  {/* Agli row: Highlighted Flagship Outdoor Signature */}
+                  {g.id === 'outdoor' && (() => {
+                    const sig = FABRICS.find((f) => f.id === 'outdoor-signature');
+                    return sig ? <SignatureFeatureCard f={sig} /> : null;
+                  })()}
 
                   {g.id === 'custom' && (
                     <div className="mt-10 sm:mt-12 text-center max-w-xl mx-auto p-5 rounded-2xl bg-black/[0.03] border border-black/10">

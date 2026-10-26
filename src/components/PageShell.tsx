@@ -9,7 +9,8 @@ import { useCart } from '@/lib/useCart';
 
 export interface PageShellApi {
   openEnquiry: () => void;
-  addToCart: (item: any) => void;
+  addToCart: (item: any, openDrawer?: boolean) => void;
+  openCart: () => void;
 }
 
 /** Shared chrome for inner pages: header, footer, cart drawer and swatch modal. */
@@ -34,10 +35,11 @@ export default function PageShell({ children }: { children: (api: PageShellApi) 
       <main>
         {children({
           openEnquiry: () => setIsSwatchOpen(true),
-          addToCart: (item) => {
+          addToCart: (item, openDrawer = false) => {
             cart.add(item);
-            setIsCartOpen(true);
+            if (openDrawer) setIsCartOpen(true);
           },
+          openCart: () => setIsCartOpen(true),
         })}
       </main>
 

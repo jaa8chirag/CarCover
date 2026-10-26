@@ -65,7 +65,7 @@ export async function POST(req: Request) {
         notes: str(it?.notes, 500) === 'None' ? '' : str(it?.notes, 500),
         price: (serverPrice !== null
           ? (serverPrice +
-              (fabric && ['outdoor-elite', 'indoor-elite'].includes(fabric.id) &&
+              (fabric && ['outdoor-signature', 'outdoor-elite', 'indoor-elite'].includes(fabric.id) &&
               it?.pipingColor &&
               it?.pipingColor !== 'No piping' &&
               !String(it?.pipingColor).toLowerCase().includes('none')

@@ -36,7 +36,7 @@ export async function POST(req: Request) {
         return Response.json({ ok: false, message: 'One of the covers in your cart is no longer available.' }, { status: 400 });
       }
       const hasPipingFee =
-        ['outdoor-elite', 'indoor-elite'].includes(fabric.id) &&
+        ['outdoor-signature', 'outdoor-elite', 'indoor-elite'].includes(fabric.id) &&
         it?.pipingColor &&
         it?.pipingColor !== 'No piping' &&
         !String(it?.pipingColor).toLowerCase().includes('none');

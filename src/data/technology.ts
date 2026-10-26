@@ -134,6 +134,19 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
     },
     bars: { water: 100, uv: 98, scratch: 90, breath: 88 },
   },
+  'outdoor-signature': {
+    short: 'Outdoor Signature',
+    environment: 'Outdoor · Ultimate Extreme',
+    warranty: '7-Year Guarantee',
+    specs: {
+      material: 'Multi-layer aerospace storm-matrix with dual-piping contour weave',
+      breathability: 'Microporous vapour matrix, 100% condensation-free',
+      waterResistance: '10,000mm submersion-proof, ultrasonic nano-welded & heat-taped seams',
+      lining: 'Cashmere-soft zero-friction fleece (certified safe for PPF & ceramic coats)',
+      stretch: 'Precision 3D contour cut with contrast piping & underbody wind-lock',
+    },
+    bars: { water: 100, uv: 100, scratch: 100, breath: 95 },
+  },
   'indoor-standard': {
     short: 'Indoor Standard',
     environment: 'Indoor · Garage',
