@@ -328,16 +328,16 @@ function HypeSection({
 
         <div className="flex flex-wrap items-center justify-center gap-3 max-md:flex-col max-md:items-center">
           {[
-            { key: 'car', label: 'Shop Car Covers', href: '/shop', solid: true },
-            { key: 'unveil', label: 'Shop Unveiling Covers', href: '/shop#unveiling', solid: false },
-            ...(slide.id === 'bespoke-veiled' || slide.id === 'bespoke-covers-slider' ? [{ key: 'bespoke', label: 'Bespoke Covers', href: '/shop#custom', solid: false }] : []),
+            { key: 'car', label: 'Shop Car Covers', href: '/shop' },
+            { key: 'unveil', label: 'Shop Unveiling Covers', href: '/shop#unveiling' },
+            ...(slide.id === 'bespoke-veiled' || slide.id === 'bespoke-covers-slider' ? [{ key: 'bespoke', label: 'Bespoke Covers', href: '/shop#custom' }] : []),
           ].filter((b) => !slide.buttonKeys || slide.buttonKeys.includes(b.key)).map((b) => (
             <motion.a
               key={b.label}
               href={b.href}
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
               transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
-              className={`inline-flex items-center gap-3 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-[2.5px] no-underline transition-colors ${b.key !== 'bespoke' && (slide.desktopShop ?? 'both') !== 'both' && slide.desktopShop !== b.key ? 'md:hidden' : ''} ${b.solid ? 'bg-white hover:bg-[#cca462] text-black shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)]' : 'bg-black/35 backdrop-blur-md border border-white/70 hover:bg-white hover:text-black text-white'}`}
+              className={`inline-flex items-center gap-3 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-[2.5px] no-underline transition-colors bg-white hover:bg-[#cca462] text-black shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)] ${b.key !== 'bespoke' && (slide.desktopShop ?? 'both') !== 'both' && slide.desktopShop !== b.key ? 'md:hidden' : ''}`}
             >
               {b.label} <span aria-hidden>→</span>
             </motion.a>

@@ -51,6 +51,7 @@ function Tilt({ children, className = '' }: { children: React.ReactNode; classNa
 }
 
 function CoverCard({ f, i, wide }: { f: Fabric; i: number; wide?: boolean }) {
+  const isSignature = f.id === 'outdoor-signature';
   return (
     <motion.div
       initial={{ opacity: 0, y: 60 }}
@@ -62,7 +63,9 @@ function CoverCard({ f, i, wide }: { f: Fabric; i: number; wide?: boolean }) {
       <Tilt className="h-full">
         <Link
           href={`/collections#${f.group}`}
-          className={`group relative block overflow-hidden rounded-[2rem] no-underline bg-black shadow-[0_24px_60px_-28px_rgba(0,0,0,0.55)] hover:shadow-[0_50px_100px_-35px_rgba(0,0,0,0.65)] transition-shadow duration-500 aspect-square`}
+          className={`group relative block overflow-hidden rounded-[2rem] no-underline bg-black shadow-[0_24px_60px_-28px_rgba(0,0,0,0.55)] hover:shadow-[0_50px_100px_-35px_rgba(0,0,0,0.65)] transition-all duration-500 aspect-square ${
+            isSignature ? 'border-2 border-[#cca462] ring-1 ring-[#cca462]/60 shadow-[0_20px_50px_-15px_rgba(204,164,98,0.5)]' : ''
+          }`}
         >
           <img
             src={f.image}
@@ -72,12 +75,26 @@ function CoverCard({ f, i, wide }: { f: Fabric; i: number; wide?: boolean }) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-black/25" />
           <span aria-hidden className="absolute inset-y-0 -left-1/2 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 group-hover:opacity-100 group-hover:translate-x-[450%] transition-all duration-[1200ms] ease-out" />
-          <span aria-hidden className="absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-white/15 group-hover:ring-[#cca462]/70 transition-all duration-500" />
+          <span
+            aria-hidden
+            className={`absolute inset-0 rounded-[2rem] transition-all duration-500 ${
+              isSignature
+                ? 'ring-2 ring-inset ring-[#cca462] shadow-[inset_0_0_22px_rgba(204,164,98,0.3)] group-hover:ring-[#ffe5a3] group-hover:shadow-[inset_0_0_30px_rgba(204,164,98,0.5)]'
+                : 'ring-1 ring-inset ring-white/15 group-hover:ring-[#cca462]/70'
+            }`}
+          />
 
           {/* top row */}
           <div className="absolute top-4 left-4 right-4 sm:top-5 sm:left-5 sm:right-5 flex items-start justify-between gap-2" style={{ transform: 'translateZ(30px)' }}>
-            <span className="text-[9.5px] sm:text-[10px] font-bold tracking-[1.5px] sm:tracking-[2px] uppercase px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white/90 text-black">{f.badge}</span>
-            {f.bestseller && (
+            {isSignature ? (
+              <span className="bg-gradient-to-r from-[#cca462] via-[#faecc7] to-[#cca462] text-black text-[9px] sm:text-[10px] font-extrabold tracking-[1.5px] uppercase px-3.5 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 whitespace-nowrap">
+                <Sparkles size={12} className="text-black flex-shrink-0" />
+                OUR FLAGSHIP OUTDOOR
+              </span>
+            ) : (
+              <span className="text-[9.5px] sm:text-[10px] font-bold tracking-[1.5px] sm:tracking-[2px] uppercase px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white/90 text-black">{f.badge}</span>
+            )}
+            {f.bestseller && !isSignature && (
               <span className="text-[9.5px] sm:text-[10px] font-bold tracking-[1.5px] sm:tracking-[2px] px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-gradient-to-r from-[#cca462] to-[#f6e3b4] text-black shadow-lg">BESTSELLER</span>
             )}
           </div>

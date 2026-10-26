@@ -107,6 +107,7 @@ function FlipCard({ f }: { f: Fabric }) {
   const [flipped, setFlipped] = useState(false);
   const sheet = sheetFor(f.id);
   const fab = FABRIC_TONES[f.id] ?? { tone: '#444' };
+  const isSignature = f.id === 'outdoor-signature';
   return (
     <div
       className="h-full [perspective:1400px]"
@@ -115,12 +116,21 @@ function FlipCard({ f }: { f: Fabric }) {
     >
       <div className="relative h-full grid transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] [transform-style:preserve-3d]" style={{ transform: flipped ? 'rotateY(180deg)' : 'none' }}>
         {/* FRONT */}
-        <div className="[grid-area:1/1] [backface-visibility:hidden] flex flex-col bg-white rounded-[2rem] overflow-hidden border border-slate-200 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.25)]">
+        <div className={`[grid-area:1/1] [backface-visibility:hidden] flex flex-col bg-white rounded-[2rem] overflow-hidden transition-all duration-500 ${
+          isSignature
+            ? 'border-2 border-[#cca462] ring-1 ring-[#cca462]/60 shadow-[0_20px_50px_-15px_rgba(204,164,98,0.45)]'
+            : 'border border-slate-200 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.25)]'
+        }`}>
           <div className="relative aspect-[5/4] overflow-hidden bg-slate-900">
             <img src={f.image} alt={`${f.title} car cover`} loading="lazy" className="w-full h-full object-cover" />
-            {f.bestseller && (
+            {isSignature ? (
+              <span className="absolute top-4 left-4 bg-gradient-to-r from-[#cca462] via-[#faecc7] to-[#cca462] text-black text-[9.5px] font-extrabold tracking-[1.5px] uppercase px-3.5 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 whitespace-nowrap">
+                <Sparkles size={12} className="text-black flex-shrink-0" />
+                OUR FLAGSHIP OUTDOOR
+              </span>
+            ) : f.bestseller ? (
               <span className="absolute top-4 left-4 bg-gradient-to-r from-[#cca462] to-[#f6e3b4] text-black text-[10px] font-bold tracking-[2px] px-4 py-2 rounded-full shadow-lg">BESTSELLER</span>
-            )}
+            ) : null}
             <button
               type="button"
               onClick={() => setFlipped(true)}
@@ -150,7 +160,11 @@ function FlipCard({ f }: { f: Fabric }) {
         </div>
 
         {/* BACK: fabric picture on top, details below */}
-        <div className="[grid-area:1/1] [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col bg-white rounded-[2rem] overflow-hidden border border-slate-200 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.35)]">
+        <div className={`[grid-area:1/1] [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col bg-white rounded-[2rem] overflow-hidden transition-all duration-500 ${
+          isSignature
+            ? 'border-2 border-[#cca462] shadow-[0_40px_90px_-30px_rgba(204,164,98,0.4)]'
+            : 'border border-slate-200 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.35)]'
+        }`}>
           <div className="relative aspect-[5/4] overflow-hidden" style={fab.image ? undefined : weave(fab.tone)}>
             {fab.image && <img src={fab.image} alt={`${f.title} fabric`} className="absolute inset-0 w-full h-full object-cover" />}
             <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10" />
