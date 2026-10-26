@@ -59,15 +59,10 @@ const SLIDES: SlideData[] = [
     mobileLine: 'One vehicle. One bespoke cover.',
     description:
       'Precision 3D-laser CAD tailored automotive covers engineered for India’s extreme climate. Rolls-Royce, Bentley, Porsche, Aston Martin & bespoke collections.',
-    bgSrc: '/images/bentley_street.jpg',
+    bgSrc: '/images/rr_spirit_rotated.jpg',
     bgSrcMobile: '/images/cover_bentley_showroom_mobile.jpg',
-    // Laptops only: slideshow between this photo and the one that used to be on its own slide.
-    sliderSlides: [
-      { src: '/images/bentley_street.jpg', pos: 'center 60%' },
-      { src: '/images/rr_spirit_rotated.jpg', pos: 'center 50%' },
-    ],
-    bgPos: 'center 55%',
-    bgPosMd: 'center 60%',
+    bgPos: 'center 50%',
+    bgPosMd: 'center 50%',
     bright: true,
     tierId: 'bespoke',
     ctaText: 'EXPLORE BESPOKE',

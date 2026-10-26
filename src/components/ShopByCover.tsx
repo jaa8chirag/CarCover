@@ -75,44 +75,44 @@ function CoverCard({ f, i, wide }: { f: Fabric; i: number; wide?: boolean }) {
           <span aria-hidden className="absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-white/15 group-hover:ring-[#cca462]/70 transition-all duration-500" />
 
           {/* top row */}
-          <div className="absolute top-5 left-5 right-5 flex items-start justify-between gap-3" style={{ transform: 'translateZ(30px)' }}>
-            <span className="text-[10px] font-bold tracking-[2px] uppercase px-3.5 py-1.5 rounded-full bg-white/90 text-black">{f.badge}</span>
+          <div className="absolute top-4 left-4 right-4 sm:top-5 sm:left-5 sm:right-5 flex items-start justify-between gap-2" style={{ transform: 'translateZ(30px)' }}>
+            <span className="text-[9.5px] sm:text-[10px] font-bold tracking-[1.5px] sm:tracking-[2px] uppercase px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white/90 text-black">{f.badge}</span>
             {f.bestseller && (
-              <span className="text-[10px] font-bold tracking-[2px] px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#cca462] to-[#f6e3b4] text-black shadow-lg">BESTSELLER</span>
+              <span className="text-[9.5px] sm:text-[10px] font-bold tracking-[1.5px] sm:tracking-[2px] px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-gradient-to-r from-[#cca462] to-[#f6e3b4] text-black shadow-lg">BESTSELLER</span>
             )}
           </div>
 
           {/* bottom content */}
-          <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 text-white" style={{ transform: 'translateZ(40px)' }}>
+          <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6 lg:p-5 xl:p-6 text-white" style={{ transform: 'translateZ(40px)' }}>
             {f.rating && (
               <div className="flex items-center gap-1.5 text-xs mb-2.5">
-                <Star size={14} className="fill-[#f6c453] text-[#f6c453]" />
+                <Star size={13} className="fill-[#f6c453] text-[#f6c453]" />
                 <strong>{f.rating}</strong>
                 <span className="text-white/60">({f.reviewCount?.toLocaleString('en-IN')})</span>
               </div>
             )}
-            <h3 className="uppercase font-bold tracking-wide leading-tight" style={{ fontSize: wide ? 'clamp(20px, 2vw, 28px)' : 'clamp(18px, 1.6vw, 24px)' }}>{f.title}</h3>
-            <p className="mt-1.5 text-sm text-white/70">{f.subtitle}</p>
+            <h3 className="uppercase font-bold tracking-wide leading-tight" style={{ fontSize: wide ? 'clamp(20px, 2vw, 28px)' : 'clamp(16px, 1.35vw, 22px)' }}>{f.title}</h3>
+            <p className="mt-1 text-xs sm:text-sm text-white/70 line-clamp-1">{f.subtitle}</p>
 
             {/* specs slide up on hover (always visible on touch) */}
             <ul className="mt-4 space-y-1.5 max-h-0 opacity-0 overflow-hidden group-hover:max-h-32 group-hover:opacity-100 max-md:hidden transition-all duration-500">
               {f.specs.slice(0, 2).map((s) => (
-                <li key={s} className="flex items-start gap-2 text-[12.5px] text-white/85 leading-snug">
-                  <Check size={14} className="mt-0.5 flex-shrink-0 text-[#cca462]" /> {s}
+                <li key={s} className="flex items-start gap-2 text-[12px] text-white/85 leading-snug">
+                  <Check size={13} className="mt-0.5 flex-shrink-0 text-[#cca462]" /> {s}
                 </li>
               ))}
             </ul>
 
-            <div className="mt-5 flex items-center justify-between">
+            <div className="mt-4 sm:mt-5 flex items-center justify-between gap-2">
               <div>
-                <span className="block text-[10px] uppercase tracking-[2px] text-white/55">Starting from</span>
-                <span className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-hype)' }}>₹{f.price.toLocaleString('en-IN')}</span>
-                <span className="block text-[11px] text-white/55 mt-0.5">{PRICE_NOTE}</span>
+                <span className="block text-[9px] sm:text-[10px] uppercase tracking-[1.5px] sm:tracking-[2px] text-white/55">Starting from</span>
+                <span className="text-xl sm:text-2xl font-semibold" style={{ fontFamily: 'var(--font-hype)' }}>₹{f.price.toLocaleString('en-IN')}</span>
+                <span className="block text-[10.5px] sm:text-[11px] text-white/55 mt-0.5">{PRICE_NOTE}</span>
               </div>
-              <span className="inline-flex items-center gap-2 pl-5 pr-2 py-2 rounded-full bg-white text-black text-[11px] font-bold uppercase tracking-[2px] group-hover:bg-[#cca462] transition-colors duration-500">
+              <span className="inline-flex items-center gap-1.5 sm:gap-2 pl-3.5 sm:pl-4 pr-1.5 sm:pr-2 py-1.5 sm:py-2 rounded-full bg-white text-black text-[10px] sm:text-[11px] font-bold uppercase tracking-[1.5px] sm:tracking-[2px] group-hover:bg-[#cca462] transition-colors duration-500 whitespace-nowrap">
                 Shop
-                <span className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center group-hover:rotate-[-45deg] transition-transform duration-500">
-                  <ArrowRight size={14} />
+                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black text-white flex items-center justify-center group-hover:rotate-[-45deg] transition-transform duration-500">
+                  <ArrowRight size={13} />
                 </span>
               </span>
             </div>
@@ -141,7 +141,7 @@ function GroupHead({ label, text }: { label: string; text: string }) {
 
 /** Light, colourful product section that breaks up the dark hero slides and gives shoppers a direct way in. */
 export default function ShopByCover() {
-  const outdoorStandard = FABRICS.filter((f) => f.group === 'outdoor' && f.id !== 'outdoor-signature');
+  const outdoorCovers = FABRICS.filter((f) => f.group === 'outdoor');
   const outdoorSignature = FABRICS.find((f) => f.id === 'outdoor-signature');
   const indoor = FABRICS.filter((f) => f.group === 'indoor');
   const custom = FABRICS.filter((f) => f.group === 'custom');
@@ -179,8 +179,8 @@ export default function ShopByCover() {
         </motion.div>
 
         <GroupHead label="Outdoor Covers" text="Rain, sun and everything in between" />
-        <MobileSlider wrapperClass="mb-8 sm:mb-10" desktopClass="md:grid md:grid-cols-3 md:gap-6 lg:gap-8">
-          {outdoorStandard.map((f, i) => (
+        <MobileSlider wrapperClass="mb-8 sm:mb-10" desktopClass="md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-5 lg:gap-6">
+          {outdoorCovers.map((f, i) => (
             <CoverCard key={f.id} f={f} i={i} />
           ))}
         </MobileSlider>

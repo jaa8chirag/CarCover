@@ -400,8 +400,8 @@ export default function ShopPage() {
                   </div>
 
                   {/* Core cards in row 1 */}
-                  <MobileSlider desktopClass={`md:grid md:gap-8 md:mx-auto ${g.id === 'unveiling' || g.id === 'custom' ? 'md:grid-cols-1 max-w-md' : g.id === 'indoor' ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-3 max-w-7xl'}`}>
-                    {FABRICS.filter((f) => f.group === g.id && (g.id !== 'outdoor' || f.id !== 'outdoor-signature')).map((f) => <FlipCard key={f.id} f={f} />)}
+                  <MobileSlider desktopClass={`md:grid md:gap-6 lg:gap-8 md:mx-auto ${g.id === 'unveiling' || g.id === 'custom' ? 'md:grid-cols-1 max-w-md' : g.id === 'indoor' ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-2 lg:grid-cols-4 max-w-7xl'}`}>
+                    {FABRICS.filter((f) => f.group === g.id).map((f) => <FlipCard key={f.id} f={f} />)}
                   </MobileSlider>
 
                   {/* Agli row: Highlighted Flagship Outdoor Signature */}
