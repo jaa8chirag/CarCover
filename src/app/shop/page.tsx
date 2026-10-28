@@ -95,7 +95,7 @@ const FABRIC_TONES: Record<string, { tone: string; image?: string }> = {
   'outdoor-standard': { tone: '#6b7686', image: '/images/fabric_outdoor_standard.jpg' },
   'outdoor-pro': { tone: '#8a5a1f', image: '/images/fabric_outdoor_pro.jpg' },
   'outdoor-elite': { tone: '#1d2430', image: '/images/fabric_outdoor_elite.jpg' },
-  'outdoor-signature': { tone: '#0b0c0e', image: '/images/fabric_outdoor_elite.jpg' },
+  'outdoor-signature': { tone: '#0b0c0e', image: '/images/fabric_outdoor_signature.jpg' },
   'indoor-standard': { tone: '#3b4250', image: '/images/fabric_indoor_standard.jpg' },
   'indoor-elite': { tone: '#15171c', image: '/images/fabric_indoor_elite.jpg' },
   'custom-printed': { tone: '#1a1a1a', image: '/images/cover_custom_printed.jpg' },
