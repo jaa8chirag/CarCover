@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Check, ArrowRight, ArrowUpRight, RotateCw, Sparkles } from 'lucide-react';
 import PageShell from '@/components/PageShell';
 import MobileSlider from '@/components/MobileSlider';
@@ -102,27 +103,46 @@ const FABRIC_TONES: Record<string, { tone: string; image?: string }> = {
   'unveil-showroom': { tone: '#4a4038', image: '/images/fabric_unveiling.jpg' },
 };
 
-/** Every cover card: hover (or tap the button on touch) flips it over. The back opens with a fabric picture, then the details. */
+/** Every cover card: hover (or tap the button on touch) flips it over. The back opens with a fabric picture, then the details. Clicking anywhere on the card navigates to the cover page. */
 function FlipCard({ f }: { f: Fabric }) {
+  const router = useRouter();
   const [flipped, setFlipped] = useState(false);
   const sheet = sheetFor(f.id);
   const fab = FABRIC_TONES[f.id] ?? { tone: '#444' };
   const isSignature = f.id === 'outdoor-signature';
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    if (e.metaKey || e.ctrlKey || e.button === 1) {
+      window.open(`/shop/${f.id}`, '_blank');
+      return;
+    }
+    router.push(`/shop/${f.id}`);
+  };
+
   return (
     <div
-      className="h-full [perspective:1400px]"
+      className="h-full [perspective:1400px] cursor-pointer group"
       onMouseEnter={() => { if (window.matchMedia('(hover: hover)').matches) setFlipped(true); }}
       onMouseLeave={() => setFlipped(false)}
+      onClick={handleCardClick}
+      role="link"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          router.push(`/shop/${f.id}`);
+        }
+      }}
     >
       <div className="relative h-full grid transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] [transform-style:preserve-3d]" style={{ transform: flipped ? 'rotateY(180deg)' : 'none' }}>
         {/* FRONT */}
-        <div className={`[grid-area:1/1] [backface-visibility:hidden] flex flex-col bg-white rounded-[2rem] overflow-hidden transition-all duration-500 ${
+        <div className={`[grid-area:1/1] [backface-visibility:hidden] flex flex-col bg-white rounded-[2rem] overflow-hidden transition-all duration-500 group-hover:-translate-y-1 ${
           isSignature
-            ? 'border-2 border-[#cca462] ring-1 ring-[#cca462]/60 shadow-[0_20px_50px_-15px_rgba(204,164,98,0.45)]'
-            : 'border border-slate-200 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.25)]'
+            ? 'border-2 border-[#cca462] ring-1 ring-[#cca462]/60 shadow-[0_20px_50px_-15px_rgba(204,164,98,0.45)] group-hover:shadow-[0_30px_70px_-15px_rgba(204,164,98,0.65)]'
+            : 'border border-slate-200 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.25)] group-hover:shadow-[0_30px_70px_-20px_rgba(0,0,0,0.35)]'
         }`}>
           <div className="relative aspect-[5/4] overflow-hidden bg-slate-900">
-            <img src={f.image} alt={`${f.title} car cover`} loading="lazy" className="w-full h-full object-cover" />
+            <img src={f.image} alt={`${f.title} car cover`} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
             {isSignature ? (
               <span className="absolute top-4 left-4 bg-gradient-to-r from-[#cca462] via-[#faecc7] to-[#cca462] text-black text-[9.5px] font-extrabold tracking-[1.5px] uppercase px-3.5 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 whitespace-nowrap">
                 <Sparkles size={12} className="text-black flex-shrink-0" />
@@ -133,7 +153,10 @@ function FlipCard({ f }: { f: Fabric }) {
             ) : null}
             <button
               type="button"
-              onClick={() => setFlipped(true)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setFlipped(true);
+              }}
               className="absolute bottom-4 right-4 hidden [@media(hover:none)]:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-[2px] cursor-pointer"
             >
               <RotateCw size={12} /> See the fabric
@@ -153,23 +176,30 @@ function FlipCard({ f }: { f: Fabric }) {
                 </li>
               ))}
             </ul>
-            <Link href={`/shop/${f.id}`} className="mt-6 inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-black hover:bg-[#b38848] text-white text-xs font-bold uppercase tracking-[2px] no-underline transition-colors">
+            <span className="mt-6 inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-black group-hover:bg-[#b38848] text-white text-xs font-bold uppercase tracking-[2px] transition-colors">
               Choose this cover <ArrowRight size={14} />
-            </Link>
+            </span>
           </div>
         </div>
 
         {/* BACK: fabric picture on top, details below */}
-        <div className={`[grid-area:1/1] [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col bg-white rounded-[2rem] overflow-hidden transition-all duration-500 ${
+        <div className={`[grid-area:1/1] [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col bg-white rounded-[2rem] overflow-hidden transition-all duration-500 group-hover:-translate-y-1 ${
           isSignature
-            ? 'border-2 border-[#cca462] shadow-[0_40px_90px_-30px_rgba(204,164,98,0.4)]'
-            : 'border border-slate-200 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.35)]'
+            ? 'border-2 border-[#cca462] shadow-[0_40px_90px_-30px_rgba(204,164,98,0.4)] group-hover:shadow-[0_50px_100px_-25px_rgba(204,164,98,0.6)]'
+            : 'border border-slate-200 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.35)] group-hover:shadow-[0_50px_100px_-25px_rgba(0,0,0,0.45)]'
         }`}>
           <div className="relative aspect-[5/4] overflow-hidden" style={fab.image ? undefined : weave(fab.tone)}>
-            {fab.image && <img src={fab.image} alt={`${f.title} fabric`} className="absolute inset-0 w-full h-full object-cover" />}
+            {fab.image && <img src={fab.image} alt={`${f.title} fabric`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />}
             <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10" />
             <span className="absolute bottom-4 left-5 text-[10px] font-bold tracking-[4px] uppercase text-[#f6e3b4]">The fabric</span>
-            <button type="button" onClick={() => setFlipped(false)} className="absolute bottom-4 right-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-[2px] cursor-pointer">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setFlipped(false);
+              }}
+              className="absolute bottom-4 right-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-[2px] cursor-pointer"
+            >
               <RotateCw size={12} /> Back
             </button>
           </div>
@@ -184,9 +214,9 @@ function FlipCard({ f }: { f: Fabric }) {
               ))}
             </dl>
             <div className="mt-5 flex gap-3">
-              <Link href={`/shop/${f.id}`} className="flex-1 inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-black hover:bg-[#b38848] text-white text-xs font-bold uppercase tracking-[2px] no-underline transition-colors">
+              <span className="flex-1 inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-black group-hover:bg-[#b38848] text-white text-xs font-bold uppercase tracking-[2px] transition-colors">
                 Choose <ArrowRight size={14} />
-              </Link>
+              </span>
             </div>
           </div>
         </div>
