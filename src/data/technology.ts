@@ -95,31 +95,31 @@ export interface FabricSheet {
 
 // Technical sheet copy is placeholder until the client supplies final lab figures.
 const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warranty' | 'specs' | 'bars'>> = {
-  'outdoor-standard': {
-    short: 'Outdoor Standard',
-    environment: 'Outdoor · Daily',
+  'outdoor-pro': {
+    short: 'Outdoor Pro',
+    environment: 'Outdoor · Daily Protection',
     warranty: '2-Year Guarantee',
     specs: {
       material: 'Polyester with UV-stable coating',
       waterResistance: 'Water-resistant, sheds light to moderate rain',
       uvProtection: 'Protection from UV rays',
-      lining: 'Standard lining',
+      lining: 'Standard soft lining',
       stretch: 'Tailored fit with elasticated hem',
     },
-    bars: { water: 60, uv: 65, scratch: 60, breath: 80 },
+    bars: { water: 70, uv: 75, scratch: 65, breath: 80 },
   },
-  'outdoor-pro': {
+  'outdoor-standard': {
     short: 'Outdoor Pro',
-    environment: 'Outdoor · Heat & Rain',
-    warranty: '3-Year Guarantee',
+    environment: 'Outdoor · Daily Protection',
+    warranty: '2-Year Guarantee',
     specs: {
-      material: 'Heat-reflective multi-layer composite',
-      breathability: 'Microporous film, condensation-free',
-      waterResistance: 'Heavy-rain resistant',
-      lining: 'Anti-abrasive microfibre lining',
-      stretch: 'Tailored fit with wind-lock buckles',
+      material: 'Polyester with UV-stable coating',
+      waterResistance: 'Water-resistant, sheds light to moderate rain',
+      uvProtection: 'Protection from UV rays',
+      lining: 'Standard soft lining',
+      stretch: 'Tailored fit with elasticated hem',
     },
-    bars: { water: 82, uv: 92, scratch: 78, breath: 85 },
+    bars: { water: 70, uv: 75, scratch: 65, breath: 80 },
   },
   'outdoor-elite': {
     short: 'Outdoor Elite',

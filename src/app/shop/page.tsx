@@ -93,8 +93,8 @@ const SPEC_LABELS: [keyof NonNullable<ReturnType<typeof sheetFor>>['specs'], str
 
 /** Colour of each cover's cloth. Add an `image` (a real fabric photo) to any entry and it replaces the drawn weave. */
 const FABRIC_TONES: Record<string, { tone: string; image?: string }> = {
+  'outdoor-pro': { tone: '#6b7686', image: '/images/fabric_outdoor_standard.jpg' },
   'outdoor-standard': { tone: '#6b7686', image: '/images/fabric_outdoor_standard.jpg' },
-  'outdoor-pro': { tone: '#8a5a1f', image: '/images/fabric_outdoor_pro.jpg' },
   'outdoor-elite': { tone: '#1d2430', image: '/images/fabric_outdoor_elite.jpg' },
   'outdoor-signature': { tone: '#0b0c0e', image: '/images/fabric_outdoor_signature.jpg' },
   'indoor-standard': { tone: '#3b4250', image: '/images/fabric_indoor_standard.jpg' },
@@ -364,7 +364,7 @@ export default function ShopPage() {
                   </div>
 
                   {/* Core cards in row 1 */}
-                  <MobileSlider desktopClass={`md:grid md:gap-6 lg:gap-8 md:mx-auto ${g.id === 'unveiling' || g.id === 'custom' ? 'md:grid-cols-1 max-w-md' : g.id === 'indoor' ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-2 lg:grid-cols-4 max-w-7xl'}`}>
+                  <MobileSlider desktopClass={`md:grid md:gap-6 lg:gap-8 md:mx-auto ${g.id === 'unveiling' || g.id === 'custom' ? 'md:grid-cols-1 max-w-md' : g.id === 'indoor' ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-2 lg:grid-cols-3 max-w-6xl'}`}>
                     {FABRICS.filter((f) => f.group === g.id).map((f) => <FlipCard key={f.id} f={f} />)}
                   </MobileSlider>
 

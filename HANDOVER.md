@@ -29,7 +29,7 @@ To change the admin password, change `ADMIN_PASSWORD` in cPanel (Setup Node.js A
 ## Prices and GST
 
 - Prices shown are before GST. Shipping is free. GST is 18% and is added at checkout.
-- Current base prices: Outdoor Standard 3,899, Pro 5,499, Elite 8,999, Signature 13,999. Indoor Standard 2,499, Indoor Elite 5,499, Unveiling 8,499. Bespoke 26,999 (enquiry only).
+- Current base prices: Outdoor Pro 3,999, Elite 8,999, Signature 13,999. Indoor Standard 2,499, Indoor Elite 5,499, Unveiling 8,499. Bespoke 26,999 (enquiry only).
 - Change a price in **Admin > Products**. It changes the cart, checkout and the Shiprocket catalog together.
 - The customer now types their own car, so the system cannot tell a small car from a big one. **Every cover is priced at its base price.** If a bigger car should cost more, adjust it with the customer on WhatsApp.
 - The "Bespoke Covers" card on the shop page is an enquiry. Its price (26,999) is only text on the page, so to change it, edit `src/app/shop/page.tsx`.

@@ -10,7 +10,7 @@ import { FABRICS, PRICE_NOTE } from '@/data/fabrics';
 
 const FABRIC_TEXTURES: Record<string, string> = {
   'outdoor-standard': '/images/fabric_outdoor_standard.jpg',
-  'outdoor-pro': '/images/fabric_outdoor_pro.jpg',
+  'outdoor-pro': '/images/fabric_outdoor_standard.jpg',
   'outdoor-elite': '/images/fabric_outdoor_elite.jpg',
   'outdoor-signature': '/images/fabric_outdoor_signature.jpg',
   'indoor-standard': '/images/fabric_indoor_standard.jpg',
@@ -21,7 +21,8 @@ const FABRIC_TEXTURES: Record<string, string> = {
 
 export default function ProductPage() {
   const params = useParams<{ fabric: string }>();
-  const fabric = FABRICS.find((f) => f.id === params?.fabric);
+  const fabricKey = params?.fabric === 'outdoor-standard' ? 'outdoor-pro' : params?.fabric;
+  const fabric = FABRICS.find((f) => f.id === fabricKey);
   const [activeView, setActiveView] = useState<'car' | 'fabric'>('car');
 
   const fabricTexture = fabric ? FABRIC_TEXTURES[fabric.id] : null;

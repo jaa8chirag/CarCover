@@ -10,7 +10,8 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { fabric } = await params;
-  const f = FABRICS.find((x) => x.id === fabric);
+  const fabricKey = fabric === 'outdoor-standard' ? 'outdoor-pro' : fabric;
+  const f = FABRICS.find((x) => x.id === fabricKey);
   if (!f) return { title: 'Cover not found', robots: { index: false, follow: false } };
   return pageMetadata({
     title: `${f.title}: ${f.subtitle}`,
@@ -22,7 +23,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 export default async function Layout({ children, params }: Params & { children: React.ReactNode }) {
   const { fabric } = await params;
-  const f = FABRICS.find((x) => x.id === fabric);
+  const fabricKey = fabric === 'outdoor-standard' ? 'outdoor-pro' : fabric;
+  const f = FABRICS.find((x) => x.id === fabricKey);
   if (!f) return children;
   const ld = {
     '@context': 'https://schema.org',
