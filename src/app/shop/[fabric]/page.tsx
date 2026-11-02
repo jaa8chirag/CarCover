@@ -12,7 +12,7 @@ const FABRIC_TEXTURES: Record<string, string> = {
   'outdoor-standard': '/images/fabric_outdoor_standard.jpg',
   'outdoor-pro': '/images/fabric_outdoor_standard.jpg',
   'outdoor-elite': '/images/fabric_outdoor_elite.jpg',
-  'outdoor-signature': '/images/fabric_outdoor_signature.jpg',
+  'outdoor-signature': '/images/fabric_outdoor_signature.jpg?v=2',
   'indoor-standard': '/images/fabric_indoor_standard.jpg',
   'indoor-elite': '/images/fabric_indoor_elite.jpg',
   'unveil-showroom': '/images/fabric_unveiling.jpg',
@@ -74,25 +74,25 @@ export default function ProductPage() {
                         <button
                           type="button"
                           onClick={() => setActiveView('car')}
-                          className={`flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-[1.5px] transition-all cursor-pointer ${
+                          className={`flex items-center gap-2.5 px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-[1.5px] transition-all cursor-pointer ${
                             activeView === 'car'
-                              ? 'bg-black text-white shadow-md'
-                              : 'bg-white text-slate-700 hover:text-black border border-slate-200'
+                              ? 'bg-black text-white shadow-md ring-2 ring-[#cca462]'
+                              : 'bg-white text-slate-700 hover:text-black border border-slate-200 shadow-sm'
                           }`}
                         >
-                          <span className={`w-2 h-2 rounded-full ${activeView === 'car' ? 'bg-[#cca462]' : 'bg-slate-300'}`} />
+                          <img src={fabric.image} alt="Vehicle fit" className="w-5 h-5 rounded-full object-cover border border-white/20" />
                           Vehicle Fit
                         </button>
                         <button
                           type="button"
                           onClick={() => setActiveView('fabric')}
-                          className={`flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-[1.5px] transition-all cursor-pointer ${
+                          className={`flex items-center gap-2.5 px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-[1.5px] transition-all cursor-pointer ${
                             activeView === 'fabric'
-                              ? 'bg-black text-white shadow-md'
-                              : 'bg-white text-slate-700 hover:text-black border border-slate-200'
+                              ? 'bg-black text-white shadow-md ring-2 ring-[#cca462]'
+                              : 'bg-white text-slate-700 hover:text-black border border-slate-200 shadow-sm'
                           }`}
                         >
-                          <span className={`w-2 h-2 rounded-full ${activeView === 'fabric' ? 'bg-[#cca462]' : 'bg-slate-300'}`} />
+                          <img src={fabricTexture} alt="Fabric weave" className="w-5 h-5 rounded-full object-cover border border-white/20" />
                           Fabric Weave
                         </button>
                       </div>

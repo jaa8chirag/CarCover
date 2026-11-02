@@ -96,7 +96,7 @@ const FABRIC_TONES: Record<string, { tone: string; image?: string }> = {
   'outdoor-pro': { tone: '#6b7686', image: '/images/fabric_outdoor_standard.jpg' },
   'outdoor-standard': { tone: '#6b7686', image: '/images/fabric_outdoor_standard.jpg' },
   'outdoor-elite': { tone: '#1d2430', image: '/images/fabric_outdoor_elite.jpg' },
-  'outdoor-signature': { tone: '#0b0c0e', image: '/images/fabric_outdoor_signature.jpg' },
+  'outdoor-signature': { tone: '#0b0c0e', image: '/images/fabric_outdoor_signature.jpg?v=2' },
   'indoor-standard': { tone: '#3b4250', image: '/images/fabric_indoor_standard.jpg' },
   'indoor-elite': { tone: '#15171c', image: '/images/fabric_indoor_elite.jpg' },
   'custom-printed': { tone: '#1a1a1a', image: '/images/cover_custom_printed.jpg' },
@@ -157,7 +157,8 @@ function FlipCard({ f }: { f: Fabric }) {
                 e.stopPropagation();
                 setFlipped(true);
               }}
-              className="absolute bottom-4 right-4 hidden [@media(hover:none)]:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-[2px] cursor-pointer"
+              className="absolute bottom-4 right-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 hover:bg-[#b38848] backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-[2px] cursor-pointer transition-colors shadow-lg z-10"
+              title="Click to view fabric weave"
             >
               <RotateCw size={12} /> See the fabric
             </button>
@@ -198,7 +199,7 @@ function FlipCard({ f }: { f: Fabric }) {
                 e.stopPropagation();
                 setFlipped(false);
               }}
-              className="absolute bottom-4 right-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-[2px] cursor-pointer"
+              className="absolute bottom-4 right-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 hover:bg-[#b38848] backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-[2px] cursor-pointer transition-colors shadow-lg z-10"
             >
               <RotateCw size={12} /> Back
             </button>
