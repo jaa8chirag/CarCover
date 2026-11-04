@@ -9,6 +9,7 @@ export interface Fabric {
   subtitle: string;
   badge: string;
   price: number;
+  depositPrice?: number;
   accentColor: string;
   image: string;
   icon: LucideIcon;
@@ -159,16 +160,18 @@ export const FABRICS: Fabric[] = [
     title: 'Bespoke Printed Cover',
     subtitle: 'Printed, Monogrammed & Branded',
     badge: 'BESPOKE',
-    price: 26999,
+    price: 24999,
+    depositPrice: 1000,
     accentColor: '#cca462',
     image: '/images/cover_custom_printed.jpg',
     icon: Sparkles,
-    description: 'Your artwork, livery, stripes or branding printed edge-to-edge on premium four-way stretch indoor fabric. Tailored for your exact car.',
+    description: 'Your artwork, livery, stripes or branding printed edge-to-edge on premium four-way stretch indoor fabric. Starts from ₹24,999. Pay ₹1,000 design booking advance to begin.',
     specs: [
+      'Starting from ₹24,999 · Pay ₹1,000 booking advance',
+      'Atelier team contacts you to collect artwork, livery & car specs',
       'Edge-to-edge printing replicating your exact car design',
       'Ultra-dense soft fleece backing protecting gloss paint and PPF',
-      'Tailored mirror pockets and sculpted contour cut',
-      'Washable and fade-resistant pigment technology',
+      'Balance (₹23,999+) payable after 3D digital design approval',
     ],
     idealFor: 'Collectors, liveried supercars, brand promotions & custom builds',
   },

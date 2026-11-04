@@ -62,7 +62,7 @@ function CoverCard({ f, i, wide }: { f: Fabric; i: number; wide?: boolean }) {
     >
       <Tilt className="h-full">
         <Link
-          href={`/collections#${f.group}`}
+          href={f.group === 'custom' ? '/shop/custom-printed' : `/collections#${f.group}`}
           className={`group relative block overflow-hidden rounded-[2rem] no-underline bg-black shadow-[0_24px_60px_-28px_rgba(0,0,0,0.55)] hover:shadow-[0_50px_100px_-35px_rgba(0,0,0,0.65)] transition-all duration-500 aspect-square ${
             isSignature ? 'border-2 border-[#cca462] ring-1 ring-[#cca462]/60 shadow-[0_20px_50px_-15px_rgba(204,164,98,0.5)]' : ''
           }`}
@@ -91,6 +91,8 @@ function CoverCard({ f, i, wide }: { f: Fabric; i: number; wide?: boolean }) {
                 <Sparkles size={12} className="text-black flex-shrink-0" />
                 OUR FLAGSHIP OUTDOOR
               </span>
+            ) : f.id === 'custom-printed' ? (
+              <span className="text-[9.5px] sm:text-[10px] font-extrabold tracking-[1.5px] uppercase px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#cca462] text-black shadow-md">₹1,000 ADVANCE</span>
             ) : (
               <span className="text-[9.5px] sm:text-[10px] font-bold tracking-[1.5px] sm:tracking-[2px] uppercase px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white/90 text-black">{f.badge}</span>
             )}

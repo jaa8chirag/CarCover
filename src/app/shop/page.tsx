@@ -28,7 +28,18 @@ function Banner() {
 }
 
 const CUSTOM = [
-  { id: 'custom-printed', title: 'Custom Printed Cover', text: 'Your artwork, livery or branding printed edge to edge on premium stretch fabric.', image: '/images/cover_custom_printed.jpg', points: ['Any artwork, logo or livery', 'Sharp, fade-resistant printing', 'Cut to your exact car'] },
+  {
+    id: 'custom-printed',
+    title: 'Custom Printed Cover',
+    text: 'Your artwork, livery or branding printed edge-to-edge on premium stretch fabric. Starts from ₹24,999 with a ₹1,000 design booking advance.',
+    image: '/images/cover_custom_printed.jpg',
+    points: [
+      'Starts from ₹24,999 · ₹1,000 Booking Advance to begin',
+      'Atelier calls you to collect artwork, livery & measurements',
+      'Sharp, fade-resistant edge-to-edge printing',
+      'Balance ₹23,999 payable upon 3D design approval',
+    ],
+  },
 ];
 
 /** Full-width photo between two sections. */
@@ -43,14 +54,25 @@ function PhotoBreak({ src, pos = 'center 58%' }: { src: string; pos?: string }) 
 function CustomCard({ c }: { c: (typeof CUSTOM)[number] }) {
   return (
     <Link
-      href="/contact"
+      href="/shop/custom-printed"
       className="group flex flex-col h-full bg-white rounded-[2rem] overflow-hidden no-underline text-inherit border border-slate-200 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.25)] hover:shadow-[0_40px_90px_-30px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-500"
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-slate-900">
         <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] group-hover:scale-110" />
+        <span className="absolute top-4 left-4 bg-gradient-to-r from-[#cca462] via-[#faecc7] to-[#cca462] text-black text-[9.5px] font-extrabold tracking-[1.5px] uppercase px-3 py-1.5 rounded-full shadow-lg">
+          BESPOKE COMMISSION
+        </span>
       </div>
       <div className="p-6 sm:p-7 flex flex-col flex-1">
-        <span className="text-2xl font-semibold text-black" style={{ fontFamily: 'var(--font-hype)' }}>₹26,999</span>
+        <div className="flex items-baseline justify-between gap-2">
+          <div>
+            <span className="block text-[10px] uppercase tracking-[2px] text-slate-400">Starting from</span>
+            <span className="text-2xl font-semibold text-black" style={{ fontFamily: 'var(--font-hype)' }}>₹24,999</span>
+          </div>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-[#8a6829] bg-[#cca462]/20 px-2.5 py-1 rounded-full border border-[#cca462]/40">
+            ₹1,000 Advance
+          </span>
+        </div>
         <span className="block text-[11px] text-slate-500 mt-0.5">{PRICE_NOTE}</span>
         <h3 className="mt-3 uppercase font-bold tracking-wide text-black leading-snug">{c.title}</h3>
         <p className="mt-1 text-sm text-slate-500">{c.text}</p>
@@ -63,7 +85,7 @@ function CustomCard({ c }: { c: (typeof CUSTOM)[number] }) {
           ))}
         </ul>
         <span className="mt-6 inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-black group-hover:bg-[#b38848] text-white text-xs font-bold uppercase tracking-[2px] transition-colors">
-          Enquire now <ArrowRight size={14} />
+          Book with ₹1,000 Advance <ArrowRight size={14} />
         </span>
       </div>
     </Link>
@@ -164,8 +186,17 @@ function FlipCard({ f }: { f: Fabric }) {
             </button>
           </div>
           <div className="p-6 sm:p-7 flex flex-col flex-1">
-            <span className="block text-[10px] font-bold uppercase tracking-[2px] text-slate-400">Starting from</span>
-            <span className="text-2xl font-semibold text-black" style={{ fontFamily: 'var(--font-hype)' }}>₹{f.price.toLocaleString('en-IN')}</span>
+            <div className="flex items-baseline justify-between gap-2">
+              <div>
+                <span className="block text-[10px] font-bold uppercase tracking-[2px] text-slate-400">Starting from</span>
+                <span className="text-2xl font-semibold text-black" style={{ fontFamily: 'var(--font-hype)' }}>₹{f.price.toLocaleString('en-IN')}</span>
+              </div>
+              {f.id === 'custom-printed' && (
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#8a6829] bg-[#cca462]/20 px-2.5 py-1 rounded-full border border-[#cca462]/40">
+                  ₹1,000 Advance
+                </span>
+              )}
+            </div>
             <span className="block text-[11px] text-slate-500 mt-0.5">{PRICE_NOTE}</span>
             <h3 className="mt-3 uppercase font-bold tracking-wide text-black leading-snug">{f.title}</h3>
             <p className="mt-1 text-sm text-slate-500">{f.subtitle}</p>
@@ -178,7 +209,7 @@ function FlipCard({ f }: { f: Fabric }) {
               ))}
             </ul>
             <span className="mt-6 inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-black group-hover:bg-[#b38848] text-white text-xs font-bold uppercase tracking-[2px] transition-colors">
-              Choose this cover <ArrowRight size={14} />
+              {f.id === 'custom-printed' ? 'Book for ₹1,000 Advance' : 'Choose this cover'} <ArrowRight size={14} />
             </span>
           </div>
         </div>

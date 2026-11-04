@@ -3,7 +3,7 @@
 import { gstOn } from '@/data/fabrics';
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Check, ShoppingBag, Plus, Trash2, PhoneCall, ArrowRight } from 'lucide-react';
+import { Check, ShoppingBag, Plus, Trash2, PhoneCall, ArrowRight, Sparkles } from 'lucide-react';
 import { FABRIC_COLORS } from '@/data/carData';
 import type { Fabric } from '@/data/fabrics';
 
@@ -120,10 +120,12 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
   };
 
   const totalCovers = cars.reduce((s, c) => s + c.quantity, 0);
+  const BESPOKE_DEPOSIT = 1000;
+  const fullStartingPrice = fabric.price;
 
   const subtotal = cars.reduce((sum, c) => {
     const pipingCost = hasPiping && c.pipingId !== 'none' ? PIPING_PRICE : 0;
-    const unitPrice = fabric.price + pipingCost;
+    const unitPrice = isBespoke ? BESPOKE_DEPOSIT : (fabric.price + pipingCost);
     return sum + unitPrice * c.quantity;
   }, 0);
 
@@ -142,7 +144,7 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
       const cColor = FABRIC_COLORS.find((fc) => fc.id === c.colorId) || FABRIC_COLORS[1];
       const cPiping = hasPiping ? PIPING_OPTIONS.find((p) => p.id === c.pipingId) || PIPING_OPTIONS[0] : PIPING_OPTIONS[0];
       const pipingCost = hasPiping && cPiping.id !== 'none' ? PIPING_PRICE : 0;
-      const unitPrice = fabric.price + pipingCost;
+      const unitPrice = isBespoke ? BESPOKE_DEPOSIT : (fabric.price + pipingCost);
       const itemPrice = unitPrice * c.quantity;
 
       onAddToCart({
@@ -151,15 +153,18 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
         variant: `${c.year.trim()}${c.quantity > 1 ? ` · Qty: ${c.quantity}` : ''}`,
         quantity: c.quantity,
         unitPrice,
-        tier: fabric.title,
-        fabricColor: isBespoke ? 'Custom Printed Design' : cColor.name,
+        tier: isBespoke ? `${fabric.title} (₹1,000 Booking Advance)` : fabric.title,
+        fabricColor: isBespoke ? 'Custom Livery & Artwork Consultation' : cColor.name,
         fabricHex: isBespoke ? '#cca462' : cColor.hex,
         pipingColor: hasPiping && cPiping.id !== 'none' ? `${cPiping.name} (+₹1,999)` : cPiping.name,
         pipingHex: cPiping.hex,
-        notes: notes.trim() || 'None',
+        notes: isBespoke
+          ? `[₹1,000 Booking Advance Paid. Full price starts from ₹24,999. Balance ₹23,999 payable after design approval.] ${notes.trim()}`
+          : (notes.trim() || 'None'),
         addons: {
           ...(c.quantity > 1 ? { quantity: c.quantity } : {}),
           ...(pipingCost > 0 ? { piping: pipingCost } : {}),
+          ...(isBespoke ? { bookingAdvance: BESPOKE_DEPOSIT, fullStartingPrice } : {}),
         },
         price: itemPrice,
         currency: '₹',
@@ -190,6 +195,39 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
     <div className="grid lg:grid-cols-[1fr_400px] gap-8 items-start">
       {/* OPTIONS */}
       <div className="bg-white border border-slate-200 rounded-[2rem] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.25)] px-6 sm:px-10">
+        {isBespoke && (
+          <div className="mt-8 mb-6 p-6 rounded-2xl bg-gradient-to-br from-[#121418] to-[#0c0d10] border border-[#cca462]/40 text-white shadow-xl">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-white/10">
+              <div className="flex items-center gap-2 text-[#cca462] text-[11px] font-bold tracking-[2px] uppercase">
+                <Sparkles size={14} className="text-[#cca462]" />
+                <span>Bespoke Commission Process</span>
+              </div>
+              <span className="text-[11px] font-bold bg-[#cca462] text-black px-3 py-1 rounded-full uppercase tracking-wider">
+                Full Price From ₹24,999 · ₹1,000 Advance
+              </span>
+            </div>
+            <div className="grid sm:grid-cols-3 gap-3.5 text-xs">
+              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
+                <span className="block text-[#cca462] font-mono font-bold text-sm mb-1">01. Book Slot</span>
+                <p className="text-white/80 leading-relaxed text-[12px]">
+                  Enter your car details and pay a <strong className="text-white font-semibold">₹1,000 token advance</strong> to start your design commission.
+                </p>
+              </div>
+              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
+                <span className="block text-[#cca462] font-mono font-bold text-sm mb-1">02. We Contact You</span>
+                <p className="text-white/80 leading-relaxed text-[12px]">
+                  Our master designer calls/WhatsApps you within 24 hours to collect your artwork, livery, stripes, colors & car measurements.
+                </p>
+              </div>
+              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
+                <span className="block text-[#cca462] font-mono font-bold text-sm mb-1">03. Render & Deliver</span>
+                <p className="text-white/80 leading-relaxed text-[12px]">
+                  Review your 3D digital render for approval. Pay the remaining <strong className="text-white font-semibold">₹23,999 balance</strong> & we tailor and deliver your cover.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
         <Block
           n={1}
           title={isUnveiling ? 'Reveal vehicles & quantities' : 'Your vehicles & quantities'}
@@ -366,10 +404,12 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
 
         <Block
           n={2}
-          title="Additional information"
+          title={isBespoke ? "Your Custom Design & Livery Requirements" : "Additional information"}
           hint={
             isUnveiling
               ? 'Optional. Tell us anything else we should know about your launch date, showroom or reveal event.'
+              : isBespoke
+              ? 'Tell us your ideas for artwork, stripes, racing livery, brand logos, colors, or special vehicle modifications (spoiler, PPF, widebody).'
               : 'Optional. Tell us anything else we should know about your car or your cover.'
           }
         >
@@ -379,6 +419,8 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
             placeholder={
               isUnveiling
                 ? 'e.g. dealership name, reveal date, logo or monogram embroidery requirements...'
+                : isBespoke
+                ? 'e.g. Gulf racing livery, twin stripes in white, custom company logo on hood, GT3 RS rear wing...'
                 : 'e.g. custom text or logo, any body kit or spoiler...'
             }
             value={notes}
@@ -437,18 +479,30 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
           <span className="block text-[11px] font-bold tracking-[3px] uppercase text-[#cca462] mb-3">Your order</span>
           <Row k="Cover" v={fabric.title} />
 
+          {isBespoke && (
+            <div className="my-3 p-3.5 rounded-xl bg-[#cca462]/10 border border-[#cca462]/30 text-xs">
+              <div className="flex justify-between items-center text-[#faecc7] font-bold uppercase tracking-wider text-[11px] mb-1">
+                <span>Bespoke Commission</span>
+                <span className="bg-[#cca462] text-black px-2 py-0.5 rounded-full font-extrabold text-[10px]">₹1,000 Advance</span>
+              </div>
+              <p className="text-white/80 leading-snug text-[11.5px] mt-1.5">
+                Full cover price starts from <span className="text-[#faecc7] font-bold">₹24,999</span>. You only pay a <span className="text-[#faecc7] font-bold">₹1,000</span> advance token today. Our atelier contacts you to finalize artwork & dimensions. Balance is payable after 3D design approval.
+              </p>
+            </div>
+          )}
+
           <div className="py-2.5 border-b border-white/10 text-xs">
             <div className="flex justify-between text-white/50 mb-1.5 uppercase tracking-wider text-[10px] font-bold">
               <span>Vehicles ({cars.length})</span>
-              <span>Subtotal</span>
+              <span>{isBespoke ? "Advance Due" : "Subtotal"}</span>
             </div>
             <div className="space-y-1.5">
               {cars.map((c, i) => {
                 const cName = c.brand.trim() || c.model.trim() ? `${c.brand.trim()} ${c.model.trim()}` : `Vehicle #${i + 1}`;
-                const cCol = isBespoke ? 'Custom' : FABRIC_COLORS.find((fc) => fc.id === c.colorId)?.name || '';
+                const cCol = isBespoke ? 'Custom Livery' : FABRIC_COLORS.find((fc) => fc.id === c.colorId)?.name || '';
                 const cPiping = hasPiping && c.pipingId !== 'none' ? ` · Piping: ${c.pipingId}` : '';
                 const pCost = hasPiping && c.pipingId !== 'none' ? PIPING_PRICE : 0;
-                const uPrice = fabric.price + pCost;
+                const uPrice = isBespoke ? BESPOKE_DEPOSIT : (fabric.price + pCost);
                 return (
                   <div key={c.id} className="flex justify-between items-center text-white/90">
                     <span className="truncate max-w-[210px] text-[13px]">
@@ -461,14 +515,21 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
             </div>
           </div>
           <Row k="Total covers" v={`${totalCovers} ${totalCovers === 1 ? 'cover' : 'covers'}`} />
-          <Row k="Notes" v={notes.trim() ? (notes.trim().length > 28 ? notes.trim().slice(0, 28) + '...' : notes.trim()) : 'None'} />
-          <Row k="Subtotal" v={formatINR(subtotal)} />
+          {isBespoke && (
+            <Row k="Full price starts from" v={formatINR(fullStartingPrice * totalCovers)} />
+          )}
+          <Row k={isBespoke ? "Advance payable today" : "Subtotal"} v={formatINR(subtotal)} />
+          {isBespoke && (
+            <Row k="Balance on 3D approval" v={formatINR((fullStartingPrice - BESPOKE_DEPOSIT) * totalCovers)} />
+          )}
           <Row k="Shipping" v="Free" />
           <Row k="GST (18%)" v={formatINR(gst)} />
 
           <div className="flex items-end justify-between pt-6">
-            <span className="text-xs uppercase tracking-[2px] text-white/50">Total (incl. GST)</span>
-            <span className="text-3xl font-semibold" style={{ fontFamily: 'var(--font-hype)' }}>{formatINR(total)}</span>
+            <span className="text-xs uppercase tracking-[2px] text-white/50">
+              {isBespoke ? "Payable Today (incl. GST)" : "Total (incl. GST)"}
+            </span>
+            <span className="text-3xl font-semibold text-[#faecc7]" style={{ fontFamily: 'var(--font-hype)' }}>{formatINR(total)}</span>
           </div>
           {/* ACTION BUTTONS: Checkout + Add to Cart */}
           <div className="mt-6 flex flex-col gap-2.5">
@@ -478,7 +539,7 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
               disabled={!ready}
               className="w-full py-4 rounded-full bg-gradient-to-r from-[#cca462] to-[#e7d29d] hover:brightness-105 text-black text-xs font-bold uppercase tracking-[2px] flex items-center justify-center gap-2 cursor-pointer transition-all shadow-[0_12px_28px_-8px_rgba(204,164,98,0.5)] disabled:opacity-30 disabled:cursor-not-allowed disabled:shadow-none"
             >
-              <span>Checkout</span>
+              <span>{isBespoke ? `Pay ${formatINR(total)} Advance & Start Design` : 'Checkout'}</span>
               <ArrowRight size={15} />
             </button>
 
@@ -489,7 +550,7 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
               className="w-full py-3.5 rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 text-white text-xs font-bold uppercase tracking-[1.5px] flex items-center justify-center gap-2 cursor-pointer transition-all disabled:opacity-30 disabled:cursor-not-allowed"
             >
               {added ? <Check size={15} className="text-[#cca462]" /> : <ShoppingBag size={15} />}
-              <span>{added ? 'Added to Cart ✓' : `Add ${totalCovers} ${totalCovers === 1 ? 'cover' : 'covers'} to cart`}</span>
+              <span>{added ? 'Added to Cart ✓' : isBespoke ? `Add ${totalCovers} ${totalCovers === 1 ? 'advance' : 'advances'} to cart (${formatINR(total)})` : `Add ${totalCovers} ${totalCovers === 1 ? 'cover' : 'covers'} to cart`}</span>
             </button>
           </div>
           {!ready && (

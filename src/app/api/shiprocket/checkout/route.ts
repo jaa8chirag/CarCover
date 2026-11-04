@@ -40,15 +40,16 @@ export async function POST(req: Request) {
         it?.pipingColor &&
         it?.pipingColor !== 'No piping' &&
         !String(it?.pipingColor).toLowerCase().includes('none');
+      const isCustomBespoke = fabric.id === 'custom-printed';
       const qty = Math.min(10, Math.max(1, Number(it?.quantity) || 1));
       const pipingFee = hasPipingFee ? 1999 : 0;
-      const unitPrice = product.basePrice + pipingFee;
+      const unitPrice = isCustomBespoke ? 1000 : (product.basePrice + pipingFee);
       const price = unitPrice * qty;
       items.push({
         fabricId: fabric.id,
         vehicle: str(it?.vehicle, 120),
         variant: str(it?.variant, 120),
-        product: fabric.title,
+        product: isCustomBespoke ? 'Bespoke Printed Cover — ₹1,000 Design Booking Advance' : fabric.title,
         coverColor: str(it?.fabricColor, 60),
         piping: str(it?.pipingColor, 60),
         notes: str(it?.notes, 500) === 'None' ? '' : str(it?.notes, 500),
@@ -63,7 +64,7 @@ export async function POST(req: Request) {
           variantId: product.id * 100 + 1,
           quantity: qty,
           price: unitPrice + gstOn(unitPrice),
-          name: `${fabric.title} (GST included)`,
+          name: isCustomBespoke ? 'Bespoke Design Booking Advance (GST included)' : `${fabric.title} (GST included)`,
           imageUrl: `${origin}${product.image}`,
         });
     }

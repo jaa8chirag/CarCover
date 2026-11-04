@@ -375,6 +375,17 @@ export default function CheckoutDrawer({
                         </div>
                       </div>
 
+                      {(item.fabricId === 'custom-printed' || (item.tier && String(item.tier).toLowerCase().includes('bespoke'))) && (
+                        <div style={{ marginTop: '10px', marginBottom: '12px', padding: '10px 12px', background: 'rgba(204,164,98,0.12)', border: '1px solid rgba(204,164,98,0.35)', borderRadius: '4px' }}>
+                          <span style={{ fontSize: '11px', fontWeight: 700, color: '#8a6829', textTransform: 'uppercase', letterSpacing: '1px', display: 'block' }}>
+                            ₹1,000 Booking Advance · Starts from ₹24,999
+                          </span>
+                          <span style={{ fontSize: '12px', color: '#4a443a', lineHeight: 1.4, display: 'block', marginTop: '3px' }}>
+                            Our atelier will contact you to collect your custom artwork, livery, stripes & car dimensions. Balance (₹23,999+) payable after 3D design approval.
+                          </span>
+                        </div>
+                      )}
+
                       <div
                         style={{
                           display: 'flex',
@@ -642,11 +653,21 @@ export default function CheckoutDrawer({
                 fontSize: '14px',
                 color: '#5c6462',
                 lineHeight: 1.6,
-                marginBottom: '24px',
+                marginBottom: '16px',
                 maxWidth: '380px',
               }}
             >
               Thank you, {clientDetails.name || 'Client'}. Your order has been received. Our team will contact you on {clientDetails.phone || 'your phone'} to confirm the details of your cover and your delivery.</p>
+            {items.some((i) => i.fabricId === 'custom-printed' || (i.tier && String(i.tier).toLowerCase().includes('bespoke'))) && (
+              <div style={{ marginTop: '4px', marginBottom: '24px', padding: '14px 16px', background: '#fdf8ee', border: '1px solid #dfc287', borderRadius: '4px', textAlign: 'left', maxWidth: '380px' }}>
+                <strong style={{ color: '#8a6829', fontSize: '13px', display: 'block', marginBottom: '4px' }}>
+                  👑 Bespoke Commission Next Steps:
+                </strong>
+                <p style={{ margin: 0, fontSize: '12.5px', color: '#554a35', lineHeight: 1.5 }}>
+                  Thank you for your ₹1,000 advance! Our master designer will call/WhatsApp you at <strong>{clientDetails.phone || 'your phone'}</strong> within 24 hours to discuss your custom artwork, livery, stripes, and car measurements.
+                </p>
+              </div>
+            )}
 
             <div
               style={{

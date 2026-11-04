@@ -105,7 +105,12 @@ export async function ensureCatalog() {
 
   for (const f of FABRICS) {
     const [exists] = await query('SELECT id FROM products WHERE handle = ?', [f.id]);
-    if (exists) continue;
+    if (exists) {
+      if (f.id === 'custom-printed') {
+        await exec('UPDATE products SET base_price = 24999 WHERE handle = ?', [f.id]);
+      }
+      continue;
+    }
     const tags = Array.from(new Set(['car cover', f.group, f.badge.toLowerCase()])).join(', ');
     const res = await exec(
       `INSERT IGNORE INTO products (handle, fabric_id, title, description, specs, group_name, base_price, quantity, status, image, tags, created_at, updated_at)
@@ -233,6 +238,7 @@ export function paging(url: URL) {
 /** Re-prices a cart line from the catalog, so a customer cannot change the price in the browser. */
 export async function priceFor(fabric: Fabric | undefined, tier: SizeTier | null): Promise<number | null> {
   if (!fabric) return null;
+  if (fabric.id === 'custom-printed') return 1000; // Bespoke booking advance
   const doc = await getProduct(fabric.id);
   const base = doc?.basePrice ?? fabric.price;
   return tier ? priceForTier(base, tier) : base;
