@@ -2,7 +2,7 @@ import { FABRICS } from '@/data/fabrics';
 import { CAR_BRANDS, FABRIC_COLORS, getSizeTier } from '@/data/carData';
 import { ensureCatalog, priceFor } from '@/lib/catalog';
 import { createOrder, type OrderItem } from '@/lib/orders';
-import { gstOn } from '@/data/fabrics';
+import { gstOn, gstIncluded } from '@/data/fabrics';
 
 export const dynamic = 'force-dynamic';
 
@@ -76,8 +76,9 @@ export async function POST(req: Request) {
       });
     }
 
-    const subtotal = items.reduce((n, i) => n + i.price, 0);
-    const gst = gstOn(subtotal);
+    const total = items.reduce((n, i) => n + i.price, 0);
+    const gst = gstIncluded(total);
+    const subtotal = total - gst;
     const doc = await createOrder({
       status: 'new',
       customer: { name, email, phone },
@@ -86,7 +87,7 @@ export async function POST(req: Request) {
       items,
       subtotal,
       gst,
-      total: subtotal + gst,
+      total,
       tracking: { courier: '', awb: '' },
       adminNote: '',
     });

@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!f) return { title: 'Cover not found', robots: { index: false, follow: false } };
   return pageMetadata({
     title: `${f.title}: ${f.subtitle}`,
-    description: `${f.description} From ₹${f.price.toLocaleString('en-IN')} plus GST, free shipping across India. Made to measure for your car.`,
+    description: `${f.description} From ₹${f.price.toLocaleString('en-IN')} (incl. 18% GST), free shipping across India. Made to measure for your car.`,
     path: `/shop/${f.id}`,
     image: f.image,
   });
@@ -47,7 +47,7 @@ export default async function Layout({ children, params }: Params & { children: 
           availability: 'https://schema.org/InStock',
           itemCondition: 'https://schema.org/NewCondition',
           seller: { '@type': 'Organization', name: BUSINESS.name },
-          priceSpecification: { '@type': 'PriceSpecification', price: f.price, priceCurrency: 'INR', valueAddedTaxIncluded: false },
+          priceSpecification: { '@type': 'PriceSpecification', price: f.price, priceCurrency: 'INR', valueAddedTaxIncluded: true },
           shippingDetails: {
             '@type': 'OfferShippingDetails',
             shippingRate: { '@type': 'MonetaryAmount', value: 0, currency: 'INR' },

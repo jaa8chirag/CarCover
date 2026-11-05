@@ -1,6 +1,6 @@
 'use client';
 
-import { gstOn } from '@/data/fabrics';
+import { gstOn, gstIncluded } from '@/data/fabrics';
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 import { Check, ShoppingBag, Plus, Trash2, PhoneCall, ArrowRight, Sparkles } from 'lucide-react';
@@ -129,8 +129,9 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
     return sum + unitPrice * c.quantity;
   }, 0);
 
-  const gst = gstOn(subtotal);
-  const total = subtotal + gst;
+  // Prices already include 18% GST; total equals the subtotal
+  const total = subtotal;
+  const gst = gstIncluded(total);
 
   const ready = cars.length > 0 && cars.every((c) => c.brand.trim() && c.model.trim() && c.year.trim());
 
@@ -523,7 +524,7 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
             <Row k="Balance on 3D approval" v={formatINR((fullStartingPrice - BESPOKE_DEPOSIT) * totalCovers)} />
           )}
           <Row k="Shipping" v="Free" />
-          <Row k="GST (18%)" v={formatINR(gst)} />
+          <Row k="GST (18% Included)" v={formatINR(gst)} />
 
           <div className="flex items-end justify-between pt-6">
             <span className="text-xs uppercase tracking-[2px] text-white/50">
@@ -539,7 +540,7 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
               disabled={!ready}
               className="w-full py-4 rounded-full bg-gradient-to-r from-[#cca462] to-[#e7d29d] hover:brightness-105 text-black text-xs font-bold uppercase tracking-[2px] flex items-center justify-center gap-2 cursor-pointer transition-all shadow-[0_12px_28px_-8px_rgba(204,164,98,0.5)] disabled:opacity-30 disabled:cursor-not-allowed disabled:shadow-none"
             >
-              <span>{isBespoke ? `Pay ${formatINR(total)} Advance & Start Design` : 'Checkout'}</span>
+              <span>{isBespoke ? `Pay ${formatINR(total)} Advance & Start Design` : `Checkout (${formatINR(total)})`}</span>
               <ArrowRight size={15} />
             </button>
 

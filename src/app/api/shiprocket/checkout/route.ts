@@ -1,4 +1,4 @@
-import { FABRICS, gstOn } from '@/data/fabrics';
+import { FABRICS, gstOn, gstIncluded } from '@/data/fabrics';
 import { getProduct } from '@/lib/catalog';
 import { createAwaitingOrder, type OrderItem } from '@/lib/orders';
 import { createCheckoutToken, shiprocketEnabled, type CheckoutLine } from '@/lib/shiprocket';
@@ -63,16 +63,17 @@ export async function POST(req: Request) {
         perFabric.set(fabric.id, {
           variantId: product.id * 100 + 1,
           quantity: qty,
-          price: unitPrice + gstOn(unitPrice),
+          price: unitPrice,
           name: isCustomBespoke ? 'Bespoke Design Booking Advance (GST included)' : `${fabric.title} (GST included)`,
           imageUrl: `${origin}${product.image}`,
         });
     }
 
-    const subtotal = items.reduce((n, i) => n + i.price, 0);
-    const gst = gstOn(subtotal);
+    const total = items.reduce((n, i) => n + i.price, 0);
+    const gst = gstIncluded(total);
+    const subtotal = total - gst;
     const { token, orderId } = await createCheckoutToken([...perFabric.values()], `${origin}/order-complete`);
-    const orderNumber = await createAwaitingOrder({ srOrderId: orderId, items, subtotal, gst, total: subtotal + gst });
+    const orderNumber = await createAwaitingOrder({ srOrderId: orderId, items, subtotal, gst, total });
     return Response.json({ ok: true, token, orderId, orderNumber });
   } catch (e) {
     console.error('shiprocket checkout failed', e);

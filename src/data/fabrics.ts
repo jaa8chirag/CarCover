@@ -24,10 +24,14 @@ export interface Fabric {
 // Product range: Outdoor (Standard, Pro, Elite), Indoor (Standard, Elite) and Unveiling (one cover).
 // NOTE: prices and spec copy are placeholders until the client supplies final figures.
 /** Shown under every price. */
-export const PRICE_NOTE = 'Includes shipping. GST 18% extra.';
+/** Shown under every price. */
+export const PRICE_NOTE = 'Inclusive of 18% GST & free delivery';
 
 export const GST_RATE = 0.18;
-export const gstOn = (amount: number) => Math.round(amount * GST_RATE);
+/** Returns the 18% GST portion already included in the gross amount. */
+export const gstIncluded = (gross: number) => Math.round((gross * 18) / 118);
+/** Kept for backwards compatibility: returns 18% GST included in gross amount. */
+export const gstOn = (gross: number) => Math.round((gross * 18) / 118);
 
 export const FABRICS: Fabric[] = [
   {

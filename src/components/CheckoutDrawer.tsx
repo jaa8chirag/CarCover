@@ -1,6 +1,6 @@
 'use client';
 
-import { gstOn } from '@/data/fabrics';
+import { gstOn, gstIncluded } from '@/data/fabrics';
 import React, { useEffect, useState } from 'react';
 import { X, Trash2, ArrowRight, CheckCircle2, Lock } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -75,9 +75,9 @@ export default function CheckoutDrawer({
 
   if (!isOpen) return null;
 
-  const subtotal = items.reduce((sum, item) => sum + (item.price || 0), 0);
-  const gst = gstOn(subtotal);
-  const total = subtotal + gst;
+  const total = items.reduce((sum, item) => sum + (item.price || 0), 0);
+  const gst = gstIncluded(total);
+  const subtotal = total;
 
   const loadShiprocket = () =>
     new Promise<void>((resolve, reject) => {
@@ -553,7 +553,7 @@ export default function CheckoutDrawer({
                       <span style={{ color: '#00665e', fontWeight: 600 }}>Free</span>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span>GST (18%)</span>
+                      <span>GST (18% Included)</span>
                       <span>{currencySymbol}{gst.toLocaleString('en-IN')}</span>
                     </div>
                   </div>
@@ -569,7 +569,7 @@ export default function CheckoutDrawer({
                   >
                     <div>
                       <div style={{ fontSize: '11px', color: '#5c6462', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                        Total (incl. GST)
+                        Total (incl. 18% GST & Shipping)
                       </div>
                       <div style={{ fontSize: '12px', color: '#00665e', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px', fontWeight: 600 }}>
                         <Lock size={12} /> {sr.enabled ? 'Secure payment by Shiprocket · address next' : 'Free Pan-India Insured Express + COD/UPI'}
