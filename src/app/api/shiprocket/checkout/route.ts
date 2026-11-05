@@ -45,28 +45,58 @@ export async function POST(req: Request) {
       const pipingFee = hasPipingFee ? 1999 : 0;
       const unitPrice = isCustomBespoke ? 1000 : (product.basePrice + pipingFee);
       const price = unitPrice * qty;
+      const vehicle = str(it?.vehicle, 120);
+      const variant = str(it?.variant, 120);
+      const coverColor = str(it?.fabricColor, 60);
+      const piping = str(it?.pipingColor, 60);
+      const notes = str(it?.notes, 500) === 'None' ? '' : str(it?.notes, 500);
+
       items.push({
         fabricId: fabric.id,
-        vehicle: str(it?.vehicle, 120),
-        variant: str(it?.variant, 120),
+        vehicle,
+        variant,
         product: isCustomBespoke ? 'Bespoke Printed Cover — ₹1,000 Design Booking Advance' : fabric.title,
-        coverColor: str(it?.fabricColor, 60),
-        piping: str(it?.pipingColor, 60),
-        notes: str(it?.notes, 500) === 'None' ? '' : str(it?.notes, 500),
+        coverColor,
+        piping,
+        notes,
         price,
         priceVerified: true,
       });
-      // Shiprocket wants one line per variant, so identical covers are merged into a quantity.
-      const line = perFabric.get(fabric.id);
-      if (line) line.quantity += qty;
-      else
-        perFabric.set(fabric.id, {
-          variantId: product.id * 100 + 1,
+
+      const carDesc = [vehicle, variant].filter(Boolean).join(' ');
+      const styleDesc = [
+        coverColor ? `Color: ${coverColor}` : '',
+        piping && !['none', 'no piping'].includes(piping.toLowerCase()) ? `Piping: ${piping}` : '',
+      ].filter(Boolean).join(', ');
+
+      let lineName: string;
+      if (isCustomBespoke) {
+        lineName = 'Bespoke Advance (₹1,000)';
+        if (carDesc) lineName += ` — ${carDesc}`;
+        if (notes) lineName += ` [Req: ${notes.slice(0, 45)}]`;
+      } else {
+        lineName = fabric.title;
+        if (carDesc) lineName += ` — ${carDesc}`;
+        if (styleDesc) lineName += ` [${styleDesc}]`;
+        if (notes) lineName += ` [Req: ${notes.slice(0, 45)}]`;
+      }
+      if (lineName.length > 200) lineName = lineName.slice(0, 197) + '...';
+
+      // Group identical custom configs together
+      const lineKey = `${fabric.id}__${carDesc}__${styleDesc}__${unitPrice}__${notes}`;
+      const line = perFabric.get(lineKey);
+      if (line) {
+        line.quantity += qty;
+      } else {
+        const variantIndex = (perFabric.size % 5) + 1;
+        perFabric.set(lineKey, {
+          variantId: product.id * 100 + variantIndex,
           quantity: qty,
           price: unitPrice,
-          name: isCustomBespoke ? 'Bespoke Design Booking Advance (GST included)' : `${fabric.title} (GST included)`,
+          name: lineName,
           imageUrl: `${origin}${product.image}`,
         });
+      }
     }
 
     const total = items.reduce((n, i) => n + i.price, 0);
