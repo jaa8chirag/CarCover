@@ -69,9 +69,10 @@ export const FABRICS: Fabric[] = [
     icon: Droplets,
     description: 'Our flagship outdoor cover. Fully waterproof, heat-reflective and built to last years in harsh weather.',
     specs: [
-      'Fully waterproof',
-      'Premium UV and heat reflective multi-layer shell',
-      'Premium paint-safe inner fleece lining',
+      'Double Layer Fabric',
+      'Enhanced Waterproof protection',
+      'Premium UV and heat reflective shell',
+      'Inner soft fleece lining',
       'Add contrast-colour piping',
       'Car brand logo to the cover and dust bag',
     ],
