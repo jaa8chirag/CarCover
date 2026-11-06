@@ -71,7 +71,7 @@ export const FABRICS: Fabric[] = [
     specs: [
       'Fully waterproof',
       'Premium UV and heat reflective multi-layer shell',
-      'Premium paint-safe inner soft fleece lining',
+      'Premium paint-safe inner fleece lining',
       'Add contrast-colour piping',
       'Car brand logo to the cover and dust bag',
     ],
