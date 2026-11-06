@@ -109,6 +109,7 @@ export async function ensureCatalog() {
       if (f.id === 'custom-printed') {
         await exec('UPDATE products SET base_price = 24999 WHERE handle = ?', [f.id]);
       }
+      await exec('UPDATE products SET specs = ? WHERE handle = ?', [JSON.stringify(f.specs), f.id]);
       continue;
     }
     const tags = Array.from(new Set(['car cover', f.group, f.badge.toLowerCase()])).join(', ');
