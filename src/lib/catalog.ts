@@ -106,7 +106,7 @@ export async function ensureCatalog() {
   for (const f of FABRICS) {
     const [exists] = await query('SELECT id FROM products WHERE handle = ?', [f.id]);
     if (exists) {
-      await exec('UPDATE products SET base_price = ?, specs = ? WHERE handle = ?', [f.price, JSON.stringify(f.specs), f.id]);
+      await exec('UPDATE products SET base_price = ?, specs = ?, image = ? WHERE handle = ?', [f.price, JSON.stringify(f.specs), f.image, f.id]);
       continue;
     }
     const tags = Array.from(new Set(['car cover', f.group, f.badge.toLowerCase()])).join(', ');

@@ -112,7 +112,7 @@ export const FABRICS: Fabric[] = [
     badge: 'OUTDOOR RESERVE',
     price: 21999,
     accentColor: '#cca462',
-    image: '/images/cover_monsoon.jpg',
+    image: '/images/outdoor_reserve_card.jpg',
     icon: Sparkles,
     description: 'The pinnacle handcrafted outdoor armor. Engineered with ultra-dense multi-layer storm fabric, cashmere-soft fleece inner lining, and bespoke contrast piping for supreme all-weather protection.',
     specs: [
