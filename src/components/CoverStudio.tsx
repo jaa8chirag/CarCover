@@ -19,7 +19,7 @@ const PIPING_OPTIONS = [
   { id: 'black', name: 'Black', hex: '#0a0a0a' },
   { id: 'white', name: 'White', hex: '#ffffff' },
 ];
-const PIPING_FABRICS = ['outdoor-signature', 'outdoor-elite', 'indoor-elite'];
+const PIPING_FABRICS = ['outdoor-signature', 'outdoor-elite', 'indoor-elite', 'outdoor-reserve'];
 
 const formatINR = (n: number) => '₹' + n.toLocaleString('en-IN');
 

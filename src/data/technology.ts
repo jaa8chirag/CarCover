@@ -147,6 +147,19 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
     },
     bars: { water: 100, uv: 100, scratch: 100, breath: 95 },
   },
+  'outdoor-reserve': {
+    short: 'Outdoor Reserve',
+    environment: 'Outdoor · Atelier Bespoke Extreme',
+    warranty: '10-Year Master Guarantee',
+    specs: {
+      material: 'Quad-layer aerospace storm composite with bespoke contour dual piping',
+      waterResistance: '15,000mm extreme hydrostatic head, 100% submersible storm barrier',
+      uvProtection: 'SolarReflect™ 50°C thermal radiation barrier & UV blocker',
+      lining: 'Ultra-dense cashmere soft fleece (certified PPF & ceramic coating safe)',
+      stretch: 'Precision 3D contour cut with contrast piping & hurricane storm-lock harness',
+    },
+    bars: { water: 100, uv: 100, scratch: 100, breath: 96 },
+  },
   'indoor-standard': {
     short: 'Indoor Standard',
     environment: 'Indoor · Garage',

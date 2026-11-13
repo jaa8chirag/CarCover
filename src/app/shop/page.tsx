@@ -119,6 +119,7 @@ const FABRIC_TONES: Record<string, { tone: string; image?: string }> = {
   'outdoor-standard': { tone: '#6b7686', image: '/images/fabric_outdoor_standard.jpg' },
   'outdoor-elite': { tone: '#1d2430', image: '/images/fabric_outdoor_elite.jpg' },
   'outdoor-signature': { tone: '#0b0c0e', image: '/images/fabric_outdoor_signature.jpg?v=2' },
+  'outdoor-reserve': { tone: '#1a1815', image: '/images/fabric_outdoor_signature_wide.jpg' },
   'indoor-standard': { tone: '#3b4250', image: '/images/fabric_indoor_standard.jpg' },
   'indoor-elite': { tone: '#15171c', image: '/images/fabric_indoor_elite.jpg' },
   'custom-printed': { tone: '#1a1a1a', image: '/images/cover_custom_printed.jpg' },
@@ -131,7 +132,7 @@ function FlipCard({ f }: { f: Fabric }) {
   const [flipped, setFlipped] = useState(false);
   const sheet = sheetFor(f.id);
   const fab = FABRIC_TONES[f.id] ?? { tone: '#444' };
-  const isSignature = f.id === 'outdoor-signature';
+  const isSignature = f.id === 'outdoor-signature' || f.id === 'outdoor-reserve';
 
   const handleCardClick = (e: React.MouseEvent) => {
     if (e.metaKey || e.ctrlKey || e.button === 1) {
@@ -396,7 +397,7 @@ export default function ShopPage() {
                   </div>
 
                   {/* Core cards in row 1 */}
-                  <MobileSlider desktopClass={`md:grid md:gap-6 lg:gap-8 md:mx-auto ${g.id === 'unveiling' || g.id === 'custom' ? 'md:grid-cols-1 max-w-md' : g.id === 'indoor' ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-2 lg:grid-cols-3 max-w-6xl'}`}>
+                  <MobileSlider desktopClass={`md:grid md:gap-6 lg:gap-8 md:mx-auto ${g.id === 'unveiling' || g.id === 'custom' ? 'md:grid-cols-1 max-w-md' : g.id === 'indoor' ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-2 lg:grid-cols-4 max-w-7xl'}`}>
                     {FABRICS.filter((f) => f.group === g.id).map((f) => <FlipCard key={f.id} f={f} />)}
                   </MobileSlider>
 
