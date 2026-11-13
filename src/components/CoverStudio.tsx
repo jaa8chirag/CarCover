@@ -189,9 +189,9 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
   const previewPiping = hasPiping ? PIPING_OPTIONS.find((p) => p.id === cars[0]?.pipingId) || PIPING_OPTIONS[0] : PIPING_OPTIONS[0];
 
   return (
-    <div className="grid lg:grid-cols-[1fr_400px] gap-8 items-start">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 items-start">
       {/* OPTIONS */}
-      <div className="bg-white border border-slate-200 rounded-[2rem] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.25)] px-6 sm:px-10">
+      <div className="order-1 lg:order-1 lg:col-start-1 lg:row-start-1 bg-white border border-slate-200 rounded-[2rem] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.25)] px-6 sm:px-10 pb-8 sm:pb-10">
         {isBespoke && (
           <div className="mt-8 mb-6 p-6 rounded-2xl bg-gradient-to-br from-[#121418] to-[#0c0d10] border border-[#cca462]/40 text-white shadow-xl">
             <div className="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-white/10">
@@ -477,37 +477,10 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
           />
           <p className="mt-2 text-right text-xs text-slate-400">{notes.length}/500</p>
         </Block>
-
-        {/* Contact atelier assistance banner */}
-        <div className="my-7 p-5 sm:p-6 rounded-2xl bg-[#faf7f2] border border-[#cca462]/35 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-full bg-[#cca462]/15 text-[#b38848] flex items-center justify-center flex-shrink-0">
-              <PhoneCall size={18} />
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-slate-900">
-                {isBespoke
-                  ? 'Have questions about your bespoke design or artwork?'
-                  : 'Have questions about your car cover or exact fit?'}
-              </p>
-              <p className="text-xs text-slate-500">
-                Contact our team directly at <a href="tel:+918585996669" className="font-semibold text-black underline">+91 85859 96669</a> or chat on WhatsApp.
-              </p>
-            </div>
-          </div>
-          <a
-            href="https://wa.me/918585996669?text=Hello%20Signature%20Covers%2C%20I%20have%20questions%20about%20ordering%20a%20car%20cover."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] text-black text-xs font-bold uppercase tracking-wider transition-colors no-underline whitespace-nowrap shadow-sm"
-          >
-            Chat on WhatsApp
-          </a>
-        </div>
       </div>
 
       {/* SUMMARY */}
-      <aside className="lg:sticky lg:top-28 bg-black text-white rounded-[2rem] overflow-hidden shadow-[0_40px_90px_-30px_rgba(0,0,0,0.6)]">
+      <aside className="order-2 lg:order-2 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:sticky lg:top-28 bg-black text-white rounded-[2rem] overflow-hidden shadow-[0_40px_90px_-30px_rgba(0,0,0,0.6)]">
         <div className="aspect-[16/10] overflow-hidden bg-slate-900">
           <div className="relative w-full h-full">
             <img src={fabric.image} alt={`${fabric.title} car cover preview`} className="w-full h-full object-cover" />
@@ -615,6 +588,33 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
           </div>
         </div>
       </aside>
+
+      {/* Contact atelier assistance banner */}
+      <div className="order-3 lg:order-3 lg:col-start-1 lg:row-start-2 p-5 sm:p-6 rounded-2xl bg-[#faf7f2] border border-[#cca462]/35 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-full bg-[#cca462]/15 text-[#b38848] flex items-center justify-center flex-shrink-0">
+            <PhoneCall size={18} />
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-slate-900">
+              {isBespoke
+                ? 'Have questions about your bespoke design or artwork?'
+                : 'Have questions about your car cover or exact fit?'}
+            </p>
+            <p className="text-xs text-slate-500">
+              Contact our team directly at <a href="tel:+918585996669" className="font-semibold text-black underline">+91 85859 96669</a> or chat on WhatsApp.
+            </p>
+          </div>
+        </div>
+        <a
+          href="https://wa.me/918585996669?text=Hello%20Signature%20Covers%2C%20I%20have%20questions%20about%20ordering%20a%20car%20cover."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] text-black text-xs font-bold uppercase tracking-wider transition-colors no-underline whitespace-nowrap shadow-sm"
+        >
+          Chat on WhatsApp
+        </a>
+      </div>
     </div>
   );
 }
