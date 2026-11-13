@@ -3,8 +3,8 @@
 import { gstOn, gstIncluded } from '@/data/fabrics';
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Check, ShoppingBag, Plus, Trash2, PhoneCall, ArrowRight, Sparkles } from 'lucide-react';
-import { FABRIC_COLORS } from '@/data/carData';
+import { Check, ShoppingBag, Plus, Trash2, PhoneCall, ArrowRight, Sparkles, ChevronDown } from 'lucide-react';
+import { FABRIC_COLORS, UNVEILING_COLORS } from '@/data/carData';
 import type { Fabric } from '@/data/fabrics';
 
 interface Props {
@@ -40,28 +40,6 @@ function Block({ n, title, hint, children }: { n: number; title: string; hint?: 
   );
 }
 
-function Swatches({ items, value, onChange }: { items: { id: string; name: string; hex: string }[]; value: string; onChange: (id: string) => void }) {
-  return (
-    <div className="flex flex-wrap gap-3">
-      {items.map((c) => {
-        const on = c.id === value;
-        return (
-          <button
-            key={c.id}
-            type="button"
-            title={c.name}
-            aria-label={c.name}
-            onClick={() => onChange(c.id)}
-            className={`w-10 h-10 rounded-full cursor-pointer border border-slate-300 flex items-center justify-center ${on ? 'ring-2 ring-offset-2 ring-black' : ''}`}
-            style={{ background: c.hex }}
-          >
-            {on && <Check size={15} className={c.hex.toLowerCase() === '#ffffff' ? 'text-black' : 'text-white'} />}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
 
 interface StudioCar {
   id: string;
@@ -80,6 +58,24 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
   const hasPiping = PIPING_FABRICS.includes(fabric.id);
   const PIPING_PRICE = 1999;
 
+  const availableColors = isUnveiling ? UNVEILING_COLORS : FABRIC_COLORS;
+  const defaultColor = availableColors[0] || { id: 'black', name: 'Black', hex: '#0a0d10' };
+
+  const getColor = (cid: string) => {
+    return (
+      availableColors.find(
+        (fc) =>
+          fc.id === cid ||
+          fc.name.toLowerCase() === cid?.toLowerCase() ||
+          (cid === 'obsidian-black' && fc.id === 'black') ||
+          (cid === 'silverstone-grey' && fc.id === 'grey') ||
+          (cid === 'monaco-navy' && fc.id === 'navy-blue') ||
+          (cid === 'racing-green' && fc.id === 'military-green') ||
+          (cid === 'maranello-red' && fc.id === 'red'),
+      ) || defaultColor
+    );
+  };
+
   // Multi-vehicle & quantity state across all covers (max 10 covers per vehicle)
   const [cars, setCars] = useState<StudioCar[]>([
     {
@@ -87,7 +83,7 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
       brand: '',
       model: '',
       year: '',
-      colorId: FABRIC_COLORS[1].id,
+      colorId: defaultColor.id,
       pipingId: 'none',
       quantity: 1,
     },
@@ -107,7 +103,7 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
         brand: '',
         model: '',
         year: '',
-        colorId: FABRIC_COLORS[1].id,
+        colorId: defaultColor.id,
         pipingId: 'none',
         quantity: 1,
       },
@@ -142,7 +138,7 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
       return;
     }
     cars.forEach((c) => {
-      const cColor = FABRIC_COLORS.find((fc) => fc.id === c.colorId) || FABRIC_COLORS[1];
+      const cColor = getColor(c.colorId);
       const cPiping = hasPiping ? PIPING_OPTIONS.find((p) => p.id === c.pipingId) || PIPING_OPTIONS[0] : PIPING_OPTIONS[0];
       const pipingCost = hasPiping && cPiping.id !== 'none' ? PIPING_PRICE : 0;
       const unitPrice = isBespoke ? BESPOKE_DEPOSIT : (fabric.price + pipingCost);
@@ -189,7 +185,7 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
     </div>
   );
 
-  const previewColor = FABRIC_COLORS.find((fc) => fc.id === cars[0]?.colorId) || FABRIC_COLORS[1];
+  const previewColor = getColor(cars[0]?.colorId);
   const previewPiping = hasPiping ? PIPING_OPTIONS.find((p) => p.id === cars[0]?.pipingId) || PIPING_OPTIONS[0] : PIPING_OPTIONS[0];
 
   return (
@@ -244,7 +240,7 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
         >
           <div className="space-y-6">
             {cars.map((car, idx) => {
-              const carColor = FABRIC_COLORS.find((fc) => fc.id === car.colorId) || FABRIC_COLORS[1];
+              const carColor = getColor(car.colorId);
               const carPiping = hasPiping ? PIPING_OPTIONS.find((p) => p.id === car.pipingId) || PIPING_OPTIONS[0] : PIPING_OPTIONS[0];
               const pipingCost = hasPiping && carPiping.id !== 'none' ? PIPING_PRICE : 0;
               const unitPrice = fabric.price + pipingCost;
@@ -297,14 +293,66 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
                   {/* Colour for this car (hidden for Bespoke) */}
                   {!isBespoke && (
                     <div className="mb-5">
-                      <span className="block text-[11px] font-bold tracking-[2px] uppercase text-slate-600 mb-2.5">
-                        Cover colour: <span className="font-semibold text-slate-900">{carColor.name}</span>
-                      </span>
-                      <Swatches
-                        items={FABRIC_COLORS}
-                        value={car.colorId}
-                        onChange={(cid) => updateCar(car.id, { colorId: cid })}
-                      />
+                      <div className="flex items-center justify-between mb-2">
+                        <label
+                          htmlFor={`color-select-${car.id}`}
+                          className="text-[11px] font-bold tracking-[2px] uppercase text-slate-600"
+                        >
+                          Cover Colour: <span className="font-semibold text-slate-900">{carColor.name}</span>
+                        </label>
+                      </div>
+
+                      {/* Premium Custom Dropdown with dynamic color badge */}
+                      <div className="relative">
+                        <div className="absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none flex items-center z-10">
+                          <span
+                            className="w-5 h-5 rounded-full border border-black/20 shadow-sm transition-transform duration-200"
+                            style={{ background: carColor.hex }}
+                          />
+                        </div>
+
+                        <select
+                          id={`color-select-${car.id}`}
+                          value={carColor.id}
+                          onChange={(e) => updateCar(car.id, { colorId: e.target.value })}
+                          className="w-full pl-11 pr-10 py-3.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:outline-none focus:border-black appearance-none cursor-pointer shadow-sm hover:border-slate-400 transition-all"
+                        >
+                          {availableColors.map((c) => (
+                            <option key={c.id} value={c.id} className="py-2 text-slate-900 font-medium">
+                              {c.name}
+                            </option>
+                          ))}
+                        </select>
+
+                        <div className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
+                          <ChevronDown size={18} />
+                        </div>
+                      </div>
+
+                      {/* Quick-tap Color Swatch Pills below dropdown for rapid mobile/desktop switching */}
+                      <div className="mt-3 flex flex-wrap items-center gap-2">
+                        {availableColors.map((c) => {
+                          const on = c.id === carColor.id;
+                          return (
+                            <button
+                              key={c.id}
+                              type="button"
+                              onClick={() => updateCar(car.id, { colorId: c.id })}
+                              className={`group inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs cursor-pointer transition-all ${
+                                on
+                                  ? 'border-black bg-black text-white font-semibold shadow-sm'
+                                  : 'border-slate-200 hover:border-slate-400 bg-white text-slate-700'
+                              }`}
+                            >
+                              <span
+                                className="w-3.5 h-3.5 rounded-full border border-black/15 shrink-0"
+                                style={{ background: c.hex }}
+                              />
+                              <span>{c.name}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
                   )}
 
@@ -500,7 +548,7 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
             <div className="space-y-1.5">
               {cars.map((c, i) => {
                 const cName = c.brand.trim() || c.model.trim() ? `${c.brand.trim()} ${c.model.trim()}` : `Vehicle #${i + 1}`;
-                const cCol = isBespoke ? 'Custom Livery' : FABRIC_COLORS.find((fc) => fc.id === c.colorId)?.name || '';
+                const cCol = isBespoke ? 'Custom Livery' : getColor(c.colorId).name;
                 const cPiping = hasPiping && c.pipingId !== 'none' ? ` · Piping: ${c.pipingId}` : '';
                 const pCost = hasPiping && c.pipingId !== 'none' ? PIPING_PRICE : 0;
                 const uPrice = isBespoke ? BESPOKE_DEPOSIT : (fabric.price + pCost);

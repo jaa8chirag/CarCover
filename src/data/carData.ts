@@ -562,13 +562,16 @@ export const COVER_TIERS: CoverTier[] = [
 ];
 
 export const FABRIC_COLORS = [
-  { id: 'racing-green', name: 'British Racing Green', hex: '#003831', accentHex: '#002621' },
-  { id: 'obsidian-black', name: 'Obsidian Midnight Black', hex: '#0a0d10', accentHex: '#050708' },
-  { id: 'silverstone-grey', name: 'Silverstone Liquid Silver', hex: '#8a939e', accentHex: '#6c747e' },
-  { id: 'monaco-navy', name: 'Monaco Royal Navy', hex: '#0f2137', accentHex: '#091523' },
-  { id: 'maranello-red', name: 'Corsa Crimson Red', hex: '#821419', accentHex: '#5c0c10' },
-  { id: 'champagne-gold', name: 'Champagne Desert Gold', hex: '#b3904e', accentHex: '#886b32' },
-  { id: 'titanium-silver', name: 'Titanium UV Shield', hex: '#cbd5e1', accentHex: '#94a3b8' },
+  { id: 'black', name: 'Black', hex: '#0a0d10', accentHex: '#050708' },
+  { id: 'grey', name: 'Grey', hex: '#71717a', accentHex: '#52525b' },
+  { id: 'navy-blue', name: 'Navy blue', hex: '#0f2137', accentHex: '#091523' },
+  { id: 'military-green', name: 'Military Green', hex: '#3d4a36', accentHex: '#2b3426' },
+];
+
+export const UNVEILING_COLORS = [
+  { id: 'black', name: 'Black', hex: '#0a0d10', accentHex: '#050708' },
+  { id: 'grey', name: 'Grey', hex: '#71717a', accentHex: '#52525b' },
+  { id: 'red', name: 'Red', hex: '#b91c1c', accentHex: '#991b1b' },
 ];
 
 export const PIPING_COLORS = [
