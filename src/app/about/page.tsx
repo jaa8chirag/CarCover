@@ -74,9 +74,8 @@ export default function AboutPage() {
                   </div>
                 ))}
               </div>
-              <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-                <button onClick={openEnquiry} className="px-8 py-4 bg-black hover:bg-[#b38848] text-white text-sm font-medium transition-colors cursor-pointer">Request Consultation</button>
-                <Link href="/shop" className="px-8 py-4 border border-black hover:bg-black hover:text-white text-black text-sm font-medium no-underline transition-colors">Shop Car Covers</Link>
+              <div className="mt-9 flex items-center justify-center">
+                <Link href="/shop" className="px-8 py-4 bg-black hover:bg-[#b38848] text-white text-sm font-medium no-underline transition-colors">Shop Car Covers</Link>
               </div>
             </div>
           </section>
@@ -146,7 +145,9 @@ export default function AboutPage() {
               <p className="mt-5 text-white/70 font-light leading-relaxed">
                 If your commission does not seat perfectly over your vehicle&apos;s mirrors, antenna and bumpers, our master tailors will alter or remanufacture it at no charge. Guaranteed.
               </p>
-              <button onClick={openEnquiry} className="mt-8 px-8 py-4 bg-black hover:bg-[#b38848] text-white text-sm font-medium transition-colors cursor-pointer">Request Consultation</button>
+              <div className="mt-8">
+                <Link href="/shop" className="inline-block px-8 py-4 bg-white hover:bg-[#cca462] text-black text-xs font-bold uppercase tracking-[2px] no-underline transition-colors">Shop Car Covers</Link>
+              </div>
             </div>
           </section>
         </>
