@@ -119,7 +119,7 @@ export const FABRICS: Fabric[] = [
       'Multi Layer Fabric',
       '15,000mm hydrostatic head extreme submersible waterproofing',
       'Aerospace SolarReflect™ UV & thermal heat barrier',
-      'Ultra soft fleece inner lining',
+      'Ultra-dense cashmere-soft fleece inner lining (PPF & ceramic safe)',
       'Hand-finished signature contrast piping along vehicle contours',
       'Car brand logo printed on the cover and dust bag',
     ],
