@@ -812,7 +812,7 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
           <p className="mt-4 text-xs text-white/50 text-center">Free delivery · 100% fit guarantee · 7-day returns</p>
           <div className="mt-4 pt-4 border-t border-white/10 text-center">
             <p className="text-xs text-white/70">
-              Have questions? Call <a href="tel:+918585996669" className="text-[#cca462] underline font-semibold">+91 85859 96669</a> or <a href="https://wa.me/918585996669?text=Hello%20Signature%20Covers%2C%20I%20have%20questions%20about%20ordering%20a%20car%20cover." target="_blank" rel="noopener noreferrer" className="text-[#25D366] underline font-semibold">WhatsApp us</a>
+              Have questions? Call <a href="tel:+918585996669" className="text-[#cca462] underline font-semibold">+91 85859 96669</a>, <a href="https://wa.me/918585996669?text=Hello%20Signature%20Covers%2C%20I%20have%20questions%20about%20ordering%20a%20car%20cover." target="_blank" rel="noopener noreferrer" className="text-[#25D366] underline font-semibold">WhatsApp us</a> or <a href="https://www.instagram.com/thesignaturecovers/" target="_blank" rel="noopener noreferrer" className="text-[#cca462] underline font-semibold">Instagram</a>
             </p>
           </div>
         </div>
@@ -835,14 +835,29 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
             </p>
           </div>
         </div>
-        <a
-          href="https://wa.me/918585996669?text=Hello%20Signature%20Covers%2C%20I%20have%20questions%20about%20ordering%20a%20car%20cover."
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] text-black text-xs font-bold uppercase tracking-wider transition-colors no-underline whitespace-nowrap shadow-sm"
-        >
-          Chat on WhatsApp
-        </a>
+        <div className="flex flex-wrap items-center gap-2.5">
+          <a
+            href="https://wa.me/918585996669?text=Hello%20Signature%20Covers%2C%20I%20have%20questions%20about%20ordering%20a%20car%20cover."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] text-black text-xs font-bold uppercase tracking-wider transition-colors no-underline whitespace-nowrap shadow-sm"
+          >
+            Chat on WhatsApp
+          </a>
+          <a
+            href="https://www.instagram.com/thesignaturecovers/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-tr from-[#fd5949] via-[#d6249f] to-[#285AEB] hover:brightness-110 text-white text-xs font-bold uppercase tracking-wider transition-all no-underline whitespace-nowrap shadow-sm"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+            Instagram
+          </a>
+        </div>
       </div>
     </div>
   );

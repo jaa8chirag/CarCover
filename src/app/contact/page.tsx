@@ -72,21 +72,43 @@ export default function ContactPage() {
                   transition={{ duration: 0.8, ease }}
                   className="lg:col-span-5 space-y-5"
                 >
-                  <a
-                    href={waLink('Hello Signature Covers, I would like to know more about your car covers.')}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-5 rounded-[2rem] bg-black text-white p-7 no-underline shadow-[0_30px_70px_-30px_rgba(0,0,0,0.6)] hover:-translate-y-1 transition-transform duration-500"
-                  >
-                    <span className="w-14 h-14 rounded-2xl bg-[#25D366] text-black flex items-center justify-center flex-shrink-0 group-hover:rotate-6 transition-transform duration-500">
-                      <WhatsAppIcon size={28} />
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-[10px] tracking-[3px] uppercase text-[#cca462] mb-1">WhatsApp, fastest reply</span>
-                      <span className="block text-xl font-semibold" style={{ fontFamily: 'var(--font-hype)' }}>{WHATSAPP_DISPLAY}</span>
-                    </span>
-                    <ArrowUpRight className="text-white/50 group-hover:text-[#cca462] transition-colors flex-shrink-0" size={22} />
-                  </a>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+                    <a
+                      href={waLink('Hello Signature Covers, I would like to know more about your car covers.')}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-4 rounded-[2rem] bg-black text-white p-6 no-underline shadow-[0_30px_70px_-30px_rgba(0,0,0,0.6)] hover:-translate-y-1 transition-transform duration-500"
+                    >
+                      <span className="w-13 h-13 rounded-2xl bg-[#25D366] text-black flex items-center justify-center flex-shrink-0 group-hover:rotate-6 transition-transform duration-500">
+                        <WhatsAppIcon size={26} />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-[10px] tracking-[3px] uppercase text-[#cca462] mb-0.5">WhatsApp Chat</span>
+                        <span className="block text-lg font-semibold" style={{ fontFamily: 'var(--font-hype)' }}>{WHATSAPP_DISPLAY}</span>
+                      </span>
+                      <ArrowUpRight className="text-white/50 group-hover:text-[#cca462] transition-colors flex-shrink-0" size={20} />
+                    </a>
+
+                    <a
+                      href="https://www.instagram.com/thesignaturecovers/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-4 rounded-[2rem] bg-black text-white p-6 no-underline shadow-[0_30px_70px_-30px_rgba(0,0,0,0.6)] hover:-translate-y-1 transition-transform duration-500"
+                    >
+                      <span className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#fd5949] via-[#d6249f] to-[#285AEB] text-white flex items-center justify-center flex-shrink-0 group-hover:rotate-6 transition-transform duration-500">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+                          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                        </svg>
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-[10px] tracking-[3px] uppercase text-[#cca462] mb-0.5">Instagram Atelier</span>
+                        <span className="block text-lg font-semibold" style={{ fontFamily: 'var(--font-hype)' }}>@thesignaturecovers</span>
+                      </span>
+                      <ArrowUpRight className="text-white/50 group-hover:text-[#cca462] transition-colors flex-shrink-0" size={20} />
+                    </a>
+                  </div>
 
                   <div className="rounded-[2rem] bg-white border border-slate-200 p-7 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.2)] space-y-6">
                     {[
