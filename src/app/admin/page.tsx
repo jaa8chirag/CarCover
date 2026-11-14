@@ -155,6 +155,21 @@ function OrderDetail({ order, onClose, onSaved }: { order: any; onClose: () => v
                 <p className="text-slate-600 mt-1">{it.vehicle}{it.variant ? ` · ${it.variant}` : ''}</p>
                 <p className="text-slate-600">Colour: {it.coverColor || '-'}{it.piping && it.piping !== 'No piping' ? ` · Piping: ${it.piping}` : ''}</p>
                 {it.notes && <p className="text-slate-800 mt-1">Note: {it.notes}</p>}
+                {(it as any).companyLogoUrl ? (
+                  <div className="mt-2 p-2 rounded-lg bg-slate-50 border border-slate-200 flex items-center gap-3">
+                    <img src={(it as any).companyLogoUrl} alt="Logo" className="w-10 h-10 object-contain bg-white rounded border border-slate-200 p-0.5" />
+                    <div>
+                      <p className="text-xs font-semibold text-slate-800">Company Logo: {(it as any).companyLogoName || 'Uploaded'}</p>
+                      <a href={(it as any).companyLogoUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 underline">View / Download Full Logo</a>
+                    </div>
+                  </div>
+                ) : it.notes && it.notes.includes('/uploads/logos/') ? (
+                  <div className="mt-2 text-xs">
+                    <a href={it.notes.match(/\/uploads\/logos\/[^\s\]]+/)?.[0] || '#'} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-medium">
+                      🖼️ View Uploaded Company Logo
+                    </a>
+                  </div>
+                ) : null}
                 {!it.priceVerified && <p className="text-xs text-amber-700 mt-1">Price could not be matched to a car size, check it.</p>}
               </div>
             ))}

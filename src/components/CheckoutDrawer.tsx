@@ -375,6 +375,22 @@ export default function CheckoutDrawer({
                         </div>
                       </div>
 
+                      {item.companyLogoUrl && (
+                        <div style={{ marginTop: '8px', marginBottom: '10px', padding: '8px 12px', background: '#faf7f2', border: '1px solid rgba(204,164,98,0.3)', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <img src={item.companyLogoUrl} alt="Company logo" style={{ width: '32px', height: '32px', objectFit: 'contain', background: '#ffffff', borderRadius: '4px', border: '1px solid #e2e8f0', padding: '2px' }} />
+                          <div style={{ minWidth: 0, flex: 1 }}>
+                            <span style={{ fontSize: '11px', fontWeight: 700, color: '#8a6829', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block' }}>
+                              Company Logo Attached {item.companyLogoPosition ? `· ${item.companyLogoPosition}` : ''}
+                            </span>
+                            {item.companyLogoName && (
+                              <span style={{ fontSize: '11px', color: '#64748b', display: 'block', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+                                {item.companyLogoName}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      )}
+
                       {(item.fabricId === 'custom-printed' || (item.tier && String(item.tier).toLowerCase().includes('bespoke'))) && (
                         <div style={{ marginTop: '10px', marginBottom: '12px', padding: '10px 12px', background: 'rgba(204,164,98,0.12)', border: '1px solid rgba(204,164,98,0.35)', borderRadius: '4px' }}>
                           <span style={{ fontSize: '11px', fontWeight: 700, color: '#8a6829', textTransform: 'uppercase', letterSpacing: '1px', display: 'block' }}>

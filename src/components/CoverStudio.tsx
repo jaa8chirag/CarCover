@@ -1,9 +1,9 @@
 'use client';
 
 import { gstOn, gstIncluded } from '@/data/fabrics';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import confetti from 'canvas-confetti';
-import { Check, ShoppingBag, Plus, Trash2, PhoneCall, ArrowRight, Sparkles, ChevronDown } from 'lucide-react';
+import { Check, ShoppingBag, Plus, Trash2, PhoneCall, ArrowRight, Sparkles, ChevronDown, UploadCloud, Image as ImageIcon, X } from 'lucide-react';
 import { FABRIC_COLORS, UNVEILING_COLORS } from '@/data/carData';
 import type { Fabric } from '@/data/fabrics';
 
@@ -91,6 +91,77 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
   const [notes, setNotes] = useState('');
   const [added, setAdded] = useState(false);
 
+  // Logo upload state (for company/dealership branding)
+  const [logoFile, setLogoFile] = useState<File | null>(null);
+  const [logoPreview, setLogoPreview] = useState<string | null>(null);
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [logoUploading, setLogoUploading] = useState(false);
+  const [logoError, setLogoError] = useState<string | null>(null);
+  const [logoPosition, setLogoPosition] = useState<string>('Center / Front Hood');
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleLogoSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setLogoError(null);
+
+    if (file.size > 10 * 1024 * 1024) {
+      setLogoError('Logo file size must be under 10MB');
+      return;
+    }
+
+    const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/svg+xml', 'application/pdf'];
+    if (!validTypes.includes(file.type) && !file.name.match(/\.(png|jpe?g|webp|svg|pdf)$/i)) {
+      setLogoError('Please upload a valid image (PNG, JPG, SVG, WebP, or PDF)');
+      return;
+    }
+
+    setLogoFile(file);
+
+    // Instant local preview
+    if (file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setLogoPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setLogoPreview(null);
+    }
+
+    // Upload to server
+    try {
+      setLogoUploading(true);
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: fd,
+      });
+      const data = await res.json();
+      if (data.ok && data.url) {
+        setLogoUrl(data.url);
+      } else {
+        console.warn('Logo upload note:', data.error);
+      }
+    } catch (err: any) {
+      console.warn('Logo upload network note:', err);
+    } finally {
+      setLogoUploading(false);
+    }
+  };
+
+  const handleRemoveLogo = () => {
+    setLogoFile(null);
+    setLogoPreview(null);
+    setLogoUrl(null);
+    setLogoError(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
   const updateCar = (id: string, patch: Partial<StudioCar>) => {
     setCars((prev) => prev.map((c) => (c.id === id ? { ...c, ...patch } : c)));
   };
@@ -155,13 +226,20 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
         fabricHex: isBespoke ? '#cca462' : cColor.hex,
         pipingColor: hasPiping && cPiping.id !== 'none' ? `${cPiping.name} (+₹1,999)` : cPiping.name,
         pipingHex: cPiping.hex,
-        notes: isBespoke
-          ? `[₹1,000 Booking Advance Paid. Full price starts from ₹24,999. Balance ₹23,999 payable after design approval.] ${notes.trim()}`
-          : (notes.trim() || 'None'),
+        companyLogoUrl: logoUrl || logoPreview || undefined,
+        companyLogoName: logoFile?.name,
+        companyLogoPosition: logoFile ? logoPosition : undefined,
+        notes: [
+          logoFile ? `[Company Logo: ${logoFile.name} (${logoPosition}) · URL: ${logoUrl || 'Attached'}]` : '',
+          isBespoke
+            ? `[₹1,000 Booking Advance Paid. Full price starts from ₹24,999. Balance ₹23,999 payable after design approval.] ${notes.trim()}`
+            : notes.trim(),
+        ].filter(Boolean).join(' ') || 'None',
         addons: {
           ...(c.quantity > 1 ? { quantity: c.quantity } : {}),
           ...(pipingCost > 0 ? { piping: pipingCost } : {}),
           ...(isBespoke ? { bookingAdvance: BESPOKE_DEPOSIT, fullStartingPrice } : {}),
+          ...(logoFile ? { companyLogo: logoUrl || logoFile.name, logoPosition } : {}),
         },
         price: itemPrice,
         currency: '₹',
@@ -451,12 +529,141 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
           </div>
         </Block>
 
+        {/* Block 2: Company / Dealership Logo */}
         <Block
           n={2}
-          title={isBespoke ? "Your Custom Design & Livery Requirements" : "Additional information"}
+          title={isUnveiling ? "Company / Dealership Logo (Optional)" : "Company / Brand Logo (Optional)"}
           hint={
             isUnveiling
-              ? 'Optional. Tell us anything else we should know about your launch date, showroom or reveal event.'
+              ? "Want your showroom, dealership or company logo printed on the cover? Upload your image below."
+              : "Optional. Upload your company, dealership or brand logo to be precision-printed on your cover."
+          }
+        >
+          {!logoFile ? (
+            <div
+              onClick={() => fileInputRef.current?.click()}
+              onDragOver={(e) => { e.preventDefault(); e.stopPropagation(); }}
+              onDrop={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                  const input = fileInputRef.current;
+                  if (input) {
+                    input.files = e.dataTransfer.files;
+                    handleLogoSelect({ target: input } as any);
+                  }
+                }
+              }}
+              className="group cursor-pointer rounded-2xl border-2 border-dashed border-slate-300 hover:border-[#cca462] bg-slate-50/70 hover:bg-[#faf7f2] p-6 sm:p-7 text-center transition-all shadow-xs"
+            >
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/png,image/jpeg,image/jpg,image/webp,image/svg+xml,application/pdf"
+                className="hidden"
+                onChange={handleLogoSelect}
+              />
+              <div className="w-12 h-12 mx-auto rounded-full bg-[#cca462]/15 text-[#b38848] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <UploadCloud size={22} />
+              </div>
+              <p className="text-sm font-bold text-slate-800">
+                {isUnveiling ? 'Upload Company / Dealership Logo' : 'Upload Company or Brand Logo'}
+              </p>
+              <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
+                Click to browse or drag & drop. Supports <span className="font-semibold text-slate-700">PNG (transparent)</span>, JPG, SVG, WebP or PDF (Max 10MB).
+              </p>
+              <div className="mt-3.5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 group-hover:border-[#cca462]/60 text-xs font-semibold text-slate-700 shadow-xs">
+                <ImageIcon size={13} className="text-[#b38848]" />
+                <span>Choose Image</span>
+              </div>
+            </div>
+          ) : (
+            <div className="p-5 sm:p-6 rounded-2xl border border-[#cca462]/40 bg-[#faf7f2]/80 shadow-xs space-y-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#cca462]/20">
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <div className="w-14 h-14 rounded-xl bg-white border border-slate-200 p-1.5 flex items-center justify-center overflow-hidden flex-shrink-0 shadow-xs">
+                    {logoPreview ? (
+                      <img src={logoPreview} alt="Logo preview" className="w-full h-full object-contain" />
+                    ) : (
+                      <span className="text-[10px] font-bold text-slate-400 uppercase">Vector/PDF</span>
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold text-slate-900 truncate max-w-[180px] sm:max-w-xs">{logoFile.name}</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 flex-shrink-0">
+                        {logoUploading ? 'Uploading...' : '✓ Attached'}
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-500 mt-0.5">
+                      {(logoFile.size / 1024).toFixed(0)} KB · Ready for placement & print
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 self-end sm:self-auto flex-shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="px-3 py-1.5 rounded-lg border border-slate-300 hover:border-black bg-white text-xs font-semibold text-slate-700 hover:text-black transition-colors cursor-pointer"
+                  >
+                    Change
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleRemoveLogo}
+                    className="p-1.5 rounded-lg text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
+                    title="Remove logo"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/png,image/jpeg,image/jpg,image/webp,image/svg+xml,application/pdf"
+                    className="hidden"
+                    onChange={handleLogoSelect}
+                  />
+                </div>
+              </div>
+
+              {/* Logo position selection */}
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                  Logo Placement Preference:
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {['Center / Front Hood', 'Front Windshield Area', 'Side Flanks / Doors'].map((pos) => (
+                    <button
+                      key={pos}
+                      type="button"
+                      onClick={() => setLogoPosition(pos)}
+                      className={`px-3 py-2 rounded-xl text-xs font-semibold text-center transition-all cursor-pointer ${
+                        logoPosition === pos
+                          ? 'bg-black text-[#faecc7] ring-1 ring-[#cca462] shadow-sm'
+                          : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                      }`}
+                    >
+                      {pos}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {logoError && (
+            <p className="mt-2 text-xs text-red-600 font-medium">⚠ {logoError}</p>
+          )}
+        </Block>
+
+        {/* Block 3: Additional information */}
+        <Block
+          n={3}
+          title={isBespoke ? "Your Custom Design & Livery Requirements" : isUnveiling ? "Showroom & Event Details" : "Additional information"}
+          hint={
+            isUnveiling
+              ? 'Optional. Tell us your launch / handover date, showroom branch, or any reveal event requirements.'
               : isBespoke
               ? 'Tell us your ideas for artwork, stripes, racing livery, brand logos, colors, or special vehicle modifications (spoiler, PPF, widebody).'
               : 'Optional. Tell us anything else we should know about your car or your cover.'
@@ -467,7 +674,7 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
             maxLength={500}
             placeholder={
               isUnveiling
-                ? 'e.g. dealership name, reveal date, logo or monogram embroidery requirements...'
+                ? 'e.g. dealership branch, reveal date, embroidery details or special instructions...'
                 : isBespoke
                 ? 'e.g. Gulf racing livery, twin stripes in white, custom company logo on hood, GT3 RS rear wing...'
                 : 'e.g. custom text or logo, any body kit or spoiler...'
@@ -495,6 +702,12 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
               <span className="absolute bottom-0 inset-x-0 h-[3px]" style={{ background: previewPiping.hex }} />
             )}
             <span className="absolute top-3 left-3 text-[10px] font-bold tracking-[2px] uppercase px-3 py-1.5 rounded-full bg-black/55 backdrop-blur-md text-white/90">Live preview</span>
+            {logoPreview && (
+              <div className="absolute top-3 right-3 px-2.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center gap-1.5 text-white/90 shadow-lg">
+                <img src={logoPreview} alt="Logo" className="w-4 h-4 object-contain bg-white rounded-full p-0.5" />
+                <span className="text-[9px] font-bold tracking-[1.5px] uppercase text-[#faecc7]">Logo Added</span>
+              </div>
+            )}
           </div>
         </div>
         <div className="p-7">
@@ -546,6 +759,22 @@ export default function CoverStudio({ fabric, onAddToCart, onOpenCart }: Props) 
           )}
           <Row k="Shipping" v="Free" />
           <Row k="GST (18% Included)" v={formatINR(gst)} />
+          {logoFile && (
+            <div className="flex items-center justify-between py-2.5 border-b border-white/10 text-xs">
+              <div className="flex items-center gap-2">
+                {logoPreview ? (
+                  <img src={logoPreview} alt="Logo preview" className="w-5 h-5 rounded object-contain bg-white p-0.5" />
+                ) : (
+                  <span className="text-[10px] uppercase font-bold text-[#cca462]">LOGO</span>
+                )}
+                <span className="text-white/60">Company Logo:</span>
+                <span className="text-white font-medium truncate max-w-[120px]">{logoFile.name}</span>
+              </div>
+              <span className="text-[#faecc7] font-bold text-[10px] uppercase tracking-wider bg-[#cca462]/20 px-2 py-0.5 rounded">
+                Included
+              </span>
+            </div>
+          )}
 
           <div className="flex items-end justify-between pt-6">
             <span className="text-xs uppercase tracking-[2px] text-white/50">

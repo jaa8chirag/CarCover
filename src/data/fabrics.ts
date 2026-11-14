@@ -180,6 +180,7 @@ export const FABRICS: Fabric[] = [
     specs: [
       'Light satin finish that drapes and lifts away cleanly',
       'Tailored silhouette so the car shape reads under the cover',
+      'Custom company or dealership logo printing available',
       'Reusable, with a carry bag for events',
     ],
     idealFor: 'Dealership reveals and delivery days',
