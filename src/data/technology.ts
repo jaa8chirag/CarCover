@@ -71,7 +71,6 @@ export interface FabricSheet {
   short: string;
   tagline: string;
   price: number;
-  warranty: string;
   image: string;
   accent: string;
   icon: LucideIcon;
@@ -94,11 +93,10 @@ export interface FabricSheet {
 }
 
 // Technical sheet copy is placeholder until the client supplies final lab figures.
-const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warranty' | 'specs' | 'bars'>> = {
+const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'specs' | 'bars'>> = {
   'outdoor-pro': {
     short: 'Outdoor Pro',
     environment: 'Outdoor · Daily Protection',
-    warranty: '2-Year Guarantee',
     specs: {
       material: 'Polyester with UV-stable coating',
       waterResistance: 'Water-resistant, sheds light to moderate rain',
@@ -111,7 +109,6 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
   'outdoor-standard': {
     short: 'Outdoor Pro',
     environment: 'Outdoor · Daily Protection',
-    warranty: '2-Year Guarantee',
     specs: {
       material: 'Polyester with UV-stable coating',
       waterResistance: 'Water-resistant, sheds light to moderate rain',
@@ -124,7 +121,6 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
   'outdoor-elite': {
     short: 'Outdoor Elite',
     environment: 'Outdoor · Extreme',
-    warranty: '5-Year Guarantee',
     specs: {
       material: 'Double Layer Fabric',
       waterResistance: 'Fully waterproof',
@@ -137,7 +133,6 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
   'outdoor-signature': {
     short: 'Outdoor Signature',
     environment: 'Outdoor · Ultimate Extreme',
-    warranty: '7-Year Guarantee',
     specs: {
       material: 'Multi-layer aerospace storm-matrix with dual-piping contour weave',
       breathability: 'Microporous vapour matrix, 100% condensation-free',
@@ -150,7 +145,6 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
   'outdoor-reserve': {
     short: 'Outdoor Reserve',
     environment: 'Outdoor · Atelier Bespoke Extreme',
-    warranty: '10-Year Master Guarantee',
     specs: {
       material: 'Quad-layer aerospace storm composite with bespoke contour dual piping',
       waterResistance: '15,000mm extreme hydrostatic head, 100% submersible storm barrier',
@@ -163,7 +157,6 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
   'indoor-standard': {
     short: 'Indoor Standard',
     environment: 'Indoor · Garage',
-    warranty: '2-Year Guarantee',
     specs: {
       material: 'Soft breathable stretch fabric',
       breathability: 'Fully breathable, prevents trapped humidity',
@@ -176,7 +169,6 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
   'indoor-elite': {
     short: 'Indoor Elite',
     environment: 'Indoor · Showroom',
-    warranty: '5-Year Guarantee',
     specs: {
       material: 'Four-way micro-stretch velvet fleece',
       breathability: 'Fully breathable, static-dissipating weave',
@@ -189,7 +181,6 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
   'unveil-showroom': {
     short: 'Unveiling Cover',
     environment: 'Indoor · Reveal',
-    warranty: '1-Year Guarantee',
     specs: {
       material: 'Light satin stretch fabric',
       breathability: 'Breathable, made for short-term use',
@@ -202,7 +193,6 @@ const EXTRA: Record<string, Pick<FabricSheet, 'short' | 'environment' | 'warrant
   'custom-printed': {
     short: 'Bespoke Printed',
     environment: 'Indoor · Custom',
-    warranty: '5-Year Guarantee',
     specs: {
       material: 'Bespoke stretch fabric with fleece lining',
       breathability: 'Micro-porous breathable finish',

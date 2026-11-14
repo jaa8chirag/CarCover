@@ -590,7 +590,7 @@ export default function BespokeConfigurator({
                     Total Commission Investment
                   </div>
                   <div style={{ fontSize: '13px', color: '#00665e', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 500 }}>
-                    <ShieldCheck size={14} /> 5-Year Craftsmanship Guarantee Included
+                    <ShieldCheck size={14} /> 100% Fit & Craftsmanship Guarantee Included
                   </div>
                 </div>
 

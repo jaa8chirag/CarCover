@@ -227,10 +227,6 @@ export default function ProductCollection({
                     <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
                       <Star size={13} fill="#00665e" color="#00665e" /> {tier.rating} ({tier.reviewCount} Reviews)
                     </span>
-                    <span style={{ opacity: 0.3 }}>•</span>
-                    <span style={{ color: '#00665e', fontWeight: 600 }}>
-                      {tier.warranty}
-                    </span>
                   </div>
 
                   {/* Bullet Highlights */}

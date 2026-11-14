@@ -433,7 +433,6 @@ export interface CoverTier {
   rating: number;
   reviewCount: number;
   popular?: boolean;
-  warranty: string;
   description: string;
   features: string[];
   fabricSpecs: {
@@ -456,7 +455,6 @@ export const COVER_TIERS: CoverTier[] = [
     rating: 4.96,
     reviewCount: 1240,
     popular: true,
-    warranty: '3-Year Replacement Guarantee',
     description: 'Constructed from a multi-layer heavy-duty polymer nano-membrane with ultrasonically welded seams. Designed to survive non-stop Mumbai monsoons, torrential downpours, high winds, and stray street scratches.',
     features: [
       '100% Waterproof with 10,000mm+ hydrostatic water head',
@@ -484,7 +482,6 @@ export const COVER_TIERS: CoverTier[] = [
     rating: 4.98,
     reviewCount: 890,
     popular: false,
-    warranty: '5-Year Guarantee',
     description: 'Our pinnacle luxury indoor cover crafted from 280gsm Italian Lycra and brushed cashmere-soft microfiber. Clings sensually to every muscular contour of your vehicle while deflecting Delhi/NCR basement dust and atmospheric smog.',
     features: [
       'Ultra-plush cashmere-soft lining, 100% zero-scratch certified',
@@ -512,7 +509,6 @@ export const COVER_TIERS: CoverTier[] = [
     rating: 4.93,
     reviewCount: 654,
     popular: false,
-    warranty: '3-Year Guarantee',
     description: 'Engineered with aerodynamic aerospace silver-titanium composite that reflects 99.8% of harsh ultraviolet rays. Protects dashboard electronics, leather upholstery from cracking, and paint from severe UV sun fading.',
     features: [
       '99.8% UV-A and UV-B solar radiation reflection',
@@ -540,7 +536,6 @@ export const COVER_TIERS: CoverTier[] = [
     rating: 4.99,
     reviewCount: 340,
     popular: false,
-    warranty: '3-Year Guarantee',
     description: 'A lustrous liquid-satin unveiling drape designed to slide effortlessly off the car with cinematic dramatic flair. Features weighted hem perimeter that cascades off the vehicle like liquid water under showroom lighting.',
     features: [
       'Glossy liquid satin finish under spotlight and natural sun',
@@ -625,8 +620,8 @@ export const FAQS = [
     a: "Yes! We maintain precision 3D CAD coordinate patterns for over 50,000 Indian and international cars—from Mahindra Thar, Scorpio-N, Fortuner, Creta, and Safari to Mercedes, BMW, Porsche, and Aston Martin. Each cover features tailored mirror pockets, antenna cutouts, and spoiler allowances."
   },
   {
-    q: "What are the shipping times across India and warranty policy?",
-    a: "We provide 100% Free Express Shipping across all 19,000+ PIN codes in India (typically delivering within 3 to 5 business days). Every cover comes with a hassle-free 3 to 5 Year Replacement Guarantee against seam failure or fabric breakdown."
+    q: "What are the shipping times across India?",
+    a: "We provide 100% Free Express Shipping across all 19,000+ PIN codes in India (typically delivering within 3 to 5 business days). Every cover is tailored to precision to guarantee a flawless contour fit."
   }
 ];
 

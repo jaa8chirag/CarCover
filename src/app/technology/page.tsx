@@ -256,7 +256,7 @@ function FabricDetail({ f, onEnquiry }: { f: (typeof FABRIC_SHEETS)[number]; onE
           <span className="text-3xl font-semibold" style={{ fontFamily: 'var(--font-hype)' }}>{inr(f.price)}</span>
         </div>
         <div className="text-xs text-white/60 leading-relaxed max-w-[200px]">
-          <span className="text-white/85">{f.warranty}</span><br />{f.idealFor}
+          {f.idealFor}
         </div>
       </div>
 
@@ -373,7 +373,6 @@ function Comparison({ activeId, onPick }: { activeId: string; onPick: (id: strin
     { label: 'Breathability', get: (f) => f.specs.breathability ?? '—' },
     { label: 'Lining', get: (f) => f.specs.lining ?? '—' },
     { label: 'Fit', get: (f) => f.specs.stretch ?? '—' },
-    { label: 'Warranty', get: (f) => f.warranty },
     { label: 'Starting price', get: (f) => inr(f.price) },
   ];
 

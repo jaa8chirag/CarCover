@@ -28,7 +28,7 @@ const MODEL_SLIDES: ModelSlide[] = [
       { label: 'WATERPROOF', value: '10,000 MM+' },
       { label: 'WIND RESIST', value: '65 KM/H BUCKLES' },
       { label: 'FABRIC', value: '5-PLY NANO-SHIELD' },
-      { label: 'WARRANTY', value: '3-YR REPLACEMENT' },
+      { label: 'FIT', value: '100% BESPOKE CONTOUR' },
     ],
     image: '/images/cover_monsoon.jpg',
     accentColor: '#c5e838',

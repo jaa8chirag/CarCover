@@ -350,14 +350,14 @@ export default function MaterialScience() {
                   </td>
                 </tr>
                 <tr>
-                  <td style={{ padding: '14px 20px', color: '#111615', fontWeight: 500 }}>Guarantee & Free Delivery</td>
+                  <td style={{ padding: '14px 20px', color: '#111615', fontWeight: 500 }}>Fit Guarantee & Free Delivery</td>
                   <td style={{ padding: '14px 20px', color: '#00665e', fontWeight: 500 }}>
                     <Check size={16} style={{ display: 'inline', marginRight: '6px' }} />
-                    3 to 5 Year Warranty + Free Pan-India Shipping
+                    100% Fit Guarantee + Free Pan-India Shipping
                   </td>
                   <td style={{ padding: '14px 20px', color: '#dc2626' }}>
                     <X size={16} style={{ display: 'inline', marginRight: '6px' }} />
-                    No warranty, cheap plastic fabric
+                    Loose universal fit, cheap plastic fabric
                   </td>
                 </tr>
               </tbody>

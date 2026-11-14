@@ -23,7 +23,7 @@ const MODELS_DATA = [
     name: 'Vantage S',
     tagline: 'THRILL. DRIVEN.',
     description: 'Precision sculpted British Racing Green cover engineered for aggressive aerodynamics and rear splitters.',
-    specs: '280gsm Fleece • Zero-Scratch • 5-Yr Guarantee',
+    specs: '280gsm Fleece • Zero-Scratch • PPF Safe',
     image: '/images/lux/studio.jpg',
     tierName: 'Prestige Tailored Indoor',
   },

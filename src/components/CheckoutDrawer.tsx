@@ -365,13 +365,9 @@ export default function CheckoutDrawer({
                           <span>Piping: </span>
                           <span style={{ color: '#111615', fontWeight: 600 }}>{item.pipingColor}</span>
                         </div>
-                        <div>
+                        <div style={{ gridColumn: 'span 2' }}>
                           <span>Notes: </span>
                           <span style={{ color: '#00665e', fontWeight: 600 }}>{item.notes ?? item.monogram}</span>
-                        </div>
-                        <div>
-                          <span>Warranty: </span>
-                          <span style={{ color: '#00665e', fontWeight: 600 }}>5-Year Master</span>
                         </div>
                       </div>
 
