@@ -303,11 +303,11 @@ export default function Header({
                 <a href="mailto:contact@thesignaturecovers.com" className="flex items-center gap-3 no-underline text-inherit hover:text-white transition-colors">
                   contact@thesignaturecovers.com <Mail size={14} className="text-[#cca462]" />
                 </a>
-                <a href="tel:+9118008892683" className="flex items-center gap-3 no-underline text-inherit hover:text-white transition-colors">
-                  +91 1800 889 2683 <Phone size={14} className="text-[#cca462]" />
+                <a href="tel:+918585996669" className="flex items-center gap-3 no-underline text-inherit hover:text-white transition-colors">
+                  +91 85859 96669 <Phone size={14} className="text-[#cca462]" />
                 </a>
                 <div className="flex items-center gap-3">
-                  BKC, Mumbai · DLF Horizon, Gurugram <MapPin size={14} className="text-[#cca462]" />
+                  Delhi, India - 110017 <MapPin size={14} className="text-[#cca462]" />
                 </div>
                 <a
                   href="https://www.instagram.com/thesignaturecovers/"

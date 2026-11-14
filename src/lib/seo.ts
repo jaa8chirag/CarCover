@@ -12,8 +12,7 @@ export const BUSINESS = {
   instagram: 'https://www.instagram.com/thesignaturecovers/',
   whatsapp: 'https://wa.me/918585996669',
   locations: [
-    { city: 'Mumbai', area: 'BKC', region: 'Maharashtra' },
-    { city: 'Gurugram', area: 'DLF Horizon', region: 'Haryana' },
+    { city: 'Delhi', area: 'Delhi', region: 'Delhi', pincode: '110017', country: 'India' },
   ],
 };
 

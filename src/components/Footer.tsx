@@ -155,7 +155,7 @@ export default function Footer() {
           </nav>
 
           <div className="text-center md:text-right font-mono text-xs leading-relaxed">
-            <div className="font-bold text-white/85">Proudly created in India.</div>
+            <div className="font-bold text-white/85">Delhi, India · 110017</div>
             <div className="text-white/40">© 2026 Signaturecovers. All rights reserved.</div>
           </div>
         </div>

@@ -92,7 +92,7 @@ export default function ContactPage() {
                     {[
                       { icon: Phone, label: 'Call us', value: WHATSAPP_DISPLAY, href: `tel:+${WHATSAPP_NUMBER}`, note: 'Mon – Sat, 9:00 AM – 8:00 PM IST' },
                       { icon: Mail, label: 'Email', value: 'contact@thesignaturecovers.com', href: 'mailto:contact@thesignaturecovers.com' },
-                      { icon: MapPin, label: 'Studios', value: 'BKC, Mumbai · DLF Horizon, Gurugram' },
+                      { icon: MapPin, label: 'Studio & Atelier', value: 'Delhi, India · 110017' },
                     ].map(({ icon: Icon, label, value, href, note }) => (
                       <div key={label} className="flex items-start gap-4">
                         <span className="w-11 h-11 rounded-xl bg-black text-[#cca462] flex items-center justify-center flex-shrink-0">
